@@ -90,9 +90,20 @@
 
 <script>
 	const headerTitle = document.getElementById("header-title");
-	const titleText = "Meta-Analysis of Breast Cancer Gene Expression Profiles: Identifying Pathways and Biomarkers for Diagnosis and Prognosis";
-	headerTitle.innerHTML = titleText.replace(/:/g, ":<br>");
+	const titleText = "Meta-Analysis of Breast Cancer Gene Expression Profiles: <br/>Identifying Pathways and Biomarkers for Diagnosis and Prognosis";
+	let currentIndex = 0;
+
+	function animateHeaderTitle() {
+		if (currentIndex < titleText.length) {
+			headerTitle.innerHTML += titleText.charAt(currentIndex);
+			currentIndex++;
+			setTimeout(animateHeaderTitle, 30);
+		}
+	}
+
+	animateHeaderTitle();
 </script>
+
 
 
 	<nav>
