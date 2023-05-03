@@ -84,10 +84,24 @@
 <body>
 	
 	<header style="height: 3cm; text-align: center;">
-	    <h1 style="font-size: 24px;">
- 			Meta-Analysis of Breast Cancer Gene Expression Profiles: 
-			Identifying Pathways and Biomarkers for Diagnosis and Prognosis</h1>
+		<h1 id="header-title" style="font-size: 24px;"></h1>
 	</header>
+
+	<script>
+		const headerTitle = document.getElementById("header-title");
+		const titleText = "Meta-Analysis of Breast Cancer Gene Expression Profiles: Identifying Pathways and Biomarkers for Diagnosis and Prognosis";
+		let currentIndex = 0;
+
+		function animateHeaderTitle() {
+			if (currentIndex < titleText.length) {
+				headerTitle.innerHTML += titleText.charAt(currentIndex);
+				currentIndex++;
+				setTimeout(animateHeaderTitle, 100);
+			}
+		}
+
+		animateHeaderTitle();
+	</script>
 
 	<nav>
 		<ul>
