@@ -5,6 +5,54 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Breast Cancer Gene Expression Biomarker Analysis</title>
 	<style>
+                
+                /* the following css code is for body section including tabs of overview, ... and menu on the left */ 
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  background-color: #f0f0f0;
+}
+
+.tabs-container {
+  display: flex;
+  width: 80%;
+  height: 100%;
+  margin-left: 20%;
+}
+
+.tabs-column {
+  display: flex;
+  flex-direction: column;
+  width: 18%;
+  height: 100%;
+}
+
+.tab {
+  display: block;
+  width: 100%;
+  height: 5mm;
+  border: 1px solid black;
+  text-align: center;
+  line-height: 5mm;
+}
+
+.big-tab {
+  display: block;
+  width: 55mm;
+  height: 35mm;
+  margin-top: 2mm;
+  margin-bottom: 2mm;
+  border: 1px solid black;
+  text-align: center;
+  line-height: 35mm;
+  font-size: 20px;
+}
+
+		/* here is the end of css code for body including overview of the project, ..., and menu tabs */ 
+
 		/* The / * * / syntax is used to comment out code in CSS, whereas in HTML, you would use <!-- --> to comment out code. */ 
 		html {
     			background:  #edca77; /* updated background color to a shade of yellow */ ;
@@ -83,9 +131,36 @@
 	</style>
 </head>
 <body>
+	<!-- the following is HTML code for overview of the project tab, methodology, ..., and menu tabs -->
+	<header>
+  <div class="tabs-container">
+    <div class="tabs-column">
+      <a href="#" class="tab">About The Project</a>
+      <a href="#" class="tab">R Code</a>
+      <a href="#" class="tab">Workflow of The Project</a>
+      <a href="#" class="tab">Research Questions</a>
+      <a href="#" class="tab">The Five</a>
+      <a href="#" class="tab">The Six</a>
+      <a href="#" class="tab">The Seven</a>
+      <a href="#" class="tab">The Eight</a>
+      <a href="#" class="tab">The Nine</a>
+      <a href="#" class="tab">The Ten</a>
+    </div>
+    <div class="tabs-column">
+      <a href="#" class="big-tab">A</a>
+      <a href="#" class="big-tab">B</a>
+      <a href="#" class="big-tab">C</a>
+      <a href="#" class="big-tab">D</a>
+      <a href="#" class="big-tab">E</a>
+    </div>
+  </div>
+</header>
+
+
+        <!-- here is the end of HTML code for overview of the project tab, methodology, ..., and menu tabs -->
+	
+	
 	<!-- ''the typing animation effect for the header'' -->  
-
-
 <header style="height: 3.5cm; text-align: center;">
   <div class="header-section-left" style="background-color: #e6f7ff; padding: 5px; width: 20%; float: left; padding-top: 10px; margin-bottom: -10px">
     <div style="display: flex;">
