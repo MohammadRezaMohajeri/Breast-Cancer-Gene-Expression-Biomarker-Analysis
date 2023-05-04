@@ -85,11 +85,49 @@
 <body>
 	<!-- ''the typing animation effect for the header'' -->  
 	
-	<header style="display: flex; justify-content: space-between; align-items: center; height: 3cm; text-align: center;">
-    <div style="flex-grow: 1; text-align: left;">LEFT SECTION</div>
-    <h1 id="header-title" style="font-size: 24px;">Meta-Analysis of Breast Cancer Gene Expression Profiles:<br><span style='display:block'>Identifying Pathways and Biomarkers for Diagnosis and Prognosis</span></h1>
-    <div style="flex-grow: 1; text-align: right;">RIGHT SECTION</div>
-	</header>
+	<header style="height: 3cm; text-align: center;">
+  <div class="header-section-left"></div>
+  <h1 id="header-title" style="font-size: 24px;"></h1>
+  <div class="header-section-right"></div>
+</header>
+
+<style>
+  .header-section-left {
+    width: 30%;
+    float: left;
+  }
+
+  .header-section-right {
+    width: 30%;
+    float: right;
+  }
+
+  #header-title {
+    width: 40%;
+    margin: auto;
+    display: block;
+  }
+</style>
+
+<script>
+  const headerTitle = document.getElementById("header-title");
+  const titleText = "Meta-Analysis of Breast Cancer Gene Expression Profiles:<br><span style='display:block'>Identifying Pathways and Biomarkers for Diagnosis and Prognosis</span>";
+  let currentIndex = 0;
+
+  function animateHeaderTitle() {
+    if (currentIndex < titleText.length) {
+      if (titleText.charAt(currentIndex) === "<") {
+        currentIndex = titleText.indexOf(">", currentIndex) + 1;
+      }
+      headerTitle.innerHTML = titleText.substring(0, currentIndex);
+      currentIndex++;
+      setTimeout(animateHeaderTitle, 30);
+    }
+  }
+
+  animateHeaderTitle();
+</script>
+
 
 	
 	
