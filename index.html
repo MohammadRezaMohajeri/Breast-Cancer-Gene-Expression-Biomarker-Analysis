@@ -7,49 +7,52 @@
 	<style>
                 
                 /* the following css code is for body section including tabs of overview, ... and menu on the left */ 
+                 
+		/* Center the text in the intro section */
+.intro-text {
+  text-align: center;
+}
+
+/* Style for the header */
 header {
+  background-color: #ffcc99;
+  height: 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  height: 50px;
-  background-color: #f0f0f0;
+  padding: 0 20px;
 }
 
-.tabs-container {
+/* Style for the logo */
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* Style for the navigation menu */
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
-  width: 80%;
-  height: 100%;
-  margin-left: 20%;
 }
 
-.tabs-column {
-  display: flex;
-  flex-direction: column;
-  width: 18%;
-  height: 100%;
+nav ul li {
+  margin: 0 10px;
 }
 
-.tab {
-  display: block;
-  width: 100%;
-  height: 5mm;
-  border: 1px solid black;
-  text-align: center;
-  line-height: 5mm;
+nav ul li a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.2s ease;
 }
 
-.big-tab {
-  display: block;
-  width: 55mm;
-  height: 35mm;
-  margin-top: 2mm;
-  margin-bottom: 2mm;
-  border: 1px solid black;
-  text-align: center;
-  line-height: 35mm;
-  font-size: 20px;
+nav ul li a:hover {
+  color: #ff6600;
 }
+
 
 		/* here is the end of css code for body including overview of the project, ..., and menu tabs */ 
 
