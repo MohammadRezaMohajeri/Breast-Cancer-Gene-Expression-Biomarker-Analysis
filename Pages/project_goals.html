@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Project Goals</title>
+	<title>Methodology</title>
 	<style>
 		/* Header Styles */
 		.header {
@@ -61,9 +61,9 @@
 			padding: 0;
 		}
 
-			.sidebar li {
-				margin-bottom: 5px;
-			}
+		.sidebar li {
+			margin-bottom: 5px;
+		}
 
 		/* Page Content Styles */
 		.content {
@@ -83,15 +83,11 @@
 			padding-left: 20px;
 			display: none;
 		}
-
-		.content ul li {
-			margin-bottom: 5px;
-		}
 	</style>
 </head>
 <body>
 	<div class="header">
-		<h1>Project Goals</h1>
+		<h1>Methodology</h1>
 	</div>
 
 	<div class="navbar">
@@ -116,58 +112,92 @@
 				<ul class="subheadings">
 					<li>Subheading 1</li>
 					<li>Subheading 2</li>
-          <li>Subheading 3</li>
-          <li>Subheading 4</li>
-        </ul>
-      </li>
-      <!-- Add more headings and subheadings below -->
-      <li>
-        <h2 class="heading">Heading 2</h2>
-        <ul class="subheadings">
-          <li>Subheading 1</li>
-          <li>Subheading 2</li>
-          <li>Subheading 3</li>
-          <li>Subheading 4</li>
-        </ul>
-      </li>
-      <!-- Repeat the pattern for additional headings -->
-    </ul>
-  </div>
+					<li>Subheading 3</li>
+					<li>Subheading 4</li>
+				</ul>
 
-  <div class="content">
-    <h2 class="heading">Heading 1</h2>
-    <ul class="subheadings">
-      <li>Subheading 1</li>
-      <li>Subheading 2</li>
-      <li>Subheading 3</li>
-      <li>Subheading 4</li>
-    </ul>
-    <!-- Add more headings and subheadings below -->
-    <h2 class="heading">Heading 2</h2>
-    <ul class="subheadings">
-      <li>Subheading 1</li>
-      <li>Subheading 2</li>
-      <li>Subheading 3</li>
-      <li>Subheading 4</li>
-    </ul>
-    <!-- Repeat the pattern for additional headings -->
-  </div>
+							</li>
+			<li>
+				<h2 class="heading">Heading 2</h2>
+				<ul class="subheadings">
+					<li>Subheading 1</li>
+					<li>Subheading 2</li>
+					<li>Subheading 3</li>
+					<li>Subheading 4</li>
+				</ul>
+			</li>
+			<li>
+				<h2 class="heading">Heading 3</h2>
+				<ul class="subheadings">
+					<li>Subheading 1</li>
+					<li>Subheading 2</li>
+					<li>Subheading 3</li>
+					<li>Subheading 4</li>
+				</ul>
+			</li>
+			<li>
+				<h2 class="heading">Heading 4</h2>
+				<ul class="subheadings">
+					<li>Subheading 1</li>
+					<li>Subheading 2</li>
+					<li>Subheading 3</li>
+					<li>Subheading 4</li>
+				</ul>
+			</li>
+			<!-- Repeat the pattern for additional headings -->
+		</ul>
+	</div>
 
-  <script>
-    // JavaScript code to handle the dropdown functionality
+	<div class="content">
+		<h2 class="heading">Heading 1</h2>
+		<ul class="subheadings">
+			<li>Subheading 1</li>
+			<li>Subheading 2</li>
+			<li>Subheading 3</li>
+			<li>Subheading 4</li>
+		</ul>
+		<!-- Add more headings and subheadings below -->
+		<h2 class="heading">Heading 2</h2>
+		<ul class="subheadings">
+			<li>Subheading 1</li>
+			<li>Subheading 2</li>
+			<li>Subheading 3</li>
+			<li>Subheading 4</li>
+		</ul>
+		<!-- Add more headings and subheadings below -->
+		<h2 class="heading">Heading 3</h2>
+		<ul class="subheadings">
+			<li>Subheading 1</li>
+			<li>Subheading 2</li>
+			<li>Subheading 3</li>
+			<li>Subheading 4</li>
+		</ul>
+		<!-- Add more headings and subheadings below -->
+		<h2 class="heading">Heading 4</h2>
+		<ul class="subheadings">
+			<li>Subheading 1</li>
+			<li>Subheading 2</li>
+			<li>Subheading 3</li>
+			<li>Subheading 4</li>
+		</ul>
+		<!-- Repeat the pattern for additional headings -->
+	</div>
 
-    // Get all heading elements
-    const headings = document.querySelectorAll('.heading');
+	<script>
+		// JavaScript code to handle the dropdown functionality
 
-    // Loop through the headings
-    headings.forEach((heading) => {
-      // Add a click event listener to each heading
-      heading.addEventListener('click', () => {
-        // Toggle the visibility of the subheadings
-        const subheadings = heading.nextElementSibling;
-        subheadings.style.display = subheadings.style.display === 'none' ? 'block' : 'none';
-      });
-    });
-  </script>
+		// Get all heading elements
+		const headings = document.querySelectorAll('.heading');
+
+		// Loop through the headings
+		headings.forEach((heading) => {
+			// Add a click event listener to each heading
+			heading.addEventListener('click', () => {
+				// Toggle the visibility of the subheadings
+				const subheadings = heading.nextElementSibling;
+				subheadings.style.display = subheadings.style.display === 'none' ? 'block' : 'none';
+			});
+		});
+	</script>
 </body>
 </html>
