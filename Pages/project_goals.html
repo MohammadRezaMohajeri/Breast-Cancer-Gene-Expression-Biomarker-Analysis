@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Methodology</title>
+    <title>Project Goals</title>
     <style>
         /* Header Styles  */
         .header {
@@ -83,13 +83,13 @@
             margin-bottom: 20px;
         }
 
-        .content h2 {
+        .content .H {
             font-size: 18px;
             color: #333;
             cursor: pointer;
         }
 
-        .content ul {
+        .content .SH {
             list-style-type: none;
             padding-left: 20px;
             display: none;
@@ -123,7 +123,8 @@
                 <li>Subheading 3</li>
                 <li>Subheading 4</li>
             </ul>
-                <li>
+        </li>
+        <li>
             <h2 class="heading">Heading 2</h2>
             <ul class="subheadings">
                 <li>Subheading 1</li>
@@ -214,7 +215,7 @@
             <li>SH1</li>
             <li>SH2</li>
             <li>SH3</li>
-                        <li>SH4</li>
+            <li>SH4</li>
         </ul>
     </div>
     <div class="container">
@@ -245,7 +246,19 @@
         </ul>
     </div>
 </div>
-</body>
-</html>
+
+<script>
+    // Get all the heading elements
+    const headings = document.querySelectorAll('.H');
+
+    // Add click event listener to each heading
+    headings.forEach(heading => {
+        heading.addEventListener('click', () => {
+            // Toggle the display of the corresponding subheadings
+            const subheadings = heading.nextElementSibling;
+            subheadings.style.display = subheadings.style.display === 'none' ? 'block' : 'none';
+        });
+    });
+</script>
 
 
