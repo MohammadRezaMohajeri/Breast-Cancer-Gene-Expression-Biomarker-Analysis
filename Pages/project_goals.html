@@ -118,6 +118,7 @@
 					<li>Subheading 2</li>
 					<li>Subheading 3</li>
 					<li>Subheading 4</li>
+				
 				</ul>
 			</li>
 			<li>
@@ -234,6 +235,18 @@
 			<li>Subheading 4</li>
 		</ul>
 	</div>
+
+	<script>
+		// Add click event listener to headings
+		const headings = document.querySelectorAll('.heading');
+		headings.forEach(heading => {
+			heading.addEventListener('click', () => {
+				// Toggle visibility of subheadings
+				const subheadings = heading.nextElementSibling;
+				subheadings.style.display = subheadings.style.display === 'none' ? 'block' : 'none';
+			});
+		});
+	</script>
 </body>
 </html>
 
