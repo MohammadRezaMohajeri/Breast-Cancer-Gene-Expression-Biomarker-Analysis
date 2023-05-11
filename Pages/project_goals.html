@@ -65,12 +65,18 @@
 			margin-bottom: 5px;
 		}
 
-		.sidebar .heading:hover {
-			background-color: green;
-			color: #fff;
-			text-decoration: none;
+		.sidebar .heading {
+			cursor: pointer;
 		}
 
+		.sidebar .subheadings {
+			display: none;
+			padding-left: 10px;
+		}
+
+		.sidebar .subheadings li {
+			margin-bottom: 5px;
+		}
 
 		/* Content Styles */
 		.content {
@@ -116,9 +122,10 @@
 				<ul class="subheadings">
 					<li>Subheading 1</li>
 					<li>Subheading 2</li>
+					
 					<li>Subheading 3</li>
 					<li>Subheading 4</li>
-					</ul>
+				</ul>
 			</li>
 			<li>
 				<h2 class="heading">Heading 2</h2>
@@ -188,17 +195,16 @@
 	</div>
 
 	<script>
-		// JavaScript to toggle the visibility of subheadings in the content section
-		document.addEventListener('DOMContentLoaded', function() {
-			var headings = document.querySelectorAll('.content h2');
-			headings.forEach(function(heading) {
-				heading.addEventListener('click', function() {
-					var ul = this.nextElementSibling;
-					ul.style.display = (ul.style.display === 'none') ? 'block' : 'none';
-				});
-			});
-		});
+  // JavaScript to toggle the visibility of subheadings in the sidebar
+  document.addEventListener('DOMContentLoaded', function() {
+    var headings = document.querySelectorAll('.sidebar .heading');
+    headings.forEach(function(heading) {
+      heading.addEventListener('click', function() {
+        var subheadings = this.nextElementSibling;
+        subheadings.style.display = (subheadings.style.display === 'none') ? 'block' : 'none';
+      });
+    });
+  });
 	</script>
-</body>
-</html>
+
 
