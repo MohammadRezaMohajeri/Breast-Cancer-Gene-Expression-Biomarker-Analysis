@@ -76,16 +76,16 @@
         .content {
             width: 80%;
             padding: 10px;
-            float: left;
+            float: right; /* Float the content section to the right */
         }
 
-        .content h2 {
+        .content .heading {
             font-size: 18px;
             color: #333;
             cursor: pointer;
         }
 
-        .content ul {
+        .content .subheadings {
             list-style-type: none;
             padding-left: 20px;
             display: none;
@@ -93,43 +93,42 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Methodology</h1>
-    </div>
+<div class="header">
+    <h1>Methodology</h1>
+</div>
 
-    <div class="navbar">
-        <ul class="menu">
-            <li><a href="#">Tab 1</a></li>
-            <li><a href="#">Tab 2</a></li>
-            <li><a href="#">Tab 3</a></li>
-            <li><a href="#">Tab 4</a></li>
-            <li><a href="#">Tab 5</a></li>
-            <li><a href="#">Tab 6</a></li>
-            <li><a href="#">Tab 7</a></li>
-        </ul>
-    </div>
+<div class="navbar">
+    <ul class="menu">
+        <li><a href="#">Tab 1</a></li>
+        <li><a href="#">Tab 2</a></li>
+        <li><a href="#">Tab 3</a></li>
+        <li><a href="#">Tab 4</a></li>
+        <li><a href="#">Tab 5</a></li>
+        <li><a href="#">Tab 6</a></li>
+        <li><a href="#">Tab 7</a></li>
+    </ul>
+</div>
 
-    <div class="sidebar">
-        <ul>
-            <li>
-                <h2 class="heading">Heading 1</h2>
-                <ul class="subheadings">
-                    <li>Subheading 1</li>
-                    <li>Subheading 2</li>
-                    <li>Subheading 3</li>
-                    <li>Subheading 4</li>
-                </ul>
-            </li>
-            <li>
-
-                <h2 class="heading">Heading 2</h2>
+<div class="sidebar">
+    <ul>
+        <li>
+            <h2 class="heading">Heading 1</h2>
             <ul class="subheadings">
                 <li>Subheading 1</li>
                 <li>Subheading 2</li>
                 <li>Subheading 3</li>
                 <li>Subheading 4</li>
             </ul>
-        </li> 
+        </li>
+        <li>
+            <h2 class="heading">Heading 2</h2>
+            <ul class="subheadings">
+                <li>Subheading 1</li>
+                <li>Subheading 2</li>
+                <li>Subheading 3</li>
+                <li>Subheading 4</li>
+            </ul>
+        </li>
         <li>
             <h2 class="heading">Heading 3</h2>
             <ul class="subheadings">
@@ -176,93 +175,72 @@
             </ul>
         </li>
     </ul>
-</div>
+    </div>
 
-<div class="content">
-    <div class="content-container">
-        <h2 class="h">H1</h2>
-        <ul class="sh">
-            <li>SH1</li>
-            <li>SH2</li>
-            <li>SH3</li>
-            <li>SH4</li>
-        </ul>
+    <div class="content">
+        <div>
+            <h1>H1</h1>
+            <ul class="subheadings">
+                <li>SH1</li>
+                <li>SH2</li>
+                <li>SH3</li>
+                <li>SH4</li>
+            </ul>
+        </div>
+        <div>
+            <h2>H2</h2>
+            <ul class="subheadings">
+                <li>SH1</li>
+                <li>SH2</li>
+                <li>SH3</li>
+                <li>SH4</li>
+            </ul>
+        </div>
+        <div>
+            <h3>H3</h3>
+            <ul class="subheadings">
+                <li>SH1</li>
+                <li>SH2</li>
+                <li>SH3</li>
+                <li>SH4</li>
+            </ul>
+        </div>
+        <div>
+            <h4>H4</h4>
+            <ul class="subheadings">
+                <li>SH1</li>
+                <li>SH2</li>
+                <li>SH3</li>
+                <li>SH4</li>
+            </ul>
+        </div>
+        <div>
+            <h5>H5</h5>
+            <ul class="subheadings">
+                <li>SH1</li>
+                <li>SH2</li>
+                <li>SH3</li>
+                <li>SH4</li>
+            </ul>
+        </div>
+        <div>
+            <h6>H6</h6>
+            <ul class="subheadings">
+                <li>SH1</li>
+                <li>SH2</li>
+                <li>SH3</li>
+                <li>SH4</li>
+            </ul>
+        </div>
+        <div>
+            <h7>H7</h7>
+            <ul class="subheadings">
+                <li>SH1</li>
+                <li>SH2</li>
+                <li>SH3</li>
+                <li>SH4</li>
+            </ul>
+        </div>
     </div>
-    <div class="content-container">
-        <h2 class="h">H2</h2>
-        <ul class="sh">
-            <li>SH1</li>
-            <li>SH2</li>
-            <li>SH3</li>
-            <li>SH4</li>
-        </ul>
-    </div>
-    <div class="content-container">
-        <h2 class="h">H3</h2>
-        <ul class="sh">
-            <li>SH1</li>
-            <li>SH2</li>
-            <li>SH3</li>
-            <li>SH4</li>
-        </ul>
-    </div>
-    <div class="content-container">
-        <h2 class="h">H4</h2>
-        <ul class="sh">
-            <li>SH1</li>
-            <li>SH2</li>
-            <li>SH3</li>
-            <li>SH4</li>
-        </ul>
-    </div>
-    <div class="content-container">
-        <h2 class="h">H5</h2>
-        <ul class="sh">
-            <li>SH1</li>
-            <li>SH2</li>
-            <li>SH3</li>
-            <li>SH4</li>
-        </ul>
-    </div>
-    <div class="content-container">
-        <h2 class="h">H6</h2>
-        <ul class="sh">
-            <li>SH1</li>
-            <li>SH2</li>
-            <li>SH3</li>
-            <li>SH4</li>
-        </ul>
-    </div>
-    <div class="content-container">
-        <h2 class="h">H7</h2>
-        <ul class="sh">
-            <li>SH1</li>
-            <li>SH2</li>
-            <li>SH3</li>
-            <li>SH4</li>
-        </ul>
-    </div>
-</div>
-
-<script>
-    // Add click event listener to the headings
-    const headings = document.querySelectorAll('.heading');
-    headings.forEach(heading => {
-        heading.addEventListener('click', () => {
-            heading.nextElementSibling.classList.toggle('active');
-        });
-    });
-
-    // Add click event listener to the content headings
-    const contentHeadings = document.querySelectorAll('.h');
-    contentHeadings.forEach(contentHeading => {
-        contentHeading.addEventListener('click', () => {
-            contentHeading.nextElementSibling.classList.toggle('active');
-        });
-    });
-</script>
-
-</body>
-</html>
-
-           
+    </body>
+    </html>
