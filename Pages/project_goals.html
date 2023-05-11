@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Methodology</title>
+	<title>Project goals</title>
 	<style>
 		/* Header Styles  */
 		.header {
@@ -83,12 +83,19 @@
 			width: 75%;
 			padding: 10px;
 			float: left;
+			background-color: #f2f2f2;
+			color: #333;
+			cursor: pointer;
+			transition: background-color 0.3s, color 0.3s; /* Add transition for smooth hover effect */
+		}
+
+		.content:hover {
+			background-color: #FFC300; /* Apply hover background color */
+			color: #fff; /* Change the text color on hover */
 		}
 
 		.content h2 {
 			font-size: 18px;
-			color: #333;
-			cursor: pointer;
 		}
 
 		.content ul {
@@ -112,8 +119,8 @@
 			<li><a href="#">Tab 5</a></li>
 			<li><a href="#">Tab 6</a></li>
 			<li><a href="#">Tab 7</a></li>
-		</ul>
-	</div>
+		</ul
+		</div>
 
 	<div class="sidebar">
 		<ul>
@@ -122,7 +129,6 @@
 				<ul class="subheadings">
 					<li>Subheading 1</li>
 					<li>Subheading 2</li>
-					
 					<li>Subheading 3</li>
 					<li>Subheading 4</li>
 				</ul>
@@ -185,26 +191,54 @@
 	</div>
 
 	<div class="content">
-		<h2>Content 1</h2>
+		<h2 class="heading">Content 1</h2>
 		<p>Content for Content 1 goes here.</p>
 	</div>
 
 	<div class="content">
-		<h2>Content 2</h2>
+		<h2 class="heading">Content 2</h2>
 		<p>Content for Content 2 goes here.</p>
 	</div>
 
-	<script>
-  // JavaScript to toggle the visibility of subheadings in the sidebar
-  document.addEventListener('DOMContentLoaded', function() {
-    var headings = document.querySelectorAll('.sidebar .heading');
-    headings.forEach(function(heading) {
-      heading.addEventListener('click', function() {
-        var subheadings = this.nextElementSibling;
-        subheadings.style.display = (subheadings.style.display === 'none') ? 'block' : 'none';
-      });
-    });
-  });
-	</script>
+	<!-- Repeat the content sections for Content 3 to Content 7 -->
+	<div class="content">
+		<h2 class="heading">Content 3</h2>
+		<p>Content for Content 3 goes here.</p>
+	</div>
 
+	<div class="content">
+		<h2 class="heading">Content 4</h2>
+		<p>Content for Content 4 goes here.</p>
+	
+		</div>
+
+	<div class="content">
+		<h2 class="heading">Content 5</h2>
+		<p>Content for Content 5 goes here.</p>
+	</div>
+
+	<div class="content">
+		<h2 class="heading">Content 6</h2>
+		<p>Content for Content 6 goes here.</p>
+	</div>
+
+	<div class="content">
+		<h2 class="heading">Content 7</h2>
+		<p>Content for Content 7 goes here.</p>
+	</div>
+
+	<script>
+		// JavaScript to toggle the visibility of subheadings in the sidebar
+		document.addEventListener('DOMContentLoaded', function() {
+			var headings = document.querySelectorAll('.sidebar .heading');
+			headings.forEach(function(heading) {
+				heading.addEventListener('click', function() {
+					var subheadings = this.nextElementSibling;
+					subheadings.style.display = (subheadings.style.display === 'none') ? 'block' : 'none';
+				});
+			});
+		});
+	</script>
+</body>
+</html>
 
