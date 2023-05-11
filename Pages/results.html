@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Results</title>
+	<title>Results/title>
 	<style>
 		/* Header Styles  */
 		.header {
@@ -65,8 +65,15 @@
 			margin-bottom: 5px;
 		}
 
+		
 		.sidebar .heading {
-			cursor: pointer;
+			cursor: default;
+			transition: background-color 0.3s, color 0.3s; /* Add transition for smooth hover effect */
+		}
+		
+		.sidebar .heading:hover {
+			background-color: #FFC300; /* Apply hover background color */
+			color: #fff; /* Change the text color on hover */
 		}
 
 		.sidebar .subheadings {
@@ -83,12 +90,19 @@
 			width: 75%;
 			padding: 10px;
 			float: left;
+			background-color: #f2f2f2;
+			color: #333;
+			cursor: pointer;
+			transition: background-color 0.3s, color 0.3s; /* Add transition for smooth hover effect */
+		}
+
+		.content:hover {
+			background-color: #FFC300; /* Apply hover background color */
+			color: #fff; /* Change the text color on hover */
 		}
 
 		.content h2 {
 			font-size: 18px;
-			color: #333;
-			cursor: pointer;
 		}
 
 		.content ul {
@@ -96,22 +110,11 @@
 			padding-left: 20px;
 			display: none;
 		}
-
-		/* Hover Effect */
-		.content h2:hover {
-			background-color: #FFC300; /* Gold */
-			color: #fff;
-		}
-
-		.sidebar .heading:hover {
-			background-color: #FFC300; /* Gold */
-			color: #fff;
-		}
 	</style>
 </head>
 <body>
 	<div class="header">
-		<h1>Results</h1>
+		<h1>Project Goals</h1>
 	</div>
 
 	<div class="navbar">
@@ -128,7 +131,7 @@
 
 	<div class="sidebar">
 		<ul>
-  			<li>
+			<li>
 				<h2 class="heading">Heading 1</h2>
 				<ul class="subheadings">
 					<li>Subheading 1</li>
@@ -195,13 +198,80 @@
 	</div>
 
 	<div class="content">
-		<h2>Content 1</h2>
+		<h2 class="heading">Content 1</h2>
+		<ul>
+			<li>Subheading 1</li>
+			<li>Subheading 2</li>
+			<li>Subheading 3</li>
+			<li>Subheading 4</li>
+		</ul>
 		<p>Content for Content 1 goes here.</p>
+	</div>
+	
+		<div class="content">
+		<h2 class="heading">Content 2</h2>
+		<ul>
+			<li>Subheading 1</li>
+			<li>Subheading 2</li>
+			<li>Subheading 3</li>
+			<li>Subheading 4</li>
+		</ul>
+		<p>Content for Content 2 goes here.</p>
 	</div>
 
 	<div class="content">
-		<h2>Content 2</h2>
-		<p>Content for Content 2 goes here.</p>
+		<h2 class="heading">Content 3</h2>
+		<ul>
+			<li>Subheading 1</li>
+			<li>Subheading 2</li>
+			<li>Subheading 3</li>
+			<li>Subheading 4</li>
+		</ul>
+		<p>Content for Content 3 goes here.</p>
+	</div>
+
+	<div class="content">
+		<h2 class="heading">Content 4</h2>
+		<ul>
+			<li>Subheading 1</li>
+			<li>Subheading 2</li>
+			<li>Subheading 3</li>
+			<li>Subheading 4</li>
+		</ul>
+		<p>Content for Content 4 goes here.</p>
+	</div>
+
+	<div class="content">
+		<h2 class="heading">Content 5</h2>
+		<ul>
+			<li>Subheading 1</li>
+			<li>Subheading 2</li>
+			<li>Subheading 3</li>
+			<li>Subheading 4</li>
+		</ul>
+		<p>Content for Content 5 goes here.</p>
+	</div>
+
+	<div class="content">
+		<h2 class="heading">Content 6</h2>
+		<ul>
+			<li>Subheading 1</li>
+			<li>Subheading 2</li>
+			<li>Subheading 3</li>
+			<li>Subheading 4</li>
+		</ul>
+		<p>Content for Content 6 goes here.</p>
+	</div>
+
+	<div class="content">
+		<h2 class="heading">Content 7</h2>
+		<ul>
+			<li>Subheading 1</li>
+			<li>Subheading 2</li>
+			<li>Subheading 3</li>
+			<li>Subheading 4</li>
+		</ul>
+		<p>Content for Content 7 goes here.</p>
 	</div>
 
 	<script>
@@ -215,12 +285,9 @@
 				});
 			});
 		});
-	});
 	</script>
 </body>
 </html>
 
-  
 
-
-
+ 
