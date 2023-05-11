@@ -230,18 +230,27 @@
 	</div>
 
 	<script>
-		// Function to handle the click event on headings
-		function toggleSubheadings(event) {
-			const subheadings = event.target.nextElementSibling;
-			subheadings.style.display = subheadings.style.display === 'none' ? 'block' : 'none';
-		}
-
-		// Add event listeners to all headings
-		const headings = document.querySelectorAll('.H');
-		headings.forEach((heading) => {
-			heading.addEventListener('click', toggleSubheadings);
+	    // Add click event listener to sidebar headings
+	    const sidebarHeadings = document.querySelectorAll('.heading');
+	    sidebarHeadings.forEach(sidebarHeading => {
+		sidebarHeading.addEventListener('click', () => {
+		    // Toggle visibility of sidebar subheadings
+		    const sidebarSubheadings = sidebarHeading.nextElementSibling;
+		    sidebarSubheadings.style.display = sidebarSubheadings.style.display === 'none' ? 'block' : 'none';
 		});
+	    });
+
+	    // Add click event listener to content headings
+	    const contentHeadings = document.querySelectorAll('.H');
+	    contentHeadings.forEach(contentHeading => {
+		contentHeading.addEventListener('click', () => {
+		    // Toggle visibility of content subheadings
+		    const contentSubheadings = contentHeading.nextElementSibling;
+		    contentSubheadings.style.display = contentSubheadings.style.display === 'none' ? 'block' : 'none';
+		});
+	    });
 	</script>
+
 
 </body>
 </html>
