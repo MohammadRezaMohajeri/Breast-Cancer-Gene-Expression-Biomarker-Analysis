@@ -121,7 +121,7 @@
 		<ul class="menu">
 			<li><a href="#">Tab 1</a></li>
 			<li><a href="#">Tab 2</a></li>
-			<li><a href="#">Tab 3</a></li>
+						<li><a href="#">Tab 3</a></li>
 			<li><a href="#">Tab 4</a></li>
 			<li><a href="#">Tab 5</a></li>
 			<li><a href="#">Tab 6</a></li>
@@ -161,10 +161,10 @@
 			<li>
 				<h2 class="heading">Heading 4</h2>
 				<ul class="subheadings">
-					<li>Subheading 1</li>
-					<li>Subheading 2</li>
-					<li>Subheading 3</li>
-					<li>Subheading 4</li>
+						<li>Subheading 1</li>
+						<li>Subheading 2</li>
+						<li>Subheading 3</li>
+						<li>Subheading 4</li>
 				</ul>
 			</li>
 			<li>
@@ -205,10 +205,10 @@
 			<li>Subheading 3</li>
 			<li>Subheading 4</li>
 		</ul>
-		<p>Content for Content 1 goes here.</p>
-	</div>
-	
-		<div class="content">
+		
+        	</div>
+
+	<div class="content">
 		<h2 class="heading">Content 2</h2>
 		<ul>
 			<li>Subheading 1</li>
@@ -216,7 +216,6 @@
 			<li>Subheading 3</li>
 			<li>Subheading 4</li>
 		</ul>
-		<p>Content for Content 2 goes here.</p>
 	</div>
 
 	<div class="content">
@@ -227,7 +226,6 @@
 			<li>Subheading 3</li>
 			<li>Subheading 4</li>
 		</ul>
-		<p>Content for Content 3 goes here.</p>
 	</div>
 
 	<div class="content">
@@ -238,7 +236,6 @@
 			<li>Subheading 3</li>
 			<li>Subheading 4</li>
 		</ul>
-		<p>Content for Content 4 goes here.</p>
 	</div>
 
 	<div class="content">
@@ -249,7 +246,6 @@
 			<li>Subheading 3</li>
 			<li>Subheading 4</li>
 		</ul>
-		<p>Content for Content 5 goes here.</p>
 	</div>
 
 	<div class="content">
@@ -260,7 +256,6 @@
 			<li>Subheading 3</li>
 			<li>Subheading 4</li>
 		</ul>
-		<p>Content for Content 6 goes here.</p>
 	</div>
 
 	<div class="content">
@@ -271,23 +266,20 @@
 			<li>Subheading 3</li>
 			<li>Subheading 4</li>
 		</ul>
-		<p>Content for Content 7 goes here.</p>
 	</div>
 
 	<script>
-		// JavaScript to toggle the visibility of subheadings in the sidebar
-		document.addEventListener('DOMContentLoaded', function() {
-			var headings = document.querySelectorAll('.sidebar .heading');
-			headings.forEach(function(heading) {
-				heading.addEventListener('click', function() {
-					var subheadings = this.nextElementSibling;
-					subheadings.style.display = (subheadings.style.display === 'none') ? 'block' : 'none';
-				});
+		// Get all the headings
+		const headings = document.querySelectorAll(".heading");
+
+		// Add event listener to each heading
+		headings.forEach((heading) => {
+			heading.addEventListener("click", () => {
+				const subheadings = heading.nextElementSibling;
+				subheadings.style.display = subheadings.style.display === "none" ? "block" : "none";
 			});
 		});
 	</script>
 </body>
 </html>
-
-
 
