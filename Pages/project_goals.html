@@ -71,6 +71,7 @@
             text-decoration: none;
         }
 
+
         /* Page Content Styles */
         .content {
             width: 80%;
@@ -92,38 +93,38 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Methodology</h1>
-    </div>
+<div class="header">
+    <h1>Methodology</h1>
+</div>
 
-    <div class="navbar">
-        <ul class="menu">
-            <li><a href="#">Tab 1</a></li>
-            <li><a href="#">Tab 2</a></li>
-            <li><a href="#">Tab 3</a></li>
-            <li><a href="#">Tab 4</a></li>
-            <li><a href="#">Tab 5</a></li>
-            <li><a href="#">Tab 6</a></li>
-            <li><a href="#">Tab 7</a></li>
-        </ul>
-    </div>
+<div class="navbar">
+    <ul class="menu">
+        <li><a href="#">Tab 1</a></li>
+        <li><a href="#">Tab 2</a></li>
+        <li><a href="#">Tab 3</a></li>
+        <li><a href="#">Tab 4</a></li>
+        <li><a href="#">Tab 5</a></li>
+        <li><a href="#">Tab 6</a></li>
+        <li><a href="#">Tab 7</a></li>
+    </ul>
+</div>
 
-    <div class="sidebar">
-        <ul>
-            <li>
-                <h2 class="heading">Heading 1</h2>
-                <ul class="subheadings">
-                    <li>Subheading 1</li>
-                    <li>Subheading 2</li>
-                    <li>Subheading 3</li>
-                    <li>Subheading 4</li>
-                            </ul>
+<div class="sidebar">
+    <ul>
+        <li>
+            <h2 class="heading">Heading 1</h2>
+            <ul class="subheadings">
+                <li>Subheading 1</li>
+                <li>Subheading 2</li>
+                <li>Subheading 3</li>
+                <li>Subheading 4</li>
+            </ul>
         </li>
         <li>
             <h2 class="heading">Heading 2</h2>
             <ul class="subheadings">
                 <li>Subheading 1</li>
-                <li>Subheading 2</li>
+                                <li>Subheading 2</li>
                 <li>Subheading 3</li>
                 <li>Subheading 4</li>
             </ul>
@@ -177,50 +178,50 @@
 </div>
 
 <div class="content">
-    <h2 class="H" id="H1">Heading 1</h2>
-    <ul class="subheadings" id="SH1">
+    <h2 class="H">Heading 1</h2>
+    <ul class="SH">
         <li>Subheading 1</li>
         <li>Subheading 2</li>
         <li>Subheading 3</li>
         <li>Subheading 4</li>
     </ul>
-    <h2 class="H" id="H2">Heading 2</h2>
-    <ul class="subheadings" id="SH2">
+    <h2 class="H">Heading 2</h2>
+    <ul class="SH">
         <li>Subheading 1</li>
         <li>Subheading 2</li>
         <li>Subheading 3</li>
         <li>Subheading 4</li>
     </ul>
-    <h2 class="H" id="H3">Heading 3</h2>
-    <ul class="subheadings" id="SH3">
+    <h2 class="H">Heading 3</h2>
+    <ul class="SH">
         <li>Subheading 1</li>
         <li>Subheading 2</li>
         <li>Subheading 3</li>
         <li>Subheading 4</li>
     </ul>
-    <h2 class="H" id="H4">Heading 4</h2>
-        <ul class="subheadings" id="SH4">
+    <h2 class="H">Heading 4</h2>
+    <ul class="SH">
         <li>Subheading 1</li>
         <li>Subheading 2</li>
         <li>Subheading 3</li>
         <li>Subheading 4</li>
     </ul>
-    <h2 class="H" id="H5">Heading 5</h2>
-    <ul class="subheadings" id="SH5">
+    <h2 class="H">Heading 5</h2>
+    <ul class="SH">
         <li>Subheading 1</li>
         <li>Subheading 2</li>
         <li>Subheading 3</li>
         <li>Subheading 4</li>
     </ul>
-    <h2 class="H" id="H6">Heading 6</h2>
-    <ul class="subheadings" id="SH6">
+    <h2 class="H">Heading 6</h2>
+    <ul class="SH">
         <li>Subheading 1</li>
         <li>Subheading 2</li>
         <li>Subheading 3</li>
         <li>Subheading 4</li>
     </ul>
-    <h2 class="H" id="H7">Heading 7</h2>
-    <ul class="subheadings" id="SH7">
+    <h2 class="H">Heading 7</h2>
+    <ul class="SH">
         <li>Subheading 1</li>
         <li>Subheading 2</li>
         <li>Subheading 3</li>
@@ -229,18 +230,12 @@
 </div>
 
 <script>
-    // Function to toggle the display of subheadings
-    function toggleSubheadings(id) {
-        var subheadings = document.getElementById(id);
-        subheadings.style.display = (subheadings.style.display === 'none') ? 'block' : 'none';
-    }
-
-    // Add event listeners to each heading to toggle the subheadings
-    var headings = document.getElementsByClassName('H');
-    for (var i = 0; i < headings.length; i++) {
-        headings[i].addEventListener('click', function () {
-            var subheadingId = 'SH' + this.id.substring(1);
-            toggleSubheadings(subheadingId);
+    // Add event listeners to the headings to toggle the subheadings
+    const headings = document.getElementsByClassName('H');
+    for (let i = 0; i < headings.length; i++) {
+        headings[i].addEventListener('click', function() {
+            const subheadings = this.nextElementSibling;
+            subheadings.style.display = subheadings.style.display === 'none' ? 'block' : 'none';
         });
     }
 </script>
@@ -248,4 +243,4 @@
 </body>
 </html>
 
-	
+
