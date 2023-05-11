@@ -1,79 +1,246 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Content Structure</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <script>
-        function toggleSubheadings(headingId) {
-            var subheadings = document.querySelectorAll('.' + headingId + ' ~ .content-subheadings');
-            for (var i = 0; i < subheadings.length; i++) {
-                var subheading = subheadings[i];
-                subheading.style.display = subheading.style.display === 'none' ? 'block' : 'none';
-            }
+    <meta charset="UTF-8">
+    <title>Methodology</title>
+    <style>
+        /* Header Styles  */
+        .header {
+            background-color: #f2f2f2;
+            padding: 10px;
+            text-align: center; /* Center-align the header content */
         }
-    </script>
-</head>
 
+        .header h1 {
+            font-size: 40px; /* Adjust the font size as desired */
+            color: #333;
+            font-weight: bold; /* Add this line to make the text bold */
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: #f2f2f2;
+            padding: 10px;
+        }
+
+        .menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .menu li a {
+            display: block;
+            padding: 10px;
+            background-color: #DAF7A6; /* green */
+            color: darkblue; /* Change the color to dark blue */
+            text-decoration: none;
+        }
+
+        .menu li a:hover {
+            background-color: #FFC300; /* Gold */
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 20%;
+            background-color: #f2f2f2;
+            padding: 10px;
+            float: left;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar li {
+            margin-bottom: 5px;
+        }
+
+        .sidebar .heading:hover {
+            background-color: green;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Page Content Styles */
+        .content {
+            width: 80%;
+            padding: 10px;
+            float: right; /* Change the float direction to right */
+        }
+
+        .content h2 {
+            font-size: 18px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .content ul {
+            list-style-type: none;
+            padding-left: 20px;
+            display: none;
+        }
+    </style>
+</head>
 <body>
-    <div class="container">
-        <h1 class="page-title">Page Title</h1>
-        <div class="content-container">
-            <h2 class="content-heading" onclick="toggleSubheadings('h1')">H1</h2>
-            <ul class="content-subheadings">
-                <li>Subheading 1 Content</li>
-                <li>Subheading 2 Content</li>
-                <li>Subheading 3 Content</li>
-            </ul>
-        </div>
-        <div class="content-container">
-            <h2 class="content-heading" onclick="toggleSubheadings('h2')">H2</h2>
-            <ul class="content-subheadings">
-                <li>Subheading 1 Content</li>
-                <li>Subheading 2 Content</li>
-                <li>Subheading 3 Content</li>
-            </ul>
-        </div>
-        <div class="content-container">
-            <h2 class="content-heading" onclick="toggleSubheadings('h3')">H3</h2>
-            <ul class="content-subheadings">
-                <li>Subheading 1 Content</li>
-                <li>Subheading 2 Content</li>
-                <li>Subheading 3 Content</li>
-            </ul>
-        </div>
-        <div class="content-container">
-            <h2 class="content-heading" onclick="toggleSubheadings('h4')">H4</h2>
-            <ul class="content-subheadings">
-                <li>Subheading 1 Content</li>
-                <li>Subheading 2 Content</li>
-                <li>Subheading 3 Content</li>
-            </ul>
-        </div>
-        <div class="content-container">
-            <h2 class="content-heading" onclick="toggleSubheadings('h5')">H5</h2>
-            <ul class="content-subheadings">
-                <li>Subheading 1 Content</li>
-                <li>Subheading 2 Content</li>
-                <li>Subheading 3 Content</li>
-            </ul>
-        </div>
-        <div class="content-container">
-            <h2 class="content-heading" onclick="toggleSubheadings('h6')">H6</h2>
-            <ul class="content-subheadings">
-                <li>Subheading 1 Content</li>
-                <li>Subheading 2 Content</li>
-                <li>Subheading 3 Content</li>
-            </ul>
-        </div>
-        <div class="content-container">
-            <h2 class="content-heading" onclick="toggleSubheadings('h7')">H7</h2>
-            <ul class="content-subheadings">
-                                <li>Subheading 1 Content</li>
-                <li>Subheading 2 Content</li>
-                <li>Subheading 3 Content</li>
-            </ul>
-        </div>
+    <div class="header">
+        <h1>Methodology</h1>
     </div>
+
+    <div class="navbar">
+        <ul class="menu">
+            <li><a href="#">Tab 1</a></li>
+            <li><a href="#">Tab 2</a></li>
+            <li><a href="#">Tab 3</a></li>
+            <li><a href="#">Tab 4</a></li>
+            <li><a href="#">Tab 5</a></li>
+            <li><a href="#">Tab 6</a></li>
+            <li><a href="#">Tab 7</a></li>
+        </ul>
+    </div>
+
+    <div class="sidebar">
+        <ul>
+            <li>
+                <h2 class="heading">Heading 1</h2>
+                <ul class="subheadings">
+                    <li>Subheading 1</li>
+                    <li>Subheading 2</li>
+                    <li>Subheading 3</li>
+                    <li>Subheading 4</li>
+                </ul>
+            </li>
+            <li>
+                <h2 class="heading">Heading 2</h2>
+                <ul class="subheadings">
+                    <li>Subheading 1</li>
+                    <li>Subheading 2</li>
+                    <li>Subheading 3</li>
+                    <li>Subheading 4</li>
+                </ul>
+            </li>
+            <li>
+                <h2 class="heading">Heading 3</h2>
+                <ul class="subheadings">
+                    <li>Subheading 1</li>
+                    <li>Subheading 2</li>
+                    <li>Subheading 3</li>
+                    <li>Subheading 4</li>
+                </ul>
+            </li>
+            <li>
+                <h2 class="heading">Heading 4</h2>
+                <ul class="subheadings">
+                    <li>Subheading 1</li>
+                    <li>Subheading 2</li>
+                    <li>Subheading 3</li>
+                    <li>Subheading 4</li>
+                </ul>
+            </li>
+            <li>
+                <h2 class="heading">Heading 5</h2>
+                <ul class="subheadings">
+                    <li>Subheading 1</li>
+                    <li>Subheading 2</li>
+                    <li>Subheading 3</li>
+                    <li>Subheading 4</li>
+                </ul>
+            </li>
+            <li>
+                <h2 class="heading">Heading 6</h2>
+                <ul class="subheadings">
+                    <li>Subheading 1</li>
+                    <li>Subheading 2</li>
+                    <li>Subheading 3</li>
+                    <li>Subheading 4</li>
+                </ul>
+            </li>
+            <li>
+                <h2 class="heading">Heading 7</h2>
+                <ul class="subheadings">
+                    <li>Subheading 1</li>
+                    <li>Subheading 2</li>
+                    <li>Subheading 3</li>
+                    <li>Subheading 4</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <!-- Content goes here -->
+        <h2 class="heading">H 1</h2>
+        <ul class="subheadings">
+            <li>SH 1</li>
+            <li>SH 2</li>
+            <li>SH 3</li>
+            <li>SH 4</li>
+        </ul>
+        <h2 class="heading">H 2</h2>
+        <ul class="subheadings">
+            <li>SH 1</li>
+            <li>SH 2</li>
+            <li>SH 3</li>
+            <li>SH 4</li>
+        </ul>
+        <h2 class="heading">H 3</h2>
+        <ul class="subheadings">
+            <li>SH 1</li>
+            <li>SH 2</li>
+            <li>SH 3</li>
+            <li>SH 4</li>
+        </ul>
+        <h2 class="heading">H 4</h2>
+        <ul class="subheadings">
+            <li>SH 1</li>
+            <li>SH 2</li>
+            <li>SH 3</li>
+            <li>SH 4</li>
+        </ul>
+        <h2 class="heading">H 5</h2>
+        <ul class="subheadings">
+            <li>SH 1</li>
+            <li>SH 2</li>
+            <li>SH 3</li>
+            <li>SH 4</li>
+        </ul>
+        <h2 class="heading">H 6</h2>
+        <ul class="subheadings">
+            <li>SH 1</li>
+            <li>SH 2</li>
+            <li>SH 3</li>
+            <li>SH 4</li>
+        </ul>
+        <h2 class="heading">H 7</h2>
+        <ul class="subheadings">
+            <li>SH 1</li>
+            <li>SH 2</li>
+            <li>SH 3</li>
+            <li>SH 4</li>
+        </ul>
+    </div>
+
+    <script>
+        // Add click event listener to headings
+        const headings = document.querySelectorAll('.heading');
+        headings.forEach(heading => {
+            heading.addEventListener('click', () => {
+                // Toggle visibility of subheadings
+                const subheadings = heading.nextElementSibling;
+                subheadings.style.display = subheadings.style.display === 'none' ? 'block' : 'none';
+            });
+        });
+    </script>
 </body>
 </html>
+
 
