@@ -2,31 +2,315 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>TEST</title>
+	<title>Results</title>
 	<style>
-		/* Header Styles */
+		/* Header Styles  */
 		.header {
-		  background-color: #00FF00;
-		  padding-top: 5px;
-		  padding-bottom: 5px;
+		  background-color: #00FF00; /* primary code:  #f2f2f2 / current code: Electric Green */ 
+		  padding-top: 5px; /* Increase or decrease the top padding value as desired */
+		  padding-bottom: 5px; /* Increase or decrease the bottom padding value as desired */
 		  text-align: center;
-		  border-bottom: 0.7px solid black;
+		  border-bottom: 0.7px solid black; /* Add this line to create a solid line */
+
 		}
+		/* 	Red: #FF0000
+			Orange: #FFA500
+			Bright Yellow: #FFFF00
+			Vibrant Blue: #00BFFF
+			Electric Green: #00FF00
+			Hot Pink: #FF69B4 
+			*/
 
 		.header h1 {
-			font-size: 40px;
-			color: #333;
-			font-weight: bold;
+			font-size: 40px; /* Adjust the font size as desired */
+			color: ; #333; 
+			font-weight: bold; /* Add this line to make the text bold */
 		}
 
 		/* Navbar Styles */
 		.navbar {
-			background-color: #e6f7ff;
+			background-color: #e6f7ff ; /* #f2f2f2 primary color */
 			padding: 10px;
-			border-bottom: 1px solid black;
+			border-bottom: 1px solid black; /* Add this line to create a solid line */
+	
 		}
 
 		.menu {
 			list-style-type: none;
 			margin: 0;
+			padding: 0;
+		}
+
+		.menu li {
+			display: inline-block;
+			margin-right: 10px;
+		}
+
+		.menu li a {
+			display: block;
+			padding: 10px;
+			background-color: #DAF7A6; /* green */
+			color: darkblue; /* Change the color to dark blue */
+			text-decoration: none;
+			
+		}
 		
+		.menu li a:hover {
+			background-color: #FFC300; /* Gold */
+			color: darkgreen !important; /* Change the text color to dark green */
+			text-decoration: none;
+		} 
+
+		/* Sidebar Styles */
+		.sidebar {
+			width: 20%;
+			height: 500px; /* Increase the height as desired */
+			background-color: #e6f7ff;
+			padding: 10px;
+			float: left;
+		    	border-right: 1px solid black; /* This will visually separate the sidebar and content sections. */
+
+		}
+
+		.sidebar ul {
+			list-style-type: none;
+			padding: 0;
+		}
+
+		.sidebar li {
+			margin-bottom: 5px;
+		}
+
+		
+		.sidebar .heading {
+			cursor: default;
+			transition: background-color 0.3s, color 0.3s; /* Add transition for smooth hover effect */
+		}
+		
+		.sidebar .heading:hover {
+			background-color: #FFC300; /* Apply hover background color */
+			color: #fff; /* Change the text color on hover */
+		}
+
+		.sidebar .subheadings {
+			display: none;
+			padding-left: 10px;
+		}
+
+		.sidebar .subheadings li {
+			margin-bottom: 5px;
+		}
+
+		/* Content Styles */
+		.content {
+			width: 75%;
+			padding: 10px;
+			float: left;
+			background-color: #f2f2f2;
+			color: #333;
+			cursor: pointer;
+			transition: background-color 0.3s, color 0.3s; /* Add transition for smooth hover effect */
+
+		}
+
+		.content:hover {
+			background-color: #06082e; /* Apply hover background color */
+			color: #fff; /* Change the text color on hover */
+		}
+
+		.content h2 {
+			font-size: 18px;
+		}
+
+		.content ul {
+			list-style-type: none;
+			padding-left: 20px;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="header">
+		<h1>Results</h1>
+	</div>
+
+	<div class="navbar">
+		<ul class="menu">
+			<li><a href="#">Tab 1</a></li>
+			<li><a href="#">Tab 2</a></li>
+			<li><a href="#">Tab 3</a></li>
+			<li><a href="#">Tab 4</a></li>
+			<li><a href="#">Tab 5</a></li>
+			<li><a href="#">Tab 6</a></li>
+			<li><a href="#">Tab 7</a></li>
+		</ul>
+	</div>
+
+	<div class="sidebar">
+		<ul>
+			<li>
+				<h2 class="heading">Heading 1</h2>
+				<ul class="subheadings">
+					<li>Subheading 1</li>
+					<li>Subheading 2</li>
+					<li>Subheading 3</li>
+					<li>Subheading 4</li>
+				</ul>
+			</li>
+			<li>
+				<h2 class="heading">Heading 2</h2>
+				<ul class="subheadings">
+					<li>Subheading 1</li>
+					<li>Subheading 2</li>
+					<li>Subheading 3</li>
+					<li>Subheading 4</li>
+				</ul>
+			</li>
+			<li>
+				<h2 class="heading">Heading 3</h2>
+				<ul class="subheadings">
+					<li>Subheading 1</li>
+					<li>Subheading 2</li>
+					<li>Subheading 3</li>
+					<li>Subheading 4</li>
+				</ul>
+			</li>
+			<li>
+				<h2 class="heading">Heading 4</h2>
+				<ul class="subheadings">
+					<li>Subheading 1</li>
+					<li>Subheading 2</li>
+					<li>Subheading 3</li>
+					<li>Subheading 4</li>
+				</ul>
+			</li>
+			<li>
+				<h2 class="heading">Heading 5</h2>
+				<ul class="subheadings">
+					<li>Subheading 1</li>
+					<li>Subheading 2</li>
+					<li>Subheading 3</li>
+					<li>Subheading 4</li>
+				</ul>
+			</li>
+			<li>
+				<h2 class="heading">Heading 6</h2>
+				<ul class="subheadings">
+					<li>Subheading 1</li>
+					<li>Subheading 2</li>
+					<li>Subheading 3</li>
+					<li>Subheading 4</li>
+				</ul>
+			</li>
+			<li>
+				<h2 class="heading">Heading 7</h2>
+				<ul class="subheadings">
+					<li>Subheading 1</li>
+					<li>Subheading 2</li>
+					<li>Subheading 3</li>
+					<li>Subheading 4</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+
+	<div class="content">
+		<h2 class="heading" onclick="toggleContent('content-1')">Content 1</h2>
+		<ul>
+			<li onclick="toggleContent('content-2')">Subheading 1</li>
+			<li onclick="toggleContent('content-3')">Subheading 2</li>
+			<li onclick="toggleContent('content-4')">Subheading 3</li>
+			<li onclick="toggleContent('content-5')">Subheading 4</li>
+		</ul>
+
+		<div class="content" id="content-1">
+			<!-- Content 1 paragraphs go here -->
+		</div>
+		<div class="content" id="content-2">
+			<!-- Subheading 1 paragraphs go here -->
+		</div>
+		<div class="content" id="content-3">
+			<!-- Subheading 2 paragraphs go here -->
+		</div>
+		<div class="content" id="content-4">
+			<!-- Subheading 3 paragraphs go here -->
+		</div>
+		<div class="content" id="content-5">
+			<!-- Subheading 4 paragraphs go here -->
+		</div>
+	</div>
+
+
+	<div class="content">
+		<h2 class="heading">Content 2</h2>
+		<ul>
+			<li>Subheading 1</li>
+			<li>Subheading 2</li>
+			<li>Subheading 3</li>
+			<li>Subheading 4</li>
+		</ul>
+	</div>
+
+	<div class="content">
+		<h2 class="heading">Content 3</h2>
+		<ul>
+			<li>Subheading 1</li>
+			<li>Subheading 2</li>
+			<li>Subheading 3</li>
+			<li>Subheading 4</li>
+		</ul>
+	</div>
+
+	<div class="content">
+		<h2 class="heading">Content 4</h2>
+		<ul>
+			<li>Subheading 1</li>
+			<li>Subheading 2</li>
+			<li>Subheading 3</li>
+			<li>Subheading 4</li>
+		</ul>
+	</div>
+
+	<div class="content">
+		<h2 class="heading">Content 5</h2>
+		<ul>
+			<li>Subheading 1</li>
+			<li>Subheading 2</li>
+			<li>Subheading 3</li>
+			<li>Subheading 4</li>
+		</ul>
+	</div>
+
+	<div class="content">
+		<h2 class="heading">Content 6</h2>
+		<ul>
+			<li>Subheading 1</li>
+			<li>Subheading 2</li>
+			<li>Subheading 3</li>
+			<li>Subheading 4</li>
+		</ul>
+	</div>
+
+	<div class="content">
+		<h2 class="heading">Content 7</h2>
+		<ul>
+			<li>Subheading 1</li>
+			<li>Subheading 2</li>
+			<li>Subheading 3</li>
+			<li>Subheading 4</li>
+		</ul>
+	</div>
+
+	<script>
+		function toggleContent(id) {
+			var content = document.getElementById(id);
+			if (content.style.display === "none") {
+				content.style.display = "block";
+			} else {
+				content.style.display = "none";
+			}
+		}
+	</script>
+</body>
+</html>
+
