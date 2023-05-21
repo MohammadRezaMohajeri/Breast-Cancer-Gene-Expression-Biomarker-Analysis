@@ -127,6 +127,14 @@
 			padding-left: 20px;
 			display: none;
 		}
+		
+		
+		.dropdown {
+			display: none;
+		}
+		
+		
+		
 	</style>
 </head>
 <body>
@@ -321,13 +329,28 @@ Next, only 4 independent datasets were selected for next analyses as the number 
 	</div>
 
 	<script>
-	  // Get all the headings
-	  const headings = document.querySelectorAll(".heading");
+	  // Get the main heading
+	  const mainHeading = document.querySelector(".main-heading");
 
-	  // Add event listener to each heading
-	  headings.forEach((heading) => {
-	    heading.addEventListener("click", () => {
-	      const dropdown = heading.nextElementSibling;
+	  // Add event listener to the main heading
+	  mainHeading.addEventListener("click", () => {
+	    const dropdown = mainHeading.nextElementSibling;
+
+	    // Toggle the display of the dropdown
+	    if (dropdown.style.display === "none" || dropdown.style.display === "") {
+	      dropdown.style.display = "block";
+	    } else {
+	      dropdown.style.display = "none";
+	    }
+	  });
+
+	  // Get all the subheadings
+	  const subheadings = document.querySelectorAll(".subheading");
+
+	  // Add event listener to each subheading
+	  subheadings.forEach((subheading) => {
+	    subheading.addEventListener("click", () => {
+	      const dropdown = subheading.nextElementSibling;
 
 	      // Toggle the display of the dropdown
 	      if (dropdown.style.display === "none" || dropdown.style.display === "") {
