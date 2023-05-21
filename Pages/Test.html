@@ -321,23 +321,21 @@ Next, only 4 independent datasets were selected for next analyses as the number 
 	</div>
 
 	<script>
-	  // Get all the headings and subheadings
-	  const headings = document.querySelectorAll(".heading, .subheading");
+	  // Get all the headings
+	  const headings = document.querySelectorAll(".heading");
 
-	  // Add event listener to each heading and subheading
+	  // Add event listener to each heading
 	  headings.forEach((heading) => {
 	    heading.addEventListener("click", () => {
 	      const dropdown = heading.nextElementSibling;
-	      const isSubheading = heading.classList.contains("subheading");
-	      if (isSubheading) {
-		// If the clicked element is a subheading, find its parent heading
-		const parentHeading = heading.closest(".content").querySelector(".heading");
-		dropdown = parentHeading.nextElementSibling;
-	      }
-	      dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+	      const subheadings = dropdown.querySelectorAll(".subheading");
+	      subheadings.forEach((subheading) => {
+		subheading.style.display = subheading.style.display === "none" ? "block" : "none";
+	      });
 	    });
 	  });
 	</script>
+
 
 </body>
 </html>
