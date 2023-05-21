@@ -354,7 +354,15 @@ Next, only 4 independent datasets were selected for next analyses as the number 
 	      }
 	    });
 	  });
+
+	  // Prevent default behavior of subheading click to avoid conflict with main heading
+	  subheadings.forEach((subheading) => {
+	    subheading.addEventListener("click", (event) => {
+	      event.stopPropagation();
+	    });
+	  });
 	</script>
+
 
 
 
