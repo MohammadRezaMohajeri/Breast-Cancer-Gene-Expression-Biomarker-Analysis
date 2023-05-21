@@ -321,16 +321,16 @@ Next, only 4 independent datasets were selected for next analyses as the number 
 	</div>
 
 	<script>
-		// Get all the headings
-		const headings = document.querySelectorAll(".heading");
+    // Get all the headings and subheadings
+    const headings = document.querySelectorAll(".heading, .subheading");
 
-		// Add event listener to each heading
-		headings.forEach((heading) => {
-			heading.addEventListener("click", () => {
-				const subheadings = heading.nextElementSibling;
-				subheadings.style.display = subheadings.style.display === "none" ? "block" : "none";
-			});
-		});
-	</script>
+    // Add event listener to each heading and subheading
+    headings.forEach((heading) => {
+      heading.addEventListener("click", () => {
+        const dropdown = heading.nextElementSibling;
+        dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+      });
+    });
+  </script>
 </body>
 </html>
