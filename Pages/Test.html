@@ -328,19 +328,25 @@ Next, only 4 independent datasets were selected for next analyses as the number 
 	  headings.forEach((heading) => {
 	    heading.addEventListener("click", () => {
 	      const dropdown = heading.nextElementSibling;
-	      const subheadings = dropdown.querySelectorAll(".subheading");
 
-	      // Toggle the display of subheadings
-	      subheadings.forEach((subheading) => {
-		if (subheading.style.display === "none") {
-		  subheading.style.display = "block";
-		} else {
-		  subheading.style.display = "none";
-		}
-	      });
+	      // Toggle the display of the dropdown
+	      if (dropdown.style.display === "none") {
+		dropdown.style.display = "block";
+	      } else {
+		dropdown.style.display = "none";
+	      }
 	    });
 	  });
+
+	  // Get all the subheadings
+	  const subheadings = document.querySelectorAll(".subheading");
+
+	  // Display all the subheadings
+	  subheadings.forEach((subheading) => {
+	    subheading.style.display = "block";
+	  });
 	</script>
+
 
 
 
