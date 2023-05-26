@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Results</title>
+	<title>Sample 1</title>
 	<style>
 		/* Header Styles  */
 		.header {
@@ -68,7 +68,7 @@
 			background-color: #e6f7ff;
 			padding: 10px;
 			float: left;
-		    	border-right: 1px solid black; /* This will visually separate the sidebar and content sections. */
+			border-right: 1px solid black; /* This will visually separate the sidebar and content sections. */
 
 		}
 
@@ -100,8 +100,11 @@
 		.sidebar .subheadings li {
 			margin-bottom: 5px;
 		}
-
-		/* Content Styles */
+		
+	
+		
+		
+				/* Content Styles */
 		.content {
 			width: 75%;
 			padding: 10px;
@@ -110,11 +113,10 @@
 			color: #333;
 			cursor: pointer;
 			transition: background-color 0.3s, color 0.3s; /* Add transition for smooth hover effect */
-
 		}
 
 		.content:hover {
-			background-color: #06082e; /* Apply hover background color */
+			background-color: #FFC300; /* Apply hover background color */
 			color: #fff; /* Change the text color on hover */
 		}
 
@@ -130,8 +132,8 @@
 	</style>
 </head>
 <body>
-	<div class="header"> 
-		<h1>Results</h1>
+	<div class="header">
+		<h1>Sample 1</h1>
 	</div>
 
 	<div class="navbar">
@@ -194,6 +196,7 @@
 				</ul>
 			</li>
 			<li>
+				
 				<h2 class="heading">Heading 6</h2>
 				<ul class="subheadings">
 					<li>Subheading 1</li>
@@ -214,38 +217,19 @@
 		</ul>
 	</div>
 
-
 	<div class="content">
-		<h2 class="heading" onclick="toggleContent('content-1')">Selection of datasets using the PubMed</h2>
-		<ul class="subheadings">
-			<li onclick="toggleContent('content-2')">Subheading 1</li>
-			<li onclick="toggleContent('content-3')">Subheading 2</li>
-			<li onclick="toggleContent('content-4')">Subheading 3</li>
-			<li onclick="toggleContent('content-5')">Subheading 4</li>
-		</ul>
-
-		<div class="content" id="content-1">
-			<!-- Content 1 paragraphs go here -->
-			For doing this microarray meta-analysis, the PubMed was initially queried using two keywords of “breast cancer” and “gene expression” and 316 papers were found.
-		</div>
-		<div class="content" id="content-2">
-			<!-- Subheading 1 paragraphs go here -->
-			Figure 1- The workflow of the study. PubMed search: 316 papers were found using two keywords of “breast cancer”, and Gene expression and this number reduced to 16 containing microarray datasets (GSEs) and 4 GSEs with the same platform were chosen for the meta-analysis. Data preprocessing: Normalization using VSN and quantile methods and visualization before and after that using box and PCA plots. Batch effect adjustment was also done using ComBat procedure and the result was visualized using three plots (PCA/MDS/Density plots). Data integration: It was done using Meta-analysis with REM model after Q-Q plot visualization. Visualization: It was done using heatmap for top 50 up/down Meta-DEGs, volcano plots for each and merged datasets, and Venn diagram for showing common DEGs across datasets. Functional analysis: it was done by different methods shown in the workflow. 
-		</div>
-		<div class="content" id="content-3">
-			<!-- Subheading 2 paragraphs go here -->
-		</div>
-		<div class="content" id="content-4">
-			<!-- Subheading 3 paragraphs go here -->
-		</div>
-		<div class="content" id="content-5">
-			<!-- Subheading 4 paragraphs go here -->
-		</div>
+		<h2 class="heading">Content 1</h2>
+		<p>
+			Read about breast cancer in women
+			<a href="table1.html">(table 1)</a>,
+			the most common type of cancer in the UK
+			<a href="figure1.html">(figure 1)</a>.
+		</p>
 	</div>
 
 	<div class="content">
 		<h2 class="heading">Content 2</h2>
-		<ul class="subheadings">
+		<ul>
 			<li>Subheading 1</li>
 			<li>Subheading 2</li>
 			<li>Subheading 3</li>
@@ -255,7 +239,7 @@
 
 	<div class="content">
 		<h2 class="heading">Content 3</h2>
-		<ul class="subheadings">
+		<ul>
 			<li>Subheading 1</li>
 			<li>Subheading 2</li>
 			<li>Subheading 3</li>
@@ -265,7 +249,7 @@
 
 	<div class="content">
 		<h2 class="heading">Content 4</h2>
-		<ul class="subheadings">
+		<ul>
 			<li>Subheading 1</li>
 			<li>Subheading 2</li>
 			<li>Subheading 3</li>
@@ -275,7 +259,7 @@
 
 	<div class="content">
 		<h2 class="heading">Content 5</h2>
-		<ul class="subheadings">
+		<ul>
 			<li>Subheading 1</li>
 			<li>Subheading 2</li>
 			<li>Subheading 3</li>
@@ -285,7 +269,7 @@
 
 	<div class="content">
 		<h2 class="heading">Content 6</h2>
-		<ul class="subheadings">
+		<ul>
 			<li>Subheading 1</li>
 			<li>Subheading 2</li>
 			<li>Subheading 3</li>
@@ -295,7 +279,7 @@
 
 	<div class="content">
 		<h2 class="heading">Content 7</h2>
-		<ul class="subheadings">
+		<ul>
 			<li>Subheading 1</li>
 			<li>Subheading 2</li>
 			<li>Subheading 3</li>
@@ -303,25 +287,35 @@
 		</ul>
 	</div>
 
-
-
-
-
 	<script>
-		function toggleContent(id) {
-			var content = document.getElementById(id);
-			if (content.style.display === "none") {
-				content.style.display = "block";
-			} else {
-				content.style.display = "none";
-			}
-		}
+				// Get all the headings
+		const headings = document.querySelectorAll(".heading");
+
+		// Add event listener to each heading
+		headings.forEach((heading) => {
+			heading.addEventListener("click", () => {
+				const subheadings = heading.nextElementSibling;
+				subheadings.style.display = subheadings.style.display === "none" ? "block" : "none";
+			});
+		});
+
+		// Add event listener to table 1 link
+		const table1Link = document.querySelector('a[href="table1.html"]');
+		table1Link.addEventListener("click", () => {
+			window.open("table1.html", "_blank");
+		});
+
+		// Add event listener to figure 1 link
+		const figure1Link = document.querySelector('a[href="figure1.html"]');
+		figure1Link.addEventListener("click", () => {
+			window.open("figure1.html", "_blank");
+		});
 	</script>
-
-
-
-
-
 </body>
 </html>
 
+
+		
+		
+		
+		
