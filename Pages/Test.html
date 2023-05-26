@@ -106,29 +106,34 @@
 		
 				/* Content Styles */
 		.content {
-			width: 75%;
-			padding: 10px;
-			float: left;
-			background-color: #95bfba;
-			color: #333;
-			cursor: pointer;
-			transition: background-color 0.3s, color 0.3s; /* Add transition for smooth hover effect */
-		}
+			  width: 75%;
+			  padding: 10px;
+			  float: left;
+			  background-color: #95bfba;
+			  color: #333;
+			  cursor: pointer;
+			  transition: background-color 0.3s, color 0.3s; /* Add transition for smooth hover effect */
+			}
 
-		.content:hover {
-			background-color: #FFC300; /* Apply hover background color */
-			color: #fff; /* Change the text color on hover */
-		}
+			.content:hover {
+			  background-color: #FFC300; /* Apply hover background color */
+			  color: #fff; /* Change the text color on hover */
+			}
 
-		.content h2 {
-			font-size: 18px;
-		}
+			.content.active {
+			  background-color: #0000FF; /* Change the background color when content is active */
+			}
 
-		.content ul {
-			list-style-type: none;
-			padding-left: 20px;
-			display: none;
-		}
+			.content h2 {
+			  font-size: 18px;
+			}
+
+			.content ul {
+			  list-style-type: none;
+			  padding-left: 20px;
+			  display: none;
+			}
+
 	</style>
 </head>
 <body>
