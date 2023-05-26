@@ -293,29 +293,31 @@
 	</div>
 
 	<script>
-				// Get all the headings
-		const headings = document.querySelectorAll(".heading");
+		  // Get all the headings
+		  const headings = document.querySelectorAll(".heading");
 
-		// Add event listener to each heading
-		headings.forEach((heading) => {
-			heading.addEventListener("click", () => {
-				const subheadings = heading.nextElementSibling;
-				subheadings.style.display = subheadings.style.display === "none" ? "block" : "none";
-			});
-		});
+		  // Add event listener to each heading
+		  headings.forEach((heading) => {
+		    heading.addEventListener("click", () => {
+		      const subheadings = heading.nextElementSibling;
+		      subheadings.style.display = subheadings.style.display === "none" ? "block" : "none";
+		      heading.classList.toggle("active"); // Toggle the active class
+		    });
+		  });
 
-		// Add event listener to table 1 link
-		const table1Link = document.querySelector('a[href="table1.html"]');
-		table1Link.addEventListener("click", () => {
-			window.open("table1.html", "_blank");
-		});
+		  // Add event listener to table 1 link
+		  const table1Link = document.querySelector('a[href="table1.html"]');
+		  table1Link.addEventListener("click", () => {
+		    window.open("table1.html", "_blank");
+		  });
 
-		// Add event listener to figure 1 link
-		const figure1Link = document.querySelector('a[href="figure1.html"]');
-		figure1Link.addEventListener("click", () => {
-			window.open("figure1.html", "_blank");
-		});
+		  // Add event listener to figure 1 link
+		  const figure1Link = document.querySelector('a[href="figure1.html"]');
+		  figure1Link.addEventListener("click", () => {
+		    window.open("figure1.html", "_blank");
+		  });
 	</script>
+
 </body>
 </html>
 
