@@ -115,6 +115,9 @@
 			  color: #333;
 			  cursor: pointer;
 			  transition: background-color 0.3s, color 0.3s; /* Add transition for smooth hover effect */
+			  overflow: hidden; /* Add overflow property to hide extra content; 
+			  we added overflow: hidden; to the .content class to hide any extra content that exceeds the specified height when the dropdown is closed. */
+
 			}
 
 			.content:hover {
@@ -137,6 +140,9 @@
 			  list-style-type: none;
 			  padding-left: 20px;
 			  display: none;
+			  overflow: auto; /* Add overflow property to enable scrolling when content exceeds height;
+				the .content ul class has overflow: auto; to enable scrolling when the content within the dropdown exceeds its height. */
+
 			}
 
 	</style>
