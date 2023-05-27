@@ -144,6 +144,14 @@
 			.content.active ul {
 			  display: block; /* Display the dropdown content when the dropdown is open */
 			}
+		
+		/* to justify the font size of title of contents like content 1 aocntent 2, .. */
+			.justified {
+			  text-align: justify;
+			  display: inline-block;
+			  width: 100%;
+}
+
 
 
 	</style>
@@ -233,6 +241,25 @@
 			</li>
 		</ul>
 	</div>
+	
+	
+	
+	<!-- A Sample for Content with FIGURE & TABLE Hyperlink 
+	<div class="content">
+		<h2 class="heading">Content 1</h2>
+		<p>
+			TEEEEXXXXTTTTT BEFORE TABLE1
+
+			<a href="table1.html">(table 1)</a>,
+
+			TEEEEXXXXTTTTT FIGURE1
+
+			<a href="figure1.html">(figure 1)</a>. 
+
+			TEXTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+		</p>
+	</div>
+-->
 
 	<div class="content">
 		<h2 class="heading">Content 1</h2>
@@ -300,15 +327,24 @@ GSEA was also implemented on the meta-DEG list of four datasets (4212 DEGs) usin
 		</p>
 	</div>
 
+	
+	------
+	
+	
+	
+	
+	----------
 	<div class="content">
-		<h2 class="heading">Content 2</h2>
-		<ul>
-			<li>Subheading 1</li>
-			<li>Subheading 2</li>
-			<li>Subheading 3</li>
-			<li>Subheading 4</li>
-		</ul>
+	  <h2 class="heading"><span class="justified">Content 1</span></h2>
+	  <p>
+	    TEEEEXXXXTTTTT BEFORE TABLE1
+	    <a href="table1.html">(table 1)</a>,
+	    TEEEEXXXXTTTTT FIGURE1
+	    <a href="figure1.html">(figure 1)</a>. 
+	    TEXTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+	  </p>
 	</div>
+
 
 	<div class="content">
 		<h2 class="heading">Content 3</h2>
