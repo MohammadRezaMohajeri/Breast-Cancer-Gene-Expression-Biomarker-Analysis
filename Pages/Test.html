@@ -108,7 +108,7 @@
 		.content {
 			  font-size: 20px; /* Adjust the font size as desired */
 			  width: 75%;
-			  height: 500px; /* Increase the height as desired */
+			  height: 2cm; /* Set the initial height when the dropdown is closed */
 			  padding: 10px;
 			  float: left;
 			  background-color: #e6f7ff;
@@ -118,12 +118,13 @@
 			}
 
 			.content:hover {
-			  height: 100px; /* Increase the height as desired */
+			  height: 2cm; /* Maintain the same height on hover when the dropdown is closed */
 			  background-color: #95bfba; /* Apply hover background color */
 			  color: #000000; /* Change the text color on hover (dark green) */
 			}
 
 			.content.active {
+			  height: auto; /* Set the height to auto when the dropdown is open */
 			  background-color: #0000FF; /* Change the background color when content is active */
 			}
 
