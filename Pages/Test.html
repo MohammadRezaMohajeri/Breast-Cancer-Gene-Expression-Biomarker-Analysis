@@ -105,8 +105,9 @@
 		
 		
 				/* Content Styles */
+		
 		.content {
-			  font-size: 20px; /* Adjust the font size as desired */
+			  font-size: 20px;
 			  width: 75%;
 			  height: 2cm; /* Set the initial height when the dropdown is closed */
 			  padding: 10px;
@@ -114,21 +115,19 @@
 			  background-color: #e6f7ff;
 			  color: #333;
 			  cursor: pointer;
-			  transition: background-color 0.3s, color 0.3s; /* Add transition for smooth hover effect */
-			  overflow: hidden; /* Add overflow property to hide extra content; 
-			  we added overflow: hidden; to the .content class to hide any extra content that exceeds the specified height when the dropdown is closed. */
-
+			  transition: background-color 0.3s, color 0.3s;
+			  overflow: hidden; /* Add overflow property to hide extra content */
 			}
 
 			.content:hover {
-			  height: 2cm; /* Maintain the same height on hover when the dropdown is closed */
-			  background-color: #95bfba; /* Apply hover background color */
-			  color: #000000; /* Change the text color on hover (dark green) */
+			  height: auto; /* Set the height to auto on hover to expand the dropdown */
+			  background-color: #95bfba;
+			  color: #000000;
 			}
 
 			.content.active {
 			  height: auto; /* Set the height to auto when the dropdown is open */
-			  background-color: #0000FF; /* Change the background color when content is active */
+			  background-color: #0000FF;
 			}
 
 			.content h2 {
@@ -136,14 +135,16 @@
 			}
 
 			.content ul {
-			  font-size: 16px; /* Adjust the font size as desired */
+			  font-size: 16px;
 			  list-style-type: none;
 			  padding-left: 20px;
 			  display: none;
-			  overflow: auto; /* Add overflow property to enable scrolling when content exceeds height;
-				the .content ul class has overflow: auto; to enable scrolling when the content within the dropdown exceeds its height. */
-
 			}
+
+			.content.active ul {
+			  display: block; /* Display the dropdown content when the dropdown is open */
+			}
+
 
 	</style>
 </head>
