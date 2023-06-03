@@ -85,6 +85,18 @@
 			cursor: pointer;
 		}
 
+		.content p {
+			font-size: 16px; /* Adjust the font size for paragraphs */
+		}
+
+		.content .heading {
+			font-size: 20px; /* Adjust the font size for headings */
+		}
+
+		.content .subheadings {
+			font-size: 14px; /* Adjust the font size for subheadings */
+		}
+
 		.content ul {
 			list-style-type: none;
 			padding-left: 20px;
@@ -116,17 +128,13 @@
 				<ul class="subheadings">
 					<li>Subheading 1</li>
 					<li>Subheading 2</li>
-					<li>Subheading 3</li>
-					<li>Subheading 4</li>
 				</ul>
 			</li>
 			<li>
 				<h2 class="heading">Heading 2</h2>
-								<ul class="subheadings">
+				<ul class="subheadings">
 					<li>Subheading 1</li>
 					<li>Subheading 2</li>
-					<li>Subheading 3</li>
-					<li>Subheading 4</li>
 				</ul>
 			</li>
 			<li>
@@ -134,8 +142,6 @@
 				<ul class="subheadings">
 					<li>Subheading 1</li>
 					<li>Subheading 2</li>
-					<li>Subheading 3</li>
-					<li>Subheading 4</li>
 				</ul>
 			</li>
 			<li>
@@ -143,8 +149,6 @@
 				<ul class="subheadings">
 					<li>Subheading 1</li>
 					<li>Subheading 2</li>
-					<li>Subheading 3</li>
-					<li>Subheading 4</li>
 				</ul>
 			</li>
 			<li>
@@ -152,45 +156,24 @@
 				<ul class="subheadings">
 					<li>Subheading 1</li>
 					<li>Subheading 2</li>
-					<li>Subheading 3</li>
-					<li>Subheading 4</li>
-				</ul>
-			</li>
-			<li>
-				<h2 class="heading">Heading 6</h2>
-				<ul class="subheadings">
-					<li>Subheading 1</li>
-					<li>Subheading 2</li>
-					<li>Subheading 3</li>
-					<li>Subheading 4</li>
-				</ul>
-			</li>
-			<li>
-				<h2 class="heading">Heading 7</h2>
-				<ul class="subheadings">
-					<li>Subheading 1</li>
-					<li>Subheading 2</li>
-					<li>Subheading 3</li>
-					<li>Subheading 4</li>
 				</ul>
 			</li>
 		</ul>
 	</div>
 
 	<div class="content">
-		<!-- Content goes here -->
-	</div>
+		<h2 class="heading">Paragraph 1</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris semper metus mauris, vel pellentesque nunc venenatis vel. Quisque sit amet feugiat massa. Donec id eros in tellus finibus suscipit. Integer consectetur arcu non turpis gravida rhoncus. Duis ultricies elit mauris, non tristique felis facilisis nec. Proin nec tincidunt nulla. Sed in libero sed urna hendrerit interdum.</p>
+		<p class="subheadings">Subheading 1</p>
+		<p class="subheadings">Subheading 2</p>
 
-	<script>
-		// Add click event listener to headings
-		const headings = document.querySelectorAll('.heading');
-		headings.forEach(heading => {
-			heading.addEventListener('click', () => {
-				// Toggle visibility of subheadings
-				const subheadings = heading.nextElementSibling;
-				subheadings.style.display = subheadings.style.display === 'none' ? 'block' : 'none';
-			});
-		});
-	</script>
+		<h2 class="heading">Paragraph 2</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris semper metus mauris, vel pellentesque nunc venenatis vel. Quisque sit amet feugiat massa. Donec id eros in tellus finibus suscipit. Integer consectetur arcu non turpis gravida rhoncus. Duis ultricies elit mauris, non tristique felis facilisis nec. Proin nec tincidunt nulla. Sed in libero sed urna hendrerit interdum.</p>
+		<p class="subheadings">Subheading 1</p>
+		<p class="subheadings">Subheading 2</p>
+
+		<!-- Add more paragraphs as needed -->
+
+	</div>
 </body>
 </html>
