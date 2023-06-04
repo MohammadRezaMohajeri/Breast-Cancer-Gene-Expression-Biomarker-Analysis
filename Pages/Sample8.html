@@ -226,23 +226,26 @@
 
 
 	<script>
-	  const headerTitle = document.getElementById("header-title");
-	  const titleText = "Meta-Analysis of Breast Cancer Gene Expression Profiles:<br><span style='display:block'>Identifying Pathways and Biomarkers for Diagnosis and Prognosis</span>";
-	  let currentIndex = 0;
+        function showTab(tabId) {
+            // Hide all tab content
+            var tabContent = document.getElementsByClassName("tabContent");
+            for (var i = 0; i < tabContent.length; i++) {
+                tabContent[i].style.display = "none";
+            }
 
-	  function animateHeaderTitle() {
-	    if (currentIndex < titleText.length) {
-	      if (titleText.charAt(currentIndex) === "<") {
-		currentIndex = titleText.indexOf(">", currentIndex) + 1;
-	      }
-	      headerTitle.innerHTML = titleText.substring(0, currentIndex);
-	      currentIndex++;
-	      setTimeout(animateHeaderTitle, 30);
-	    }
-	  }
+            // Deactivate all tabs
+            var tabs = document.getElementsByClassName("tab");
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
 
-	  animateHeaderTitle();
-	</script>
+            // Show the selected tab content
+            document.getElementById(tabId).style.display = "block";
+
+            // Activate the selected tab
+            document.getElementById(tabId + "-tab").classList.add("active");
+        }
+    </script>
 
 
 	<nav>
