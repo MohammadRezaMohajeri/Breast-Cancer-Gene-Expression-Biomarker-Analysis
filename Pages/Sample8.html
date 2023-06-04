@@ -1,181 +1,306 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Breast Cancer Gene Expression Biomarker Analysis</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        html {
-            background: #edca77; /* updated background color to a shade of yellow */
-        }
+        @media screen and (max-width: 600px) {
+            /* CSS code for smaller screens */
+            /* Place your modifications for smaller screens here */
+            html {
+                background: #edca77;
+            }
 
-        body {
-            color: #fff;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+            body {
+                color: #fff;
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+            }
 
-        header {
-            background: #f7c857;
-            padding: 20px;
-            color: #18217a; /* set text color to yellow */
-            font-family: Arial, sans-serif; /* set font family */
-            font-size: 2em; /* set font size */
-        }
+            header {
+                background: #f7c857;
+                padding: 20px;
+                color: #18217a;
+                font-family: Arial, sans-serif;
+                font-size: 2em;
+            }
 
-        h1 {
-            font-size: 2em;
-            margin: 0;
-        }
+            h1 {
+                font-size: 2em;
+                margin: 0;
+            }
 
-        nav {
-            background: #444;
-            padding: 10px;
-        }
+            nav {
+                background: #444;
+                padding: 10px;
+            }
 
-        nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+            nav ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
 
-        nav li {
-            margin: 0 10px;
-        }
+            nav li {
+                margin: 0 10px;
+            }
 
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.2em;
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
+            nav a {
+                color: #fff;
+                text-decoration: none;
+                font-size: 1.2em;
+                padding: 5px 10px;
+                border-radius: 5px;
+            }
 
-        footer {
-            background: #222;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
+            footer {
+                background: #222;
+                color: #fff;
+                padding: 20px;
+                text-align: center;
+            }
 
-        .body-section {
-            display: flex;
-            justify-content: space-between;
-        }
+            /* Additional styles for responsive layout */
 
-        .left-section {
-            width: 20%;
-            /* Add any additional styling for the left section here */
-        }
-
-        .menu {
-            padding: 0;
-            margin: 0;
-            list-style: none;
-        }
-
-        .menu li {
-            margin: 0;
-            /* Add any additional styling for each menu item here */
-        }
-
-        .menu a {
-            display: block;
-            padding: 10px;
-            text-decoration: none;
-            color: #000;
-            background-color: #f0f0f0;
-        }
-
-        .menu a:hover {
-            background-color: purple;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .right-section {
-            width: 80%;
-            /* Add any additional styling for the right section here */
-        }
-
-        .row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .tab {
-            width: calc(50% - 10px);
-            background-color: #fff;
-            color: #157D7F;
-            border: 1px solid #ccc;
-            padding: 20px;
-            height: 50px;
-            margin-right: 10px;
-        }
-
-        .right-section .tab:hover {
-            background-color: darkblue;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .menu li {
-            display: inline-block;
-            margin: 5px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f5f5f5;
-            width: 150px;
-        }
-
-        .menu li a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            display: block;
-            padding: 10px;
-        }
-
-        @media only screen and (max-width: 600px) {
+            /* CSS code for dividing the body into 20% and 80% sections */
             .body-section {
-                flex-direction: column;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
             }
 
             .left-section {
                 width: 100%;
+                max-width: 20%;
+                background-color: #f0f0f0;
+                padding: 10px;
+            }
+
+            .menu {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+            }
+
+            .menu li {
+                margin: 5px;
+            }
+
+            .menu a {
+                display: block;
+                padding: 10px;
+                text-decoration: none;
+                color: #000;
+                background-color: #f0f0f0;
+            }
+
+            .menu a:hover {
+                background-color: purple;
+                color: #fff;
             }
 
             .right-section {
                 width: 100%;
+                max-width: 80%;
+                padding: 10px;
             }
 
+            /* Styles for tabs */
             .tab {
                 width: 100%;
+                max-width: calc(50% - 10px);
+                background-color: #fff;
+                color: #157D7F;
+                border: 1px solid #ccc;
+                padding: 20px;
+                height: 50px;
+                margin-bottom: 10px;
+            }
+
+            .tab:hover {
+                background-color: darkblue;
+                color: #fff;
+            }
+
+            /* Styles for the header section */
+            .header-section-left {
+                width: 100%;
+                max-width: 20%;
+                padding-top: 10px;
+            }
+
+            .header-section-left img {
+                height: auto;
+                max-width: 100%;
+                display: block;
+            }
+
+            .header-section-right {
+                width: 100%;
+                max-width: 80%;
+                padding-top: 10px;
+            }
+        }
+
+        @media screen and (min-width: 601px) {
+            /* CSS code for larger screens */
+            /* Place your modifications for larger screens here */
+            html {
+                background: #edca77;
+            }
+
+            body {
+                color: #fff;
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+
+            header {
+                background: #f7c857;
+                padding: 20px;
+                color: #18217a;
+                font-family: Arial, sans-serif;
+                font-size: 2em;
+            }
+
+            h1 {
+                font-size: 2em;
+                margin: 0;
+            }
+
+            nav {
+                background: #444;
+                padding: 10px;
+            }
+
+            nav ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            nav li {
+                margin: 0 10px;
+            }
+
+            nav a {
+                color: #fff;
+                text-decoration: none;
+                font-size: 1.2em;
+                padding: 5px 10px;
+                border-radius: 5px;
+            }
+
+            footer {
+                background: #222;
+                color: #fff;
+                padding: 20px;
+                text-align: center;
+            }
+
+            /* Additional styles for responsive layout */
+
+            /* CSS code for dividing the body into 20% and 80% sections */
+            .body-section {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .left-section {
+                width: 100%;
+                max-width: 20%;
+                background-color: #f0f0f0;
+                padding: 10px;
             }
 
             .menu {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
+                padding: 0;
+                margin: 0;
+                list-style: none;
             }
 
             .menu li {
-                width: 40%;
+                margin: 5px;
+            }
+
+            .menu a {
+                display: block;
+                padding: 10px;
+                text-decoration: none;
+                color: #000;
+                background-color: #f0f0f0;
+            }
+
+            .menu a:hover {
+                background-color: purple;
+                color: #fff;
+            }
+
+            .right-section {
+                width: 100%;
+                max-width: 80%;
+                padding: 10px;
+            }
+
+            /* Styles for tabs */
+            .tab {
+                width: 100%;
+                max-width: calc(50% - 10px);
+                background-color: #fff;
+                color: #157D7F;
+                border: 1px solid #ccc;
+                padding: 20px;
+                height: 50px;
                 margin-bottom: 10px;
+            }
+
+            .tab:hover {
+                background-color: darkblue;
+                color: #fff;
+            }
+
+            /* Styles for the header section */
+            .header-section-left {
+                width: 100%;
+                max-width: 20%;
+                padding-top: 10px;
+            }
+
+            .header-section-left img {
+                height: auto;
+                max-width: 100%;
+                display: block;
+            }
+
+            .header-section-right {
+                width: 100%;
+                max-width: 80%;
+                padding-top: 10px;
             }
         }
     </style>
 </head>
+
 <body>
     <header>
-        <h1>Breast Cancer Gene Expression Biomarker Analysis</h1>
-        <img src="logo.png" alt="Logo">
+        <div class="header-section-left">
+            <img src="logo.png" alt="Logo">
+        </div>
+        <div class="header-section-right">
+            <h1>Breast Cancer Gene Expression Biomarker Analysis</h1>
+        </div>
     </header>
 
     <nav>
@@ -190,39 +315,19 @@
     <div class="body-section">
         <div class="left-section">
             <ul class="menu">
-                <li><a href="#">Tab 1</a></li>
-                <li><a href="#">Tab 2</a></li>
-                <li><a href="#">Tab 3</a></li>
-                <li><a href="#">Tab 4</a></li>
-                <li><a href="#">Tab 5</a></li>
+                <li><a href="#">Link 1</a></li>
+                <li><a href="#">Link 2</a></li>
+                <li><a href="#">Link 3</a></li>
+                <li><a href="#">Link 4</a></li>
+                <li><a href="#">Link 5</a></li>
             </ul>
         </div>
-
         <div class="right-section">
-            <div class="row">
-                <div class="tab">
-                    <a href="#">Tab 1 Content</a>
-                </div>
-                <div class="tab">
-                    <a href="#">Tab 2 Content</a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="tab">
-                    <a href="#">Tab 3 Content</a>
-                </div>
-                <div class="tab">
-                    <a href="#">Tab 4 Content</a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="tab">
-                    <a href="#">Tab 5 Content</a>
-                </div>
-                <div class="tab">
-                    <a href="#">Tab 6 Content</a>
-                </div>
-            </div>
+            <div class="tab">Tab 1</div>
+            <div class="tab">Tab 2</div>
+            <div class="tab">Tab 3</div>
+            <div class="tab">Tab 4</div>
+            <div class="tab">Tab 5</div>
         </div>
     </div>
 
@@ -230,4 +335,5 @@
         &copy; 2023 Breast Cancer Gene Expression Biomarker Analysis. All rights reserved.
     </footer>
 </body>
+
 </html>
