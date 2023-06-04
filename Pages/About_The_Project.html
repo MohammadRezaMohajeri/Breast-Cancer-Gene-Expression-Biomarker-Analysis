@@ -87,11 +87,9 @@
 		.content {
 			width: 80%;
 			padding: 10px;
-       			padding-left: 100px; /* Add padding to create spacing */
-			box-sizing: border-box; /* Include padding and border in the total width */
-		 	border-left: 1px solid green;
- 
-
+			padding-left: 100px;
+			box-sizing: border-box;
+			border-left: 1px solid green;
 		}
 
 		.content h2 {
@@ -101,28 +99,13 @@
 		}
 
 		.content p {
-			font-size: 16px; /* Adjust the font size for paragraphs */
+			font-size: 16px;
+			margin-left: 20px; /* Adjust the margin value for indentation */
 		}
 
-		.content .heading {
-			font-size: 20px; /* Adjust the font size for headings */
-		}
 		
-		/* Adjust the font size for headings */
-		.step {
-			font-weight: bold;
-			margin-bottom: 10px;
-			font-size: 25px; /* Adjust the font size for the step paragraph */
-
-	        }
-
-	       .bullet {
-			padding-left: 30px;
-			list-style-type: disc;
-			font-size: 18px;
-			box-sizing: border-box; /* Include padding and border in the total width */
-		}
-
+		
+		
 	        }
 	</style>
 </head>
@@ -178,13 +161,16 @@
 	</div>
 	
 	
-	<div>
-	    <p class="step">1. Initial Exploration:</p>
-	    <ul class="bullet">
-		<li>  Started with a broad interest in gene expression profiling and breast cancer differentiation.</li>
-		<li>  Pondered the question: "What common features differentiate between non-aggressive and aggressive breast cancer samples in gene expression profiling?"</li>
-	    </ul>
+	<div class="content">
+		  <h2>Heading 1</h2>
+		  <p>Paragraph 1 content.</p>
+		  <p>Paragraph 2 content.</p>
+
+		  <h2>Heading 2</h2>
+		  <p>Paragraph 1 content.</p>
+		  <p>Paragraph 2 content.</p>
 	</div>
+
 	
 <!-- 
 	<div class="content">
