@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Breast Cancer Gene Expression Biomarker Analysis</title>
+	<style>
+                
+                /*   the following css code is for body section including tabs of overview, ... and menu on the left */ 
+        
+
+		/*  here is the end of css code for body including overview of the project, ..., and menu tabs */ 
+
+		/* The / * * / syntax is used to comment out code in CSS, whereas in HTML, you would use <!-- --> to comment out code. */ 
+		html {
+    			background:  #edca77; /* updated background color to a shade of yellow */ ;
+		}
+
+		body {
+			color: #fff;
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+		
+		}
+
+		/* Header in my page is ''Breast Cancer Gene-Expression Biomarker Analysis'' */
+		header {
+			background: #f7c857;
+			padding: 20px;
+			color: #18217a; /* set text color to yellow */
+    			font-family: Arial, sans-serif; /* set font family */
+    			font-size: 2em; /* set font size */
+		}
+
+
+		h1 {
+			font-size: 2em;
+			margin: 0;
+		}
+
+		nav {
+			background: #444;
+			padding: 10px;
+		}
+
+		nav ul {
+			list-style: none;
+			margin: 0; 
+			padding: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		nav li {
+			margin: 0 10px;
+		}
+
+		nav a {
+			color: #fff;
+			text-decoration: none;
+			font-size: 1.2em;
+			padding: 5px 10px;
+			border-radius: 5px;
+		
+
+   
+		footer {
+			background: #222;
+			color: #fff;
+			padding: 20px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	
+		
+
+		<!-- ''the typing animation effect for the header'' -->  
+	<header style="height: 3.5cm; text-align: center;">
+	  <div class="header-section-left" style="background-color: #e6f7ff; padding: 5px; width: 20%; float: left; padding-top: 10px; margin-bottom: -10px">
+	    <div style="display: flex;">
+
+	      <div style="flex: 1;">
+		<a href="https://github.com/MohammadRezaMohajeri/Breast-Cancer-Gene-Expression-Biomarker-Analysis/blob/main/Images/IMG_7082%20-%20Copy.JPG?raw=true" target="_blank">
+		  <img src="https://github.com/MohammadRezaMohajeri/Breast-Cancer-Gene-Expression-Biomarker-Analysis/blob/main/Images/IMG_7082%20-%20Copy.JPG?raw=true" alt="My Picture">
+		</a>
+	      </div>
+
+	      <div style="flex: 1; margin-left: 10px;">
+		<p style="font-size: 12px; font-weight: bold;"> Results-oriented and motivated bioinformatician with rich experience in bioinformatics tools and programming.</p>
+		<div style="display: flex;">
+		  <a href="https://drive.google.com/file/d/1x3KKb0zxYMamSQZohbJ04YNcGaG2LHks/view?usp=sharing" target="_blank" style="display: block; text-align: center; margin-top: -10px; font-size: 12px; background-color: #37bd26; color: #fff; padding: 5px 10px; margin-right: 10px;">My CV</a>
+		  <a href="https://www.linkedin.com/in/mohammad-reza-mohajeri-24240a12b/" target="_blank" style="display: block; text-align: center; margin-top: -10px; font-size: 12px; background-color: #0077b5; color: #fff; padding: 5px 10px;">LinkedIn</a>
+		</div>
+	      </div>
+	    </div>
+	  </div>
+	  <h1 id="header-title" style="font-size: 24px;"></h1>
+	  <div class="header-section-right" style="background-color: #e6f7ff;"></div>
+	</header>
+
+
+	<style>
+	  .header-section-left {
+	    width: 20%;
+	    float: left;
+	    margin-top: -15px;
+	    margin-left: -10px;
+	    padding-top: 10px;
+	  }
+
+	  .header-section-left img {
+	    height: 150px;
+	    width: 100px;
+	    overflow: hidden;
+	    margin-top: -5px; /* to top of  */
+	    margin-bottom: -5px; /* adjust this value to move the image up or down */
+	  }
+
+	  .header-section-right {
+	    width: 30%;
+	    float: right;
+	  }
+
+	  #header-title {
+	    width: 40%;
+	    margin: auto;
+	    display: block;
+	  }
+
+	  img {
+	    height: 100%;
+	    width: auto;
+	  }
+	</style>
+
+
+
+<!-- CSS code for dividingthe body:20and 80%
+--> 
+			<style>
+		.body-section {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.left-section {
+			width: 20%;
+			/* Add any additional styling for the left section here */
+		}
+
+		.menu {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+		}
+
+		.menu li {
+			margin: 0;
+			/* Add any additional styling for each menu item here */
+		}
+
+		.menu a {
+			display: block;
+			padding: 10px;
+			text-decoration: none;
+			color: #000;
+			background-color: #f0f0f0;
+		}
+
+	/* The grey box that appears when you move your cursor over the menu tabs is a default behavior called the "hover" effect. 
+	It provides a visual indication that the tab is interactive and can be clicked. */ 
+		.menu a:hover {
+			background-color: purple; /* Set the background color to purple */
+			color: #fff; /* Change the text color to white */
+			text-decoration: none; /* Remove the underline from the text */
+		}
+			
+			
+			
+			
+		    .right-section {
+			width: 80%;
+			/* Add any additional styling for the right section here */
+	        }
+				
+				/* To apply the same effect (The grey/ purple box that appears when you move your cursor over the tabs) to the tabs in the right section  */
+		    .right-section .tab:hover {
+			background-color: darkblue; /* Set the background color to darkblue */
+			color: #fff; /* Change the text color to white */
+			text-decoration: none; /* Remove the underline from the text */
+		}
+		</style>
+	
+	
+
+<!-- This CSS code will define the layout and appearance of the rows and tabs 
+--> 
+			<style>
+			    .row {
+				display: flex;
+				justify-content: space-between;
+				margin-bottom: 20px;
+			    }
+
+			    .tab {
+				width: calc(50% - 10px);
+				background-color: #fff;
+				color: #157D7F; /* Replace with your desired color value */
+   
+				border: 1px solid #ccc;
+				padding: 20px;
+				height: 50px; /* Adjust the height value of each tab as needed */
+				margin-right: 10px; /* Adjust the value as per your requirements */
+
+
+			    }
+
+			    .right-section {
+				width: 80%;
+				/* Add any additional styling for the right section here */
+			    }
+			</style>
+
+	
+	<!-- The following is for stype of menu item tabs on the left -->	
+			<style>
+		    .menu li {
+			display: inline-block;
+			margin: 5px;
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			background-color: #f5f5f5;
+			width: 150px; /* Adjust the width of each menu tab as desired */
+			    
+			/*margin-left: 20px; /* Adjust the left margin of each menu tab as desired */
+			    
+			/* margin-right: 20px; /* Adjust the right margin as desired */
+
+
+    
+		    }
+
+		    .menu li a {
+			text-decoration: none;
+			color: #333;
+			font-weight: bold;
+			font-size: 16px;
+		    }
+		</style>
+
+
+
+
+
+
+	<script>
+	  const headerTitle = document.getElementById("header-title");
+	  const titleText = "Meta-Analysis of Breast Cancer Gene Expression Profiles:<br><span style='display:block'>Identifying Pathways and Biomarkers for Diagnosis and Prognosis</span>";
+	  let currentIndex = 0;
+
+	  function animateHeaderTitle() {
+	    if (currentIndex < titleText.length) {
+	      if (titleText.charAt(currentIndex) === "<") {
+		currentIndex = titleText.indexOf(">", currentIndex) + 1;
+	      }
+	      headerTitle.innerHTML = titleText.substring(0, currentIndex);
+	      currentIndex++;
+	      setTimeout(animateHeaderTitle, 30);
+	    }
+	  }
+
+	  animateHeaderTitle();
+	</script>
+
+
+	<nav>
+		<ul>
+			<li><a href="#">Home</a></li>
+			<li><a href="#">About</a></li>
+			<li><a href="#">Services</a></li>
+			<li><a href="#">Contact</a></li>
+		</ul>
+	</nav>
+
+	<!--
+comment: 
+To divide the body section below the navigation bar into two parts, 
+		with the left part taking up 20% of the width and the right part taking up 80% of the width, 
+		I added the following HTML and CSS code:
+
+HTML:
+		
+-->	
+	
+<div class="body-section">
+	<div class="left-section">
+	    <!-- Menu item tabs -->
+	    <ul class="menu">
+		<li><a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/About_The_Project.html">About The Project</a></li>
+		<li><a href="#">R Code</a></li>
+		<li><a href="#">Research Questions</a></li>
+		<li><a href="#">Workflow (Whole Project) 4</a></li>
+		
+
+	    </ul>
+	</div>
+
+
+
+    <!-- Bellow is the section for tabs in the body (e.g. Project Goals, Methodology). For linking each tab to a separate page, 
+we can us an approach by wrapping the content of each tab with an anchor tag <a> and setting the href attribute to the respective destination pages. 
+To do this,  <a href="project_goals.html"> and  </a> were used to wrap the existing line ( <span style="font-weight: bold; font-size: 30px;">Project Goals</span> )
+-->
+<!-- Like Methodology that I have added the webpage address,  the address for the Project Goals should be replaced with project_goals.html -->
+	
+	<div class="right-section">
+    <!-- First Row -->
+    <div class="row">
+        <div class="tab" style="text-align: center;">
+            <!-- Content for the first tab in the first row -->
+            <a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/project_goals.html">
+                <span style="font-weight: bold; font-size: 30px;">Project Goals</span>
+            </a>
+        </div>
+
+        <div class="tab" style="text-align: center;">
+    <!-- Content for the second tab in the first row -->
+    <a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/methodology.html">
+        <span style="font-weight: bold; font-size: 30px;">Methodology</span>
+    </a>
+</div>
+    </div>
+
+    <!-- Second Row -->
+    <div class="row">
+        <div class="tab" style="text-align: center;">
+            <!-- Content for the first tab in the second row -->
+            <a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/results.html">
+                <span style="font-weight: bold; font-size: 30px;">Results</span>
+            </a>
+        </div>
+        <div class="tab" style="text-align: center;">
+            <!-- Content for the second tab in the second row -->
+            <a href="discussion_conclusion.html">
+                <span style="font-weight: bold; font-size: 30px;">Discussion & Conclusion</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Third Row -->
+    <div class="row">
+        <div class="tab" style="text-align: center;">
+            <!-- Content for the first tab in the third row -->
+            <a href="leave_comment.html">
+                <span style="font-weight: bold; font-size: 30px;">Leave a comment about the project</span>
+            </a>
+        </div>
+        <div class="tab" style="text-align: center;">
+            <!-- Content for the second tab in the third row -->
+            <a href="additional_info.html">
+                <span style="font-weight: bold; font-size: 30px;">Additional info</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+	
+</div>
+
+
+	
+	
+
+	<footer>
+		<p>&copy; My Website 2023</p>
+	</footer>
+</body>
+</html>
