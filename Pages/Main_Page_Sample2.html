@@ -26,14 +26,18 @@
 			height: 200px; /* Adjust the height as desired */
 			object-fit: cover; /* Adjust the object-fit property as desired */
 		}
-
+		
 		.middle-section {
-			display: flex;
-			align-items: flex-end; /* Align items at the bottom */
-			justify-content: space-between;
+		        display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: flex-end; /* Align items at the bottom */
 			padding: 0 10px; /* Add some padding to the buttons */
 			background-color: #000; /* Black */
+			color: white; /* Text color */
 
+			 /* Adjust height if needed */
+			height: 100px;
 		}
 
 		.middle-section .button {
@@ -43,8 +47,12 @@
 			border: none;
 			cursor: pointer;
 			height: 30px; /* Adjust the height as desired */
-
 		}
+
+		.text-above-buttons {
+		  	margin-bottom: 5px;
+		}
+
 
 		.right-section {
 			display: flex;
@@ -200,6 +208,8 @@
 			    <img src="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Images/IMG_7082.JPG" alt="Your Photo">
 			  </div>
 			  <div class="middle-section">
+				  <p class="Results-oriented and motivated bioinformatician with rich experience in bioinformatics tools and programming.">Some text above buttons</p>
+  			  <div class="button-container">
 			    <button class="button">CV</button>
 			    <button class="button">LinkedIn</button>
 			  </div>
@@ -207,6 +217,20 @@
 			    <h1>Meta-Analysis of Breast Cancer Gene Expression Profiles: Identifying Pathways and Biomarkers for Diagnosis and Prognosis</h1>
 			  </div>
 	</div>
+	
+	---
+	<div class="middle-section">
+		
+  <p class="text-above-buttons">Some text above buttons</p>
+  <div class="button-container">
+	  
+	  
+    <button class="button">CV</button>
+    <button class="button">LinkedIn</button>
+  </div>
+</div>
+	
+	---
 	
 
 	<div class="navbar">
