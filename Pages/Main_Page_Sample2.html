@@ -6,10 +6,28 @@
 	<style>
 		/* Header Styles  */
 		.header {
+			display: grid;
+			grid-template-columns: 20% 80%;
 			background-color: #00FF00; /* GREEN */
-			padding: 50px;
-			text-align: center; /* Center-align the header content */
+			padding: 10px;
 		}
+
+		       .left-section {
+			  /* Styles for the left section */
+		}
+
+		       .right-section {
+			  /* Styles for the right section */
+		}
+
+			right-section h1 {
+			font-size: 40px;
+			color: #333;
+			font-weight: bold;
+			text-align: right;
+		}
+
+
 
 		.header h1 {
 			font-size: 30px; /* Adjust the font size as desired */
@@ -149,11 +167,18 @@
 	</style>
 </head>
 <body>
-	<div class="header">
-        <img src="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Images/IMG_7082.JPG" alt="Your Photo">
 
-		<h1>Meta-Analysis of Breast Cancer Gene Expression Profiles: Identifying Pathways and Biomarkers for Diagnosis and Prognosis</h1>
+	
+	<div class="header">
+			 <div class="left-section">
+			    <!-- Place your photo here -->
+			    <img src="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Images/IMG_7082.JPG" alt="Your Photo">
+			 </div>
+			  <div class="right-section">
+			    <h1>Meta-Analysis of Breast Cancer Gene Expression Profiles: Identifying Pathways and Biomarkers for Diagnosis and Prognosis</h1>
+	  </div>
 	</div>
+
 
 	<div class="navbar">
 		<ul class="menu">
