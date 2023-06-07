@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>About The Project</title>
+	<style>
+		/* Header Styles  */
+		.header {
+			background-color: #00FF00; /* GREEN */
+			padding: 10px;
+			text-align: center; /* Center-align the header content */
+		}
+
+		.header h1 {
+			font-size: 40px; /* Adjust the font size as desired */
+			color: #333;
+			font-weight: bold; /* Add this line to make the text bold */
+		}
+
+		/* Navbar Styles */
+		.navbar {
+			background-color: #f2f2f2;
+			padding: 10px;
+		}
+
+		.menu {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		        margin-right: 20px; /* Add a margin to the right side of the menu */
+
+		}
+
+		.menu li {
+			display: inline-block;
+			margin-right: 100px; /* I changed this from 10 to 100; therefore, the spacing between tabs on navbar will be increased */
+
+		}
+
+		.menu li a {
+			display: block;
+			padding: 10px;
+			background-color: #DAF7A6; /* green */
+			color: darkblue; /* Change the color to dark blue */
+			text-decoration: none;
+		}
+
+		.menu li a:hover {
+			background-color: #FFC300; /* Gold */
+			color: #fff;
+			text-decoration: none;
+		}
+
+		/* Sidebar Styles */
+		.sidebar {
+			width: 20%;
+			background-color: #f2f2f2;
+			padding: 10px;
+			float: left;
+			height: 5000px; /* Increase the height as desired */
+			border-right: 1px solid black; /* This will visually separate the sidebar and content sections. */
+			padding-right: 10px; /* Add padding to create spacing */
+
+
+
+		}
+
+		.sidebar ul {
+			list-style-type: none;
+			padding: 0;
+			margin-bottom: 0; /* Add margin-bottom to remove extra spacing */
+
+		}
+
+		.sidebar li {
+			margin-bottom: 5px;
+		}
+
+		.sidebar .heading:hover {
+			background-color: green;
+			color: #fff;
+			text-decoration: none;
+		}
+
+
+		/* Page Content Styles */
+		.content {
+			width: 100%;
+			padding: 10px;
+			padding-left: 100px;
+			box-sizing: border-box;
+			border-left: 1px solid green;
+			text-align: justify; /* Add this line to justify the text */
+
+		}
+
+		.content h2 {
+			font-size: 24px; /* Adjust the font size for headings */
+			color: #333;
+			cursor: pointer;
+		}
+
+		.content p {
+			font-size: 20px; /* Adjust the font size for paragraphs */
+			margin-left: 20px; /* Adjust the margin value for indentation */
+		}
+
+		
+		
+		
+	        }
+		
+		
+		/* To highlight different parts of the text in red, green, and blue, you can use the <span> element and apply CSS styles to it */ 
+		
+		
+		.orange-text {
+			color: orange;
+			font-weight: bold;
+		}
+		.dark-yellow-text {
+			color: hsl(50, 100%, 30%); /* Adjust the hue and saturation values as needed */
+			font-weight: bold;
+		}
+		.brown-text {
+			color: hsl(30, 100%, 30%); /* Adjust the hue and saturation values as needed */
+			font-weight: bold;
+		}
+		.green-text {
+			color: green;
+			font-weight: bold;
+		}
+		.purple-text {
+			color: purple;
+			font-weight: bold;
+		}
+		.blue-text {
+			color: blue;
+			font-weight: bold;
+		}
+		
+	</style>
+</head>
+<body>
+	<div class="header">
+        <img src="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/Sample8.html/Images/Screenshot%202023-04-11%20141112.png" alt="Your Photo">
+
+		<h1>About The Project</h1>
+	</div>
+
+	<div class="navbar">
+		<ul class="menu">
+			<li><a href="#">Tab 1</a></li>
+			<li><a href="#">Tab 2</a></li>
+			<li><a href="#">Tab 3</a></li>
+			<li><a href="#">Tab 4</a></li>
+			<li><a href="#">Tab 5</a></li>
+			<li><a href="#">Tab 6</a></li>
+			<li><a href="#">Tab 7</a></li>
+		</ul>
+	</div>
+
+	<div class="sidebar">
+		<ul>
+			<li>
+				<h2 class="heading">1- Research Question</h2>
+				<!-- <ul class="subheadings">
+					<li>Subheading 1</li>
+					<li>Subheading 2</li>
+				</ul> --> 
+			</li>
+			<li>
+				<h2 class="heading">2- Research Hypothesis</h2>
+				<!-- <ul class="subheadings">
+					<li>Subheading 1</li>
+					<li>Subheading 2</li>
+				</ul> --> 
+			</li>
+			<li>
+				<h2 class="heading">3- Objectives</h2>
+				<!-- <ul class="subheadings">
+					<li>Subheading 1</li>
+					<li>Subheading 2</li>
+				</ul> -->
+			</li>
+			<li>
+				<h2 class="heading">4- A brief Methodology</h2>
+				<!-- <ul class="subheadings">
+					<li>Subheading 1</li>
+					<li>Subheading 2</li>
+				</ul> --> 
+			</li>
+		
+		</ul>
+	</div>
+	
+	<!-- the primary format for content as follows:
+<div class="content">
+		  <h2>Heading 1</h2>
+		  <p>Paragraph 1 content.</p>
+		  <p>Paragraph 2 content.</p>
+
+		  <h2>Heading 2</h2>
+		  <p>Paragraph 1 content.</p>
+		  <p>Paragraph 2 content.</p>
+	</div>
+
+--> 
+	<div class="content">
+		  <h2>1- Research Question</h2>
+		
+		 <!-- Paragraph 1 content: -->
+		The research  began
+
+<p>		My research question <span class="green-text">development</span> process began with a broad interest in gene expression profiling and breast cancer differentiation. 
+<strong>Initially</strong> , my research question was a general research topic <span class="green-text">"What common features across homogenous studies can be used to differentiate between non-aggressive and aggressive breast cancer samples in gene expression profiling?''</span>. Homogenous studies that I selected to involve in my analysis included the same platform (Affymetrix Human Genome U133A Array), technology (microarray), and biological specimens (tissue). 
+After reviewing the available literature and data, I realized that some homogenous datasets contained information on grading systems and molecular subtypes. This led me to refine my research question to  <span class="purple-text"> "Can molecular subtypes and grading systems be used to differentiate between non-aggressive and aggressive breast cancer samples in microarray gene expression profiling?" </span> 
+I then narrowed down my research question further to " <span class="orange-text">  "Can the grading system (grade 1 vs grade 3) and gene expression signatures, along with functional analysis, be used to differentiate between non-aggressive and aggressive breast cancer samples in microarray gene expression profiling?" </span> "
+</p>
+		<p>		My research question <span class="purple-text">development</span> process began with a broad interest in gene expression profiling and breast cancer differentiation. 
+<strong>Initially</strong> , my research question was a general research topic <span class="dark-yellow-text">"What common features across homogenous studies can be used to differentiate between non-aggressive and aggressive breast cancer samples in gene expression profiling?''</span>. Homogenous studies that I selected to involve in my analysis included the same platform <span class="brown-text">(Affymetrix Human Genome U133A Array), technology (microarray), and biological specimens (tissue). </span> 
+ 
+After reviewing the available literature and data, I realized that some homogenous datasets contained information on grading systems and molecular subtypes. This led me to refine my research question to  <span class="purple-text"> "Can molecular subtypes and grading systems be used to differentiate between non-aggressive and aggressive breast cancer samples in microarray gene expression profiling?" </span> 
+I then narrowed down my research question further to " <span class="orange-text">  "Can the grading system (grade 1 vs grade 3) and gene expression signatures, along with functional analysis, be used to differentiate between non-aggressive and aggressive breast cancer samples in microarray gene expression profiling?" </span> "
+</p>	
+
+	
+		
+<p>		Overall, my approach to <span class="blue-text">developing my research question was iterative. I started with a broad question, refined it based on the available literature and data, </span> and further narrowed it down until I arrived at a specific and answerable research question that incorporated the insights I gained from my review of the literature and data.
+	
+</p>	
+		
+
+		
+		
+		 <!-- Paragraph 2 content: -->
+		  <p>Paragraph 2 content.</p>
+		
+
+		  <h2> 2- Research Hypothesis</h2>
+		  <p>Paragraph 1 content.</p>
+		  <p>Paragraph 2 content.</p>
+		
+		 <h2>3- Objectives</h2>
+		  <p>Paragraph 1 content.</p>
+		  <p>Paragraph 2 content.</p>
+
+		  <h2>4- A brief Methodology</h2>
+		  <p>Paragraph 1 content.</p>
+		  <p>Paragraph 2 content.</p>
+	</div>
+
+	
+<!-- 
+	<div class="content">
+    <h2 class="heading">1- Research Question</h2>
+    <p>Content under the first heading.</p> --> 
+
+
+    <!-- <h3 class="subheadings">First Subheading</h3>
+    <p>Content under the first subheading.</p>
+
+    <h3 class="subheadings">Second Subheading</h3>
+    <p>Content under the second subheading.</p>
+
+    <h2 class="heading">2- Research Hypothesis</h2>
+    <p>Content under the second heading.</p>
+
+    <!--  <h3 class="subheadings">First Subheading</h3>
+    <p>Content under the third subheading.</p>
+
+    <h3 class="subheadings">Second Subheading</h3>
+    <p>Content under the fourth subheading.</p>  
+
+    <h2 class="heading">3- Objectives</h2>
+    <p>Content under the third heading.</p>
+
+    <!-- <h3 class="subheadings">First Subheading</h3>
+    <p>Content under the fifth subheading.</p>
+
+    <h3 class="subheadings">Second Subheading</h3>
+    <p>Content under the sixth subheading.</p>
+
+    <h2 class="heading">4- A brief Methodology</h2>
+    <p>Content under the fourth heading.</p>
+
+    <!-- <h3 class="subheadings">First Subheading</h3>
+    <p>Content under the seventh subheading.</p>
+
+    <h3 class="subheadings">Second Subheading</h3>
+    <p>Content under the eighth subheading.</p> --> 
+
+    <!-- Add more headings and subheadings as needed -->
+
+</div>
+
+</body>
+</html>
