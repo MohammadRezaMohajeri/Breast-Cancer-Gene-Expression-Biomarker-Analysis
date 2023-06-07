@@ -5,45 +5,52 @@
 	<title>About The Project</title>
 	<style>
 		/* Header Styles  */
+		
 		.header {
 			display: grid;
-			grid-template-columns: 20% 80%;
+			grid-template-columns: 20% 10% 70%;
 			background-color: #00FF00; /* GREEN */
 			padding: 10px;
 		}
 
-		       .left-section {
-			  /* Styles for the left section */
+		.left-section {
+		  /* Styles for the left section */
 		}
 
-		       .right-section {
-			  /* Styles for the right section */
+		.middle-section {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0 10px; /* Add some padding to the buttons */
+		}
+
+		.middle-section .button {
+			padding: 5px 10px;
+			background-color: #DAF7A6; /* Green */
+			color: darkblue;
+			border: none;
+			cursor: pointer;
+		}
+
+		.right-section {
 			display: flex;
 			align-items: center;
 			justify-content: center;
 		}
 
-			.right-section h1 {
+		.right-section h1 {
 			font-size: 40px;
 			color: #333;
 			font-weight: bold;
 			text-align: center; /* Align the title in the center */
-		}
 
-
-
-		.header h1 {
-			font-size: 30px; /* Adjust the font size as desired */
-			color: #333;
-			font-weight: bold; /* Add this line to make the text bold */
-		}
-		.header img {
+		.right-section img {
 			width: 150px;
 			height: 150px;
 			margin-right: 10px;
 			float: left;
 		}
-
+		
 
 		/* Navbar Styles */
 		.navbar {
@@ -172,16 +179,20 @@
 <body>
 
 	
+
 	<div class="header">
-			 <div class="left-section">
-			    <!-- Place your photo here -->
+			  <div class="left-section">
 			    <img src="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Images/IMG_7082.JPG" alt="Your Photo">
-			 </div>
+			  </div>
+			  <div class="middle-section">
+			    <button class="button">CV</button>
+			    <button class="button">LinkedIn</button>
+			  </div>
 			  <div class="right-section">
 			    <h1>Meta-Analysis of Breast Cancer Gene Expression Profiles: Identifying Pathways and Biomarkers for Diagnosis and Prognosis</h1>
-	  </div>
+			  </div>
 	</div>
-
+	
 
 	<div class="navbar">
 		<ul class="menu">
