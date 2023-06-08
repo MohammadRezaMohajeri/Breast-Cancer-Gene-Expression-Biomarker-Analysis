@@ -28,30 +28,31 @@
 		}
 		
 		.middle-section {
-		        display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: flex-end; /* Align items at the bottom */
-			padding: 0 10px; /* Add some padding to the buttons */
-			background-color: #000; /* Black */
-			color: white; /* Text color */
-
-			 /* Adjust height if needed */
-			height: 100px;
-		}
-
-		.middle-section .button {
-			padding: 5px 10px;
-			background-color: #DAF7A6; /* Green */
-			color: darkblue;
-			border: none;
-			cursor: pointer;
-			height: 30px; /* Adjust the height as desired */
+			  display: flex;
+			  flex-direction: column;
+			  align-items: flex-end;
+			  justify-content: space-between;
+			  padding: 0 10px;
+			  background-color: black;
+			  color: white;
 		}
 
 		.text-above-buttons {
-		  	margin-bottom: 5px;
+		         margin-bottom: 5px;
 		}
+
+		.button-container {
+		  	display: flex;
+		}
+
+		.button {
+			  padding: 5px 10px;
+			  background-color: #DAF7A6;
+			  color: darkblue;
+			  border: none;
+			  cursor: pointer;
+		}
+
 
 
 		.right-section {
