@@ -124,20 +124,22 @@
 			padding: 10px;
 		  }
 
+		.tabs {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
 		.tab {
-			display: block;
-			padding: 10px;
-			margin-bottom: 5px;
-			background-color: #ddd;
-			color: #333;
-			text-decoration: none;
-			transition: background-color 0.3s;
-		  }
+		        padding: 10px;
+		        background-color: #EEE;
+		        transition: background-color 0.3s;
+		        cursor: pointer;
+		}
 
 		.tab:hover {
-			background-color: #aaa;
-			color: #fff;
-		  }
+		        background-color: #CCC;
+		}
 
 
 		/* Page Content Styles */
@@ -237,23 +239,11 @@
 			<a href="#" class="tab">D</a>
 	</div>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	<!-- the primary format for content as follows:
-<div class="content">
-		  <h2>Heading 1</h2>
-		  <p>Paragraph 1 content.</p>
-		  <p>Paragraph 2 content.</p>
-
-		  <h2>Heading 2</h2>
-		  <p>Paragraph 1 content.</p>
-		  <p>Paragraph 2 content.</p>
+	<div class="tabs">
+			div class="tab">Project Goals</div>
+			<div class="tab">Methodology</div>
+			<div class="tab">Results</div>
+			<div class="tab">Discussion &amp; Conclusion</div>
 	</div>
 
 
