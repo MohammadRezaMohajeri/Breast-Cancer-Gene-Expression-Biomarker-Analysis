@@ -116,73 +116,52 @@
 			text-decoration: none;
 		}
 
-		/* Sidebar Styles */
 		
+		/* Main Content Styles */
+		.main-content {
+		       display: flex;
+		}
+		
+		
+		/* Sidebar Styles */
 		.sidebar {
-			width: 200px;
+			width: 30%;
 			background-color: #f1f1f1;
 			padding: 10px;
 		  }
+		
+		.sidebar .tab {
+		        display: block;
+		        padding: 10px;
+		        background-color: #EEE;
+		        transition: background-color 0.3s;
+		        cursor: pointer;
+		        margin-bottom: 5px;
+		}
+		
+		.sidebar .tab:hover {
+		        background-color: #CCC;
+		}
+
 
 		.tabs {
-		        display: flex;
-		        flex-direction: column;
-		        align-items: flex-start;
-		        position: absolute;
-		        top: 0;
-		        right: 30px; /* Adjust the right value as needed */
-		        width: 70%;
-		  }
-
-		.tab {
-		       padding: 10px;
-		       background-color: #EEE;
-		       transition: background-color 0.3s;
-		       cursor: pointer;
-	          }
-
-                .tab:hover {
-		       background-color: #CCC;
-		  }
-
-		.right-tabs {
+		       width: 70%;
 		       display: flex;
 		       flex-direction: column;
 		       align-items: flex-start;
-		       position: absolute;
-  		       top: 0;
-		       right: 30px; /* Adjust the right value as needed */
-		       width: 70%;
-		  }
+		       padding: 10px;
+		}
 
-		.right-tabs .tab {
+		.tabs .tab {
 		       padding: 10px;
 		       background-color: #EEE;
 		       transition: background-color 0.3s;
 		       cursor: pointer;
-		  }
-
-
-
-		.left-tabs {
-		      display: flex;
-		      flex-direction: column;
-		      align-items: flex-start;
-		      position: absolute;
-		      top: 0;
-		      left: 30px; /* Adjust the left value as needed */
-		      width: 70%;
-	         }
-
-		.left-tabs .tab {
-		     padding: 10px;
-		     background-color: #EEE;
-		     transition: background-color 0.3s;
-		     cursor: pointer;
+		       margin-bottom: 5px;
 		}
 
-		.left-tabs .tab:hover {
-		     background-color: #CCC;
+		.tabs .tab:hover {
+		       background-color: #CCC;
 		}
 
 		
@@ -250,20 +229,22 @@
 		</ul>
 	</div>
 
-	<div class="sidebar">
-			<a href="#" class="tab">About The Project</a>
-			<a href="#" class="tab">R Code</a>
-			<a href="#" class="tab">C</a>
-			<a href="#" class="tab">D</a>
-	</div>
 	
-	<div class="tabs">
-			<div class="tab">Project Goals</div>
-			<div class="tab">Methodology</div>
-			<div class="tab">Results</div>
-			<div class="tab">Discussion &amp; Conclusion</div>
-	</div>
+	<div class="main-content">
+        <div class="sidebar">
+            <a href="#" class="tab">About The Project</a>
+            <a href="#" class="tab">R Code</a>
+            <a href="#" class="tab">C</a>
+            <a href="#" class="tab">D</a>
+        </div>
 
+        <div class="tabs">
+            <div class="tab">Project Goals</div>
+            <div class="tab">Methodology</div>
+            <div class="tab">Results</div>
+            <div class="tab">Discussion &amp; Conclusion</div>
+        </div>
+    </div>
 
 
 </body>
