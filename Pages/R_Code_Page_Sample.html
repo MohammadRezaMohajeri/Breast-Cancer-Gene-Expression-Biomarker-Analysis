@@ -5,7 +5,7 @@
 	<title>R Code</title>
 	<style>
 		/* CSS Styles */
-		/* To highlight different parts of the text in red, green, and blue, you can use the <span> element and apply CSS styles to it */ 
+		/* To highlight different  parts of the text in red, green, and blue, you can use the <span> element and apply CSS styles to it */ 
 		
 		.orange-text {
 			color: orange;
@@ -49,13 +49,55 @@
 		}
 		
 		hr {
-			width: 50%; /* Adjust the width as desired */
+			width: 100%; /* Adjust the width as desired */
+		}
+		
+		/* Drop-down Styles */
+		.drop-down-content {
+			display: none;
 		}
 
+		.dropdown-trigger {
+			cursor: pointer;
+		}
 
+		.drop-down-content.active {
+			display: block;
+		}
+		
+		
+		h3.dropdown-trigger {
+		font-size: 24px; /* Adjust the font size as desired */
+		}
+
+	        /* Adjust font size for paragraph under 1-1- Explanation:*/
+		.drop-down-content p {
+			font-size: 16px; /* Adjust the font size as desired */
+		}
+
+		/* Adjust font size for list items */
+		.drop-down-content ul li {
+			font-size: 16px; /* Adjust the font size as desired */
+		}
+
+			/* Adjust font size for the explanation paragraph */
+		#explanation-content p {
+			font-size: 20px; /* Adjust the font size as desired */
+		}
+		
+		/* Adjust font size for the headings */
+		#plots-tables-content ul li a {
+			font-size: 20px; /* Adjust the font size as desired */
+		}
+		
+		/* Adjust font size for the code block */
+		#code-content pre code {
+			font-size: 20px; /* Adjust the font size as desired */
+		}
 
 		
 	</style>
+	
 </head>
 <body>
 	<header>
@@ -63,39 +105,56 @@
 	</header>
 	
 	
-	<h2>1- Differential Expression Analysis of Breast Cancer Dataset (GSE25055) using limma in R: Comparing Molecular Subtypes and Grading System</h2>
+	<h2 style="font-size: 28px;">1- Differential Expression Analysis of Breast Cancer Dataset (GSE25055) using limma in R: Comparing Molecular Subtypes and Grading System</h2>
+
 	
 	<hr>
-	<h3>1-1- Explanation:</h3>
-	<p>I want to have a paragraph here to explain the analysis.</p>
+	<h3 class="dropdown-trigger" onclick="toggleDropDown('explanation-content')">1-1- Explanation:</h3>
+	<div class="drop-down-content" id="explanation-content">
+		<p>I want to have a paragraph here to explain the analysis.</p>
+	</div>
 	<hr>
 
 	
-	<h3>1-2- Generated Plots & Tables:</h3>
-	<ul>
-		<li><a href="#">Volcano plots for comparing grade 1 vs grade 3 (GSE25055 dataset)</a></li>
-		<li><a href="#">Volcano plots for comparing Luminal A, Normal-like vs Luminal B, Basal-like, and HER2 (GSE25055 dataset)</a></li>
-		<li><a href="#">Tables</a></li>
-	</ul>
+	<h3 class="dropdown-trigger" onclick="toggleDropDown('plots-tables-content')">1-2- Generated Plots & Tables:</h3>
+	<div class="drop-down-content" id="plots-tables-content">
+		<ul>
+			<li><a href="#">Volcano plots for comparing grade 1 vs grade 3 (GSE25055 dataset)</a></li>
+			<li><a href="#">Volcano plots for comparing Luminal A, Normal-like vs Luminal B, Basal-like, and HER2 (GSE25055 dataset)</a></li>
+			<li><a href="#">Tables</a></li>
+		</ul>
+	</div>
 	<hr>
 
-	<h3>1-3- Code:</h3>
-	<pre><code>
-<!--
-<span class="green-text">GREEN TEXTTTTTT</span> 
-<span class="purple-text">PURPLE TEXTTTTTT</span> 
-<span class="orange-text">ORANGE TEXTTTT</span> 
-<span class="dark-yellow-text">DARK YELLOW TEXTTT</span> 
-<span class="brown-text">BROWN TEXTTTT</span> 
-<span class="blue-text">BLUE TEXTTTTT</span> 
-<strong>BOLD TEXTTTTTT</strong> 
--->
-require(<span class="green-text">GEOquery</span>)
-require(limma)
-require(tidyverse)
-require(plotly)
-	</code></pre>
+	<h3 class="dropdown-trigger" onclick="toggleDropDown('code-content')">1-3- Code:</h3>
+	<div class="drop-down-content" id="code-content">
+		<pre><code>
+			<!--
+			<span class="green-text">GREEN TEXTTTTTT</span> 
+			<span class="purple-text">PURPLE TEXTTTTTT</span> 
+			<span class="orange-text">ORANGE TEXTTTT</span> 
+			<span class="dark-yellow-text">DARK YELLOW TEXTTT</span> 
+			<span class="brown-text">BROWN TEXTTTT</span> 
+			<span class="blue-text">BLUE TEXTTTTT</span> 
+			<strong>BOLD TEXTTTTTT</strong> 
+			-->
+			require(<span class="green-text">GEOquery</span>)
+			require(limma)
+			require(tidyverse)
+			require(plotly)
+		</code></pre>
+	</div>
+
+
 	<hr>
 	
+	<!-- JavaScript for Drop-down Functionality -->
+	<script>
+		function toggleDropDown(id) {
+			var content = document.getElementById(id);
+			content.classList.toggle("active");
+		}
+	</script>
+
 </body>
 </html>
