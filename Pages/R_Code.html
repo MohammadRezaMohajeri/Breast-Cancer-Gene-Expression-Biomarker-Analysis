@@ -3,277 +3,62 @@
 <head>
 	<meta charset="UTF-8">
 	<title>R Code</title>
+	<style>
+		/* CSS Styles */
+		/* To highlight different parts of the text in red, green, and blue, you can use the <span> element and apply CSS styles to it */ 
+		
+		.orange-text {
+			color: orange;
+			font-weight: bold;
+		}
+		.dark-yellow-text {
+			color: hsl(50, 100%, 30%); /* Adjust the hue and saturation values as needed */
+			font-weight: bold;
+		}
+		.brown-text {
+			color: hsl(30, 100%, 30%); /* Adjust the hue and saturation values as needed */
+			font-weight: bold;
+		}
+		.green-text {
+			color: green;
+			font-weight: bold;
+		}
+		.purple-text {
+			color: purple;
+			font-weight: bold;
+		}
+		.blue-text {
+			color: blue;
+			font-weight: bold;
+		}
+
+		/* Header Styles */
+		h1 {
+			text-align: center;
+		}
+	</style>
 </head>
 <body>
 	<h1>R Code</h1>
 	<p>This is your R code:</p>
 	<pre>
 		<code>
-require(GEOquery)
+		<!--
+		<span class="green-text"> GREEN TEXTTTTTT </span> 
+		<span class="purple-text"> PURPLE TEXTTTTTT</span> 
+		<span class="orange-text"> ORANGE TEXTTTT </span> 
+		<span class="dark-yellow-text"> DARK YELLOW TEXTTT </span> 
+		<span class="brown-text">BROWN TEXTTTT </span> 
+		<span class="blue-text">BLUE TEXTTTTT </span> 
+		<strong>BOLD TEXTTTTTT </strong> 
+		--> 
+		
+				 
+
+require(<span class="green-text"> GEOquery </span>)
 require(limma)
 require(tidyverse)
 require(plotly)
-
-
-
-
-DownloadGEO <- function(GSEname){
-  # Create a folder
-  dir.create(GSEname, showWarnings = F)
-  # Increase memory
-  Sys.setenv("VROOM_CONNECTION_SIZE"=131072*10)
-  #Download dataset
-  gset <- getGEO(GSEname, GSEMatrix =TRUE, AnnotGPL = TRUE,
-                 destdir = paste0(getwd(), "/", GSEname))
-  if(!is.null(gset)){
-  # Extracting matrix, phenotype, and annotation
-  matrix <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@assayData[["exprs"]]
-  matrix <- cbind(rownames(matrix), matrix)
-  colnames(matrix)[1] <- "ID"
-  phenotype <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@phenoData@data
-  phenotype <- cbind(rownames(phenotype), phenotype)
-  colnames(phenotype)[1] <- "ID"
-  annot <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@featureData@data
-  # Writing the extracted variables
-  write.csv(matrix, paste0(GSEname, "/", "matrix.csv"), quote = F, row.names = F)
-  write_tsv(phenotype, paste0(GSEname, "/", "phenotype.tsv"))
-  write_tsv(annot, paste0(GSEname, "/", "annot.tsv"))
-  # Removing variables
-  rm(gset, matrix, phenotype, annot)
-  message("+++++ Datatset is ready to analyse. +++++")
-}
-}
-
-
-DEGanalysis <- function(projname,
-                        compare = "subtype",
-                        groups,
-                        adjust = "fdr") {
-  # Reading the files
-  matrix <- read_csv(paste0(projname, "/", "matrix.csv"), )
-  matrix <- data.frame(matrix)
-  rownames(matrix) <- matrix[,1]
-  matrix <- matrix[,-1]
-  phenotype <- read_tsv(paste0(projname, "/", "phenotype.tsv"))
-  phenotype <- data.frame(phenotype)
-  rownames(phenotype) <- phenotype[,1]
-  phenotype <- phenotype[,-1]
-  annot <- read_tsv(paste0(projname, "/", "annot.tsv"))
-  annot <- data.frame(annot)
-  rownames(annot) <- annot[,1]
-  annot <- annot[,-1]
-  
-  # Preparing the breast cancer subtype into a dataframe
-  phecoln <- grep("pam50", phenotype)
-  pheno <- data.frame(phenotype[ ,phecoln])
-  colnames(pheno) <- "subtype"
-  pheno$subtype <- gsub("pam50.+:", "", pheno$subtype)
-  rownames(pheno) <- rownames(phenotype)
-
-  # Preparing the breast cancer grades into a dataframe
-  gradecoln <- grep("grade:", phenotype)
-  grade <- data.frame(phenotype[ ,gradecoln])
-  colnames(grade) <- "grade"
-  grade$grade <- gsub("grade:", "", grade$grade)
-  grade$grade <- gsub("=.+", "", grade$grade)
-  rownames(grade) <- rownames(phenotype)
-  
-  # log2 transformation if the matrix is not already transformed
-  qx <- as.numeric(quantile(matrix, c(0., 0.25, 0.5, 0.75, 0.99, 1.0), na.rm=T))
-  LogC <- (qx[5] > 100) || (qx[6]-qx[1] > 50 && qx[2] > 0)
-  if(LogC){
-    matrix[which(matrix <= 0)] <- NaN
-    matrix <- log2(matrix)
-  }
-
-  # Extracting the sample ID according to the groups names specified by user
-  if(compare == "subtype"){
-    grouplis <- list()
-    for(i in seq_along(groups)){
-      name <- paste0(groups[[i]], collapse = "|")
-      rownum <- grep(name, pheno$subtype)
-      grouplis[[names(groups)[i]]] <- rownames(pheno)[rownum]
-    }
-  } else{
-    grouplis <- list()
-    for(i in seq_along(groups)){
-      name <- paste0(groups[[i]], collapse = "|")
-      rownum <- grep(name, grade$grade)
-      grouplis[[names(groups)[i]]] <- rownames(grade)[rownum]
-    }
-  }
-  # Renaming the matrix file according to the group names specified by user 
-  for(i in seq_along(grouplis)){
-    matname <- paste0(grouplis[[i]], collapse = "|")
-    matcoln <- grep(matname, colnames(matrix))
-    colnames(matrix)[matcoln] <- paste0(names(grouplis)[i], 1:length(grouplis[[i]]))
-  }
-  # Keeping only samples that are renamed and order them 
-  matnames <- grep(paste0(names(grouplis), collapse = "|"), colnames(matrix))
-  matrix <- matrix[, matnames]
-  matrix <- matrix[, order(colnames(matrix))]
-  # Creating a factor of 0 and 1 according to the length of groups specified by user
-  gname <- list()
-  for(i in seq_along(grouplis)){
-    number <- length(grep(names(grouplis)[i], colnames(matrix)))
-    gname[[i]] <- factor(rep(i - 1, number))
-  }
-  grouping <- unlist(gname)
-  
-  # Making the design matrix 
-  design <- model.matrix(~ 0 + grouping)
-  colnames(design) <- names(grouplis)
-  # Fitting the liner moder
-  fit1 <- lmFit(matrix, design)
-  l <- length(names(grouplis))
-  cts <- paste0(names(grouplis)[l:1], collapse = "-")
-  cont.matrix <- makeContrasts(contrasts = cts, levels = design)
-  fit2 <- contrasts.fit(fit1, cont.matrix)
-  fit2 <- eBayes(fit2)
-  # Creating top table with all genes
-  DEGs <- topTable(fit2, adjust = adjust, number = Inf)
-  DEGs <- cbind(rownames(DEGs), DEGs)
-  colnames(DEGs)[1] <- "ID" 
-  # Preparing the annotation variable
-  annotation <- annot[ , c("Gene.symbol", "Chromosome.location", "GO.Function")]
-  annotation <- cbind(rownames(annotation), annotation)
-  colnames(annotation)[1] <- "ID" 
-  # Making sure that both DEGs and annotation row names are the same
-  annotation <- annotation[order(annotation$ID), ]
-  DEGs <- DEGs[order(DEGs$ID), ]
-  # Adding annotation to the top table
-  DEGs <- cbind(DEGs,  annotation[, c(2, 3, 4)])
-  # Removing missing gene symbols
-  genemissing <- which(is.na(DEGs$Gene.symbol) == TRUE)
-  DEGs <- DEGs[-genemissing, ]
-  # Writing the top table
-  write_tsv(DEGs, paste0(projname, "/", "DEGs.tsv"))
-  message("+++++ Analysis has completed. +++++")
-  
-}
-
-
-Makevolcano <- function(projname,
-                        padjlevel = 0.05,
-                        uplogFC = 1,
-                        downlogFC = -1,
-                        ntop = 10) {
-  # Reading the top table
-  table <- read_tsv(paste0(projname, "/", "DEGs.tsv"))
-  table <- data.frame(table)
-  # Colors
-  my_pal <- c("#1B9E77","#7570B3", "#E7298A", "#66A61E", "#E6AB02", "#A6761D", "#666666", "#9A7D0A")
-  # Adding DEG column based on the value of  adj.P.Val and logfc
-  volcano <- table %>%
-    mutate(AdjustedPvalue = -log10(adj.P.Val)) %>%
-    mutate(DEGs = "Not") %>%
-    mutate(DEGs = ifelse(AdjustedPvalue > -log10(padjlevel) & logFC > uplogFC, "Upregulated", DEGs)) %>%
-    mutate(DEGs = ifelse(AdjustedPvalue > -log10(padjlevel) & logFC < downlogFC, "Downregulated", DEGs))
-  
-  # Creating ggplot object, adding layers and annotation to the plot
-  p <- ggplot(data = volcano, aes(x = logFC, y= AdjustedPvalue, color= DEGs, fill = DEGs, text = paste("ID: ", ID,
-                                                                                    "<br>Gene: ", Gene.symbol,
-                                                                                    "<br>Chromosome: ", Chromosome.location,
-                                                                                    "<br>GO function: ", GO.Function))) + 
-    labs(x= 'log2 (Fold Change)', y= "-log10(Adjusted P-value)") +
-    geom_point(size = 1, shape = 21) +
-    scale_color_manual(values=c(my_pal)) +
-    scale_fill_manual(values=c(paste(my_pal, "66", sep = ""))) +
-    theme_classic() +
-    theme(axis.text = element_text(family = "Times",size = 15 , colour = "black"),
-          axis.text.x = element_text(family = "Times",colour = "black", size = 15),
-          axis.text.y = element_text(family = "Times",colour = "black", size = 15),
-          plot.subtitle = element_text(family = "Times",size = 20, colour = "black", hjust = 0.5),
-          axis.title.y = element_text(family = "Times", size = rel(1.8), angle = 90),
-          axis.title.x = element_text(family = "Times", size = rel(1.8), angle = 00))+
-    labs(subtitle = "Volcano plot")
-  p <- ggplotly(p, tooltip = "text")
-  # Calculation the up and down regulated genes number
-  up <- volcano[which(volcano$DEGs == "Upregulated"),]
-  up <- up[order(up$logFC, decreasing = T), ]
-  down <- volcano[which(volcano$DEGs == "Downregulated"),]
-  down <- down[order(down$logFC, decreasing = F), ]
-  # Creating the top table (up and down) based on the number specified (ntop)
-  top <- rbind(up[1:ntop, ], down[1:ntop, ])
-  top <- top[,c(1:6, 11, 7, 8, 9, 10, 12)]
-  colnames(top)[7] <- "n.log10(adj.P.Val)"
-  # Save top table into project folder
-  write.csv(top, paste0(projname, "/", "top.csv"), quote = F, row.names = F)
-  message(sprintf("Up-regulated genes: %s ; Down-regulated geges: %s", nrow(up), nrow(down)))
-  return(p)
-}
-
-
-DownloadGEO("GSE25055")
-
-#============================ Q1 =========================#
-# other asjust methods --- > "holm", "hochberg", "hommel", "bonferroni", "BH", "BY","fdr", "none"
-
-
-# (Lum A, Normal-like subtypes) VS (Basal-like, HER2, Lum B)
-DEGanalysis(projname = "GSE25055",
-            compare = "subtype",
-            groups = list(normal = c("LumA", "Normal"), tumor = c("Basal", "Her2", "LumB")),
-            adjust = "fdr")
-
-# alpha = 0.01 - logFC 0
-volcano1 <- Makevolcano(projname = "GSE25055",
-                        padjlevel = 0.01,
-                        uplogFC = 1.5,
-                        downlogFC = -1.5,
-                        ntop = 10)
-volcano1
-# alpha= 0.01 - logFC 1
-volcano2 <-  Makevolcano(projname = "GSE25055",
-                         padjlevel = 0.00001,
-                         uplogFC = 1,
-                         downlogFC = -1)
-volcano2
-
-# alpha = 0.05 - logFC 0
-volcano3 <-  Makevolcano(projname = "GSE25055",
-                         padjlevel = 0.05,
-                         uplogFC = 0,
-                         downlogFC = 0)
-volcano3
-# alpha = 0.05 - logFC 1
-volcano4 <-  Makevolcano(projname = "GSE25055",
-                         padjlevel = 0.05,
-                         uplogFC = 1,
-                         downlogFC = -1)
-volcano4
-#============================ Q2 =========================#
-# Grade 1 vs Grade 3
-DEGanalysis(projname = "GSE25055",
-            compare = "grade",
-            groups = list(normal = c("1"), tumor= c("3")),
-            adjust = "fdr")
-
-# alpha = 0.01 - logFC 0
-volcano5 <-  Makevolcano(projname = "GSE25055",
-                         padjlevel = 0.01,
-                         uplogFC = 0,
-                         downlogFC = 0)
-volcano5
-# alpha= 0.01 - logFC 1.5
-volcano6 <-  Makevolcano(projname = "GSE25055",
-                         padjlevel = 0.01,
-                         uplogFC = 1.5,
-                         downlogFC = -1.5)
-volcano6
-
-# alpha = 0.05 - logFC 0
-volcano7 <-  Makevolcano(projname = "GSE25055",
-                         padjlevel = 0.05,
-                         uplogFC = 0,
-                         downlogFC = 0)
-volcano7
-# alpha= 0.01 - logFC 1
-volcano8 <-  Makevolcano(projname = "GSE25055",
-                         padjlevel = 0.01,
-                         uplogFC = 1,
-                         downlogFC = -1)
-volcano8
 		</code>
 	</pre>
 </body>
