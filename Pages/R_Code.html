@@ -24,7 +24,26 @@
             width: 100%;
         }
 
+         /* Navbar Styles */
+        .navbar {
+            background-color: #EEE;
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+        }
 
+        .navbar .nav-tab {
+            padding: 10px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 20px;
+            color: #14140b;
+        }
+
+        .navbar .nav-tab:hover {
+            background-color: #8cafba;
+        }
         
 
         /* Main Content Styles */
@@ -74,15 +93,20 @@
 <header>
     <h1>R code</h1>
 </header>
-
-<div class="main-content">
-    <div class="tabs">
-        <a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/R_Code_1Dataset.html" class="tab">R CODE (1 Dataset)</a>
-        <a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/R_Code_4Datasets_FC_FDR.html" class="tab">R CODE (4 Dataset analysis (FC &amp; FDR)</a>
-        <a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/R_Code_4Datasets_Meta_analysis.html" class="tab">R CODE (4 Dataset Meta-analysis (Z score &amp; FDR)</a>
-
+    <div class="navbar">
+            <div class="nav-tab">
+            <a href="#"> About R Code Snippets on this Page</a>
+            </div>
     </div>
-</div>
+
+    <div class="main-content">
+        <div class="tabs">
+            <a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/R_Code_1Dataset.html" class="tab">R CODE (1 Dataset)</a>
+            <a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/R_Code_4Datasets_FC_FDR.html" class="tab">R CODE (4 Dataset analysis (FC &amp; FDR)</a>
+            <a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/R_Code_4Datasets_Meta_analysis.html" class="tab">R CODE (4 Dataset Meta-analysis (Z score &amp; FDR)</a>
+
+        </div>
+    </div>
 
 <footer class="footer">
     <p>&copy; 2023 Mohammad Reza Mohajeri. All rights reserved.</p>
