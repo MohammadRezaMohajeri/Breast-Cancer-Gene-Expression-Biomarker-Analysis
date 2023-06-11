@@ -277,11 +277,11 @@ DEGanalysis <- function(projname,
   }
   grouping <- unlist(gname)
   
-  # Making the design matrix 
+  <span style="color: #999; font-style: italic;"># Making the design matrix</span>
   design <- model.matrix(~ 0 + grouping)
   colnames(design) <- names(grouplis)
   
-  # Fitting the linear model
+  <span style="color: #999; font-style: italic;"># Fitting the linear model</span>
   fit1 <- lmFit(matrix, design)
   l <- length(names(grouplis))
   cts <- paste0(names(grouplis)[l:1], collapse = "-")
@@ -289,28 +289,28 @@ DEGanalysis <- function(projname,
   fit2 <- contrasts.fit(fit1, cont.matrix)
   fit2 <- eBayes(fit2)
   
-  # Creating top table with all genes
+  <span style="color: #999; font-style: italic;"># Creating top table with all genes</span>
   DEGs <- topTable(fit2, adjust = adjust, number = Inf)
   DEGs <- cbind(rownames(DEGs), DEGs)
   colnames(DEGs)[1] <- "ID" 
   
-  # Preparing the annotation variable
+  <span style="color: #999; font-style: italic;"># Preparing the annotation variable</span>
   annotation <- annot[, c("Gene.symbol", "Chromosome.location", "GO.Function")]
   annotation <- cbind(rownames(annotation), annotation)
   colnames(annotation)[1] <- "ID" 
   
-  # Making sure that both DEGs and annotation row names are the same
+  <span style="color: #999; font-style: italic;"># Making sure that both DEGs and annotation row names are the same</span>
   annotation <- annotation[order(annotation$ID), ]
   DEGs <- DEGs[order(DEGs$ID), ]
   
-  # Adding annotation to the top table
+  <span style="color: #999; font-style: italic;"># Adding annotation to the top table</span>
   DEGs <- cbind(DEGs,  annotation[, c(2, 3, 4)])
   
-  # Removing missing gene symbols
+  <span style="color: #999; font-style: italic;"># Removing missing gene symbols</span>
   genemissing <- which(is.na(DEGs$Gene.symbol) == TRUE)
   DEGs <- DEGs[-genemissing, ]
   
-  # Writing the top table
+  <span style="color: #999; font-style: italic;"># Writing the top table</span>
   write_tsv(DEGs, paste0(projname, "/", "DEGs.tsv"))
   
   message("+++++ Analysis has completed. +++++")
@@ -324,19 +324,19 @@ Makevolcano <- function(projname,
                         uplogFC = 1,
                         downlogFC = -1,
                         ntop = 10) {
-  # Reading the top table
+  <span style="color: #999; font-style: italic;"># Reading the top table</span>
   table <- read_tsv(paste0(projname, "/", "DEGs.tsv"))
   table <- data.frame(table)
-  # Colors
+  <span style="color: #999; font-style: italic;"># Colors</span>
   my_pal <- c("#1B9E77","#7570B3", "#E7298A", "#66A61E", "#E6AB02", "#A6761D", "#666666", "#9A7D0A")
-  # Adding DEG column based on the value of adj.P.Val and logfc
+  <span style="color: #999; font-style: italic;"># Adding DEG column based on the value of adj.P.Val and logfc</span>
   volcano <- table %>%
     mutate(AdjustedPvalue = -log10(adj.P.Val)) %>%
     mutate(DEGs = "Not") %>%
     mutate(DEGs = ifelse(AdjustedPvalue > -log10(padjlevel) & logFC > uplogFC, "Upregulated", DEGs)) %>%
     mutate(DEGs = ifelse(AdjustedPvalue > -log10(padjlevel) & logFC < downlogFC, "Downregulated", DEGs))
 
-  # Creating ggplot object, adding layers and annotation to the plot
+  <span style="color: #999; font-style: italic;"># Creating ggplot object, adding layers and annotation to the plot</span>
   p <- ggplot(data = volcano, aes(x = logFC, y= AdjustedPvalue, color= DEGs, fill = DEGs, text = paste("ID: ", ID,
                                                                                                      "<br>Gene: ", Gene.symbol,
                                                                                                      "<br>Chromosome: ", Chromosome.location,
@@ -354,16 +354,16 @@ Makevolcano <- function(projname,
           axis.title.x = element_text(family = "Times", size = rel(1.8), angle = 00)) +
     labs(subtitle = "Volcano plot")
   p <- ggplotly(p, tooltip = "text")
-  # Calculation the up and down regulated genes number
+  <span style="color: #999; font-style: italic;"># Calculation the up and down regulated genes number</span>
   up <- volcano[which(volcano$DEGs == "Upregulated"), ]
   up <- up[order(up$logFC, decreasing = T), ]
   down <- volcano[which(volcano$DEGs == "Downregulated"), ]
   down <- down[order(down$logFC, decreasing = F), ]
-  # Creating the top table (up and down) based on the number specified (ntop)
+  <span style="color: #999; font-style: italic;"># Creating the top table (up and down) based on the number specified (ntop)</span>
   top <- rbind(up[1:ntop, ], down[1:ntop, ])
   top <- top[, c(1:6, 11, 7, 8, 9, 10, 12)]
   colnames(top)[7] <- "n.log10(adj.P.Val)"
-  # Save top table into project folder
+  <span style="color: #999; font-style: italic;"># Save top table into project folder</span>
   write.csv(top, paste0(projname, "/", "top.csv"), quote = FALSE, row.names = FALSE)
   message(sprintf("Up-regulated genes: %s; Down-regulated genes: %s", nrow(up), nrow(down)))
   return(p)
@@ -374,15 +374,15 @@ Makevolcano <- function(projname,
 DownloadGEO("GSE25055")
 
 #============================ Q1 =========================#
-# other adjust methods ---> "holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr", "none"
+<span style="color: #999; font-style: italic;"># other adjust methods ---> "holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr", "none"</span>
 
-# (Lum A, Normal-like subtypes) VS (Basal-like, HER2, Lum B)
+<span style="color: #999; font-style: italic;"># (Lum A, Normal-like subtypes) VS (Basal-like, HER2, Lum B)</span>
 DEGanalysis(projname = "GSE25055",
             compare = "subtype",
             groups = list(normal = c("LumA", "Normal"), tumor = c("Basal", "Her2", "LumB")),
             adjust = "fdr")
 
-# alpha = 0.01 - logFC 0
+<span style="color: #999; font-style: italic;"># alpha = 0.01 - logFC 0</span>
 volcano1 <- Makevolcano(projname = "GSE25055",
                         padjlevel = 0.01,
                         uplogFC = 1.5,
@@ -390,21 +390,21 @@ volcano1 <- Makevolcano(projname = "GSE25055",
                         ntop = 10)
 volcano1
 
-# alpha = 0.01 - logFC 1
+<span style="color: #999; font-style: italic;"># alpha = 0.01 - logFC 1</span>
 volcano2 <- Makevolcano(projname = "GSE25055",
                         padjlevel = 0.00001,
                         uplogFC = 1,
                         downlogFC = -1)
 volcano2
 
-# alpha = 0.05 - logFC 0
+<span style="color: #999; font-style: italic;"># alpha = 0.05 - logFC 0</span>
 volcano3 <- Makevolcano(projname = "GSE25055",
                         padjlevel = 0.05,
                         uplogFC = 0,
                         downlogFC = 0)
 volcano3
 
-# alpha = 0.05 - logFC 1
+<span style="color: #999; font-style: italic;"># alpha = 0.05 - logFC 1</span>
 volcano4 <- Makevolcano(projname = "GSE25055",
                         padjlevel = 0.05,
                         uplogFC = 1,
@@ -412,34 +412,34 @@ volcano4 <- Makevolcano(projname = "GSE25055",
 volcano4
 
 #============================ Q2 =========================#
-# Grade 1 vs Grade 3
+<span style="color: #999; font-style: italic;"># Grade 1 vs Grade 3</span>
 DEGanalysis(projname = "GSE25055",
             compare = "grade",
             groups = list(normal = c("1"), tumor = c("3")),
             adjust = "fdr")
 
-# alpha = 0.01 - logFC 0
+<span style="color: #999; font-style: italic;"># alpha = 0.01 - logFC 0</span>
 volcano5 <- Makevolcano(projname = "GSE25055",
                         padjlevel = 0.01,
                         uplogFC = 0,
                         downlogFC = 0)
 volcano5
 
-# alpha = 0.01 - logFC 1.5
+<span style="color: #999; font-style: italic;"># alpha = 0.01 - logFC 1.5</span>
 volcano6 <- Makevolcano(projname = "GSE25055",
                         padjlevel = 0.01,
                         uplogFC = 1.5,
                         downlogFC = -1.5)
 volcano6
 
-# alpha = 0.05 - logFC 0
+<span style="color: #999; font-style: italic;"># alpha = 0.05 - logFC 0</span>
 volcano7 <- Makevolcano(projname = "GSE25055",
                         padjlevel = 0.05,
                         uplogFC = 0,
                         downlogFC = 0)
 volcano7
 
-# alpha = 0.01 - logFC 1
+<span style="color: #999; font-style: italic;"># alpha = 0.01 - logFC 1</span>
 volcano8 <- Makevolcano(projname = "GSE25055",
                         padjlevel = 0.01,
                         uplogFC = 1,
