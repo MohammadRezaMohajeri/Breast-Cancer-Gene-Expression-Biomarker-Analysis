@@ -5,82 +5,17 @@
 	<title>About The Project</title>
 	<style>
 		/* Header Styles  */
-		
 		.header {
-			display: grid;
-			grid-template-columns: 10% 20% 70%;
-			background-color: #01031f; /* GREEN */
+			background-color: #040459; /* Dark blue navy for header  */
 			padding: 10px;
+			text-align: center; /* Center-align the header content */
 		}
 
-		.left-section {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			
-
+		.header h1 {
+			font-size: 40px; /* Adjust the font size as desired */
+			color: #ededf5; /* To change the color of the text "About The Project" in the header to white */
+			font-weight: bold; /* Add this  line to make the text bold */
 		}
-
-		.left-section img {
-			width: 100px; /* Adjust the width as desired */
-			height: 200px; /* Adjust the height as desired */
-			object-fit: cover; /* Adjust the object-fit property as desired */
-		}
-		
-		.middle-section {
-			  display: flex;
-			  flex-direction: column;
-			  align-items: flex-end;
-			  justify-content: space-between;
-			  padding: 0 10px;
-			  background-color: black;
-			  color: white;
-		}
-
-		.text-above-buttons {
-		         margin-bottom: 5px;
-		}
-
-		.button-container {
-		  	display: flex;
-			justify-content: center; /* Align buttons horizontally at the center */
-			margin-top: 10px; /* Add margin to separate the buttons from the text */
-			align-items: center; /* Align items vertically at the center */
-		}
-		
-		
-		.button {
-			  padding: 5px 10px;
-			  background-color: #DAF7A6;
-			  color: darkblue;
-			  border: none;
-			  cursor: pointer;
-			  width: 150px; /* Adjust the width as desired */
-
-		}
-
-
-
-		.right-section {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-
-		.right-section h1 {
-			font-size: 30px;
-			color: #f0f0f7;
-			font-weight: bold;
-			text-align: center; /* Align the title in the center */
-		}
-
-		.right-section img {
-			width: 150px;
-			height: 150px;
-			margin-right: 10px;
-			float: left;
-		}
-		
 
 		/* Navbar Styles */
 		.navbar {
@@ -116,59 +51,78 @@
 			text-decoration: none;
 		}
 
-		
-		/* Main Content Styles */
-		.main-content {
-		       display: flex;
-		}
-		
-		
 		/* Sidebar Styles */
 		.sidebar {
-			width: 30%;
-			background-color: #f1f1f1;
+			width: 20%;
+			background-color: #f2f2f2;
 			padding: 10px;
-		  }
-		
-		.sidebar .tab {
-		        display: block;
-		        padding: 10px;
-		        background-color: #EEE;
-		        transition: background-color 0.3s;
-		        cursor: pointer;
-		        margin-bottom: 5px;
-		}
-		
-		.sidebar .tab:hover {
-		        background-color: #CCC;
-		}
+			float: left;
+			height: 5000px; /* Increase the height as desired */
+			border-right: 1px solid black; /* This will visually separate the sidebar and content sections. */
 
 
-		.tabs {
-		       width: 70%;
-		       display: flex;
-		       flex-direction: column;
-		       align-items: flex-start;
-		       padding: 10px;
+
 		}
 
-		.tabs .tab {
-		       padding: 10px;
-		       background-color: #EEE;
-		       transition: background-color 0.3s;
-		       cursor: pointer;
-		       margin-bottom: 5px;
+		.sidebar ul {
+			list-style-type: none;
+			padding: 0;
+			margin-bottom: 0; /* Add margin-bottom to remove extra spacing */
+
 		}
 
-		.tabs .tab:hover {
-		       background-color: #CCC;
+		.sidebar li {
+			margin-bottom: 5px;
 		}
 
+		.sidebar .heading:hover {
+			background-color: green;
+			color: #fff;
+			text-decoration: none;
+		}
+
+
+		/* Page Content Styles */
+		.content {
+			width: 100%;
+			padding: 10px;
+			padding-left: 100px;
+			box-sizing: border-box;
+			border-left: 1px solid green;
+			text-align: justify; /* Add this line to justify the text */
+		}
+
+		.content h2 {
+			font-size: 24px; /* Adjust the font size for headings */
+			color:#000333;
+			cursor: pointer;
+		}
+		.content h3 {
+			font-size: 20px;
+			color: #000080;
+			font-weight: bold;
+			margin-bottom: 0;
+			
+			
+
+		}
+
+		.content p {
+			font-size: 20px; /* Adjust the font size for paragraphs */
+			margin-left: 20px; /* Adjust the margin value for indentation */
+			margin-top: 0;
+			
+
+		}
 		
-		
-		
-		/* To highlight different parts of the text in red, green, and blue, you can use the <span> element and apply CSS styles to it */ 
-		
+		/* The <hr> element creates a horizontal rule, which is a self-closing tag and doesn't require a closing tag.
+          	You can also style the horizontal line using CSS if you want to customize its appearance. For example:*/ 
+		hr {
+			border: none;
+			border-top: 1px solid black;
+			margin: 20px 0;
+		}
+
 		
 		.orange-text {
 			color: orange;
@@ -195,27 +149,14 @@
 			font-weight: bold;
 		}
 		
+	        }
 	</style>
+
 </head>
 <body>
-
-
 	<div class="header">
-		  <div class="left-section">
-			    <img src="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Images/Linkedin_Photo.jpg" alt="Your Photo">
-			  </div>
-			  <div class="middle-section">
-			    <p class="text-above-buttons">Results-oriented and motivated bioinformatician with rich experience in bioinformatics tools and programming.</p>
-			    <div class="button-container">
-			       <a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Documents/MohajeriM_CV.pdf" target="_blank"><button class="button">CV</button></a>
-     			       <a href="https://www.linkedin.com/in/mohammad-reza-mohajeri-24240a12b" target="_blank"><button class="button">LinkedIn</button></a>
-			    </div>
-			  </div> <!-- Close the middle-section div here -->
-			  <div class="right-section">
-			    <h1>Meta-Analysis of Breast Cancer Gene Expression Profiles: Identifying Pathways and Biomarkers for Diagnosis and Prognosis</h1>
-		  </div>
+		<h1>About The Project</h1>
 	</div>
-
 
 	<div class="navbar">
 		<ul class="menu">
@@ -229,23 +170,187 @@
 		</ul>
 	</div>
 
+	<div class="sidebar">
+		<ul>
+			<li>
+				<h2 class="heading">1- Research Question</h2>
+				<!-- <ul class="subheadings">
+					<li>Subheading 1</li>
+					<li>Subheading 2</li>
+				</ul> --> 
+			</li>
+			<li>
+				<h2 class="heading">2- Research Hypothesis</h2>
+				<!-- <ul class="subheadings">
+					<li>Subheading 1</li>
+					<li>Subheading 2</li>
+				</ul> --> 
+			</li>
+			<li>
+				<h2 class="heading">3- Objectives</h2>
+				<!-- <ul class="subheadings">
+					<li>Subheading 1</li>
+					<li>Subheading 2</li>
+				</ul> -->
+			</li>
+			<li>
+				<h2 class="heading">4- A brief Methodology</h2>
+				<!-- <ul class="subheadings">
+					<li>Subheading 1</li>
+					<li>Subheading 2</li>
+				</ul> --> 
+			</li>
+			<li>
+				<h2 class="heading">5- The R Code: A Concise Overview</h2>
+				<!-- <ul class="subheadings">
+					<li>Subheading 1</li>
+					<li>Subheading 2</li>
+				</ul> --> 
+			</li>
+		
+		</ul>
+	</div>
 	
-	<div class="main-content">
-        <div class="sidebar">
-            <a href="#" class="tab">About The Project</a>
-            <a href="#" class="tab">R Code</a>
-            <a href="#" class="tab">C</a>
-            <a href="#" class="tab">D</a>
-        </div>
+	<!-- the primary format for content as follows:
+<div class="content">
+		  <h2>Heading 1</h2>
+		  <p>Paragraph 1 content.</p>
+		  <p>Paragraph 2 content.</p>
 
-        <div class="tabs">
-            <div class="tab">Project Goals</div>
-            <div class="tab">Methodology</div>
-            <div class="tab">Results</div>
-            <div class="tab">Discussion &amp; Conclusion</div>
-        </div>
-    </div>
+		  <h2>Heading 2</h2>
+		  <p>Paragraph 1 content.</p>
+		  <p>Paragraph 2 content.</p>
+	</div>
+
+--> 
+	<!-- "Chromatic Transformation in the text: 
+
+		 <span class="green-text"> GREEN TEXTTTTTT </span> 
+
+		 <span class="purple-text"> PURPLE TEXTTTTTT</span> 
+
+		 <span class="orange-text"> ORANGE TEXTTTT </span> 
+
+		<span class="dark-yellow-text"> DARK YELLOW TEXTTT </span> 
+
+		<span class="brown-text">BROWN TEXTTTT </span> 
+
+		 <span class="blue-text">BLUE TEXTTTTT </span> 
+
+		<strong>BOLD TEXTTTTTT </strong> , 
+
+-->
+
+	<div class="content">
+		  <h2>1- Research Question</h2>
+		
+	<div class="content">
+		  <h2 class="heading">1- Research Question</h2>
+		  <div class="dropdown">
+		     
+			   <!-- Heading 1 content: -->
+<h3>    1- Primary Research Question: "Which shared characteristics among homogeneous studies can be utilized to distinguish between non-aggressive and aggressive breast cancer samples through gene expression profiling?"  </h3>
+<p>  The research question development process began with a broad interest in <strong> gene expression profiling </strong> in relation to <strong> breast cancer differentiation </strong>. Initially, with the aim of <strong> identifying biomarkers </strong> that could be utilized in the industry, a general research topic emerged, focusing on identifying common features across homogenous studies that could differentiate between non-aggressive and aggressive breast cancer samples through gene expression profiling. To ensure consistency and reliability, the selected studies included the use of the same platform (Affymetrix Human Genome U133A Array), technology (microarray), and biological specimens (tissue). </p>   
+<h3>    2- Refining the Research Question: Investigating Grading Systems and Molecular Subtypes for Breast Cancer Differentiation between non-aggressive and aggressive samples through microarray gene expression profiling </h3>
+<p>  After a review of the available literature and data, it became apparent that some homogenous datasets provided information on <strong> grading systems </strong>  and <strong> molecular subtypes </strong>. This realization prompted a refinement of the research question to investigate the utilization of molecular subtypes and grading systems as classification methods for categorizing patient sample data into two distinct groups: non-aggressive and aggressive breast cancer. </p>
+<h3>    3- Distinguishing Non-aggressive and Aggressive Breast Cancer Samples through Grading Systems and Gene Expression Profiling </h3>
+<p>  Further narrowing down the research question, the focus was specifically placed on examining whether <strong> the grading system </strong>  (grade 1 vs. grade 3) and gene expression signatures, along with functional analysis, could be employed to distinguish between non-aggressive and aggressive breast cancer samples in microarray gene expression profiling. This research question served as the foundation for the subsequent analysis conducted in this study. The objective was to identify biomarkers that could accurately differentiate between these two groups using microarray gene expression profiling. The identified biomarkers would provide valuable information about the aggressiveness of the disease and aid in assessing the risk of distant metastasis.  </p> 
+<h3>    4- Future Investigation: Comparative Analysis of Differentiating Breast Cancer Samples using Molecular Subtypes and Grading System </h3>
+<p>  As a future research question, the research query was further refined to investigate whether <strong> molecular subtypes </strong> and gene expression signatures, along with functional analysis, could be used to differentiate between non-aggressive and aggressive breast cancer samples in microarray gene expression profiling, while also comparing the obtained results with those derived from <strong> the grading system </strong>. This comparative analysis aimed to evaluate the differential expression outcomes of the grading system and molecular subtypes. </p>
+<p>  Overall, the approach to <strong> developing the research question</strong>  was <strong> iterative </strong>, starting with a broad question and progressively refining it based on the available literature and data. The process resulted in a specific and answerable research question that incorporated insights gained from the literature review and data analysis. </p>
+
+		
+	</div>
+		
+
+		
+		
+		
+		
+		<!--the <hr> element is placed after the paragraphs, indicating that you want to draw a horizontal line separating that section from the next content -->
+		<hr>
+		 <!-- Heading 2 content: -->
+		  <h2> 2- Research Hypothesis</h2>
+		  <p>Paragraph 1 content.</p>
+		  <p>Paragraph 2 content.</p>
+		
+		
+		
+		<hr>
+		 <!-- Heading 3 content: -->
+		 <h2>3- Objectives</h2>
+		  <p>Paragraph 1 content.</p>
+		  <p>Paragraph 2 content.</p>
+		
+		
+		
+		
+		<hr>
+		 <!-- Heading 4 content: -->
+		  <h2>4- A brief Methodology</h2>
+		  <p>Paragraph 1 content.</p>
+		  <p>Paragraph 2 content.</p>
+		
+		
+
+		<hr>
+		 <!-- Heading 5 content: -->
+		  <h2>5- The R Code: A Concise Overview</h2>
+		  <p>Paragraph 1 content.</p>
+		  <p>Paragraph 2 content.</p>
+	</div>
+
+	
+<!-- 
+	<div class="content">
+    <h2 class="heading">1- Research Question</h2>
+    <p>Content under the first heading.</p> --> 
 
 
+    <!-- <h3 class="subheadings">First Subheading</h3>
+    <p>Content under the first subheading.</p>
+
+    <h3 class="subheadings">Second Subheading</h3>
+    <p>Content under the second subheading.</p>
+
+    <h2 class="heading">2- Research Hypothesis</h2>
+    <p>Content under the second heading.</p>
+
+    <!--  <h3 class="subheadings">First Subheading</h3>
+    <p>Content under the third subheading.</p>
+
+    <h3 class="subheadings">Second Subheading</h3>
+    <p>Content under the fourth subheading.</p>  
+
+    <h2 class="heading">3- Objectives</h2>
+    <p>Content under the third heading.</p>
+
+    <!-- <h3 class="subheadings">First Subheading</h3>
+    <p>Content under the fifth subheading.</p>
+
+    <h3 class="subheadings">Second Subheading</h3>
+    <p>Content under the sixth subheading.</p>
+
+    <h2 class="heading">4- A brief Methodology</h2>
+    <p>Content under the fourth heading.</p>
+
+    <!-- <h3 class="subheadings">First Subheading</h3>
+    <p>Content under the seventh subheading.</p>
+
+    <h3 class="subheadings">Second Subheading</h3>
+    <p>Content under the eighth subheading.</p> --> 
+
+    <!-- Add more headings and subheadings as needed -->
+
+</div>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+		$(document).ready(function() {
+		    $('.heading').click(function() {
+			$(this).next('.dropdown').slideToggle();
+		    });
+		});
+        </script>
+	
 </body>
 </html>
