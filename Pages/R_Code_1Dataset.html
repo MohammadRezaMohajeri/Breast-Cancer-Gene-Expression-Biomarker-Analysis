@@ -164,8 +164,8 @@
 <span style="color: #c910c9; font-style: italic;">require</span>(plotly)
 
 
-
-DownloadGEO <- function(GSEname) {
+ 
+DownloadGEO <- <span style="color: #04cc04; font-style: italic;">function</span>(GSEname) {
   <span style="color: #04cc04; font-style: italic;"># Create a folder</span>
   dir.create(GSEname, showWarnings = FALSE)
   
@@ -180,7 +180,7 @@ DownloadGEO <- function(GSEname) {
     destdir = paste0(getwd(), "/", GSEname)
   )
   
-  if (!is.null(gset)) {
+  <span style="color: #04cc04; font-style: italic;">if</span> (!is.null(gset)) {
     <span style="color: #04cc04; font-style: italic;"># Extracting matrix, phenotype, and annotation</span>
     matrix <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@assayData[["exprs"]]
     matrix <- cbind(rownames(matrix), matrix)
@@ -205,7 +205,7 @@ DownloadGEO <- function(GSEname) {
 }
 
 
-DEGanalysis <- function(projname,
+DEGanalysis <- <span style="color: #04cc04; font-style: italic;">function</span>(projname,
                         compare = "subtype",
                         groups,
                         adjust = "fdr") {
@@ -325,7 +325,7 @@ DEGanalysis <- function(projname,
 
 
 
-Makevolcano <- function(projname,
+Makevolcano <- <span style="color: #04cc04; font-style: italic;">function</span>(projname,
                         padjlevel = 0.05,
                         uplogFC = 1,
                         downlogFC = -1,
