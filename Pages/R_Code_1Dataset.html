@@ -180,7 +180,7 @@ DownloadGEO <- <span style="color: #c910c9; font-style: italic;">function</span>
     destdir = paste0(getwd(), "/", GSEname)
   )
   
-  <span style="color: #c910c9; font-style: italic;">if</span> (!is.null(gset)) {
+  <span style="color: #c910c9; font-style: italic;">if</span>(!is.null(gset)) {
     <span style="color: #04cc04; font-style: italic;"># Extracting matrix, phenotype, and annotation</span>
     matrix <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@assayData[["exprs"]]
     matrix <- cbind(rownames(matrix), matrix)
@@ -248,15 +248,15 @@ DEGanalysis <- <span style="color: #c910c9; font-style: italic;">function</span>
 
   <span style="color: #04cc04; font-style: italic;"># Extracting the sample ID according to the groups names specified by user</span>
   <span style="color: #c910c9; font-style: italic;">if</span>(compare == "subtype"){
-    grouplis <- list()
-    for(i in seq_along(groups)){
+    grouplis <- list() 
+    <span style="color: #c910c9; font-style: italic;">for</span>(i <span style="color: #c910c9; font-style: italic;">in</span> seq_along(groups)){
       name <- paste0(groups[[i]], collapse = "|")
       rownum <- grep(name, pheno$subtype)
       grouplis[[names(groups)[i]]] <- rownames(pheno)[rownum]
     }
-  } else{
+  } <span style="color: #c910c9; font-style: italic;">else</span>{
     grouplis <- list()
-    for(i in seq_along(groups)){
+    <span style="color: #c910c9; font-style: italic;">for</span>(i <span style="color: #c910c9; font-style: italic;">in</span> seq_along(groups)){
       name <- paste0(groups[[i]], collapse = "|")
       rownum <- grep(name, grade$grade)
       grouplis[[names(groups)[i]]] <- rownames(grade)[rownum]
@@ -264,7 +264,7 @@ DEGanalysis <- <span style="color: #c910c9; font-style: italic;">function</span>
   }
   
   <span style="color: #04cc04; font-style: italic;"># Renaming the matrix file according to the group names specified by user</span> 
-  for(i in seq_along(grouplis)){
+  <span style="color: #c910c9; font-style: italic;">for</span>(i <span style="color: #c910c9; font-style: italic;">in</span> seq_along(grouplis)){
     matname <- paste0(grouplis[[i]], collapse = "|")
     matcoln <- grep(matname, colnames(matrix))
     colnames(matrix)[matcoln] <- paste0(names(grouplis)[i], 1:length(grouplis[[i]]))
@@ -277,7 +277,7 @@ DEGanalysis <- <span style="color: #c910c9; font-style: italic;">function</span>
   
   <span style="color: #04cc04; font-style: italic;"># Creating a factor of 0 and 1 according to the length of groups specified by user</span>
   gname <- list()
-  for(i in seq_along(grouplis)){
+  <span style="color: #c910c9; font-style: italic;">for</span>(i <span style="color: #c910c9; font-style: italic;">in</span> seq_along(grouplis)){
     number <- length(grep(names(grouplis)[i], colnames(matrix)))
     gname[[i]] <- factor(rep(i - 1, number))
   }
