@@ -157,10 +157,45 @@
 			<span class="blue-text">BLUE TEXTTTTT</span> 
 			<strong>BOLD TEXTTTTTT</strong> 
 			-->
-			require(<span class="green-text">GEOquery</span>)
-			require(limma)
-			require(tidyverse)
-			require(plotly)
+DownloadGEO <- function(GSEname) {
+  # Create a folder
+  dir.create(GSEname, showWarnings = FALSE)
+  
+  # Increase memory
+  Sys.setenv("VROOM_CONNECTION_SIZE" = 131072 * 10)
+  
+  # Download dataset
+  gset <- getGEO(
+    GSEname,
+    GSEMatrix = TRUE,
+    AnnotGPL = TRUE,
+    destdir = paste0(getwd(), "/", GSEname)
+  )
+  
+  if (!is.null(gset)) {
+    # Extracting matrix, phenotype, and annotation
+    matrix <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@assayData[["exprs"]]
+    matrix <- cbind(rownames(matrix), matrix)
+    colnames(matrix)[1] <- "ID"
+    
+    phenotype <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@phenoData@data
+    phenotype <- cbind(rownames(phenotype), phenotype)
+    colnames(phenotype)[1] <- "ID"
+    
+    annot <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@featureData@data
+    
+    # Writing the extracted variables
+    write.csv(matrix, paste0(GSEname, "/", "matrix.csv"), quote = FALSE, row.names = FALSE)
+    write_tsv(phenotype, paste0(GSEname, "/", "phenotype.tsv"))
+    write_tsv(annot, paste0(GSEname, "/", "annot.tsv"))
+    
+    # Removing variables
+    rm(gset, matrix, phenotype, annot)
+    
+    message("+++++ Dataset is ready to analyze. +++++")
+  }
+}
+
 		</code></pre>
 	</div>
 
