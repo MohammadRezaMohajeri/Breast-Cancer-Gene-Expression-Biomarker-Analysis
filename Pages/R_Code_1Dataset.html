@@ -158,7 +158,13 @@
 			<span class="blue-text">BLUE TEXTTTTT</span> 
 			<strong>BOLD TEXTTTTTT</strong> 
 			-->
-<!-- put the R CODE comments in this format:    <div class="comment">This is a comment.</div>	-->				
+<!-- put the R CODE comments in this format:    <span style="color: #04cc04; font-style: italic;"></span> -->
+<span style="color: #800080; font-style: italic;">require</span>(limma) 
+require(tidyverse)
+require(plotly)
+
+
+
 DownloadGEO <- function(GSEname) {
   <span style="color: #04cc04; font-style: italic;"># Create a folder</span>
   dir.create(GSEname, showWarnings = FALSE)
