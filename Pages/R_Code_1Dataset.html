@@ -106,6 +106,13 @@
 		        bottom: 0;
 		        width: 100%;
 		}
+		
+		/* CSS styles for comments in my R code section */
+		.comment {
+		       font-style: italic;
+		       color: #999999; /* Light gray color */
+		}
+
 		     
 		
 	</style>
@@ -157,8 +164,11 @@
 			<span class="blue-text">BLUE TEXTTTTT</span> 
 			<strong>BOLD TEXTTTTTT</strong> 
 			-->
+			
+<!-- put the R CODE comments in this format:    <div class="comment">This is a comment.</div>	-->		
+			
 DownloadGEO <- function(GSEname) {
-  # Create a folder
+  <div class="comment"># Create a folder</div>
   dir.create(GSEname, showWarnings = FALSE)
   
   # Increase memory
