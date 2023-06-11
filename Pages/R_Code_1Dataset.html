@@ -165,7 +165,7 @@
 
 
  
-DownloadGEO <- <span style="color: #04cc04; font-style: italic;">function</span>(GSEname) {
+DownloadGEO <- <span style="color: #c910c9; font-style: italic;">function</span>(GSEname) {
   <span style="color: #04cc04; font-style: italic;"># Create a folder</span>
   dir.create(GSEname, showWarnings = FALSE)
   
@@ -180,7 +180,7 @@ DownloadGEO <- <span style="color: #04cc04; font-style: italic;">function</span>
     destdir = paste0(getwd(), "/", GSEname)
   )
   
-  <span style="color: #04cc04; font-style: italic;">if</span> (!is.null(gset)) {
+  <span style="color: #c910c9; font-style: italic;">if</span> (!is.null(gset)) {
     <span style="color: #04cc04; font-style: italic;"># Extracting matrix, phenotype, and annotation</span>
     matrix <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@assayData[["exprs"]]
     matrix <- cbind(rownames(matrix), matrix)
@@ -205,7 +205,7 @@ DownloadGEO <- <span style="color: #04cc04; font-style: italic;">function</span>
 }
 
 
-DEGanalysis <- <span style="color: #04cc04; font-style: italic;">function</span>(projname,
+DEGanalysis <- <span style="color: #c910c9; font-style: italic;">function</span>(projname,
                         compare = "subtype",
                         groups,
                         adjust = "fdr") {
@@ -241,13 +241,13 @@ DEGanalysis <- <span style="color: #04cc04; font-style: italic;">function</span>
   <span style="color: #04cc04; font-style: italic;"># log2 transformation if the matrix is not already transformed</span>
   qx <- as.numeric(quantile(matrix, c(0., 0.25, 0.5, 0.75, 0.99, 1.0), na.rm=T))
   LogC <- (qx[5] > 100) || (qx[6]-qx[1] > 50 && qx[2] > 0)
-  if(LogC){
+  <span style="color: #c910c9; font-style: italic;">if</span>(LogC){
     matrix[which(matrix <= 0)] <- NaN
     matrix <- log2(matrix)
   }
 
   <span style="color: #04cc04; font-style: italic;"># Extracting the sample ID according to the groups names specified by user</span>
-  if(compare == "subtype"){
+  <span style="color: #c910c9; font-style: italic;">if</span>(compare == "subtype"){
     grouplis <- list()
     for(i in seq_along(groups)){
       name <- paste0(groups[[i]], collapse = "|")
@@ -325,7 +325,7 @@ DEGanalysis <- <span style="color: #04cc04; font-style: italic;">function</span>
 
 
 
-Makevolcano <- <span style="color: #04cc04; font-style: italic;">function</span>(projname,
+Makevolcano <- <span style="color: #c910c9; font-style: italic;">function</span>(projname,
                         padjlevel = 0.05,
                         uplogFC = 1,
                         downlogFC = -1,
