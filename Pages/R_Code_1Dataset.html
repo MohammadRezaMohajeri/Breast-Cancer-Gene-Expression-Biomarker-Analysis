@@ -163,10 +163,10 @@ DownloadGEO <- function(GSEname) {
   <span style="color: #999; font-style: italic;"># Create a folder</span>
   dir.create(GSEname, showWarnings = FALSE)
   
-  # Increase memory
+  <span style="color: #999; font-style: italic;"># Increase memory</span>
   Sys.setenv("VROOM_CONNECTION_SIZE" = 131072 * 10)
   
-  # Download dataset
+  <span style="color: #999; font-style: italic;"># Download dataset</span>
   gset <- getGEO(
     GSEname,
     GSEMatrix = TRUE,
@@ -175,7 +175,7 @@ DownloadGEO <- function(GSEname) {
   )
   
   if (!is.null(gset)) {
-    # Extracting matrix, phenotype, and annotation
+    <span style="color: #999; font-style: italic;"># Extracting matrix, phenotype, and annotation</span>
     matrix <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@assayData[["exprs"]]
     matrix <- cbind(rownames(matrix), matrix)
     colnames(matrix)[1] <- "ID"
@@ -186,12 +186,12 @@ DownloadGEO <- function(GSEname) {
     
     annot <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@featureData@data
     
-    # Writing the extracted variables
+    <span style="color: #999; font-style: italic;"># Writing the extracted variables</span>
     write.csv(matrix, paste0(GSEname, "/", "matrix.csv"), quote = FALSE, row.names = FALSE)
     write_tsv(phenotype, paste0(GSEname, "/", "phenotype.tsv"))
     write_tsv(annot, paste0(GSEname, "/", "annot.tsv"))
     
-    # Removing variables
+    <span style="color: #999; font-style: italic;"># Removing variables</span>
     rm(gset, matrix, phenotype, annot)
     
     message("+++++ Dataset is ready to analyze. +++++")
@@ -203,7 +203,7 @@ DEGanalysis <- function(projname,
                         compare = "subtype",
                         groups,
                         adjust = "fdr") {
-  # Reading the files
+  <span style="color: #999; font-style: italic;"># Reading the files</span>
   matrix <- read_csv(paste0(projname, "/", "matrix.csv"))
   matrix <- data.frame(matrix)
   rownames(matrix) <- matrix[,1]
@@ -217,14 +217,14 @@ DEGanalysis <- function(projname,
   rownames(annot) <- annot[,1]
   annot <- annot[,-1]
   
-  # Preparing the breast cancer subtype into a dataframe
+  <span style="color: #999; font-style: italic;"># Preparing the breast cancer subtype into a dataframe</span>
   phecoln <- grep("pam50", phenotype)
   pheno <- data.frame(phenotype[ ,phecoln])
   colnames(pheno) <- "subtype"
   pheno$subtype <- gsub("pam50.+:", "", pheno$subtype)
   rownames(pheno) <- rownames(phenotype)
 
-  # Preparing the breast cancer grades into a dataframe
+  <span style="color: #999; font-style: italic;"># Preparing the breast cancer grades into a dataframe</span>
   gradecoln <- grep("grade:", phenotype)
   grade <- data.frame(phenotype[ ,gradecoln])
   colnames(grade) <- "grade"
@@ -232,7 +232,7 @@ DEGanalysis <- function(projname,
   grade$grade <- gsub("=.+", "", grade$grade)
   rownames(grade) <- rownames(phenotype)
   
-  # log2 transformation if the matrix is not already transformed
+  <span style="color: #999; font-style: italic;"># log2 transformation if the matrix is not already transformed</span>
   qx <- as.numeric(quantile(matrix, c(0., 0.25, 0.5, 0.75, 0.99, 1.0), na.rm=T))
   LogC <- (qx[5] > 100) || (qx[6]-qx[1] > 50 && qx[2] > 0)
   if(LogC){
@@ -240,7 +240,7 @@ DEGanalysis <- function(projname,
     matrix <- log2(matrix)
   }
 
-  # Extracting the sample ID according to the groups names specified by user
+  <span style="color: #999; font-style: italic;"># Extracting the sample ID according to the groups names specified by user</span>
   if(compare == "subtype"){
     grouplis <- list()
     for(i in seq_along(groups)){
@@ -257,19 +257,19 @@ DEGanalysis <- function(projname,
     }
   }
   
-  # Renaming the matrix file according to the group names specified by user 
+  <span style="color: #999; font-style: italic;"># Renaming the matrix file according to the group names specified by user</span> 
   for(i in seq_along(grouplis)){
     matname <- paste0(grouplis[[i]], collapse = "|")
     matcoln <- grep(matname, colnames(matrix))
     colnames(matrix)[matcoln] <- paste0(names(grouplis)[i], 1:length(grouplis[[i]]))
   }
   
-  # Keeping only samples that are renamed and order them 
+  <span style="color: #999; font-style: italic;"># Keeping only samples that are renamed and order them</span>
   matnames <- grep(paste0(names(grouplis), collapse = "|"), colnames(matrix))
   matrix <- matrix[, matnames]
   matrix <- matrix[, order(colnames(matrix))]
   
-  # Creating a factor of 0 and 1 according to the length of groups specified by user
+  <span style="color: #999; font-style: italic;"># Creating a factor of 0 and 1 according to the length of groups specified by user</span>
   gname <- list()
   for(i in seq_along(grouplis)){
     number <- length(grep(names(grouplis)[i], colnames(matrix)))
