@@ -339,9 +339,9 @@ Makevolcano <- <span style="color: #c910c9; font-style: italic;">function</span>
   <span style="color: #04cc04; font-style: italic;"># Adding DEG column based on the value of adj.P.Val and logfc</span>
   volcano <- table %>%
     mutate(AdjustedPvalue = -log10(adj.P.Val)) %>%
-    mutate(DEGs = "Not") %>%
-    mutate(DEGs = ifelse(AdjustedPvalue > -log10(padjlevel) & logFC > uplogFC, "Upregulated", DEGs)) %>%
-    mutate(DEGs = ifelse(AdjustedPvalue > -log10(padjlevel) & logFC < downlogFC, "Downregulated", DEGs))
+    mutate(DEGs = <span style="color: #0788e3; font-style: italic;">"Not"</span>) %>%
+    mutate(DEGs = ifelse(AdjustedPvalue > -log10(padjlevel) & logFC > uplogFC, <span style="color: #0788e3; font-style: italic;">"Upregulated"</span>, DEGs)) %>%
+    mutate(DEGs = ifelse(AdjustedPvalue > -log10(padjlevel) & logFC < downlogFC, <span style="color: #0788e3; font-style: italic;">"Downregulated"</span>, DEGs))
 
   <span style="color: #04cc04; font-style: italic;"># Creating ggplot object, adding layers and annotation to the plot</span>
   p <- ggplot(data = volcano, aes(x = logFC, y = AdjustedPvalue, color = DEGs, fill = DEGs, text = paste(<span style="color: #0788e3; font-style: italic;">"ID: "</span>, ID,
@@ -353,55 +353,55 @@ Makevolcano <- <span style="color: #c910c9; font-style: italic;">function</span>
     scale_color_manual(values = c(my_pal)) +
     scale_fill_manual(values = c(paste(my_pal, <span style="color: #0788e3; font-style: italic;">"66"</span> , sep = <span style="color: #0788e3; font-style: italic;">""</span> ))) +
     theme_classic() +
-    theme(axis.text = element_text(family = <span style="color: #0788e3; font-style: italic;">"Times"</span>, size = 15 , colour = "black"),
-          axis.text.x = element_text(family = <span style="color: #0788e3; font-style: italic;">"Times"</span>, colour = "black", size = 15),
-          axis.text.y = element_text(family = <span style="color: #0788e3; font-style: italic;">"Times"</span>, colour = "black", size = 15),
-          plot.subtitle = element_text(family = <span style="color: #0788e3; font-style: italic;">"Times"</span>, size = 20, colour = "black", hjust = 0.5),
-          axis.title.y = element_text(family = <span style="color: #0788e3; font-style: italic;">"Times"</span>, size = rel(1.8), angle = 90),
-          axis.title.x = element_text(family = <span style="color: #0788e3; font-style: italic;">"Times"</span>, size = rel(1.8), angle = 00)) +
-    labs(subtitle = "Volcano plot")
-  p <- ggplotly(p, tooltip = "text")
+    theme(axis.text = element_text(family = <span style="color: #0788e3; font-style: italic;">"Times"</span>, size = <span style="color: #0788e3; font-style: italic;">15</span> , colour = "black"),
+          axis.text.x = element_text(family = <span style="color: #0788e3; font-style: italic;">"Times"</span>, colour = "black", size = <span style="color: #0788e3; font-style: italic;">15</span>),
+          axis.text.y = element_text(family = <span style="color: #0788e3; font-style: italic;">"Times"</span>, colour = "black", size = <span style="color: #0788e3; font-style: italic;">15</span>),
+          plot.subtitle = element_text(family = <span style="color: #0788e3; font-style: italic;">"Times"</span>, size = <span style="color: #0788e3; font-style: italic;">20</span>, colour = "black", hjust = <span style="color: #0788e3; font-style: italic;">0.5</span>),
+          axis.title.y = element_text(family = <span style="color: #0788e3; font-style: italic;">"Times"</span>, size = rel(<span style="color: #0788e3; font-style: italic;">1.8</span>), angle = <span style="color: #0788e3; font-style: italic;">90</span>),
+          axis.title.x = element_text(family = <span style="color: #0788e3; font-style: italic;">"Times"</span>, size = rel(<span style="color: #0788e3; font-style: italic;">1.8</span>), angle = <span style="color: #0788e3; font-style: italic;">00</span>)) +
+    labs(subtitle = <span style="color: #0788e3; font-style: italic;">"Volcano plot"</span>)
+  p <- ggplotly(p, tooltip = <span style="color: #0788e3; font-style: italic;">"text"</span>)
   <span style="color: #04cc04; font-style: italic;"># Calculation the up and down regulated genes number</span>
-  up <- volcano[which(volcano$DEGs == "Upregulated"), ]
-  up <- up[order(up$logFC, decreasing = T), ]
-  down <- volcano[which(volcano$DEGs == "Downregulated"), ]
-  down <- down[order(down$logFC, decreasing = F), ]
+  up <- volcano[which(volcano$DEGs == <span style="color: #0788e3; font-style: italic;">"Upregulated"</span>), ]
+  up <- up[order(up$logFC, decreasing = <span style="color: #0788e3; font-style: italic;">T</span>), ]
+  down <- volcano[which(volcano$DEGs == <span style="color: #0788e3; font-style: italic;">"Downregulated"</span>), ]
+  down <- down[order(down$logFC, decreasing = <span style="color: #0788e3; font-style: italic;">F</span>), ]
   <span style="color: #04cc04; font-style: italic;"># Creating the top table (up and down) based on the number specified (ntop)</span>
-  top <- rbind(up[1:ntop, ], down[1:ntop, ])
-  top <- top[, c(1:6, 11, 7, 8, 9, 10, 12)]
-  colnames(top)[7] <- "n.log10(adj.P.Val)"
+  top <- rbind(up[<span style="color: #0788e3; font-style: italic;">1</span>:ntop, ], down[<span style="color: #0788e3; font-style: italic;">1</span>:ntop, ])
+  top <- top[, c(<span style="color: #0788e3; font-style: italic;">1</span>:<span style="color: #0788e3; font-style: italic;">6</span>, <span style="color: #0788e3; font-style: italic;">11</span>, <span style="color: #0788e3; font-style: italic;">7</span>, <span style="color: #0788e3; font-style: italic;">8</span>, <span style="color: #0788e3; font-style: italic;">9</span>, <span style="color: #0788e3; font-style: italic;">10</span>, <span style="color: #0788e3; font-style: italic;">12</span>)]
+  colnames(top)[<span style="color: #0788e3; font-style: italic;">7</span>] <- <span style="color: #0788e3; font-style: italic;">"n.log10(adj.P.Val)"</span>
   <span style="color: #04cc04; font-style: italic;"># Save top table into project folder</span>
-  write.csv(top, paste0(projname, "/", "top.csv"), quote = <span style="color: #0788e3; font-style: italic;">FALSE</span>, row.names = <span style="color: #0788e3; font-style: italic;">FALSE</span>)
-  message(sprintf("Up-regulated genes: %s; Down-regulated genes: %s", nrow(up), nrow(down)))
+  write.csv(top, paste0(projname, <span style="color: #0788e3; font-style: italic;">"/"</span>, <span style="color: #0788e3; font-style: italic;">"top.csv"</span>), quote = <span style="color: #0788e3; font-style: italic;">FALSE</span>, row.names = <span style="color: #0788e3; font-style: italic;">FALSE</span>)
+  message(sprintf(<span style="color: #0788e3; font-style: italic;">"Up-regulated genes: %s; Down-regulated genes: %s"</span>, nrow(up), nrow(down)))
   <span style="color: #c910c9; font-style: italic;">return</span>(p)
 }
 
 
 
-DownloadGEO("GSE25055")
+DownloadGEO(<span style="color: #0788e3; font-style: italic;">"GSE25055"</span>)
 
 #============================ Q1 =========================#
 <span style="color: #04cc04; font-style: italic;"># other adjust methods ---> "holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr", "none"</span>
 
 <span style="color: #04cc04; font-style: italic;"># (Lum A, Normal-like subtypes) VS (Basal-like, HER2, Lum B)</span>
-DEGanalysis(projname = "GSE25055",
-            compare = "subtype",
-            groups = list(normal = c("LumA", "Normal"), tumor = c("Basal", "Her2", "LumB")),
+DEGanalysis(projname = <span style="color: #0788e3; font-style: italic;">"GSE25055"</span>,
+            compare = <span style="color: #0788e3; font-style: italic;">"subtype"</span>,
+            groups = list(normal = c(<span style="color: #0788e3; font-style: italic;">"LumA"</span>, <span style="color: #0788e3; font-style: italic;">"Normal"</span>), tumor = c(<span style="color: #0788e3; font-style: italic;">"Basal"</span>, <span style="color: #0788e3; font-style: italic;">"Her2"</span>, <span style="color: #0788e3; font-style: italic;">"LumB"</span>)),
             adjust = "fdr")
 
 <span style="color: #04cc04; font-style: italic;"># alpha = 0.01 - logFC 0</span>
-volcano1 <- Makevolcano(projname = "GSE25055",
-                        padjlevel = 0.01,
-                        uplogFC = 1.5,
-                        downlogFC = -1.5,
-                        ntop = 10)
+volcano1 <- Makevolcano(projname = <span style="color: #0788e3; font-style: italic;"><"GSE25055"/span>,
+                        padjlevel = <span style="color: #0788e3; font-style: italic;">0.01</span>,
+                        uplogFC = <span style="color: #0788e3; font-style: italic;">1.5</span>,
+                        downlogFC = <span style="color: #0788e3; font-style: italic;">-1.5</span>,
+                        ntop = <span style="color: #0788e3; font-style: italic;">10</span>)
 volcano1
 
 <span style="color: #04cc04; font-style: italic;"># alpha = 0.01 - logFC 1</span>
-volcano2 <- Makevolcano(projname = "GSE25055",
-                        padjlevel = 0.00001,
-                        uplogFC = 1,
-                        downlogFC = -1)
+volcano2 <- Makevolcano(projname = <span style="color: #0788e3; font-style: italic;">"GSE25055"</span>,
+                        padjlevel = <span style="color: #0788e3; font-style: italic;">0.00001</span>,
+                        uplogFC = <span style="color: #0788e3; font-style: italic;">1</span>,
+                        downlogFC = <span style="color: #0788e3; font-style: italic;">-1</span>)
 volcano2
 
 <span style="color: #04cc04; font-style: italic;"># alpha = 0.05 - logFC 0</span>
@@ -412,45 +412,45 @@ volcano3 <- Makevolcano(projname = "GSE25055",
 volcano3
 
 <span style="color: #04cc04; font-style: italic;"># alpha = 0.05 - logFC 1</span>
-volcano4 <- Makevolcano(projname = "GSE25055",
-                        padjlevel = 0.05,
-                        uplogFC = 1,
-                        downlogFC = -1)
+volcano4 <- Makevolcano(projname = <span style="color: #0788e3; font-style: italic;">"GSE25055"</span>,
+                        padjlevel = <span style="color: #0788e3; font-style: italic;">0.05</span>,
+                        uplogFC = <span style="color: #0788e3; font-style: italic;">1</span>,
+                        downlogFC = <span style="color: #0788e3; font-style: italic;">-1</span>)
 volcano4
 
 #============================ Q2 =========================#
 <span style="color: #04cc04; font-style: italic;"># Grade 1 vs Grade 3</span>
-DEGanalysis(projname = "GSE25055",
-            compare = "grade",
-            groups = list(normal = c("1"), tumor = c("3")),
-            adjust = "fdr")
+DEGanalysis(projname = <span style="color: #0788e3; font-style: italic;">"GSE25055"</span>,
+            compare = <span style="color: #0788e3; font-style: italic;">"grade"</span>,
+            groups = list(normal = c(<span style="color: #0788e3; font-style: italic;">"1"</span>), tumor = c(<span style="color: #0788e3; font-style: italic;">"3"</span>)),
+            adjust = <span style="color: #0788e3; font-style: italic;">"fdr"</span>)
 
 <span style="color: #04cc04; font-style: italic;"># alpha = 0.01 - logFC 0</span>
-volcano5 <- Makevolcano(projname = "GSE25055",
-                        padjlevel = 0.01,
-                        uplogFC = 0,
-                        downlogFC = 0)
+volcano5 <- Makevolcano(projname = <span style="color: #0788e3; font-style: italic;">"GSE25055"</span>,
+                        padjlevel = <span style="color: #0788e3; font-style: italic;">0.01</span>,
+                        uplogFC = <span style="color: #0788e3; font-style: italic;">0</span>,
+                        downlogFC = <span style="color: #0788e3; font-style: italic;">0</span>)
 volcano5
 
 <span style="color: #04cc04; font-style: italic;"># alpha = 0.01 - logFC 1.5</span>
-volcano6 <- Makevolcano(projname = "GSE25055",
-                        padjlevel = 0.01,
-                        uplogFC = 1.5,
-                        downlogFC = -1.5)
+volcano6 <- Makevolcano(projname = <span style="color: #0788e3; font-style: italic;">"GSE25055"</span>,
+                        padjlevel = <span style="color: #0788e3; font-style: italic;">0.01</span>,
+                        uplogFC = <span style="color: #0788e3; font-style: italic;">1.5</span>,
+                        downlogFC = <span style="color: #0788e3; font-style: italic;">-1.5</span>)
 volcano6
 
 <span style="color: #04cc04; font-style: italic;"># alpha = 0.05 - logFC 0</span>
-volcano7 <- Makevolcano(projname = "GSE25055",
-                        padjlevel = 0.05,
-                        uplogFC = 0,
-                        downlogFC = 0)
+volcano7 <- Makevolcano(projname = <span style="color: #0788e3; font-style: italic;">"GSE25055"</span>,
+                        padjlevel = <span style="color: #0788e3; font-style: italic;">0.05</span>,
+                        uplogFC = <span style="color: #0788e3; font-style: italic;">0</span>,
+                        downlogFC = <span style="color: #0788e3; font-style: italic;">0</span>)
 volcano7
 
 <span style="color: #04cc04; font-style: italic;"># alpha = 0.01 - logFC 1</span>
-volcano8 <- Makevolcano(projname = "GSE25055",
-                        padjlevel = 0.01,
-                        uplogFC = 1,
-                        downlogFC = -1)
+volcano8 <- Makevolcano(projname = <span style="color: #0788e3; font-style: italic;">"GSE25055"</span>,
+                        padjlevel = <span style="color: #0788e3; font-style: italic;">0.01</span>,
+                        uplogFC = <span style="color: #0788e3; font-style: italic;">1</span>,
+                        downlogFC = <span style="color: #0788e3; font-style: italic;">-1</span>)
 volcano8
 
 
