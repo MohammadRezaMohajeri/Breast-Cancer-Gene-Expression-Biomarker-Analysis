@@ -185,11 +185,11 @@ DownloadGEO <- <span style="color: #c910c9; font-style: italic;">function</span>
     <span style="color: #04cc04; font-style: italic;"># Extracting matrix, phenotype, and annotation</span>
     matrix <- gset[[paste0(GSEname, <span style="color: #0788e3; font-style: italic;">"_series_matrix.txt.gz"</span>)]]@assayData[["exprs"]]
     matrix <- cbind(rownames(matrix), matrix)
-    colnames(matrix)[1] <- "ID"
+    colnames(matrix)[1] <- <span style="color: #0788e3; font-style: italic;">"ID"</span>
     
     phenotype <- gset[[paste0(GSEname, <span style="color: #0788e3; font-style: italic;">"_series_matrix.txt.gz"</span>)]]@phenoData@data
     phenotype <- cbind(rownames(phenotype), phenotype)
-    colnames(phenotype)[1] <- "ID"
+    colnames(phenotype)[1] <- <span style="color: #0788e3; font-style: italic;">"ID"</span>
     
     annot <- gset[[paste0(GSEname, <span style="color: #0788e3; font-style: italic;">"_series_matrix.txt.gz"</span>)]]@featureData@data
     
@@ -299,12 +299,12 @@ DEGanalysis <- <span style="color: #c910c9; font-style: italic;">function</span>
   <span style="color: #04cc04; font-style: italic;"># Creating top table with all genes</span>
   DEGs <- topTable(fit2, adjust = adjust, number = Inf)
   DEGs <- cbind(rownames(DEGs), DEGs)
-  colnames(DEGs)[1] <- "ID" 
+  colnames(DEGs)[1] <- <span style="color: #0788e3; font-style: italic;">"ID"</span> 
   
   <span style="color: #04cc04; font-style: italic;"># Preparing the annotation variable</span>
   annotation <- annot[, c("Gene.symbol", "Chromosome.location", "GO.Function")]
   annotation <- cbind(rownames(annotation), annotation)
-  colnames(annotation)[1] <- "ID" 
+  colnames(annotation)[1] <- <span style="color: #0788e3; font-style: italic;">"ID"</span> 
   
   <span style="color: #04cc04; font-style: italic;"># Making sure that both DEGs and annotation row names are the same</span>
   annotation <- annotation[order(annotation$ID), ]
@@ -344,21 +344,21 @@ Makevolcano <- <span style="color: #c910c9; font-style: italic;">function</span>
     mutate(DEGs = ifelse(AdjustedPvalue > -log10(padjlevel) & logFC < downlogFC, "Downregulated", DEGs))
 
   <span style="color: #04cc04; font-style: italic;"># Creating ggplot object, adding layers and annotation to the plot</span>
-  p <- ggplot(data = volcano, aes(x = logFC, y = AdjustedPvalue, color = DEGs, fill = DEGs, text = paste("ID: ", ID,
-                                                                                                       "&lt;br&gt;Gene: ", Gene.symbol,
-                                                                                                       "&lt;br&gt;Chromosome: ", Chromosome.location,
-                                                                                                       "&lt;br&gt;GO function: ", GO.Function))) +
-    labs(x= 'log2 (Fold Change)', y = "-log10(Adjusted P-value)") +
-    geom_point(size = 1, shape = 21) +
+  p <- ggplot(data = volcano, aes(x = logFC, y = AdjustedPvalue, color = DEGs, fill = DEGs, text = paste(<span style="color: #0788e3; font-style: italic;">"ID: "</span>, ID,
+                                                                                                       <span style="color: #0788e3; font-style: italic;">"&lt;br&gt;Gene: "</span>, Gene.symbol,
+                                                                                                       <span style="color: #0788e3; font-style: italic;">"&lt;br&gt;Chromosome: "</span>, Chromosome.location,
+                                                                                                       <span style="color: #0788e3; font-style: italic;">"&lt;br&gt;GO function: "</span>, GO.Function))) +
+    labs(x= <span style="color: #0788e3; font-style: italic;">'log2 (Fold Change)'</span>, y = <span style="color: #0788e3; font-style: italic;">"-log10(Adjusted P-value)"</span>) + 
+    geom_point(size = <span style="color: #0788e3; font-style: italic;">1</span>, shape = <span style="color: #0788e3; font-style: italic;">21</span>) +
     scale_color_manual(values = c(my_pal)) +
-    scale_fill_manual(values = c(paste(my_pal, "66", sep = ""))) +
+    scale_fill_manual(values = c(paste(my_pal, <span style="color: #0788e3; font-style: italic;">"66"</span> , sep = <span style="color: #0788e3; font-style: italic;">""</span> ))) +
     theme_classic() +
-    theme(axis.text = element_text(family = "Times", size = 15 , colour = "black"),
-          axis.text.x = element_text(family = "Times", colour = "black", size = 15),
-          axis.text.y = element_text(family = "Times", colour = "black", size = 15),
-          plot.subtitle = element_text(family = "Times", size = 20, colour = "black", hjust = 0.5),
-          axis.title.y = element_text(family = "Times", size = rel(1.8), angle = 90),
-          axis.title.x = element_text(family = "Times", size = rel(1.8), angle = 00)) +
+    theme(axis.text = element_text(family = <span style="color: #0788e3; font-style: italic;">"Times"</span>, size = 15 , colour = "black"),
+          axis.text.x = element_text(family = <span style="color: #0788e3; font-style: italic;">"Times"</span>, colour = "black", size = 15),
+          axis.text.y = element_text(family = <span style="color: #0788e3; font-style: italic;">"Times"</span>, colour = "black", size = 15),
+          plot.subtitle = element_text(family = <span style="color: #0788e3; font-style: italic;">"Times"</span>, size = 20, colour = "black", hjust = 0.5),
+          axis.title.y = element_text(family = <span style="color: #0788e3; font-style: italic;">"Times"</span>, size = rel(1.8), angle = 90),
+          axis.title.x = element_text(family = <span style="color: #0788e3; font-style: italic;">"Times"</span>, size = rel(1.8), angle = 00)) +
     labs(subtitle = "Volcano plot")
   p <- ggplotly(p, tooltip = "text")
   <span style="color: #04cc04; font-style: italic;"># Calculation the up and down regulated genes number</span>
