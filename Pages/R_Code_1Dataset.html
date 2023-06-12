@@ -325,17 +325,17 @@ DEGanalysis <- <span style="color: #c910c9; font-style: italic;">function</span>
 
 
 
-
+<span style="color: #0788e3; font-style: italic;">0.05</span>
 Makevolcano <- <span style="color: #c910c9; font-style: italic;">function</span>(projname,
-                        padjlevel = 0.05,
-                        uplogFC = 1,
-                        downlogFC = -1,
-                        ntop = 10) {
+                        padjlevel = <span style="color: #0788e3; font-style: italic;">0.05</span>,
+                        uplogFC = <span style="color: #0788e3; font-style: italic;">1</span>,
+                        downlogFC = <span style="color: #0788e3; font-style: italic;">-1</span> ,
+                        ntop = <span style="color: #0788e3; font-style: italic;">10</span>) {
   <span style="color: #04cc04; font-style: italic;"># Reading the top table</span>
-  table <- read_tsv(paste0(projname, "/", "DEGs.tsv"))
+  table <- read_tsv(paste0(projname, <span style="color: #0788e3; font-style: italic;">"/"</span>, <span style="color: #0788e3; font-style: italic;">"DEGs.tsv"</span>))
   table <- data.frame(table)
   <span style="color: #04cc04; font-style: italic;"># Colors</span>
-  my_pal <- c("#1B9E77","#7570B3", "#E7298A", "#66A61E", "#E6AB02", "#A6761D", "#666666", "#9A7D0A")
+  my_pal <- c(<span style="color: #1B9E77; font-style: italic;">"#1B9E77"</span>,<span style="color: #7570B3; font-style: italic;">"#7570B3"</span>, <span style="color: #E7298A; font-style: italic;">"#E7298A"</span>, <span style="color: #66A61E; font-style: italic;">"#66A61E"</span>, <span style="color: #E6AB02; font-style: italic;">"#E6AB02"</span>, <span style="color: #A6761D; font-style: italic;">"#A6761D"</span>, <span style="color: #666666; font-style: italic;">"#666666"</span>, <span style="color: #9A7D0A; font-style: italic;">"#9A7D0A"</span>)
   <span style="color: #04cc04; font-style: italic;"># Adding DEG column based on the value of adj.P.Val and logfc</span>
   volcano <- table %>%
     mutate(AdjustedPvalue = -log10(adj.P.Val)) %>%
