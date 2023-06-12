@@ -343,10 +343,10 @@ Makevolcano <- <span style="color: #c910c9; font-style: italic;">function</span>
     mutate(DEGs = ifelse(AdjustedPvalue > -log10(padjlevel) & logFC < downlogFC, "Downregulated", DEGs))
 
   <span style="color: #04cc04; font-style: italic;"># Creating ggplot object, adding layers and annotation to the plot</span>
-  p <- ggplot(data = volcano, aes(x = logFC, y= AdjustedPvalue, color= DEGs, fill = DEGs, text = paste("ID: ", ID,
-                                                                                                     "<br>Gene: ", Gene.symbol,
-                                                                                                     "<br>Chromosome: ", Chromosome.location,
-                                                                                                     "<br>GO function: ", GO.Function))) + 
+  p <- ggplot(data = volcano, aes(x = logFC, y = AdjustedPvalue, color = DEGs, fill = DEGs, text = paste("ID: ", ID,
+                                                                                                       "&lt;br&gt;Gene: ", Gene.symbol,
+                                                                                                       "&lt;br&gt;Chromosome: ", Chromosome.location,
+                                                                                                       "&lt;br&gt;GO function: ", GO.Function))) +
     labs(x= 'log2 (Fold Change)', y = "-log10(Adjusted P-value)") +
     geom_point(size = 1, shape = 21) +
     scale_color_manual(values = c(my_pal)) +
