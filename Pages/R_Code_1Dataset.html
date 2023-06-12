@@ -185,65 +185,65 @@ DownloadGEO <- <span style="color: #c910c9; font-style: italic;">function</span>
     <span style="color: #04cc04; font-style: italic;"># Extracting matrix, phenotype, and annotation</span>
     matrix <- gset[[paste0(GSEname, <span style="color: #0788e3; font-style: italic;">"_series_matrix.txt.gz"</span>)]]@assayData[["exprs"]]
     matrix <- cbind(rownames(matrix), matrix)
-    colnames(matrix)[1] <- <span style="color: #0788e3; font-style: italic;">"ID"</span>
+    colnames(matrix)[<span style="color: #0788e3; font-style: italic;">1</span>] <- <span style="color: #0788e3; font-style: italic;">"ID"</span>
     
     phenotype <- gset[[paste0(GSEname, <span style="color: #0788e3; font-style: italic;">"_series_matrix.txt.gz"</span>)]]@phenoData@data
     phenotype <- cbind(rownames(phenotype), phenotype)
-    colnames(phenotype)[1] <- <span style="color: #0788e3; font-style: italic;">"ID"</span>
+    colnames(phenotype)[<span style="color: #0788e3; font-style: italic;">1</span>] <- <span style="color: #0788e3; font-style: italic;">"ID"</span>
     
     annot <- gset[[paste0(GSEname, <span style="color: #0788e3; font-style: italic;">"_series_matrix.txt.gz"</span>)]]@featureData@data
     
     <span style="color: #04cc04; font-style: italic;"># Writing the extracted variables</span>
-    write.csv(matrix, paste0(GSEname, "/", "matrix.csv"), quote = <span style="color: #0788e3; font-style: italic;">FALSE</span>, row.names = <span style="color: #0788e3; font-style: italic;">FALSE</span>)
-    write_tsv(phenotype, paste0(GSEname, "/", "phenotype.tsv"))
-    write_tsv(annot, paste0(GSEname, "/", "annot.tsv"))
+    write.csv(matrix, paste0(GSEname, <span style="color: #0788e3; font-style: italic;">"/"</span>, <span style="color: #0788e3; font-style: italic;">"matrix.csv"</span>), quote = <span style="color: #0788e3; font-style: italic;">FALSE</span>, row.names = <span style="color: #0788e3; font-style: italic;">FALSE</span>)
+    write_tsv(phenotype, paste0(GSEname, <span style="color: #0788e3; font-style: italic;">"/"</span>, <span style="color: #0788e3; font-style: italic;">"phenotype.tsv"</span>)) 
+    write_tsv(annot, paste0(GSEname, <span style="color: #0788e3; font-style: italic;">"/"</span>, <span style="color: #0788e3; font-style: italic;">"annot.tsv"</span>)) 
     
     <span style="color: #04cc04; font-style: italic;"># Removing variables</span>
     rm(gset, matrix, phenotype, annot)
     
-    message("+++++ Dataset is ready to analyze. +++++")
+    <span style="color: #0788e3; font-style: italic;">message("+++++ Dataset is ready to analyze. +++++")</span>
   }
 }
 
 
 DEGanalysis <- <span style="color: #c910c9; font-style: italic;">function</span>(projname,
-                        compare = "subtype",
+                        compare = <span style="color: #0788e3; font-style: italic;">"subtype"</span>,
                         groups,
-                        adjust = "fdr") {
+                        adjust = <span style="color: #0788e3; font-style: italic;">"fdr"</span>) {
   <span style="color: #04cc04; font-style: italic;"># Reading the files</span>
-  matrix <- read_csv(paste0(projname, "/", "matrix.csv"))
+  matrix <- read_csv(paste0(projname, <span style="color: #0788e3; font-style: italic;">"/"</span>, <span style="color: #0788e3; font-style: italic;">"matrix.csv"</span>))
   matrix <- data.frame(matrix)
-  rownames(matrix) <- matrix[,1]
-  matrix <- matrix[,-1]
-  phenotype <- read_tsv(paste0(projname, "/", "phenotype.tsv"))
+  rownames(matrix) <- matrix[<span style="color: #0788e3; font-style: italic;">,1</span>]
+  matrix <- matrix[<span style="color: #0788e3; font-style: italic;">,-1</span>]
+  phenotype <- read_tsv(paste0(projname, <span style="color: #0788e3; font-style: italic;">"/"</span>, <span style="color: #0788e3; font-style: italic;">"phenotype.tsv"</span>))
   phenotype <- data.frame(phenotype)
-  rownames(phenotype) <- phenotype[,1]
-  phenotype <- phenotype[,-1]
-  annot <- read_tsv(paste0(projname, "/", "annot.tsv"))
+  rownames(phenotype) <- phenotype[<span style="color: #0788e3; font-style: italic;">,1</span>]
+  phenotype <- phenotype[<span style="color: #0788e3; font-style: italic;">,-1</span>]
+  annot <- read_tsv(paste0(projname, <span style="color: #0788e3; font-style: italic;">"/"</span>, <span style="color: #0788e3; font-style: italic;">"annot.tsv"</span>))
   annot <- data.frame(annot)
-  rownames(annot) <- annot[,1]
-  annot <- annot[,-1]
+  rownames(annot) <- annot[<span style="color: #0788e3; font-style: italic;">,1</span>]
+  annot <- annot[<span style="color: #0788e3; font-style: italic;">,-1</span>]
   
   <span style="color: #04cc04; font-style: italic;"># Preparing the breast cancer subtype into a dataframe</span>
-  phecoln <- grep("pam50", phenotype)
+  phecoln <- grep(<span style="color: #0788e3; font-style: italic;">"pam50"</span>, phenotype)
   pheno <- data.frame(phenotype[ ,phecoln])
   colnames(pheno) <- "subtype"
-  pheno$subtype <- gsub("pam50.+:", "", pheno$subtype)
+  pheno$subtype <- gsub(<span style="color: #0788e3; font-style: italic;">"pam50.+:"</span>, <span style="color: #0788e3; font-style: italic;">""</span>, pheno$subtype)
   rownames(pheno) <- rownames(phenotype)
 
   <span style="color: #04cc04; font-style: italic;"># Preparing the breast cancer grades into a dataframe</span>
-  gradecoln <- grep("grade:", phenotype)
+  gradecoln <- grep(<span style="color: #0788e3; font-style: italic;">"grade:"</span>, phenotype)
   grade <- data.frame(phenotype[ ,gradecoln])
-  colnames(grade) <- "grade"
-  grade$grade <- gsub("grade:", "", grade$grade)
-  grade$grade <- gsub("=.+", "", grade$grade)
+  colnames(grade) <- <span style="color: #0788e3; font-style: italic;">"grade"</span>
+  grade$grade <- gsub(<span style="color: #0788e3; font-style: italic;">"grade:"</span>, <span style="color: #0788e3; font-style: italic;">""</span>, grade$grade)
+  grade$grade <- gsub(<span style="color: #0788e3; font-style: italic;">"=.+"</span>, <span style="color: #0788e3; font-style: italic;">""</span>, grade$grade)
   rownames(grade) <- rownames(phenotype)
   
   <span style="color: #04cc04; font-style: italic;"># log2 transformation if the matrix is not already transformed</span>
-  qx <- as.numeric(quantile(matrix, c(0., 0.25, 0.5, 0.75, 0.99, 1.0), na.rm=T))
-  LogC <- (qx[5] > 100) || (qx[6]-qx[1] > 50 && qx[2] > 0)
+  qx <- as.numeric(quantile(matrix, c(<span style="color: #0788e3; font-style: italic;">0.</span>, <span style="color: #0788e3; font-style: italic;">0.25</span>, <span style="color: #0788e3; font-style: italic;">0.5</span>, <span style="color: #0788e3; font-style: italic;">0.75</span>, <span style="color: #0788e3; font-style: italic;">0.99</span>, <span style="color: #0788e3; font-style: italic;">1.0</span>), na.rm=<span style="color: #0788e3; font-style: italic;">T</span>))
+  LogC <- (qx[<span style="color: #0788e3; font-style: italic;">5</span>] > <span style="color: #0788e3; font-style: italic;">100</span>) || (qx[<span style="color: #0788e3; font-style: italic;">6</span>]-qx[<span style="color: #0788e3; font-style: italic;">1</span>] > <span style="color: #0788e3; font-style: italic;">50</span> && qx[<span style="color: #0788e3; font-style: italic;">2</span>] > <span style="color: #0788e3; font-style: italic;">0</span>)
   <span style="color: #c910c9; font-style: italic;">if</span>(LogC){
-    matrix[which(matrix <= 0)] <- NaN
+    matrix[which(matrix <= <span style="color: #0788e3; font-style: italic;">0</span>)] <- <span style="color: #0788e3; font-style: italic;">NaN</span>
     matrix <- log2(matrix)
   }
 
