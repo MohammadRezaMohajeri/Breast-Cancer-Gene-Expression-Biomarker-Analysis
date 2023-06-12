@@ -171,7 +171,7 @@ DownloadGEO <- <span style="color: #c910c9; font-style: italic;">function</span>
   dir.create(GSEname, showWarnings = <span style="color: #0788e3; font-style: italic;">FALSE</span>)
   
   <span style="color: #04cc04; font-style: italic;"># Increase memory</span>
-  Sys.setenv("VROOM_CONNECTION_SIZE" = 131072 * 10)
+  Sys.setenv("<span style="color: #0788e3; font-style: italic;">VROOM_CONNECTION_SIZE</span>" = <span style="color: #0788e3; font-style: italic;">131072</span> * <span style="color: #0788e3; font-style: italic;">10</span>) 
   
   <span style="color: #04cc04; font-style: italic;"># Download dataset</span>
   gset <- getGEO(
@@ -183,15 +183,15 @@ DownloadGEO <- <span style="color: #c910c9; font-style: italic;">function</span>
   
   <span style="color: #c910c9; font-style: italic;">if</span>(!is.null(gset)) {
     <span style="color: #04cc04; font-style: italic;"># Extracting matrix, phenotype, and annotation</span>
-    matrix <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@assayData[["exprs"]]
+    matrix <- gset[[paste0(GSEname, <span style="color: #0788e3; font-style: italic;">"_series_matrix.txt.gz"</span>)]]@assayData[["exprs"]]
     matrix <- cbind(rownames(matrix), matrix)
     colnames(matrix)[1] <- "ID"
     
-    phenotype <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@phenoData@data
+    phenotype <- gset[[paste0(GSEname, <span style="color: #0788e3; font-style: italic;">"_series_matrix.txt.gz"</span>)]]@phenoData@data
     phenotype <- cbind(rownames(phenotype), phenotype)
     colnames(phenotype)[1] <- "ID"
     
-    annot <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@featureData@data
+    annot <- gset[[paste0(GSEname, <span style="color: #0788e3; font-style: italic;">"_series_matrix.txt.gz"</span>)]]@featureData@data
     
     <span style="color: #04cc04; font-style: italic;"># Writing the extracted variables</span>
     write.csv(matrix, paste0(GSEname, "/", "matrix.csv"), quote = <span style="color: #0788e3; font-style: italic;">FALSE</span>, row.names = <span style="color: #0788e3; font-style: italic;">FALSE</span>)
