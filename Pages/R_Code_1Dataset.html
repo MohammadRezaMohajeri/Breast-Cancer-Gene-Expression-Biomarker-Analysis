@@ -180,10 +180,10 @@ DownloadGEO <- <span style="color: #c910c9; font-style: italic;">function</span>
     AnnotGPL = <span style="color: #0788e3; font-style: italic;">TRUE</span>,
     destdir = paste0(getwd(), "/", GSEname)
   )
-  
+ 
   <span style="color: #c910c9; font-style: italic;">if</span>(!is.null(gset)) {
     <span style="color: #04cc04; font-style: italic;"># Extracting matrix, phenotype, and annotation</span>
-    matrix <- gset[[paste0(GSEname, <span style="color: #0788e3; font-style: italic;">"_series_matrix.txt.gz"</span>)]]@assayData[["exprs"]]
+    matrix <- gset[[paste0(GSEname, <span style="color: #0788e3; font-style: italic;">"_series_matrix.txt.gz"</span>)]]@assayData[[<span style="color: #0788e3; font-style: italic;">"exprs"</span>]]
     matrix <- cbind(rownames(matrix), matrix)
     colnames(matrix)[<span style="color: #0788e3; font-style: italic;">1</span>] <- <span style="color: #0788e3; font-style: italic;">"ID"</span>
     
@@ -223,11 +223,11 @@ DEGanalysis <- <span style="color: #c910c9; font-style: italic;">function</span>
   annot <- data.frame(annot)
   rownames(annot) <- annot[<span style="color: #0788e3; font-style: italic;">,1</span>]
   annot <- annot[<span style="color: #0788e3; font-style: italic;">,-1</span>]
-  
+   
   <span style="color: #04cc04; font-style: italic;"># Preparing the breast cancer subtype into a dataframe</span>
   phecoln <- grep(<span style="color: #0788e3; font-style: italic;">"pam50"</span>, phenotype)
   pheno <- data.frame(phenotype[ ,phecoln])
-  colnames(pheno) <- "subtype"
+  colnames(pheno) <- <span style="color: #0788e3; font-style: italic;">"subtype"</span>
   pheno$subtype <- gsub(<span style="color: #0788e3; font-style: italic;">"pam50.+:"</span>, <span style="color: #0788e3; font-style: italic;">""</span>, pheno$subtype)
   rownames(pheno) <- rownames(phenotype)
 
@@ -248,17 +248,17 @@ DEGanalysis <- <span style="color: #c910c9; font-style: italic;">function</span>
   }
 
   <span style="color: #04cc04; font-style: italic;"># Extracting the sample ID according to the groups names specified by user</span>
-  <span style="color: #c910c9; font-style: italic;">if</span>(compare == "subtype"){
+  <span style="color: #c910c9; font-style: italic;">if</span>(compare == <span style="color: #0788e3; font-style: italic;">"subtype"</span>){
     grouplis <- list() 
     <span style="color: #c910c9; font-style: italic;">for</span>(i <span style="color: #c910c9; font-style: italic;">in</span> seq_along(groups)){
-      name <- paste0(groups[[i]], collapse = "|")
+      name <- paste0(groups[[i]], collapse = <span style="color: #0788e3; font-style: italic;">"|"</span>)
       rownum <- grep(name, pheno$subtype)
       grouplis[[names(groups)[i]]] <- rownames(pheno)[rownum]
     }
   } <span style="color: #c910c9; font-style: italic;">else</span>{
     grouplis <- list()
     <span style="color: #c910c9; font-style: italic;">for</span>(i <span style="color: #c910c9; font-style: italic;">in</span> seq_along(groups)){
-      name <- paste0(groups[[i]], collapse = "|")
+      name <- paste0(groups[[i]], collapse = <span style="color: #0788e3; font-style: italic;">"|"</span>)
       rownum <- grep(name, grade$grade)
       grouplis[[names(groups)[i]]] <- rownames(grade)[rownum]
     }
@@ -266,13 +266,13 @@ DEGanalysis <- <span style="color: #c910c9; font-style: italic;">function</span>
   
   <span style="color: #04cc04; font-style: italic;"># Renaming the matrix file according to the group names specified by user</span> 
   <span style="color: #c910c9; font-style: italic;">for</span>(i <span style="color: #c910c9; font-style: italic;">in</span> seq_along(grouplis)){
-    matname <- paste0(grouplis[[i]], collapse = "|")
+    matname <- paste0(grouplis[[i]], collapse = <span style="color: #0788e3; font-style: italic;">"|"</span>)
     matcoln <- grep(matname, colnames(matrix))
-    colnames(matrix)[matcoln] <- paste0(names(grouplis)[i], 1:length(grouplis[[i]]))
-  }
+    colnames(matrix)[matcoln] <- paste0(names(grouplis)[i], <span style="color: #0788e3; font-style: italic;">1:</span>length(grouplis[[i]]))
+  } 
   
   <span style="color: #04cc04; font-style: italic;"># Keeping only samples that are renamed and order them</span>
-  matnames <- grep(paste0(names(grouplis), collapse = "|"), colnames(matrix))
+  matnames <- grep(paste0(names(grouplis), collapse = <span style="color: #0788e3; font-style: italic;">"|"</span>), colnames(matrix))
   matrix <- matrix[, matnames]
   matrix <- matrix[, order(colnames(matrix))]
   
@@ -280,47 +280,47 @@ DEGanalysis <- <span style="color: #c910c9; font-style: italic;">function</span>
   gname <- list()
   <span style="color: #c910c9; font-style: italic;">for</span>(i <span style="color: #c910c9; font-style: italic;">in</span> seq_along(grouplis)){
     number <- length(grep(names(grouplis)[i], colnames(matrix)))
-    gname[[i]] <- factor(rep(i - 1, number))
+    gname[[i]] <- factor(rep(i <span style="color: #0788e3; font-style: italic;">- 1</span>, number))
   }
   grouping <- unlist(gname)
   
   <span style="color: #04cc04; font-style: italic;"># Making the design matrix</span>
-  design <- model.matrix(~ 0 + grouping)
+  design <- model.matrix(~ <span style="color: #0788e3; font-style: italic;">0</span> + grouping)
   colnames(design) <- names(grouplis)
   
   <span style="color: #04cc04; font-style: italic;"># Fitting the linear model</span>
   fit1 <- lmFit(matrix, design)
   l <- length(names(grouplis))
-  cts <- paste0(names(grouplis)[l:1], collapse = "-")
+  cts <- paste0(names(grouplis)[l:<span style="color: #0788e3; font-style: italic;">1</span>], collapse = <span style="color: #0788e3; font-style: italic;">"-"</span>)
   cont.matrix <- makeContrasts(contrasts = cts, levels = design)
   fit2 <- contrasts.fit(fit1, cont.matrix)
   fit2 <- eBayes(fit2)
   
   <span style="color: #04cc04; font-style: italic;"># Creating top table with all genes</span>
-  DEGs <- topTable(fit2, adjust = adjust, number = Inf)
+  DEGs <- topTable(fit2, adjust = adjust, number = <span style="color: #0788e3; font-style: italic;">Inf</span>)
   DEGs <- cbind(rownames(DEGs), DEGs)
-  colnames(DEGs)[1] <- <span style="color: #0788e3; font-style: italic;">"ID"</span> 
+  colnames(DEGs)[<span style="color: #0788e3; font-style: italic;">1</span>] <- <span style="color: #0788e3; font-style: italic;">"ID"</span> 
   
   <span style="color: #04cc04; font-style: italic;"># Preparing the annotation variable</span>
-  annotation <- annot[, c("Gene.symbol", "Chromosome.location", "GO.Function")]
+  annotation <- annot[, c(<span style="color: #0788e3; font-style: italic;">"Gene.symbol"</span>, <span style="color: #0788e3; font-style: italic;">"Chromosome.location"</span>, <span style="color: #0788e3; font-style: italic;">"GO.Function"</span>)]
   annotation <- cbind(rownames(annotation), annotation)
-  colnames(annotation)[1] <- <span style="color: #0788e3; font-style: italic;">"ID"</span> 
+  colnames(annotation)[<span style="color: #0788e3; font-style: italic;">1</span>] <- <span style="color: #0788e3; font-style: italic;">"ID"</span> 
   
   <span style="color: #04cc04; font-style: italic;"># Making sure that both DEGs and annotation row names are the same</span>
   annotation <- annotation[order(annotation$ID), ]
   DEGs <- DEGs[order(DEGs$ID), ]
   
   <span style="color: #04cc04; font-style: italic;"># Adding annotation to the top table</span>
-  DEGs <- cbind(DEGs,  annotation[, c(2, 3, 4)])
+  DEGs <- cbind(DEGs,  annotation[, c(<span style="color: #0788e3; font-style: italic;">2</span>, <span style="color: #0788e3; font-style: italic;">3</span>, <span style="color: #0788e3; font-style: italic;">4</span>)])
   
   <span style="color: #04cc04; font-style: italic;"># Removing missing gene symbols</span>
   genemissing <- which(is.na(DEGs$Gene.symbol) == <span style="color: #0788e3; font-style: italic;">TRUE</span>)
   DEGs <- DEGs[-genemissing, ]
   
   <span style="color: #04cc04; font-style: italic;"># Writing the top table</span>
-  write_tsv(DEGs, paste0(projname, "/", "DEGs.tsv"))
+  write_tsv(DEGs, paste0(projname, <span style="color: #0788e3; font-style: italic;">"/"</span>, <span style="color: #0788e3; font-style: italic;">"DEGs.tsv"</span>))
   
-  message("+++++ Analysis has completed. +++++")
+  message(<span style="color: #0788e3; font-style: italic;">"+++++ Analysis has completed. +++++"</span>)
 }
 
 
