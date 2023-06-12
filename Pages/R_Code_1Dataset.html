@@ -158,23 +158,17 @@
 			<span class="blue-text">BLUE TEXTTTTT</span> 
 			<strong>BOLD TEXTTTTTT</strong> 
 			-->
-<!-- put the R CODE comments in this format:    <span style="color: #0479cc; font-style: italic;">TESSSSSSSTTTTTT</span> -->
+<!-- put the R CODE comments in this format:    <span style="color: #0788e3; font-style: italic;">TESSSSSSSTTTTTT</span> -->
 <span style="color: #c910c9; font-style: italic;">require</span>(GEOquery)
 <span style="color: #c910c9; font-style: italic;">require</span>(limma) 
 <span style="color: #c910c9; font-style: italic;">require</span>(tidyverse)
 <span style="color: #c910c9; font-style: italic;">require</span>(plotly)
 
 
- <span style="color: #0479cc; font-style: italic;">TESSSSSSSTTTTTT</span>
- <span style="color: #0788e3; font-style: italic;">TESSSSSSSTTTTTT</span>
- <span style="color: #0c90ed; font-style: italic;">TESSSSSSSTTTTTT</span>
- <span style="color: #1a96ed; font-style: italic;">TESSSSSSSTTTTTT</span>
- <span style="color: #075185; font-style: italic;">TESSSSSSSTTTTTT</span>
-
- 
+  
 DownloadGEO <- <span style="color: #c910c9; font-style: italic;">function</span>(GSEname) {
   <span style="color: #04cc04; font-style: italic;"># Create a folder</span>
-  dir.create(GSEname, showWarnings = FALSE)
+  dir.create(GSEname, showWarnings = <span style="color: #0788e3; font-style: italic;">FALSE</span>)
   
   <span style="color: #04cc04; font-style: italic;"># Increase memory</span>
   Sys.setenv("VROOM_CONNECTION_SIZE" = 131072 * 10)
@@ -182,8 +176,8 @@ DownloadGEO <- <span style="color: #c910c9; font-style: italic;">function</span>
   <span style="color: #04cc04; font-style: italic;"># Download dataset</span>
   gset <- getGEO(
     GSEname,
-    GSEMatrix = TRUE,
-    AnnotGPL = TRUE,
+    GSEMatrix = <span style="color: #0788e3; font-style: italic;">TRUE</span>,
+    AnnotGPL = <span style="color: #0788e3; font-style: italic;">TRUE</span>,
     destdir = paste0(getwd(), "/", GSEname)
   )
   
@@ -200,7 +194,7 @@ DownloadGEO <- <span style="color: #c910c9; font-style: italic;">function</span>
     annot <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@featureData@data
     
     <span style="color: #04cc04; font-style: italic;"># Writing the extracted variables</span>
-    write.csv(matrix, paste0(GSEname, "/", "matrix.csv"), quote = FALSE, row.names = FALSE)
+    write.csv(matrix, paste0(GSEname, "/", "matrix.csv"), quote = <span style="color: #0788e3; font-style: italic;">FALSE</span>, row.names = <span style="color: #0788e3; font-style: italic;">FALSE</span>)
     write_tsv(phenotype, paste0(GSEname, "/", "phenotype.tsv"))
     write_tsv(annot, paste0(GSEname, "/", "annot.tsv"))
     
@@ -320,7 +314,7 @@ DEGanalysis <- <span style="color: #c910c9; font-style: italic;">function</span>
   DEGs <- cbind(DEGs,  annotation[, c(2, 3, 4)])
   
   <span style="color: #04cc04; font-style: italic;"># Removing missing gene symbols</span>
-  genemissing <- which(is.na(DEGs$Gene.symbol) == TRUE)
+  genemissing <- which(is.na(DEGs$Gene.symbol) == <span style="color: #0788e3; font-style: italic;">TRUE</span>)
   DEGs <- DEGs[-genemissing, ]
   
   <span style="color: #04cc04; font-style: italic;"># Writing the top table</span>
@@ -377,7 +371,7 @@ Makevolcano <- <span style="color: #c910c9; font-style: italic;">function</span>
   top <- top[, c(1:6, 11, 7, 8, 9, 10, 12)]
   colnames(top)[7] <- "n.log10(adj.P.Val)"
   <span style="color: #04cc04; font-style: italic;"># Save top table into project folder</span>
-  write.csv(top, paste0(projname, "/", "top.csv"), quote = FALSE, row.names = FALSE)
+  write.csv(top, paste0(projname, "/", "top.csv"), quote = <span style="color: #0788e3; font-style: italic;">FALSE</span>, row.names = <span style="color: #0788e3; font-style: italic;">FALSE</span>)
   message(sprintf("Up-regulated genes: %s; Down-regulated genes: %s", nrow(up), nrow(down)))
   <span style="color: #c910c9; font-style: italic;">return</span>(p)
 }
