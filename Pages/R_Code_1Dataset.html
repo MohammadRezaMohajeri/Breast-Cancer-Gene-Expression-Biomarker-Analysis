@@ -378,7 +378,7 @@ Makevolcano <- <span style="color: #c910c9; font-style: italic;">function</span>
 
 
 
-DownloadGEO(<span style="color: #0788e3; font-style: italic;">"GSE25055"</span>
+DownloadGEO(<span style="color: #0788e3; font-style: italic;">"GSE25055"</span>)
 
 #============================ Q1 =========================#
 <span style="color: #04cc04; font-style: italic;"># other adjust methods ---> "holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr", "none"</span>
@@ -390,7 +390,7 @@ DEGanalysis(projname = <span style="color: #0788e3; font-style: italic;">"GSE250
             adjust = "fdr")
 
 <span style="color: #04cc04; font-style: italic;"># alpha = 0.01 - logFC 0</span>
-volcano1 <- Makevolcano(projname = <span style="color: #0788e3; font-style: italic;"><"GSE25055"/span>,
+volcano1 <- Makevolcano(projname = <span style="color: #0788e3; font-style: italic;">"GSE25055"</span>,
                         padjlevel = <span style="color: #0788e3; font-style: italic;">0.01</span>,
                         uplogFC = <span style="color: #0788e3; font-style: italic;">1.5</span>,
                         downlogFC = <span style="color: #0788e3; font-style: italic;">-1.5</span>,
@@ -454,11 +454,7 @@ volcano8 <- Makevolcano(projname = <span style="color: #0788e3; font-style: ital
 volcano8
 
 
-<span style="color: #04cc04; font-style: italic;"># (Lum A, Normal-like subtypes) VS (Basal-like, HER2, Lum B)</span>
-DEGanalysis(projname = <span style="color: #0788e3; font-style: italic;">"GSE25055"</span>,
-            compare = <span style="color: #0788e3; font-style: italic;">"subtype"</span>,
-            groups = list(normal = c(<span style="color: #0788e3; font-style: italic;">"LumA"</span>, <span style="color: #0788e3; font-style: italic;">"Normal"</span>), tumor = c(<span style="color: #0788e3; font-style: italic;">"Basal"</span>, <span style="color: #0788e3; font-style: italic;">"Her2"</span>, <span style="color: #0788e3; font-style: italic;">"LumB"</span>)),
-            adjust = "fdr")
+
 
 
 
