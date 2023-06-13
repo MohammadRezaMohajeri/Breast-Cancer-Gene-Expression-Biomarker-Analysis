@@ -159,21 +159,22 @@
 			<strong>BOLD TEXTTTTTT</strong> 
 			-->
 <!-- put the R CODE comments in this format:    <span style="color: #0788e3; font-style: italic;">TESSSSSSSTTTTTT</span> -->
-<span style="color: #c910c9; font-style: italic;">require</span>(GEOquery)
-<span style="color: #c910c9; font-style: italic;">require</span>(limma) 
-<span style="color: #c910c9; font-style: italic;">require</span>(tidyverse)
-<span style="color: #c910c9; font-style: italic;">require</span>(plotly)
+<span style="color: #04cc04; font-style: italic;"># Load required packages</span>
+<span style="color: #c910c9; font-style: italic;">require</span>(GEOquery)   # <span style="color: #04cc04; font-style: italic;"> # For downloading and processing GEO datasets</span>
+<span style="color: #c910c9; font-style: italic;">require</span>(limma)      # <span style="color: #04cc04; font-style: italic;"># For performing differential expression analysis</span>
+<span style="color: #c910c9; font-style: italic;">require</span>(tidyverse)  # <span style="color: #04cc04; font-style: italic;"># For data manipulation and visualization</span>
+<span style="color: #c910c9; font-style: italic;">require</span>(plotly)     # <span style="color: #04cc04; font-style: italic;"># For interactive plots</span>
 
 
-  
+<span style="color: #04cc04; font-style: italic;"># Function to download a GEO dataset</span>
 DownloadGEO <- <span style="color: #c910c9; font-style: italic;">function</span>(GSEname) {
-  <span style="color: #04cc04; font-style: italic;"># Create a folder</span>
+  <span style="color: #04cc04; font-style: italic;"># Create a folder for the dataset</span>
   dir.create(GSEname, showWarnings = <span style="color: #0788e3; font-style: italic;">FALSE</span>)
   
-  <span style="color: #04cc04; font-style: italic;"># Increase memory</span>
+  <span style="color: #04cc04; font-style: italic;"># Increase memory allocation</span>
   Sys.setenv("<span style="color: #0788e3; font-style: italic;">VROOM_CONNECTION_SIZE</span>" = <span style="color: #0788e3; font-style: italic;">131072</span> * <span style="color: #0788e3; font-style: italic;">10</span>) 
   
-  <span style="color: #04cc04; font-style: italic;"># Download dataset</span>
+  <span style="color: #04cc04; font-style: italic;"># Download the dataset</span>
   gset <- getGEO(
     GSEname,
     GSEMatrix = <span style="color: #0788e3; font-style: italic;">TRUE</span>,
@@ -182,7 +183,7 @@ DownloadGEO <- <span style="color: #c910c9; font-style: italic;">function</span>
   )
  
   <span style="color: #c910c9; font-style: italic;">if</span>(!is.null(gset)) {
-    <span style="color: #04cc04; font-style: italic;"># Extracting matrix, phenotype, and annotation</span>
+    <span style="color: #04cc04; font-style: italic;"># Extract matrix, phenotype, and annotation</span>
     matrix <- gset[[paste0(GSEname, <span style="color: #0788e3; font-style: italic;">"_series_matrix.txt.gz"</span>)]]@assayData[[<span style="color: #0788e3; font-style: italic;">"exprs"</span>]]
     matrix <- cbind(rownames(matrix), matrix)
     colnames(matrix)[<span style="color: #0788e3; font-style: italic;">1</span>] <- <span style="color: #0788e3; font-style: italic;">"ID"</span>
@@ -193,24 +194,24 @@ DownloadGEO <- <span style="color: #c910c9; font-style: italic;">function</span>
     
     annot <- gset[[paste0(GSEname, <span style="color: #0788e3; font-style: italic;">"_series_matrix.txt.gz"</span>)]]@featureData@data
     
-    <span style="color: #04cc04; font-style: italic;"># Writing the extracted variables</span>
+    <span style="color: #04cc04; font-style: italic;"># Write the extracted variables to files</span>
     write.csv(matrix, paste0(GSEname, <span style="color: #0788e3; font-style: italic;">"/"</span>, <span style="color: #0788e3; font-style: italic;">"matrix.csv"</span>), quote = <span style="color: #0788e3; font-style: italic;">FALSE</span>, row.names = <span style="color: #0788e3; font-style: italic;">FALSE</span>)
     write_tsv(phenotype, paste0(GSEname, <span style="color: #0788e3; font-style: italic;">"/"</span>, <span style="color: #0788e3; font-style: italic;">"phenotype.tsv"</span>)) 
     write_tsv(annot, paste0(GSEname, <span style="color: #0788e3; font-style: italic;">"/"</span>, <span style="color: #0788e3; font-style: italic;">"annot.tsv"</span>)) 
     
-    <span style="color: #04cc04; font-style: italic;"># Removing variables</span>
+    <span style="color: #04cc04; font-style: italic;"># Remove variables from memory</span>
     rm(gset, matrix, phenotype, annot)
     
     <span style="color: #0788e3; font-style: italic;">message("+++++ Dataset is ready to analyze. +++++")</span>
   }
 }
 
-
+# <span style="color: #04cc04; font-style: italic;"># Function for differential expression analysis</span>
 DEGanalysis <- <span style="color: #c910c9; font-style: italic;">function</span>(projname,
                         compare = <span style="color: #0788e3; font-style: italic;">"subtype"</span>,
                         groups,
                         adjust = <span style="color: #0788e3; font-style: italic;">"fdr"</span>) {
-  <span style="color: #04cc04; font-style: italic;"># Reading the files</span>
+  <span style="color: #04cc04; font-style: italic;"># Read the input files: matrix, phenotype, and annotation</span>
   matrix <- read_csv(paste0(projname, <span style="color: #0788e3; font-style: italic;">"/"</span>, <span style="color: #0788e3; font-style: italic;">"matrix.csv"</span>))
   matrix <- data.frame(matrix)
   rownames(matrix) <- matrix[<span style="color: #0788e3; font-style: italic;">,1</span>]
@@ -224,14 +225,14 @@ DEGanalysis <- <span style="color: #c910c9; font-style: italic;">function</span>
   rownames(annot) <- annot[<span style="color: #0788e3; font-style: italic;">,1</span>]
   annot <- annot[<span style="color: #0788e3; font-style: italic;">,-1</span>]
    
-  <span style="color: #04cc04; font-style: italic;"># Preparing the breast cancer subtype into a dataframe</span>
+  <span style="color: #04cc04; font-style: italic;"># Prepare the breast cancer subtype into a dataframe</span>
   phecoln <- grep(<span style="color: #0788e3; font-style: italic;">"pam50"</span>, phenotype)
   pheno <- data.frame(phenotype[ ,phecoln])
   colnames(pheno) <- <span style="color: #0788e3; font-style: italic;">"subtype"</span>
   pheno$subtype <- gsub(<span style="color: #0788e3; font-style: italic;">"pam50.+:"</span>, <span style="color: #0788e3; font-style: italic;">""</span>, pheno$subtype)
   rownames(pheno) <- rownames(phenotype)
 
-  <span style="color: #04cc04; font-style: italic;"># Preparing the breast cancer grades into a dataframe</span>
+  <span style="color: #04cc04; font-style: italic;"># Prepare the breast cancer grades into a dataframe</span>
   gradecoln <- grep(<span style="color: #0788e3; font-style: italic;">"grade:"</span>, phenotype)
   grade <- data.frame(phenotype[ ,gradecoln])
   colnames(grade) <- <span style="color: #0788e3; font-style: italic;">"grade"</span>
@@ -239,7 +240,7 @@ DEGanalysis <- <span style="color: #c910c9; font-style: italic;">function</span>
   grade$grade <- gsub(<span style="color: #0788e3; font-style: italic;">"=.+"</span>, <span style="color: #0788e3; font-style: italic;">""</span>, grade$grade)
   rownames(grade) <- rownames(phenotype)
   
-  <span style="color: #04cc04; font-style: italic;"># log2 transformation if the matrix is not already transformed</span>
+  <span style="color: #04cc04; font-style: italic;"># Perform log2 transformation if the matrix is not already transformed</span>
   qx <- as.numeric(quantile(matrix, c(<span style="color: #0788e3; font-style: italic;">0.</span>, <span style="color: #0788e3; font-style: italic;">0.25</span>, <span style="color: #0788e3; font-style: italic;">0.5</span>, <span style="color: #0788e3; font-style: italic;">0.75</span>, <span style="color: #0788e3; font-style: italic;">0.99</span>, <span style="color: #0788e3; font-style: italic;">1.0</span>), na.rm=<span style="color: #0788e3; font-style: italic;">T</span>))
   LogC <- (qx[<span style="color: #0788e3; font-style: italic;">5</span>] > <span style="color: #0788e3; font-style: italic;">100</span>) || (qx[<span style="color: #0788e3; font-style: italic;">6</span>]-qx[<span style="color: #0788e3; font-style: italic;">1</span>] > <span style="color: #0788e3; font-style: italic;">50</span> && qx[<span style="color: #0788e3; font-style: italic;">2</span>] > <span style="color: #0788e3; font-style: italic;">0</span>)
   <span style="color: #c910c9; font-style: italic;">if</span>(LogC){
@@ -247,7 +248,7 @@ DEGanalysis <- <span style="color: #c910c9; font-style: italic;">function</span>
     matrix <- log2(matrix)
   }
 
-  <span style="color: #04cc04; font-style: italic;"># Extracting the sample ID according to the groups names specified by user</span>
+  <span style="color: #04cc04; font-style: italic;"># Extracting the sample ID according to the groups names specified by the user</span>
   <span style="color: #c910c9; font-style: italic;">if</span>(compare == <span style="color: #0788e3; font-style: italic;">"subtype"</span>){
     grouplis <- list() 
     <span style="color: #c910c9; font-style: italic;">for</span>(i <span style="color: #c910c9; font-style: italic;">in</span> seq_along(groups)){
@@ -264,7 +265,7 @@ DEGanalysis <- <span style="color: #c910c9; font-style: italic;">function</span>
     }
   }
   
-  <span style="color: #04cc04; font-style: italic;"># Renaming the matrix file according to the group names specified by user</span> 
+  <span style="color: #04cc04; font-style: italic;"># Renaming the matrix file according to the group names specified by the user</span> 
   <span style="color: #c910c9; font-style: italic;">for</span>(i <span style="color: #c910c9; font-style: italic;">in</span> seq_along(grouplis)){
     matname <- paste0(grouplis[[i]], collapse = <span style="color: #0788e3; font-style: italic;">"|"</span>)
     matcoln <- grep(matname, colnames(matrix))
