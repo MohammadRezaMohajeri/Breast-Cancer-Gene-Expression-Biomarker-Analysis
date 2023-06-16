@@ -160,51 +160,48 @@ require(tidyverse)
 require(plotly)
 <span style="color: #04cc04; font-style: italic;"># Load the ggvenn library for creating Venn diagrams using ggplot2</span>			
 require(ggvenn)
-
-
-			
-# Uncomment the line below if devtools package is not installed
-# if (!require(devtools)) install.packages("devtools")
-# devtools::install_github("yanlinlin82/ggvenn")
+<span style="color: #04cc04; font-style: italic;"># Uncomment the line below if devtools package is not installed</span>
+<span style="color: #04cc04; font-style: italic;"># if (!require(devtools)) install.packages("devtools")</span>
+<span style="color: #04cc04; font-style: italic;"># devtools::install_github("yanlinlin82/ggvenn")</span>
 require(ggvenn)
 
-# Function to download the specified GEO dataset
+<span style="color: #04cc04; font-style: italic;"># Function to download the specified GEO dataset</span>
 DownloadGEO <- function(GSEname = "GSE11121") {
-  # Create a folder for the dataset
+  <span style="color: #04cc04; font-style: italic;"># Create a folder for the dataset</span>
   dir.create(GSEname, showWarnings = FALSE)
   
-  # Increase memory allocation for efficient data processing
+  <span style="color: #04cc04; font-style: italic;"># Increase memory allocation for efficient data processing</span>
   Sys.setenv("VROOM_CONNECTION_SIZE" = 131072 * 10)
   
-  # Download the dataset from the GEO database
+  <span style="color: #04cc04; font-style: italic;"># Download the dataset from the GEO database</span>
   gset <- getGEO(GSEname, GSEMatrix = TRUE, AnnotGPL = TRUE,
                  destdir = paste0(getwd(), "/", GSEname))
   
-  # Check if the dataset was successfully downloaded
+  <span style="color: #04cc04; font-style: italic;"># Check if the dataset was successfully downloaded</span>
   if (!is.null(gset)) {
-    # Extract matrix, phenotype, and annotation data from the downloaded dataset
+    <span style="color: #04cc04; font-style: italic;"># Extract matrix, phenotype, and annotation data from the downloaded dataset</span>
     matrix <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@assayData[["exprs"]]
     
-    # Perform log2 transformation if the matrix is not already transformed
-    # Determine if log2 transformation is required based on the quantiles of the matrix values
+    <span style="color: #04cc04; font-style: italic;"># Perform log2 transformation if the matrix is not already transformed</span>
+    <span style="color: #04cc04; font-style: italic;"># Determine if log2 transformation is required based on the quantiles of the matrix values</span>
     qx <- as.numeric(quantile(matrix, c(0., 0.25, 0.5, 0.75, 0.99, 1.0), na.rm = TRUE))
     LogC <- (qx[5] > 100) || (qx[6] - qx[1] > 50 && qx[2] > 0)
     
-    # Check if log2 transformation is required
+    <span style="color: #04cc04; font-style: italic;"># Check if log2 transformation is required</span>
     if (LogC) {
-      # Replace non-positive values with NA
+      <span style="color: #04cc04; font-style: italic;"># Replace non-positive values with NA</span>
       matrix[matrix <= 0] <- NA
-      # Perform log2 transformation on the matrix
+      <span style="color: #04cc04; font-style: italic;"># Perform log2 transformation on the matrix</span>
       matrix <- log2(matrix)
     }
     
-    # Add row names to the matrix:
-    # Add row names as the first column of the matrix using cbind()
+    <span style="color: #04cc04; font-style: italic;"><strong># Add row names to the matrix:</strong></span>
+    <span style="color: #04cc04; font-style: italic;"># Add row names as the first column of the matrix using cbind()</span>
     matrix <- cbind(rownames(matrix), matrix)
-    # Set the column name of the first column as "ID" using colnames()
+    <span style="color: #04cc04; font-style: italic;"># Set the column name of the first column as "ID" using colnames()</span>
     colnames(matrix)[1] <- "ID"
     
-    # Extract phenotype information from the dataset:
+    <span style="color: #04cc04; font-style: italic;"></span># Extract phenotype information from the dataset:
     # Extract the phenotype information from the dataset
     phenotype <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@phenoData@data  
     # Add row names as the first column of the phenotype data using cbind()
