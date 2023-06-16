@@ -195,32 +195,32 @@ DownloadGEO <- function(GSEname = "GSE11121") {
       matrix <- log2(matrix)
     }
     
-    <span style="color: #04cc04; font-style: italic;"><strong># Add row names to the matrix:</strong></span>
+    <span style="color: #024202; font-style: italic;"><strong># Add row names to the matrix:</strong></span>
     <span style="color: #04cc04; font-style: italic;"># Add row names as the first column of the matrix using cbind()</span>
     matrix <- cbind(rownames(matrix), matrix)
     <span style="color: #04cc04; font-style: italic;"># Set the column name of the first column as "ID" using colnames()</span>
     colnames(matrix)[1] <- "ID"
     
-    <span style="color: #04cc04; font-style: italic;"></span># Extract phenotype information from the dataset:
-    # Extract the phenotype information from the dataset
+    <span style="color: #024202; font-style: italic;"># Extract phenotype information from the dataset:</span>
+    <span style="color: #04cc04; font-style: italic;"># Extract the phenotype information from the dataset</span>
     phenotype <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@phenoData@data  
-    # Add row names as the first column of the phenotype data using cbind()
+    <span style="color: #04cc04; font-style: italic;"># Add row names as the first column of the phenotype data using cbind()</span>
     phenotype <- cbind(rownames(phenotype), phenotype)  
-    # Set the column name of the first column as "ID" using colnames()
+    <span style="color: #04cc04; font-style: italic;"># Set the column name of the first column as "ID" using colnames()</span>
     colnames(phenotype)[1] <- "ID"  
     
-    # Extract annotation information from the dataset
+    <span style="color: #04cc04; font-style: italic;"># Extract annotation information from the dataset</span>
     annot <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@featureData@data
     
-    # Write the extracted variables to files:
-    # Write the 'matrix' variable to a CSV file
+    <span style="color: #024202; font-style: italic;"># Write the extracted variables to files:</span>
+    <span style="color: #04cc04; font-style: italic;"># Write the 'matrix' variable to a CSV file</span>
     write.csv(matrix, paste0(GSEname, "/", "matrix.csv"), quote = FALSE, row.names = FALSE)
-    # Write the 'phenotype' variable to a TSV file
+    <span style="color: #04cc04; font-style: italic;"># Write the 'phenotype' variable to a TSV file</span>
     write_tsv(phenotype, paste0(GSEname, "/", "phenotype.tsv"))
-    # Write the 'annot' variable to a TSV file
+    <span style="color: #04cc04; font-style: italic;"># Write the 'annot' variable to a TSV file</span>
     write_tsv(annot, paste0(GSEname, "/", "annot.tsv"))
     
-    # Remove unnecessary variables to free up memory
+    <span style="color: #04cc04; font-style: italic;"># Remove unnecessary variables to free up memory</span>
     rm(gset, matrix, phenotype, annot)
     
     message("+++++ Dataset is ready to be analyzed. +++++")
@@ -228,352 +228,351 @@ DownloadGEO <- function(GSEname = "GSE11121") {
 }
 
 
-# Function to perform differential expression analysis on the specified GEO dataset.
+<span style="color: #04cc04; font-style: italic;"># Function to perform differential expression analysis on the specified GEO dataset.</span>
 DEGanalysis <- function(projname,
                         compare = "subtype",
                         groups,
                         adjust = "fdr") {
-  # Reading the files:
-  
-  # Read the matrix file and store it in a variable
+  <span style="color: #024202; font-style: italic;"># Reading the files:</span>
+  <span style="color: #04cc04; font-style: italic;"># Read the matrix file and store it in a variable</span>
   matrix <- read_csv(paste0(projname, "/", "matrix.csv"), )
-  # Convert the matrix into a data frame
+  <span style="color: #04cc04; font-style: italic;"># Convert the matrix into a data frame</span>
   matrix <- data.frame(matrix)
-  # Set row names of the matrix
+  <span style="color: #04cc04; font-style: italic;"># Set row names of the matrix</span>
   rownames(matrix) <- matrix[, 1]
-  # Remove the first column of the matrix
+  <span style="color: #04cc04; font-style: italic;"># Remove the first column of the matrix</span>
   matrix <- matrix[, -1]
   
-  # Read the phenotype file and store it in a variable
+  <span style="color: #04cc04; font-style: italic;"># Read the phenotype file and store it in a variable</span>
   phenotype <- read_tsv(paste0(projname, "/", "phenotype.tsv"))
-  # Convert the phenotype into a data frame
+  <span style="color: #04cc04; font-style: italic;"># Convert the phenotype into a data frame</span>
   phenotype <- data.frame(phenotype)
-  # Set row names of the phenotype
+  <span style="color: #04cc04; font-style: italic;"># Set row names of the phenotype</span>
   rownames(phenotype) <- phenotype[, 1]
-  # Remove the first column of the phenotype
+  <span style="color: #04cc04; font-style: italic;"># Remove the first column of the phenotype</span>
   phenotype <- phenotype[, -1]
   
-  # Read the annotation file and store it in a variable
+  <span style="color: #04cc04; font-style: italic;"># Read the annotation file and store it in a variable</span>
   annot <- read_tsv(paste0(projname, "/", "annot.tsv"))
-  # Convert the annotation into a data frame
+  <span style="color: #04cc04; font-style: italic;"># Convert the annotation into a data frame</span>
   annot <- data.frame(annot)
-  # Set row names of the annotation
+  <span style="color: #04cc04; font-style: italic;"># Set row names of the annotation</span>
   rownames(annot) <- annot[, 1]
-  # Remove the first column of the annotation
+  <span style="color: #04cc04; font-style: italic;"># Remove the first column of the annotation</span>
   annot <- annot[, -1]
   
-  # Extract sample IDs based on user-specified groups for differential analysis
+  <span style="color: #04cc04; font-style: italic;"# Extract sample IDs based on user-specified groups for differential analysis></span>
   if (compare == "subtype") {
     
-    # Preparing the breast cancer subtype
+    <span style="color: #04cc04; font-style: italic;"># Preparing the breast cancer subtype</span>
     phecoln <- grep("pam50", phenotype)
     if (length(phecoln) > 0) {
-      # Prepare breast cancer subtypes into a dataframe
+      <span style="color: #04cc04; font-style: italic;"># Prepare breast cancer subtypes into a dataframe</span>
       pheno <- data.frame(phenotype[, phecoln])
-      # Extract relevant columns from the phenotype file for breast cancer subtypes and rename them
+      <span style="color: #04cc04; font-style: italic;"># Extract relevant columns from the phenotype file for breast cancer subtypes and rename them</span>
       colnames(pheno) <- "subtype"
       pheno$subtype <- gsub("pam50.+:", "", pheno$subtype)
       rownames(pheno) <- rownames(phenotype)
-      # Store the extracted subtypes in a list, grouped by user-specified group names
+      <span style="color: #04cc04; font-style: italic;"># Store the extracted subtypes in a list, grouped by user-specified group names</span>
       grouplis <- list()
-      # Iterate over each group specified by the user
+      <span style="color: #04cc04; font-style: italic;"># Iterate over each group specified by the user</span>
       for (i in seq_along(groups)) {
-        # Create a regular expression pattern by concatenating group elements with a "|"
+        <span style="color: #04cc04; font-style: italic;"># Create a regular expression pattern by concatenating group elements with a "|"</span>
         name <- paste0(groups[[i]], collapse = "|")
-        # Find the row numbers in the "subtype" column of the phenotype data that match the pattern
+        <span style="color: #04cc04; font-style: italic;"># Find the row numbers in the "subtype" column of the phenotype data that match the pattern</span>
         rownum <- grep(name, pheno$subtype)
-        # Store the row names corresponding to the matched rows in the grouplis list
+        <span style="color: #04cc04; font-style: italic;"># Store the row names corresponding to the matched rows in the grouplis list</span>
         grouplis[[names(groups)[i]]] <- rownames(pheno)[rownum]
       }
     }
   } else {
     
-    # Preparing the breast cancer grades: 
-    # Find columns containing "grade:" in the 'phenotype' data frame
+    <span style="color: #024202; font-style: italic;"># Preparing the breast cancer grades: </span>
+    <span style="color: #04cc04; font-style: italic;"># Find columns containing "grade:" in the 'phenotype' data frame</span>
     gradecoln <- grep("grade:", phenotype)
     
-    # Check if there are any columns with "grade:" found
+    <span style="color: #04cc04; font-style: italic;"># Check if there are any columns with "grade:" found</span>
     if (length(gradecoln) > 0) {
-      # Prepare breast cancer grades into a dataframe
+      <span style="color: #04cc04; font-style: italic;"># Prepare breast cancer grades into a dataframe</span>
       grade <- data.frame(phenotype[, gradecoln])
       
-      # Extract relevant columns from phenotype file for breast cancer grades and rename them:
-      # Rename the column in 'grade' data frame to "grade"
+      <span style="color: #024202; font-style: italic;"># Extract relevant columns from phenotype file for breast cancer grades and rename them:</span>
+      <span style="color: #04cc04; font-style: italic;"># Rename the column in 'grade' data frame to "grade"</span>
       colnames(grade) <- "grade"
-      # Remove unwanted text patterns from the 'grade' column using regular expressions
+      <span style="color: #04cc04; font-style: italic;"># Remove unwanted text patterns from the 'grade' column using regular expressions</span>
       grade$grade <- gsub("grade:|grade: |B-R grade: ", "", grade$grade)
       grade$grade <- gsub("=.+", "", grade$grade)
       
-      # Identify rows containing the pattern "III" in the 'grade' column
+      <span style="color: #04cc04; font-style: italic;"># Identify rows containing the pattern "III" in the 'grade' column</span>
       greek <- grep("III", grade$grade)
       if (length(greek) > 0) {
         
-        # Convert grade names to numeric values:
-        # Identify rows with grade "I"
+        <span style="color: #024202; font-style: italic;"># Convert grade names to numeric values:</span>
+        <span style="color: #04cc04; font-style: italic;"># Identify rows with grade "I"</span>
         one <- which(factor(grade$grade) == "I")
-        # Identify rows with grade "II"
+        <span style="color: #04cc04; font-style: italic;"># Identify rows with grade "II"</span>
         two <- which(factor(grade$grade) == "II")
-        # Identify rows with grade "III"
+        <span style="color: #04cc04; font-style: italic;"># Identify rows with grade "III"</span>
         three <- which(factor(grade$grade) == "III")
         
-        # Convert grade values to numeric: "I" -> 1, "II" -> 2, "III" -> 3
+        <span style="color: #04cc04; font-style: italic;"># Convert grade values to numeric: "I" -> 1, "II" -> 2, "III" -> 3</span>
         grade[one, ] <- "1"
         grade[two, ] <- "2"
         grade[three, ] <- "3"
       }
       
-      # Set row names of 'grade' data frame to row names of 'phenotype'
+      <span style="color: #04cc04; font-style: italic;"># Set row names of 'grade' data frame to row names of 'phenotype'</span>
       rownames(grade) <- rownames(phenotype)
       
-      # Store the extracted grades in a list, grouped by user-specified group names
+      <span style="color: #04cc04; font-style: italic;"># Store the extracted grades in a list, grouped by user-specified group names</span>
       grouplis <- list()
       for (i in seq_along(groups)) {
-        # Generate a group name by collapsing the elements of 'groups' with "|"
+        <span style="color: #04cc04; font-style: italic;"># Generate a group name by collapsing the elements of 'groups' with "|"</span>
         name <- paste0(groups[[i]], collapse = "|")
-        # Find the row numbers in 'grade' where the group name is present in the 'grade' column
+        <span style="color: #04cc04; font-style: italic;"># Find the row numbers in 'grade' where the group name is present in the 'grade' column</span>
         rownum <- grep(name, grade$grade)
-        # Store the corresponding row names in the 'grouplis' list under the appropriate group name
+        <span style="color: #04cc04; font-style: italic;"># Store the corresponding row names in the 'grouplis' list under the appropriate group name</span>
         grouplis[[names(groups)[i]]] <- rownames(grade)[rownum]
       }
     }
   }
   
-  # Rename the matrix file according to the groups name specified by the user
+  <span style="color: #04cc04; font-style: italic;"># Rename the matrix file according to the groups name specified by the user</span>
   for (i in seq_along(grouplis)) {
-    # Generate a group name by collapsing the elements of 'grouplis[[i]]' with "|"
+    <span style="color: #04cc04; font-style: italic;"># Generate a group name by collapsing the elements of 'grouplis[[i]]' with "|"</span>
     matname <- paste0(grouplis[[i]], collapse = "|")
-    # Find the column numbers in 'matrix' where the group name is present in the column names
+    <span style="color: #04cc04; font-style: italic;"># Find the column numbers in 'matrix' where the group name is present in the column names</span>
     matcoln <- grep(matname, colnames(matrix))
-    # Rename the columns of 'matrix' with the group name followed by a numeric index
+    <span style="color: #04cc04; font-style: italic;"># Rename the columns of 'matrix' with the group name followed by a numeric index</span>
     colnames(matrix)[matcoln] <- paste0(names(grouplis)[i], 1:length(grouplis[[i]]))
   }
   
-  # Keep only the renamed samples in the matrix and order them
+  <span style="color: #04cc04; font-style: italic;"># Keep only the renamed samples in the matrix and order them</span>
   matnames <- grep(paste0(names(grouplis), collapse = "|"), colnames(matrix))
-  # Subset the 'matrix' data frame to include only the columns corresponding to the renamed samples
+  <span style="color: #04cc04; font-style: italic;"># Subset the 'matrix' data frame to include only the columns corresponding to the renamed samples</span>
   matrix <- matrix[, matnames]
-  # Reorder the columns of the 'matrix' data frame based on the column names
+  <span style="color: #04cc04; font-style: italic;"># Reorder the columns of the 'matrix' data frame based on the column names</span>
   matrix <- matrix[, order(colnames(matrix))]
   
-  # Creating a factor of 0 and 1 according to the length of groups specified by the user
-  # Create an empty list to store the factors
+  <span style="color: #024202; font-style: italic;"># Creating a factor of 0 and 1 according to the length of groups specified by the user:</span>
+  <span style="color: #04cc04; font-style: italic;"># Create an empty list to store the factors</span>
   gname <- list()
-  # Iterate over each group in grouplis
+  <span style="color: #04cc04; font-style: italic;"># Iterate over each group in grouplis</span>
   for (i in seq_along(grouplis)) {
-    # Count the number of columns in matrix corresponding to the group
+    <span style="color: #04cc04; font-style: italic;"># Count the number of columns in matrix corresponding to the group</span>
     number <- length(grep(names(grouplis)[i], colnames(matrix)))
-    # Create a factor variable with values i - 1 repeated number times
+    <span style="color: #04cc04; font-style: italic;"># Create a factor variable with values i - 1 repeated number times</span>
     gname[[i]] <- factor(rep(i - 1, number))
   }
-  # Convert the list of factors to a single vector
+  <span style="color: #04cc04; font-style: italic;"># Convert the list of factors to a single vector</span>
   grouping <- unlist(gname)
   
-  # Create a design matrix for the linear model:
-  # Create a design matrix with the factor variables as predictors
+  <span style="color: #024202; font-style: italic;"># Create a design matrix for the linear model:</span>
+  <span style="color: #04cc04; font-style: italic;"># Create a design matrix with the factor variables as predictors</span>
   design <- model.matrix(~ 0 + grouping)
-  # Assign column names to the design matrix based on the group names
+  <span style="color: #04cc04; font-style: italic;"># Assign column names to the design matrix based on the group names</span>
   colnames(design) <- names(grouplis)
   
-  # Fit the linear model to the data
-  # Fit the linear model using the matrix and design matrix
+  <span style="color: #024202; font-style: italic;"># Fit the linear model to the data:</span>
+  <span style="color: #04cc04; font-style: italic;"># Fit the linear model using the matrix and design matrix</span>
   fit1 <- lmFit(matrix, design)
-  # Get the number of group names
+  <span style="color: #04cc04; font-style: italic;"># Get the number of group names</span>
   l <- length(names(grouplis))
-  # Create a string representation of group names for contrasts
+  <span style="color: #04cc04; font-style: italic;"># Create a string representation of group names for contrasts</span>
   cts <- paste0(names(grouplis)[l:1], collapse = "-")
-  # Create contrasts for pairwise comparisons of groups
+  <span style="color: #04cc04; font-style: italic;"># Create contrasts for pairwise comparisons of groups</span>
   cont.matrix <- makeContrasts(contrasts = cts, levels = design)
-  # Fit the contrasts to the model
+  <span style="color: #04cc04; font-style: italic;"># Fit the contrasts to the model</span>
   fit2 <- contrasts.fit(fit1, cont.matrix)
-  # Perform empirical Bayes moderation on the fitted model
+  <span style="color: #04cc04; font-style: italic;"># Perform empirical Bayes moderation on the fitted model</span>
   fit2 <- eBayes(fit2)
   
-  # Generate a top table of differentially expressed genes
+  <span style="color: #04cc04; font-style: italic;"># Generate a top table of differentially expressed genes</span>
   DEGs <- topTable(fit2, adjust = adjust, number = Inf)
-  # Add row names as a separate column in the DEGs table
+  <span style="color: #04cc04; font-style: italic;"># Add row names as a separate column in the DEGs table</span>
   DEGs <- cbind(rownames(DEGs), DEGs)
-  # Rename the first column as "ID"
+  <span style="color: #04cc04; font-style: italic;"># Rename the first column as "ID"</span>
   colnames(DEGs)[1] <- "ID"
   
-  # Preparing the annotation variable:
-  # Extract relevant columns from the 'annot' data frame
+  <span style="color: #024202; font-style: italic;"># Preparing the annotation variable:</span>
+  <span style="color: #04cc04; font-style: italic;"># Extract relevant columns from the 'annot' data frame</span>
   annotation <- annot[, c("Gene.symbol", "Chromosome.location", "GO.Function")]
-  # Add row names as a separate column in the 'annotation' data frame
+  <span style="color: #04cc04; font-style: italic;"># Add row names as a separate column in the 'annotation' data frame</span>
   annotation <- cbind(rownames(annotation), annotation)
-  # Rename the first column as "ID"
+  <span style="color: #04cc04; font-style: italic;"># Rename the first column as "ID"</span>
   colnames(annotation)[1] <- "ID"
   
-  # Making sure that both DEGs and annotation row names are the same:
-  # Sort the 'annotation' data frame by the "ID" column
+  <span style="color: #024202; font-style: italic;"># Making sure that both DEGs and annotation row names are the same:</span>
+  <span style="color: #04cc04; font-style: italic;"># Sort the 'annotation' data frame by the "ID" column</span>
   annotation <- annotation[order(annotation$ID), ]
-  # Sort the 'DEGs' data frame by the "ID" column
+  <span style="color: #04cc04; font-style: italic;"># Sort the 'DEGs' data frame by the "ID" column</span>
   DEGs <- DEGs[order(DEGs$ID), ]
   
-  # Merge the top table with the annotation data 
+  <span style="color: #04cc04; font-style: italic;"># Merge the top table with the annotation data </span>
   DEGs <- cbind(DEGs, annotation[, c(2, 3, 4)])
   
-  # Removing missing gene symbols:
-  # Find the indices of rows with missing gene symbols
+  <span style="color: #024202; font-style: italic;"># Removing missing gene symbols:</span>
+  <span style="color: #04cc04; font-style: italic;"># Find the indices of rows with missing gene symbols</span>
   genemissing <- which(is.na(DEGs$Gene.symbol) == TRUE)
-  # Remove the rows with missing gene symbols from the 'DEGs' data frame
+  <span style="color: #04cc04; font-style: italic;"># Remove the rows with missing gene symbols from the 'DEGs' data frame</span>
   DEGs <- DEGs[-genemissing, ]
   
-  # Write the resulting top table to a file
+  <span style="color: #04cc04; font-style: italic;"># Write the resulting top table to a file</span>
   write_tsv(DEGs, paste0(projname, "/", "DEGs.tsv"))
   
-  # Display a completion message
+  <span style="color: #04cc04; font-style: italic;"># Display a completion message</span>
   message("+++++ Analysis has completed. +++++")
 }
 
 
 
-# Function to generates volcano plots for the specified GEO datasets.
+<span style="color: #04cc04; font-style: italic;"># Function to generates volcano plots for the specified GEO datasets.</span>
 Makevolcano <- function(projname,
                         padjlevel = 0.05,
                         uplogFC = 1,
                         downlogFC = -1,
                         ntop = 10,
                         voltype = "plotly") {
-  # Read the tab-separated DEGs file into a data frame
+  <span style="color: #04cc04; font-style: italic;"># Read the tab-separated DEGs file into a data frame</span>
   table <- read_tsv(paste0(projname, "/", "DEGs.tsv"))
   table <- data.frame(table)
   
-  # Define a vector of color codes
+  <span style="color: #04cc04; font-style: italic;"># Define a vector of color codes</span>
   my_pal <- c("#1B9E77","#7570B3", "#E7298A", "#66A61E", "#E6AB02", "#A6761D", "#666666", "#9A7D0A")
   
-  # Add DEG column based on the value of adj.P.Val and logFC
+  <span style="color: #04cc04; font-style: italic;"># Add DEG column based on the value of adj.P.Val and logFC</span>
   volcano <- table %>%
-    # Calculate AdjustedPvalue as the negative logarithm (base 10) of adj.P.Val
+    <span style="color: #04cc04; font-style: italic;"># Calculate AdjustedPvalue as the negative logarithm (base 10) of adj.P.Val</span>
     mutate(AdjustedPvalue = -log10(adj.P.Val)) %>%
-    # Initialize DEG column with "Non-Significant" for all rows
+    <span style="color: #04cc04; font-style: italic;"># Initialize DEG column with "Non-Significant" for all rows</span>
     mutate(DEG = "NotSignificant") %>%
-    # Update DEG based on conditions for upregulation
+    <span style="color: #04cc04; font-style: italic;"># Update DEG based on conditions for upregulation</span>
     mutate(DEG = ifelse(AdjustedPvalue > -log10(padjlevel) & logFC > uplogFC, "Upregulated", DEG)) %>%
-    # Update DEG based on conditions for downregulation
+    <span style="color: #04cc04; font-style: italic;"># Update DEG based on conditions for downregulation</span>
     mutate(DEG = ifelse(AdjustedPvalue > -log10(padjlevel) & logFC < downlogFC, "Downregulated", DEG))
   
-  # Calculating the number of each Upregulated, Downregulated, and NonSignificant probes
-  # Separate the DEGs into three categories: Upregulated
+  <span style="color: #024202; font-style: italic;"># Calculating the number of each Upregulated, Downregulated, and NonSignificant probes:</span>
+  <span style="color: #04cc04; font-style: italic;"># Separate the DEGs into three categories: Upregulated</span>
   volcano_up <- volcano[which(volcano$DEG == "Upregulated"), ]
   volcano_up <- volcano_up[order(volcano_up$logFC, decreasing = T), ]
-  # Separate the DEGs into three categories: Downregulated
+  <span style="color: #04cc04; font-style: italic;"># Separate the DEGs into three categories: Downregulated</span>
   volcano_down <- volcano[which(volcano$DEG == "Downregulated"), ]
   volcano_down <- volcano_down[order(volcano_down$logFC, decreasing = F), ]
-  # Separate the DEGs into three categories: NotSignificant
+  <span style="color: #04cc04; font-style: italic;"># Separate the DEGs into three categories: Non-Significant</span>
   volcano_NA <- volcano[which(volcano$DEG == "NotSignificant"), ]
   
-  # Combine the DEGs into a single data frame
+  <span style="color: #04cc04; font-style: italic;"># Combine the DEGs into a single data frame</span>
   volcano_all <- rbind(volcano_up, volcano_down, volcano_NA)
   
-  # Replace the top probes with the word "Top" in the DEGs column
+  <span style="color: #04cc04; font-style: italic;"># Replace the top probes with the word "Top" in the DEGs column</span>
   ntop_rep <- rep("Top", ntop)
   volcano_all$DEGs <- c(ntop_rep, volcano_up$DEG[-c(1:ntop)], ntop_rep, volcano_down$DEG[-c(1:ntop)], volcano_NA$DEG)
   
-  # Label only top genes
-  # Assign the gene symbol as a label for top genes
+  <span style="color: #024202; font-style: italic;"># Label only top genes:</span>
+  <span style="color: #04cc04; font-style: italic;"># Assign the gene symbol as a label for top genes</span>
   volcano_all$Top <- ifelse(volcano_all$DEGs == "Top", volcano_all$Gene.symbol, "")
   
-  # Plotting either with plotly or ggplot
+  <span style="color: #04cc04; font-style: italic;"># Plotting either with plotly or ggplot</span>
   if (voltype == "plotly") {
-    # Create a ggplot object with layers and annotations
+    <span style="color: #04cc04; font-style: italic;"># Create a ggplot object with layers and annotations</span>
     p <- ggplot(data = volcano_all, aes(x = logFC, y = AdjustedPvalue, color = DEGs, fill = DEGs, text = paste("ID: ", ID,
-                                                                                                               # Tooltip text for gene symbol
+                                                                                                               <span style="color: #04cc04; font-style: italic;"># Tooltip text for gene symbol</span>
                                                                                                                "<br>Gene: ", Gene.symbol,
-                                                                                                               # Tooltip text for chromosome location
+                                                                                                               <span style="color: #04cc04; font-style: italic;"># Tooltip text for chromosome location</span>
                                                                                                                "<br>Chromosome: ", Chromosome.location,
-                                                                                                               # Tooltip text for GO function
+                                                                                                               <span style="color: #04cc04; font-style: italic;"># Tooltip text for GO function</span>
                                                                                                                "<br>GO function: ", GO.Function))) +
-      # Set the x-axis label, y-axis label, and plot title
+      <span style="color: #04cc04; font-style: italic;"># Set the x-axis label, y-axis label, and plot title</span>
       labs(x = 'log2 (Fold Change)', y = "-log10(Adjusted P-value)", title = paste0("Volcano plot-", projname)) +
-      # Add points to the plot with specified size and shape
+      <span style="color: #04cc04; font-style: italic;"># Add points to the plot with specified size and shape</span>
       geom_point(size = 1, shape = 21) +
-      # Set the color scale of the plot manually
+      <span style="color: #04cc04; font-style: italic;"># Set the color scale of the plot manually</span>
       scale_color_manual(values = c(my_pal)) +
-      # Set the fill color scale of the plot manually
+      <span style="color: #04cc04; font-style: italic;"># Set the fill color scale of the plot manually</span>
       scale_fill_manual(values = c(paste(my_pal, "66", sep = ""))) +
-      # Apply the "classic" theme to the plot
+      <span style="color: #04cc04; font-style: italic;"># Apply the "classic" theme to the plot</span>
       theme_classic() +
-      # Set axis text font and size
+      <span style="color: #04cc04; font-style: italic;"># Set axis text font and size</span>
       theme(axis.text = element_text(family = "Arial", size = 24, colour = "black"),
-            # Set x-axis text color and size
+            <span style="color: #04cc04; font-style: italic;"># Set x-axis text color and size</span>
             axis.text.x = element_text(family = "Arial", colour = "black", size = 24),
-            # Set y-axis text color and size
+            <span style="color: #04cc04; font-style: italic;"># Set y-axis text color and size</span>
             axis.text.y = element_text(family = "Arial", colour = "black", size = 24),
-            # Set subtitle font, size, and color
+            <span style="color: #04cc04; font-style: italic;"># Set subtitle font, size, and color</span>
             plot.subtitle = element_text(family = "Arial", size = 24, colour = "black", hjust = 0.5),
-            # Set y-axis title font, size, and angle
+            <span style="color: #04cc04; font-style: italic;"# Set y-axis title font, size, and angle></span>
             axis.title.y = element_text(family = "Arial", size = 24, angle = 90),
-            # Set x-axis title font, size, and angle
+            <span style="color: #04cc04; font-style: italic;"># Set x-axis title font, size, and angle</span>
             axis.title.x = element_text(family = "Arial", size = 24, angle = 00))
     
-    # Convert ggplot object to plotly object and customize layout
+    <span style="color: #04cc04; font-style: italic;"># Convert ggplot object to plotly object and customize layout</span>
     p <- ggplotly(p, tooltip = "text") %>%
-      # Set the title of the plot
+      <span style="color: #04cc04; font-style: italic;"># Set the title of the plot</span>
       layout(title = paste0("Volcano plot-", projname),
-             # Customize font properties
+             <span style="color: #04cc04; font-style: italic;"># Customize font properties</span>
              font = list(family = "Arial", color = "black", size = 24),
-             # Customize legend properties
+             <span style="color: #04cc04; font-style: italic;"># Customize legend properties</span>
              legend = list(family = "Arial", color = "black", size = 20, itemclick = "toggle"))
   } else {
-    # Create a ggplot object with layers and annotations:
+    <span style="color: #024202; font-style: italic;"># Create a ggplot object with layers and annotations:</span>
     p <- ggplot(data = volcano_all, aes(x = logFC, y = AdjustedPvalue, color = DEGs, fill = DEGs, label = Top)) + 
-      # Set the labels for x and y axes
+      <span style="color: #04cc04; font-style: italic;"># Set the labels for x and y axes</span>
       labs(x = 'log2 (Fold Change)', y = "-log10(Adjusted P-value)") +
-      # Add points to the plot
+      <span style="color: #04cc04; font-style: italic;"># Add points to the plot</span>
       geom_point(size = 1, shape = 21) +
-      # Add text annotations to the plot
+      <span style="color: #04cc04; font-style: italic;"># Add text annotations to the plot</span>
       geom_text(check_overlap = F, vjust = 0.1, nudge_y = 0.4) +
-      # Set manual color scale for DEGs
+      <span style="color: #04cc04; font-style: italic;"># Set manual color scale for DEGs</span>
       scale_color_manual(values = c(my_pal)) +
-      # Set manual fill scale for DEGs
+      <span style="color: #04cc04; font-style: italic;"># Set manual fill scale for DEGs</span>
       scale_fill_manual(values = c(paste(my_pal, "66", sep = ""))) +
-      # Use classic theme for the plot
+      <span style="color: #04cc04; font-style: italic;"># Use classic theme for the plot</span>
       theme_classic() +
       
       theme(
-        # Customize axis text properties
+        <span style="color: #04cc04; font-style: italic;"># Customize axis text properties</span>
         axis.text = element_text(family = "Arial", size = 24, colour = "black"),
-        # Customize x-axis text properties    
+        <span style="color: #04cc04; font-style: italic;"># Customize x-axis text properties</span>    
         axis.text.x = element_text(family = "Arial", colour = "black", size = 24),
-        # Customize y-axis text properties    
+        <span style="color: #04cc04; font-style: italic;"># Customize y-axis text properties</span>    
         axis.text.y = element_text(family = "Arial", colour = "black", size = 24),
-        # Customize subtitle text properties    
+        <span style="color: #04cc04; font-style: italic;"># Customize subtitle text properties</span>    
         plot.subtitle = element_text(family = "Arial", size = 24, colour = "black", hjust = 0.5),
-        # Customize y-axis title properties    
+        <span style="color: #04cc04; font-style: italic;"># Customize y-axis title properties</span>    
         axis.title.y = element_text(family = "Arial", size = 24, angle = 90),
-        # Customize x-axis title properties    
+        <span style="color: #04cc04; font-style: italic;"># Customize x-axis title properties </span>   
         axis.title.x = element_text(family = "Arial", size = 24, angle = 00),
-        # Customize legend text properties    
+        <span style="color: #04cc04; font-style: italic;"># Customize legend text properties</span>    
         legend.text = element_text(size = 10, family = "Arial"), 
-        # Customize legend title properties    
+        <span style="color: #04cc04; font-style: italic;"># Customize legend title properties</span>    
         legend.title = element_text(size = 20, family = "Arial")
       ) +
-      # Set the subtitle of the plot
+      <span style="color: #04cc04; font-style: italic;"># Set the subtitle of the plot</span>
       labs(subtitle = paste0("Volcano plot-", projname))
   }
   
-  # Calculate the number of up-regulated and down-regulated genes
-  # Write the up-regulated and down-regulated genes to a TSV file
+  <span style="color: #024202; font-style: italic;"# Calculate the number of up-regulated and down-regulated genes:></span>
+  <span style="color: #04cc04; font-style: italic;"># Write the up-regulated and down-regulated genes to a TSV file</span>
   write_tsv(rbind(volcano_up, volcano_down), paste0(projname, "/", "all_top_down.tsv"))
   
-  # Create the top table containing the top up-regulated and down-regulated genes
+  <span style="color: #04cc04; font-style: italic;"># Create the top table containing the top up-regulated and down-regulated genes</span>
   top <- rbind(volcano_up[1:ntop, ], volcano_down[1:ntop, ])
-  # Reorder columns in the top table
+  <span style="color: #04cc04; font-style: italic;"># Reorder columns in the top table</span>
   top <- top[, c(1:6, 11, 7, 8, 9, 10, 12)]
-  # Rename the 7th column as "n.log10(adj.P.Val)"
+  <span style="color: #04cc04; font-style: italic;"># Rename the 7th column as "n.log10(adj.P.Val)"</span>
   colnames(top)[7] <- "n.log10(adj.P.Val)"
   
-  # Save the top table as a CSV file in the project folder
+  <span style="color: #04cc04; font-style: italic;"># Save the top table as a CSV file in the project folder</span>
   write.csv(top, paste0(projname, "/", "top.csv"), quote = FALSE, row.names = FALSE)
   
-  # Display the number of up-regulated and down-regulated genes
+  <span style="color: #04cc04; font-style: italic;"># Display the number of up-regulated and down-regulated genes</span>
   message(sprintf("Up-regulated genes: %s; Down-regulated genes: %s", nrow(volcano_up), nrow(volcano_down)))
   
-  # Return the generated plot
+  <span style="color: #04cc04; font-style: italic;"># Return the generated plot</span>
   return(p)
 }
 
-
+---------------<span style="color: #04cc04; font-style: italic;"></span>
 # Function to creates a Venn diagram to visualize common differentially expressed genes among specified GEO datasets.
 MakeVenna <- function(common, ntop = 10) {
   
