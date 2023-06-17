@@ -150,24 +150,29 @@
 			<span class="blue-text">BLUE TEXTTTTT</span> 
 			<strong>BOLD TEXTTTTTT</strong> 
 			-->
+<span style="color: #04cc04; font-style: italic;"></span>
+<span style="color: #04cc04; font-style: italic;"></span>
+<span style="color: #04cc04; font-style: italic;"></span>
+<span style="color: #04cc04; font-style: italic;"></span>
+<span style="color: #04cc04; font-style: italic;"></span>
 
-<span style="color: #04cc04; font-style: italic;"># Load the GEOquery library for accessing GEO data</span>			
+<span style="color: #75020c; font-style: italic;"># Load the GEOquery library for accessing GEO data</span>			
 require(GEOquery)
-<span style="color: #04cc04; font-style: italic;"># Load the limma library for differential expression analysis	</span>		
+<span style="color: #75020c; font-style: italic;"># Load the limma library for differential expression analysis	</span>		
 require(limma)
-<span style="color: #04cc04; font-style: italic;"># Load the tidyverse library, which includes several useful packages for data manipulation and visualization</span>		
+<span style="color: #75020c; font-style: italic;"># Load the tidyverse library, which includes several useful packages for data manipulation and visualization</span>		
 require(tidyverse)
-<span style="color: #04cc04; font-style: italic;"># Load the plotly library for interactive plots</span>			
+<span style="color: #75020c; font-style: italic;"># Load the plotly library for interactive plots</span>			
 require(plotly)
-<span style="color: #04cc04; font-style: italic;"># Load the ggvenn library for creating Venn diagrams using ggplot2</span>			
+<span style="color: #75020c; font-style: italic;"># Load the ggvenn library for creating Venn diagrams using ggplot2</span>			
 require(ggvenn)
-<span style="color: #04cc04; font-style: italic;"># Uncomment the line below if devtools package is not installed</span>
-<span style="color: #04cc04; font-style: italic;"># if (!require(devtools)) install.packages("devtools")</span>
-<span style="color: #04cc04; font-style: italic;"># devtools::install_github("yanlinlin82/ggvenn")</span>
+<span style="color: #75020c; font-style: italic;"># Uncomment the line below if devtools package is not installed</span>
+<span style="color: #75020c; font-style: italic;"># if (!require(devtools)) install.packages("devtools")</span>
+<span style="color: #75020c; font-style: italic;"># devtools::install_github("yanlinlin82/ggvenn")</span>
 require(ggvenn)
 
 <span style="color: #04cc04; font-style: italic;"># Function to download the specified GEO dataset</span>
-DownloadGEO <- <span style="color: #0548e8; font-style: italic;">function</span>(GSEname = "GSE11121") {
+DownloadGEO <- <span style="color: #0548e8; font-style: italic;">function</span>(GSEname = <span style="color: #04cc04; font-style: italic;">"GSE11121"</span>) {
   <span style="color: #04cc04; font-style: italic;"># Create a folder for the dataset</span>
   dir.create(GSEname, showWarnings = <span style="color: #0548e8; font-style: italic;">FALSE</span>)
   
