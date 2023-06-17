@@ -572,367 +572,367 @@ Makevolcano <- function(projname,
   return(p)
 }
 
----------------<span style="color: #04cc04; font-style: italic;"></span>
-# Function to creates a Venn diagram to visualize common differentially expressed genes among specified GEO datasets.
+
+<span style="color: #04cc04; font-style: italic;"># Function to creates a Venn diagram to visualize common differentially expressed genes among specified GEO datasets.</span>
 MakeVenna <- function(common, ntop = 10) {
   
-  # Create a directory to store the output files
+  <span style="color: #04cc04; font-style: italic;"># Create a directory to store the output files</span>
   dir.create("common", showWarnings = FALSE)
   
-  # Reading all all_top_down files and processing them
+  <span style="color: #04cc04; font-style: italic;"># Reading all all_top_down files and processing them</span>
   com_table <- list()
   
-  # Process each dataset
+  <span style="color: #04cc04; font-style: italic;"># Process each dataset</span>
   for (i in seq_along(common)) {
-    # Read the all_top_down file for the current dataset
+    <span style="color: #04cc04; font-style: italic;"># Read the all_top_down file for the current dataset</span>
     DEG_table <- data.frame(read_tsv(paste0(common[i], "/", "all_top_down.tsv")))
     
-    # Finding duplicated genes
-    # Find the indices of duplicated genes
+    <span style="color: #04cc04; font-style: italic;"># Finding duplicated genes</span>
+    <span style="color: #04cc04; font-style: italic;"># Find the indices of duplicated genes</span>
     dup_genes_n <- which(duplicated(DEG_table$Gene.symbol))
-    # Get unique duplicated genes
+    <span style="color: #04cc04; font-style: italic;"># Get unique duplicated genes</span>
     dup_uniq_genes <- unique(DEG_table[dup_genes_n, "Gene.symbol"])
-    # Find the indices of all duplicated genes
+    <span style="color: #04cc04; font-style: italic;"># Find the indices of all duplicated genes</span>
     find_dup <- which(DEG_table$Gene.symbol %in% dup_uniq_genes)
-    # Extract all duplicated genes
+    <span style="color: #04cc04; font-style: italic;"># Extract all duplicated genes</span>
     all_dup <- DEG_table[find_dup, ]
-    # Remove duplicated genes from the DEG table
+    <span style="color: #04cc04; font-style: italic;"># Remove duplicated genes from the DEG table</span>
     DEG_table <- DEG_table[-find_dup, -11]
     
-    # Calculation the mean for logFC and ... of duplicated genes
+    <span style="color: #04cc04; font-style: italic;"># Calculation the mean for logFC/AveExpr/t value/P-value/adjusted P-value/B value of duplicated genes</span>
     uniq_genes_list <- list()
     
-    # Process each duplicated gene
+    <span style="color: #04cc04; font-style: italic;"></span># Process each duplicated gene
     for (j in seq_along(dup_uniq_genes)) {
-      # Find the indices of the current duplicated gene
+      <span style="color: #04cc04; font-style: italic;"></span># Find the indices of the current duplicated gene
       c <- which(all_dup$Gene.symbol %in% dup_uniq_genes[j])
-      # Calculate the mean logFC
+      <span style="color: #04cc04; font-style: italic;"></span># Calculate the mean logFC
       b <- c(mean(all_dup$logFC[c]),
-             # Calculate the mean AveExpr
+             <span style="color: #04cc04; font-style: italic;"></span># Calculate the mean AveExpr
              mean(all_dup$AveExpr[c]),
-             # Calculate the mean t value
+             <span style="color: #04cc04; font-style: italic;"></span># Calculate the mean t value
              mean(all_dup$t[c]),
-             # Calculate the mean P-value
+             <span style="color: #04cc04; font-style: italic;"></span># Calculate the mean P-value
              mean(all_dup$P.Value[c]),
-             # Calculate the mean adjusted P-value
+             <span style="color: #04cc04; font-style: italic;"></span># Calculate the mean adjusted P-value
              mean(all_dup$adj.P.Val[c]),
-             # Calculate the mean B value
+             <span style="color: #04cc04; font-style: italic;"></span># Calculate the mean B value
              mean(all_dup$B[c]))
       
-      # Assign column names and create a new data frame with the mean values
-      # Assign column names to the mean values
+      <span style="color: #04cc04; font-style: italic;"># Assign column names and create a new data frame with the mean values</span>
+      <span style="color: #04cc04; font-style: italic;"># Assign column names to the mean values</span>
       names(b) <- c("logFC", "AveExpr", "t", "P.Value", "adj.P.Val", "B")
-      # Create a new data frame with the mean values
+      <span style="color: #04cc04; font-style: italic;"># Create a new data frame with the mean values</span>
       d <- data.frame(c(all_dup[c[1], -c(2, 3, 4, 5, 6, 7, 11)], b))
-      # Reorder the columns of the data frame
+      <span style="color: #04cc04; font-style: italic;"># Reorder the columns of the data frame</span>
       d <- d[, c(1, 6, 7, 8, 9, 10, 11, 2, 3, 4, 5)]
-      # Store the data frame in the list for unique genes
+      <span style="color: #04cc04; font-style: italic;"># Store the data frame in the list for unique genes</span>
       uniq_genes_list[[j]] <- d
     }
     
-    # Joining the mean calculated and unique genes with the rest of genes
-    # Combine the data frames in the list into one data frame
+    <span style="color: #04cc04; font-style: italic;"># Joining the mean calculated and unique genes with the rest of genes</span>
+    <span style="color: #04cc04; font-style: italic;"># Combine the data frames in the list into one data frame</span>
     uniq_genes_df <- do.call(rbind, uniq_genes_list)
-    # Append the unique genes data frame to the DEG_table
+    <span style="color: #04cc04; font-style: italic;"># Append the unique genes data frame to the DEG_table</span>
     DEG_table <- rbind(DEG_table, uniq_genes_df)
     
-    # Store the processed DEG table for the current dataset
+    <span style="color: #04cc04; font-style: italic;"># Store the processed DEG table for the current dataset</span>
     com_table[[common[i]]] <- DEG_table
   }
   
-  # Calculating up and down-regulated genes for each dataset
-  # Create an empty list to store the up and down-regulated genes
+  <span style="color: #04cc04; font-style: italic;"># Calculating up and down-regulated genes for each dataset</span>
+  <span style="color: #04cc04; font-style: italic;"># Create an empty list to store the up and down-regulated genes</span>
   DEGslist <- list()
   
   for (i in seq_along(com_table)) {
-    # Extract the 8th column (DEGs) and store it in the list
+    <span style="color: #04cc04; font-style: italic;"># Extract the 8th column (DEGs) and store it in the list</span>
     DEGslist[[common[i]]] <- com_table[[i]][8]
   }
   
-  # Find common genes among all datasets
+  <span style="color: #04cc04; font-style: italic;"># Find common genes among all datasets</span>
   com_prob <- Reduce(intersect, DEGslist)
   
-  # Writing all common genes into separated files as well as the top files
-  # Create an empty list to store all common genes
+  <span style="color: #04cc04; font-style: italic;"># Writing all common genes into separated files as well as the top files</span>
+  <span style="color: #04cc04; font-style: italic;"># Create an empty list to store all common genes</span>
   all_com <- list()
-  # Create an empty list to store all common genes (including all samples)
+  <span style="color: #04cc04; font-style: italic;"># Create an empty list to store all common genes (including all samples)</span>
   all_com_all <- list()
   
   for (i in seq_along(com_table)) {
-    # Extract the common differentially expressed genes for the current dataset
+    <span style="color: #04cc04; font-style: italic;"># Extract the common differentially expressed genes for the current dataset</span>
     comn <- which(com_table[[names(com_table)[i]]][["Gene.symbol"]] %in% com_prob$Gene.symbol)
-    # Subset the current dataset with the common DEGs
+    <span style="color: #04cc04; font-style: italic;"># Subset the current dataset with the common DEGs</span>
     com_final_DEG  <- com_table[[names(com_table)[i]]][comn, ]
-    # Sort the subsetted data frame based on the "DEG" column
+    <span style="color: #04cc04; font-style: italic;"># Sort the subsetted data frame based on the "DEG" column</span>
     com_final_DEG <- com_final_DEG[order(com_final_DEG$DEG), ]
     
-    # Save the common differentially expressed genes as a TSV file
+    <span style="color: #04cc04; font-style: italic;"># Save the common differentially expressed genes as a TSV file</span>
     write_tsv(com_final_DEG, paste0("common", "/", names(com_table)[i], "_common_DEGs.tsv"))
     
-    # Extract the top up-regulated genes for the current dataset
+    <span style="color: #04cc04; font-style: italic;"># Extract the top up-regulated genes for the current dataset</span>
     com_final_up <- com_final_DEG[which(com_final_DEG$DEG == "Upregulated"), ]
-    # Sort the subsetted data frame based on the "logFC" column in decreasing order
+    <span style="color: #04cc04; font-style: italic;"># Sort the subsetted data frame based on the "logFC" column in decreasing order</span>
     com_final_up <- com_final_up[order(com_final_up$logFC, decreasing = TRUE), ]
     
-    # Extract the top down-regulated genes for the current dataset
+    <span style="color: #04cc04; font-style: italic;"># Extract the top down-regulated genes for the current dataset</span>
     com_final_down <- com_final_DEG[which(com_final_DEG$DEG == "Downregulated"), ]
-    # Sort the subsetted data frame based on the "logFC" column in increasing order
+    <span style="color: #04cc04; font-style: italic;"># Sort the subsetted data frame based on the "logFC" column in increasing order</span>
     com_final_down <- com_final_down[order(com_final_down$logFC, decreasing = FALSE), ]
     
-    # Save the top common differentially expressed genes as a TSV file
+    <span style="color: #04cc04; font-style: italic;"># Save the top common differentially expressed genes as a TSV file</span>
     write_tsv(rbind(com_final_up[1:ntop, ], com_final_down[1:ntop, ]), paste0("common", "/", names(com_table)[i], "_top_common_DEGs.tsv"))
     
-    # Store the common differentially expressed genes and all genes for each dataset
-    # Store the subsetted com_final_DEG data frame in all_com list
+    <span style="color: #04cc04; font-style: italic;"># Store the common differentially expressed genes and all genes for each dataset</span>
+    <span style="color: #04cc04; font-style: italic;"># Store the subsetted com_final_DEG data frame in all_com list</span>
     all_com[[names(com_table)[i]]] <- com_final_DEG[, c(2:7)]
-    # Store the complete com_final_DEG data frame in all_com_all list
+    <span style="color: #04cc04; font-style: italic;"># Store the complete com_final_DEG data frame in all_com_all list</span>
     all_com_all[[names(com_table)[i]]] <- com_final_DEG
   }
   
-  # Calculate the mean of logFC for all common genes in each dataset 
-  # Combine the data frames in all_com list into a single data frame, all_com_df
+  <span style="color: #04cc04; font-style: italic;"># Calculate the mean of logFC for all common genes in each dataset</span> 
+  <span style="color: #04cc04; font-style: italic;"># Combine the data frames in all_com list into a single data frame, all_com_df</span>
   all_com_df <- do.call(cbind, all_com)
-  # Find the column indices of columns containing "logFC" in their names
+  <span style="color: #04cc04; font-style: italic;"># Find the column indices of columns containing "logFC" in their names</span>
   logfc_n <- grep("logFC", colnames(all_com_df))
   
-  # Extract the columns containing logFC values from all_com_all_df
+  <span style="color: #04cc04; font-style: italic;"># Extract the columns containing logFC values from all_com_all_df</span>
   logfc_df <- all_com_df[, logfc_n]
   
-  # Calculate the row means of logFC values to obtain the mean logFC for each common gene
+  <span style="color: #04cc04; font-style: italic;"># Calculate the row means of logFC values to obtain the mean logFC for each common gene</span>
   logfc_df <- data.frame(logFC = rowMeans(logfc_df))
   
-  # Extract columns containing adj.P.Val values from all_com_df:
-  # Find the column indices of columns containing "adj.P.Val" in their names
+  <span style="color: #04cc04; font-style: italic;"># Extract columns containing adj.P.Val values from all_com_df:</span>
+  <span style="color: #04cc04; font-style: italic;"># Find the column indices of columns containing "adj.P.Val" in their names</span>
   adj.P.Val_n <- grep("adj.P.Val", colnames(all_com_df))
-  # Extract the columns containing adj.P.Val values
+  <span style="color: #04cc04; font-style: italic;"># Extract the columns containing adj.P.Val values</span>
   adj.P.Val_df <- all_com_df[, adj.P.Val_n]
-  # Calculate the row means of adj.P.Val values to obtain the mean adj.P.Val for each common gene:
-  # Create a data frame with a single column "adj.P.Val" containing the mean adj.P.Val values
+  <span style="color: #04cc04; font-style: italic;"># Calculate the row means of adj.P.Val values to obtain the mean adj.P.Val for each common gene:</span>
+  <span style="color: #04cc04; font-style: italic;"># Create a data frame with a single column "adj.P.Val" containing the mean adj.P.Val values</span>
   adj.P.Val_df <- data.frame(adj.P.Val = rowMeans(adj.P.Val_df))
   
-  # Extract columns containing B values from all_com_df
+  <span style="color: #04cc04; font-style: italic;"># Extract columns containing B values from all_com_df</span>
   B_n <- grep("B", colnames(all_com_df))
   B_df <- all_com_df[, B_n]
-  # Calculate the row means of B values to obtain the mean B for each common gene
+  <span style="color: #04cc04; font-style: italic;"># Calculate the row means of B values to obtain the mean B for each common gene</span>
   B_df <- data.frame(B = rowMeans(B_df))
   
-  # Extract columns containing t values from all_com_df
+  <span style="color: #04cc04; font-style: italic;"># Extract columns containing t values from all_com_df</span>
   t_n <- grep(".t", colnames(all_com_df))
   t_df <- all_com_df[, t_n]
-  # Calculate the row means of t values to obtain the mean t for each common gene
+  <span style="color: #04cc04; font-style: italic;"># Calculate the row means of t values to obtain the mean t for each common gene</span>
   t_df <- data.frame(t = rowMeans(t_df))
   
-  # Extract columns containing P.Value values from all_com_df
+  <span style="color: #04cc04; font-style: italic;"># Extract columns containing P.Value values from all_com_df</span>
   P.Value_n <- grep("P.Value", colnames(all_com_df))
   P.Value_df <- all_com_df[, P.Value_n]
-  # Calculate the row means of P.Value values to obtain the mean P.Value for each common gene
+  <span style="color: #04cc04; font-style: italic;"># Calculate the row means of P.Value values to obtain the mean P.Value for each common gene</span>
   P.Value_df <- data.frame(P.Value = rowMeans(P.Value_df))
   
-  # Extract columns containing AveExpr values from all_com_df:
-  # Find the column indices of columns containing "AveExpr" in their names
+  <span style="color: #04cc04; font-style: italic;"># Extract columns containing AveExpr values from all_com_df:</span>
+  <span style="color: #04cc04; font-style: italic;"># Find the column indices of columns containing "AveExpr" in their names</span>
   AveExpr_n <- grep("AveExpr", colnames(all_com_df))
-  # Extract the columns containing AveExpr values
+  <span style="color: #04cc04; font-style: italic;"># Extract the columns containing AveExpr values</span>
   AveExpr_df <- all_com_df[, AveExpr_n]
-  # Calculate the row means of AveExpr values to obtain the mean AveExpr for each common gene:
-  # Create a data frame with a single column "AveExpr" containing the mean AveExpr values
+  <span style="color: #04cc04; font-style: italic;"># Calculate the row means of AveExpr values to obtain the mean AveExpr for each common gene:</span>
+  <span style="color: #04cc04; font-style: italic;"># Create a data frame with a single column "AveExpr" containing the mean AveExpr values</span>
   AveExpr_df <- data.frame(AveExpr = rowMeans(AveExpr_df))
   
-  # Combining all calculated means into one data frame 
+  <span style="color: #04cc04; font-style: italic;"># Combining all calculated means into one data frame </span>
   all_com_all_df <- data.frame(do.call(cbind, all_com_all[[1]]))
-  # Removing unnecessary columns from all_com_all_df
+  <span style="color: #04cc04; font-style: italic;"># Removing unnecessary columns from all_com_all_df</span>
   all_com_all_df <- all_com_all_df[, -c(2:7)]
-  # Combining the calculated means with all_com_all_df
+  <span style="color: #04cc04; font-style: italic;"># Combining the calculated means with all_com_all_df</span>
   all_com_all_df <- cbind(all_com_all_df, logfc_df, adj.P.Val_df, B_df, t_df, AveExpr_df, P.Value_df)
-  # Reordering the columns of all_com_all_df
+  <span style="color: #04cc04; font-style: italic;"># Reordering the columns of all_com_all_df</span>
   all_com_all_df <- all_com_all_df[, c(1, 6, 10, 9, 11, 7, 8, 2, 3, 4, 5)]
   
-  # Writing the combined data frame of all calculated means to a TSV file
+  <span style="color: #04cc04; font-style: italic;"># Writing the combined data frame of all calculated means to a TSV file</span>
   write_tsv(all_com_all_df, paste0("common", "/", "all_mean_common_DEGs.tsv"))
   
-  # Displaying a message to indicate that the common genes have been saved
+  <span style="color: #04cc04; font-style: italic;"># Displaying a message to indicate that the common genes have been saved</span>
   message("+++++ Common genes between all datasets have been saved into the 'common' folder. +++++")
   
-  # Creating a list of DEGs for each dataset to generate a Venn diagram
+  <span style="color: #04cc04; font-style: italic;"># Creating a list of DEGs for each dataset to generate a Venn diagram</span>
   venlist <- list()
-  # Iterating over the DEGslist to populate the venlist
+  <span style="color: #04cc04; font-style: italic;"># Iterating over the DEGslist to populate the venlist</span>
   for (i in seq_along(DEGslist)) {
     venlist[[common[i]]] <- DEGslist[[i]][[1]]
   }
   
-  # Generate the Venn diagram using the logFC mean values for common genes
-  # Set the seed for random number generation
+  <span style="color: #04cc04; font-style: italic;"># Generate the Venn diagram using the logFC mean values for common genes</span>
+  <span style="color: #04cc04; font-style: italic;"># Set the seed for random number generation</span>
   set.seed(1234)
-  # Define color palette for the Venn diagram
+  <span style="color: #04cc04; font-style: italic;"># Define color palette for the Venn diagram</span>
   my_pal <- c("#1B9E77", "#7570B3", "#E7298A", "#66A61E", "#E6AB02", "#A6761D", "#666666", "#9A7D0A")
-  # Create the Venn diagram using ggvenn package
+  <span style="color: #04cc04; font-style: italic;"># Create the Venn diagram using ggvenn package</span>
   venaa <- ggvenn(venlist, 
                   fill_color = my_pal,
                   stroke_size = 0.5,
                   set_name_size = 4)
   
-  # Return the generated Venn diagram
+  <span style="color: #04cc04; font-style: italic;"># Return the generated Venn diagram</span>
   return(venaa)
 }
 
 
 
-# Function to prepares files for network analysis using the specified GEO datasets.
+<span style="color: #04cc04; font-style: italic;"># Function to prepares files for network analysis using the specified GEO datasets.</span>
 Makenetworkanalyst <- function(projname,
                                compare = "grade",
                                groups) {
-  # Reading files
-  # Create 'networkanalyst' directory to store the output files
+  <span style="color: #04cc04; font-style: italic;"># Reading files</span>
+  <span style="color: #04cc04; font-style: italic;"># Create 'networkanalyst' directory to store the output files</span>
   dir.create("networkanalyst", showWarnings = FALSE)
   
-  # Read the 'matrix.csv' file
+  <span style="color: #04cc04; font-style: italic;"># Read the 'matrix.csv' file</span>
   matrix <- read_csv(paste0(projname, "/", "matrix.csv"))
   matrix <- data.frame(matrix)
   
-  # Read the 'phenotype.tsv' file
+  <span style="color: #04cc04; font-style: italic;"># Read the 'phenotype.tsv' file</span>
   phenotype <- read_tsv(paste0(projname, "/", "phenotype.tsv"))
   phenotype <- data.frame(phenotype)
   
-  # Set the row names of the 'phenotype' dataframe
+  <span style="color: #04cc04; font-style: italic;"># Set the row names of the 'phenotype' dataframe</span>
   rownames(phenotype) <- phenotype[, 1]
   
-  # Calculating DEGs:
-  # Read the 'all_top_down.tsv' file containing up and down genes
+  <span style="color: #04cc04; font-style: italic;"># Calculating DEGs:</span>
+  <span style="color: #04cc04; font-style: italic;"># Read the 'all_top_down.tsv' file containing up and down genes</span>
   updown <- data.frame(read_tsv(paste0(projname, "/", "all_top_down.tsv")))
   
-  # Creating a file that contains up and down genes based on groups specified:
+  <span style="color: #04cc04; font-style: italic;"># Creating a file that contains up and down genes based on groups specified:</span>
   
-  # Identify the rows in 'matrix' corresponding to up and down genes
+  <span style="color: #04cc04; font-style: italic;"># Identify the rows in 'matrix' corresponding to up and down genes</span>
   updown_genes <- which(matrix$ID %in% updown$ID)
-  # Create a new matrix 'updown_matrix' containing the identified rows
+  <span style="color: #04cc04; font-style: italic;"># Create a new matrix 'updown_matrix' containing the identified rows</span>
   updown_matrix <- matrix[updown_genes, ]
   
-  # Add gene symbols to the 'updown_matrix' dataframe
+  <span style="color: #04cc04; font-style: italic;"># Add gene symbols to the 'updown_matrix' dataframe</span>
   updown_matrix <- cbind(updown$Gene.symbol, updown_matrix)
-  # Rename the first column as "Symbol"
+  <span style="color: #04cc04; font-style: italic;"># Rename the first column as "Symbol"</span>
   colnames(updown_matrix)[1] <- "Symbol"
-  # Remove the second column from the dataframe
+  <span style="color: #04cc04; font-style: italic;"># Remove the second column from the dataframe</span>
   updown_matrix <- updown_matrix[, -2]
   
-  # Extract the gene symbols from the 'updown_matrix' dataframe
+  <span style="color: #04cc04; font-style: italic;"># Extract the gene symbols from the 'updown_matrix' dataframe</span>
   genes <- updown_matrix$Symbol
-  # Remove the first column (gene symbols) from 'updown_matrix', round the remaining expression values to 2 decimal places
+  <span style="color: #04cc04; font-style: italic;"># Remove the first column (gene symbols) from 'updown_matrix', round the remaining expression values to 2 decimal places</span>
   updown_matrix <- round(updown_matrix[-1], 2)
-  # Add the gene symbols column back to the 'updown_matrix' dataframe
+  <span style="color: #04cc04; font-style: italic;"># Add the gene symbols column back to the 'updown_matrix' dataframe</span>
   updown_matrix <- cbind(genes, updown_matrix)
   
   if (compare == "subtype") {
-    # Prepare data based on subtype comparison
+    <span style="color: #04cc04; font-style: italic;"># Prepare data based on subtype comparison</span>
     
-    # Find the column index for 'pam50' in 'phenotype'
+    <span style="color: #04cc04; font-style: italic;"># Find the column index for 'pam50' in 'phenotype'</span>
     phecoln <- grep("pam50", phenotype)
     
-    # Check if the length of 'phecoln' is greater than 0 (if there are subtype columns present in 'phenotype' dataframe.)
+    <span style="color: #04cc04; font-style: italic;"># Check if the length of 'phecoln' is greater than 0 (if there are subtype columns present in 'phenotype' dataframe.)</span>
     if (length(phecoln) > 0) {
-      # Extract the subtype column from 'phenotype'
+      <span style="color: #04cc04; font-style: italic;"># Extract the subtype column from 'phenotype'</span>
       pheno <- data.frame(phenotype[, phecoln])
-      # Rename the column to "subtype"
+      <span style="color: #04cc04; font-style: italic;"># Rename the column to "subtype"</span>
       colnames(pheno) <- "subtype"
       
-      # Clean up the subtype values by removing the "pam50" prefix
+      <span style="color: #04cc04; font-style: italic;"># Clean up the subtype values by removing the "pam50" prefix</span>
       pheno$subtype <- gsub("pam50.+:", "", pheno$subtype)
-      # Assign the row names of 'phenotype' as the row names of 'pheno'
+      <span style="color: #04cc04; font-style: italic;"># Assign the row names of 'phenotype' as the row names of 'pheno'</span>
       rownames(pheno) <- rownames(phenotype)
       
-      # Creating groups of samples based on specified conditions:
-      # Create an empty list to store groups of samples
+      <span style="color: #04cc04; font-style: italic;"># Creating groups of samples based on specified conditions:</span>
+      <span style="color: #04cc04; font-style: italic;"># Create an empty list to store groups of samples</span>
       grouplis <- list()
       for (i in seq_along(groups)) {
-        # Combine the group names using the '|' separator
+        <span style="color: #04cc04; font-style: italic;"># Combine the group names using the '|' separator</span>
         name <- paste0(groups[[i]], collapse = "|")
-        # Find the rows in 'pheno$subtype' that match the group name
+        <span style="color: #04cc04; font-style: italic;"># Find the rows in 'pheno$subtype' that match the group name</span>
         rownum <- grep(name, pheno$subtype)
-        # Store the matching row names in 'grouplis' with the group name as the key
+        <span style="color: #04cc04; font-style: italic;"># Store the matching row names in 'grouplis' with the group name as the key</span>
         grouplis[[names(groups)[i]]] <- rownames(pheno)[rownum]
       }
     }
   } else {
-    # Preparing the breast cancer grades into a dataframe:
-    # Find the column index containing "grade:" in the phenotype data
+    <span style="color: #04cc04; font-style: italic;"># Preparing the breast cancer grades into a dataframe:</span>
+    <span style="color: #04cc04; font-style: italic;"># Find the column index containing "grade:" in the phenotype data</span>
     gradecoln <- grep("grade:", phenotype)
-    # Check if any column contains "grade:"
+    <span style="color: #04cc04; font-style: italic;"># Check if any column contains "grade:"</span>
     if (length(gradecoln) > 0) {
-      # Extract the column with "grade:" and create a data frame
+      <span style="color: #04cc04; font-style: italic;"># Extract the column with "grade:" and create a data frame</span>
       grade <- data.frame(phenotype[, gradecoln])
-      # Rename the column to "grade"
+      <span style="color: #04cc04; font-style: italic;"># Rename the column to "grade"</span>
       colnames(grade) <- "grade"
-      # Remove "grade:", "grade: ", and "B-R grade: " from the values in the column
+      <span style="color: #04cc04; font-style: italic;"># Remove "grade:", "grade: ", and "B-R grade: " from the values in the column</span>
       grade$grade <- gsub("grade:|grade: |B-R grade: ", "", grade$grade)
-      # Remove any characters after "=" in the values
+      <span style="color: #04cc04; font-style: italic;"># Remove any characters after "=" in the values</span>
       grade$grade <- gsub("=.+", "", grade$grade)
-      # Find the rows with "III" in the grade column
+      <span style="color: #04cc04; font-style: italic;"># Find the rows with "III" in the grade column</span>
       greek <- grep("III", grade$grade)
-      # Check if any rows contain "III"
+      <span style="color: #04cc04; font-style: italic;"># Check if any rows contain "III"</span>
       if (length(greek) > 0) {
-        # Find the rows with "I", "II", "III" in the grade column
+        <span style="color: #04cc04; font-style: italic;"># Find the rows with "I", "II", "III" in the grade column</span>
         one <- which(factor(grade$grade) == "I")
         two <- which(factor(grade$grade) == "II")
         three <- which(factor(grade$grade) == "III")
-        # Replace the rows with "I" with "1"
+        <span style="color: #04cc04; font-style: italic;"># Replace the rows with "I" with "1"</span>
         grade[one, ] <- "1"
-        # Replace the rows with "II" with "2"
+        <span style="color: #04cc04; font-style: italic;"># Replace the rows with "II" with "2"</span>
         grade[two, ] <- "2"
-        # Replace the rows with "III" with "3"
+        <span style="color: #04cc04; font-style: italic;"># Replace the rows with "III" with "3"</span>
         grade[three, ] <- "3"
       }
-      # Set the row names of the 'grade' data frame to match the row names of the 'phenotype' data frame
+      <span style="color: #04cc04; font-style: italic;"># Set the row names of the 'grade' data frame to match the row names of the 'phenotype' data frame</span>
       rownames(grade) <- rownames(phenotype)
-      # Create an empty list to store the group information
+      <span style="color: #04cc04; font-style: italic;"># Create an empty list to store the group information</span>
       grouplis <- list()
       for (i in seq_along(groups)) {
-        # Concatenate the elements of 'groups' with a '|' separator
+        <span style="color: #04cc04; font-style: italic;"># Concatenate the elements of 'groups' with a '|' separator</span>
         name <- paste0(groups[[i]], collapse = "|")
-        # Find the rows in the 'grade' data frame where the 'grade' column matches the group name
+        <span style="color: #04cc04; font-style: italic;"># Find the rows in the 'grade' data frame where the 'grade' column matches the group name</span>
         rownum <- grep(name, grade$grade)
-        # Store the row names corresponding to the group in the 'grouplis' list
+        <span style="color: #04cc04; font-style: italic;"># Store the row names corresponding to the group in the 'grouplis' list</span>
         grouplis[[names(groups)[i]]] <- rownames(grade)[rownum]
       }
     }
   }
   
-  # Renaming the matrix file according to the groups name specified by the user:
-  # Bind the column names of 'updown_matrix' as the first row of 'updown_matrix'
+  <span style="color: #04cc04; font-style: italic;"># Renaming the matrix file according to the groups name specified by the user:</span>
+  <span style="color: #04cc04; font-style: italic;"># Bind the column names of 'updown_matrix' as the first row of 'updown_matrix'</span>
   updown_matrix <- rbind(colnames(updown_matrix), updown_matrix)
   for (i in seq_along(grouplis)) {
-    # Concatenate the elements of 'grouplis[[i]]' with a '|' separator
+    <span style="color: #04cc04; font-style: italic;"># Concatenate the elements of 'grouplis[[i]]' with a '|' separator</span>
     matname <- paste0(grouplis[[i]], collapse = "|")
-    # Find the columns in 'updown_matrix' that match the group name specified by 'matname'
+    <span style="color: #04cc04; font-style: italic;"># Find the columns in 'updown_matrix' that match the group name specified by 'matname'</span>
     matcoln <- grep(matname, colnames(updown_matrix))
-    # Replace the corresponding columns in the first row of 'updown_matrix' with the group name
+    <span style="color: #04cc04; font-style: italic;"># Replace the corresponding columns in the first row of 'updown_matrix' with the group name</span>
     updown_matrix[1, matcoln] <- names(grouplis)[i]
   }
   
-  # Adding column names and the second row according to the file for networkanalyst:
-  # Find the columns in the first row of 'updown_matrix' that match the names of 'grouplis'
+  <span style="color: #04cc04; font-style: italic;"># Adding column names and the second row according to the file for networkanalyst:</span>
+  <span style="color: #04cc04; font-style: italic;"># Find the columns in the first row of 'updown_matrix' that match the names of 'grouplis'</span>
   changedcol <- grep(paste0(names(grouplis), collapse = "|"), updown_matrix[1, ])
-  # Keep the first column and the columns selected by 'changedcol' in 'updown_matrix'
+  <span style="color: #04cc04; font-style: italic;"># Keep the first column and the columns selected by 'changedcol' in 'updown_matrix'</span>
   updown_matrix <- updown_matrix[, c(1, changedcol)]
-  # Replace the first cell of 'updown_matrix' with "#CLASS"
+  <span style="color: #04cc04; font-style: italic;"># Replace the first cell of 'updown_matrix' with "#CLASS"</span>
   updown_matrix[1, 1] <- "#CLASS"
-  # Replace the column name of the first column in 'updown_matrix' with "#NAME"
+  <span style="color: #04cc04; font-style: italic;"># Replace the column name of the first column in 'updown_matrix' with "#NAME"</span>
   colnames(updown_matrix)[1] <- "#NAME"
   
-  # Write 'updown_matrix' to a tab-separated file
+  <span style="color: #04cc04; font-style: italic;"># Write 'updown_matrix' to a tab-separated file</span>
   write.table(updown_matrix, paste0("networkanalyst", "/", projname, "_dataanlys.txt"), quote = FALSE, row.names = FALSE, sep = "\t")
   
-  # Display a message indicating that the file has been saved
+  <span style="color: #04cc04; font-style: italic;"># Display a message indicating that the file has been saved</span>
   message("+++++ Your file has been saved in the networkanalyst folder. +++++")
 }
 
 
-
-#============================ Q1 =========================#
+	  
+<span style="color: #300206; font-style: italic;">#=================================== Q1 ===================================#</span>
 # other adjust methods ---> "holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr", "none"
 
-########################### GSE25055 ############################
-# Download the GEO dataset GSE25055
+<span style="color: #66050d; font-style: italic;">################################# GSE25055 #################################</span> 
+<span style="color: #04cc04; font-style: italic;"># Download the GEO dataset GSE25055</span>
 DownloadGEO("GSE25055")
 
-# Perform DEG analysis on GSE25055 dataset
+<span style="color: #04cc04; font-style: italic;"># Perform DEG analysis on GSE25055 dataset</span>
 DEGanalysis(projname = "GSE25055",
             compare = "grade",
             groups = list(normal = c("1"), tumor = c("3")),
@@ -947,22 +947,22 @@ volcano_GSE25055 <- Makevolcano(projname = "GSE25055",
                                 voltype = "ggplot")
 volcano_GSE25055
 
-# Prepare files for network analysis on GSE25055 dataset
+<span style="color: #04cc04; font-style: italic;"># Prepare files for network analysis on GSE25055 dataset</span>
 Makenetworkanalyst(projname = "GSE25055",
                    compare = "grade",
                    groups = list(normal = c("1"), tumor = c("3")))
 
-################################# GSE7390 #########################
-# Download the GEO dataset GSE7390
+<span style="color: #66050d; font-style: italic;">################################# GSE7390 #################################</span>
+<span style="color: #04cc04; font-style: italic;"># Download the GEO dataset GSE7390</span>
 DownloadGEO("GSE7390")
 
-# Perform DEG analysis on GSE7390 dataset
+<span style="color: #04cc04; font-style: italic;"># Perform DEG analysis on GSE7390 dataset</span>
 DEGanalysis(projname = "GSE7390",
             compare = "grade",
             groups = list(normal = c("1"), tumor = c("3")),
             adjust = "fdr")
 
-# Create a volcano plot for GSE7390 dataset
+<span style="color: #04cc04; font-style: italic;"># Create a volcano plot for GSE7390 dataset</span>
 volcano_GSE7390 <- Makevolcano(projname = "GSE7390",
                                padjlevel = 0.05,
                                uplogFC = 1,
@@ -971,22 +971,22 @@ volcano_GSE7390 <- Makevolcano(projname = "GSE7390",
                                voltype = "ggplot")
 volcano_GSE7390
 
-# Prepare files for network analysis on GSE7390 dataset
+<span style="color: #04cc04; font-style: italic;"># Prepare files for network analysis on GSE7390 dataset</span>
 Makenetworkanalyst(projname = "GSE7390",
                    compare = "grade",
                    groups = list(normal = c("1"), tumor = c("3")))
 
-############################## GSE11121 ##########################
-# Download the GEO dataset GSE11121
+<span style="color: #66050d; font-style: italic;">################################# GSE11121 #################################</span>
+<span style="color: #04cc04; font-style: italic;"># Download the GEO dataset GSE11121</span>
 DownloadGEO("GSE11121")
 
-# Perform DEG analysis on GSE11121 dataset
+<span style="color: #04cc04; font-style: italic;"># Perform DEG analysis on GSE11121 dataset</span>
 DEGanalysis(projname = "GSE11121",
             compare = "grade",
             groups = list(normal = c("1"), tumor = c("3")),
             adjust = "fdr")
 
-# Create a volcano plot for GSE11121 dataset
+<span style="color: #04cc04; font-style: italic;"># Create a volcano plot for GSE11121 dataset</span>
 volcano_GSE11121 <- Makevolcano(projname = "GSE11121",
                                 padjlevel = 0.05,
                                 uplogFC = 1,
@@ -995,22 +995,22 @@ volcano_GSE11121 <- Makevolcano(projname = "GSE11121",
                                 voltype = "ggplot")
 volcano_GSE11121
 
-# Prepare files for network analysis on GSE11121 dataset
+<span style="color: #04cc04; font-style: italic;"># Prepare files for network analysis on GSE11121 dataset</span>
 Makenetworkanalyst(projname = "GSE11121",
                    compare = "grade",
                    groups = list(normal = c("1"), tumor = c("3")))
 
-############################## GSE25065 ###########################
-# Download the GEO dataset GSE25065
+<span style="color: #66050d; font-style: italic;">################################# GSE25065 #################################</span>
+<span style="color: #04cc04; font-style: italic;"></span># Download the GEO dataset GSE25065
 DownloadGEO("GSE25065")
 
-# Perform DEG analysis on GSE25065 dataset
+<span style="color: #04cc04; font-style: italic;"># Perform DEG analysis on GSE25065 dataset</span>
 DEGanalysis(projname = "GSE25065",
             compare = "grade",
             groups = list(normal = c("1"), tumor = c("3")),
             adjust = "fdr")
 
-# Create a volcano plot for GSE25065 dataset
+<span style="color: #04cc04; font-style: italic;"># Create a volcano plot for GSE25065 dataset</span>
 volcano_GSE25065 <- Makevolcano(projname = "GSE25065",
                                 padjlevel = 0.05,
                                 uplogFC = 1,
@@ -1019,13 +1019,13 @@ volcano_GSE25065 <- Makevolcano(projname = "GSE25065",
                                 voltype = "ggplot")
 volcano_GSE25065
 
-# Prepare files for network analysis on GSE25065 dataset
+<span style="color: #04cc04; font-style: italic;"># Prepare files for network analysis on GSE25065 dataset</span>
 Makenetworkanalyst(projname = "GSE25065",
                    compare = "grade",
                    groups = list(normal = c("1"), tumor = c("3")))
 
 
-# Create a Venn diagram for the common differentially expressed genes across the datasets
+<span style="color: #04cc04; font-style: italic;"># Create a Venn diagram for the common differentially expressed genes across the datasets</span>
 MakeVenna(common = c("GSE25055", "GSE7390", "GSE11121", "GSE25065"), ntop = 10)
 
 
