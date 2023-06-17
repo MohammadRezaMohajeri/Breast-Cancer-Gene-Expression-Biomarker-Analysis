@@ -179,7 +179,7 @@ DownloadGEO <- function(GSEname = "GSE11121") {
   
   <span style="color: #04cc04; font-style: italic;"># Check if the dataset was successfully downloaded</span>
   if (!is.null(gset)) {
-    <span style="color: #04cc04; font-style: italic;"># Extract matrix, phenotype, and annotation data from the downloaded dataset</span>
+    <span style="color: #04cc04; font-style: italic;"># Extract matrix data from the downloaded dataset</span>
     matrix <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@assayData[["exprs"]]
     
     <span style="color: #0d8f50; font-style: italic;"><strong># Perform log2 transformation if the matrix is not already transformed</strong></span>
@@ -222,7 +222,8 @@ DownloadGEO <- function(GSEname = "GSE11121") {
     
     <span style="color: #04cc04; font-style: italic;"># Remove unnecessary variables to free up memory</span>
     rm(gset, matrix, phenotype, annot)
-    
+
+    <span style="color: #04cc04; font-style: italic;"># Display a completion message</span>
     message("+++++ Dataset is ready to be analyzed. +++++")
   }
 }
