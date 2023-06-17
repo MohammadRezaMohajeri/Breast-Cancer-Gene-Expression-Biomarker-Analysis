@@ -150,15 +150,6 @@
 			<span class="blue-text">BLUE TEXTTTTT</span> 
 			<strong>BOLD TEXTTTTTT</strong> 
 			-->
-			 -- <span style="color: #1883ad; font-style: italic;"># Load the GEOquery library for accessing GEO data</span>
-			 -- <span style="color: #208fba; font-style: italic;"># Load the GEOquery library for accessing GEO data</span>
-			 -- <span style="color: #2ba1cf; font-style: italic;"># Load the GEOquery library for accessing GEO data</span>
-			 -- <span style="color: #032e94; font-style: italic;"># Load the GEOquery library for accessing GEO data</span>
-			 -- <span style="color: #0640c9; font-style: italic;"># Load the GEOquery library for accessing GEO data</span>
-			 -- <span style="color: #2791ba; font-style: italic;"># Load the GEOquery library for accessing GEO data</span>
-			 -- <span style="color: #0548e8; font-style: italic;"># Load the GEOquery library for accessing GEO data</span>
-
-
 
 <span style="color: #04cc04; font-style: italic;"># Load the GEOquery library for accessing GEO data</span>			
 require(GEOquery)
@@ -188,19 +179,19 @@ DownloadGEO <- <span style="color: #0548e8; font-style: italic;">function</span>
                  destdir = paste0(getwd(), "/", GSEname))
   
   <span style="color: #04cc04; font-style: italic;"># Check if the dataset was successfully downloaded</span>
-  if (!is.null(gset)) {
+  <span style="color: #0548e8; font-style: italic;">if</span> (!is.null(gset)) {
     <span style="color: #04cc04; font-style: italic;"># Extract matrix data from the downloaded dataset</span>
     matrix <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@assayData[["exprs"]]
     
     <span style="color: #0d8f50; font-style: italic;"><strong># Perform log2 transformation if the matrix is not already transformed</strong></span>
     <span style="color: #04cc04; font-style: italic;"># Determine if log2 transformation is required based on the quantiles of the matrix values</span>
-    qx <- as.numeric(quantile(matrix, c(0., 0.25, 0.5, 0.75, 0.99, 1.0), na.rm = TRUE))
+    qx <- as.numeric(quantile(matrix, c(0., 0.25, 0.5, 0.75, 0.99, 1.0), na.rm = <span style="color: #0548e8; font-style: italic;">TRUE</span>))
     LogC <- (qx[5] > 100) || (qx[6] - qx[1] > 50 && qx[2] > 0)
     
     <span style="color: #04cc04; font-style: italic;"># Check if log2 transformation is required</span>
-    if (LogC) {
+    <span style="color: #0548e8; font-style: italic;">if</span> (LogC) {
       <span style="color: #04cc04; font-style: italic;"># Replace non-positive values with NA</span>
-      matrix[matrix <= 0] <- NA
+      matrix[matrix <= 0] <- <span style="color: #0548e8; font-style: italic;">NA</span>
       <span style="color: #04cc04; font-style: italic;"># Perform log2 transformation on the matrix</span>
       matrix <- log2(matrix)
     }
@@ -224,7 +215,7 @@ DownloadGEO <- <span style="color: #0548e8; font-style: italic;">function</span>
     
     <span style="color: #0d8f50; font-style: italic;"><strong># Write the extracted variables to files:</strong></span>
     <span style="color: #04cc04; font-style: italic;"># Write the 'matrix' variable to a CSV file</span>
-    write.csv(matrix, paste0(GSEname, "/", "matrix.csv"), quote = FALSE, row.names = FALSE)
+    write.csv(matrix, paste0(GSEname, "/", "matrix.csv"), quote = <span style="color: #0548e8; font-style: italic;">FALSE</span>, row.names = <span style="color: #0548e8; font-style: italic;">FALSE</span>)
     <span style="color: #04cc04; font-style: italic;"># Write the 'phenotype' variable to a TSV file</span>
     write_tsv(phenotype, paste0(GSEname, "/", "phenotype.tsv"))
     <span style="color: #04cc04; font-style: italic;"># Write the 'annot' variable to a TSV file</span>
@@ -240,7 +231,7 @@ DownloadGEO <- <span style="color: #0548e8; font-style: italic;">function</span>
 
 
 <span style="color: #04cc04; font-style: italic;"># Function to perform differential expression analysis on the specified GEO dataset.</span>
-DEGanalysis <- function(projname,
+DEGanalysis <- <span style="color: #0548e8; font-style: italic;">function</span>(projname,
                         compare = "subtype",
                         groups,
                         adjust = "fdr") {
@@ -273,11 +264,11 @@ DEGanalysis <- function(projname,
   annot <- annot[, -1]
   
   <span style="color: #04cc04; font-style: italic;"# Extract sample IDs based on user-specified groups for differential analysis></span>
-  if (compare == "subtype") {
+  <span style="color: #0548e8; font-style: italic;">if</span> (compare == "subtype") {
     
     <span style="color: #04cc04; font-style: italic;"># Preparing the breast cancer subtype</span>
     phecoln <- grep("pam50", phenotype)
-    if (length(phecoln) > 0) {
+    <span style="color: #0548e8; font-style: italic;">if</span> (length(phecoln) > 0) {
       <span style="color: #04cc04; font-style: italic;"># Prepare breast cancer subtypes into a dataframe</span>
       pheno <- data.frame(phenotype[, phecoln])
       <span style="color: #04cc04; font-style: italic;"># Extract relevant columns from the phenotype file for breast cancer subtypes and rename them</span>
@@ -287,7 +278,7 @@ DEGanalysis <- function(projname,
       <span style="color: #04cc04; font-style: italic;"># Store the extracted subtypes in a list, grouped by user-specified group names</span>
       grouplis <- list()
       <span style="color: #04cc04; font-style: italic;"># Iterate over each group specified by the user</span>
-      for (i in seq_along(groups)) {
+      <span style="color: #0548e8; font-style: italic;">for</span> (i <span style="color: #0548e8; font-style: italic;">in</span> seq_along(groups)) {
         <span style="color: #04cc04; font-style: italic;"># Create a regular expression pattern by concatenating group elements with a "|"</span>
         name <- paste0(groups[[i]], collapse = "|")
         <span style="color: #04cc04; font-style: italic;"># Find the row numbers in the "subtype" column of the phenotype data that match the pattern</span>
@@ -296,14 +287,14 @@ DEGanalysis <- function(projname,
         grouplis[[names(groups)[i]]] <- rownames(pheno)[rownum]
       }
     }
-  } else {
+  } <span style="color: #0548e8; font-style: italic;">else</span> {
     
     <span style="color: #0d8f50; font-style: italic;"><strong># Preparing the breast cancer grades:</strong></span>
     <span style="color: #04cc04; font-style: italic;"># Find columns containing "grade:" in the 'phenotype' data frame</span>
     gradecoln <- grep("grade:", phenotype)
     
     <span style="color: #04cc04; font-style: italic;"># Check if there are any columns with "grade:" found</span>
-    if (length(gradecoln) > 0) {
+    <span style="color: #0548e8; font-style: italic;">if</span> (length(gradecoln) > 0) {
       <span style="color: #04cc04; font-style: italic;"># Prepare breast cancer grades into a dataframe</span>
       grade <- data.frame(phenotype[, gradecoln])
       
@@ -316,7 +307,7 @@ DEGanalysis <- function(projname,
       
       <span style="color: #04cc04; font-style: italic;"># Identify rows containing the pattern "III" in the 'grade' column</span>
       greek <- grep("III", grade$grade)
-      if (length(greek) > 0) {
+      <span style="color: #0548e8; font-style: italic;">if</span> (length(greek) > 0) {
         
         <span style="color: #0d8f50; font-style: italic;"><strong># Convert grade names to numeric values:</strong></span>
         <span style="color: #04cc04; font-style: italic;"># Identify rows with grade "I"</span>
@@ -337,7 +328,7 @@ DEGanalysis <- function(projname,
       
       <span style="color: #04cc04; font-style: italic;"># Store the extracted grades in a list, grouped by user-specified group names</span>
       grouplis <- list()
-      for (i in seq_along(groups)) {
+      <span style="color: #0548e8; font-style: italic;">for</span> (i <span style="color: #0548e8; font-style: italic;">in</span> seq_along(groups)) {
         <span style="color: #04cc04; font-style: italic;"># Generate a group name by collapsing the elements of 'groups' with "|"</span>
         name <- paste0(groups[[i]], collapse = "|")
         <span style="color: #04cc04; font-style: italic;"># Find the row numbers in 'grade' where the group name is present in the 'grade' column</span>
@@ -350,7 +341,7 @@ DEGanalysis <- function(projname,
   
   <span style="color: #0d8f50; font-style: italic;"><strong># Rename the matrix file according to the groups name specified by the user:</strong></span>
   <span style="color: #04cc04; font-style: italic;"># Iterate over each group in grouplis</span>		
-  for (i in seq_along(grouplis)) {
+  <span style="color: #0548e8; font-style: italic;">for</span> (i <span style="color: #0548e8; font-style: italic;">in</span> seq_along(grouplis)) {
     <span style="color: #04cc04; font-style: italic;"># Generate a group name by collapsing the elements of 'grouplis[[i]]' with "|"</span>
     matname <- paste0(grouplis[[i]], collapse = "|")
     <span style="color: #04cc04; font-style: italic;"># Find the column numbers in 'matrix' where the group name is present in the column names</span>
@@ -371,7 +362,7 @@ DEGanalysis <- function(projname,
   <span style="color: #04cc04; font-style: italic;"># Create an empty list to store the factors</span>
   gname <- list()
   <span style="color: #04cc04; font-style: italic;"># Iterate over each group in grouplis</span>
-  for (i in seq_along(grouplis)) {
+  <span style="color: #0548e8; font-style: italic;">for</span> (i <span style="color: #0548e8; font-style: italic;">in</span> seq_along(grouplis)) {
     <span style="color: #04cc04; font-style: italic;"># Count the number of columns in matrix corresponding to the group</span>
     number <- length(grep(names(grouplis)[i], colnames(matrix)))
     <span style="color: #04cc04; font-style: italic;"># Create a factor variable with values i - 1 repeated number times</span>
@@ -401,7 +392,7 @@ DEGanalysis <- function(projname,
   fit2 <- eBayes(fit2)
   
   <span style="color: #04cc04; font-style: italic;"># Generate a top table of differentially expressed genes</span>
-  DEGs <- topTable(fit2, adjust = adjust, number = Inf)
+  DEGs <- topTable(fit2, adjust = adjust, number = <span style="color: #0548e8; font-style: italic;">Inf</span>)
   <span style="color: #04cc04; font-style: italic;"># Add row names as a separate column in the DEGs table</span>
   DEGs <- cbind(rownames(DEGs), DEGs)
   <span style="color: #04cc04; font-style: italic;"># Rename the first column as "ID"</span>
@@ -426,7 +417,7 @@ DEGanalysis <- function(projname,
   
   <span style="color: #0d8f50; font-style: italic;"><strong># Removing missing gene symbols:</strong></span>
   <span style="color: #04cc04; font-style: italic;"># Find the indices of rows with missing gene symbols</span>
-  genemissing <- which(is.na(DEGs$Gene.symbol) == TRUE)
+  genemissing <- which(is.na(DEGs$Gene.symbol) == <span style="color: #0548e8; font-style: italic;">TRUE</span>)
   <span style="color: #04cc04; font-style: italic;"># Remove the rows with missing gene symbols from the 'DEGs' data frame</span>
   DEGs <- DEGs[-genemissing, ]
   
@@ -440,7 +431,7 @@ DEGanalysis <- function(projname,
 
 
 <span style="color: #04cc04; font-style: italic;"># Function to generates volcano plots for the specified GEO datasets.</span>
-Makevolcano <- function(projname,
+Makevolcano <- <span style="color: #0548e8; font-style: italic;">function</span>(projname,
                         padjlevel = 0.05,
                         uplogFC = 1,
                         downlogFC = -1,
@@ -491,7 +482,7 @@ Makevolcano <- function(projname,
   volcano_all$Top <- ifelse(volcano_all$DEGs == "Top", volcano_all$Gene.symbol, "")
   
   <span style="color: #04cc04; font-style: italic;"># Plotting either with plotly or ggplot</span>
-  if (voltype == "plotly") {
+  <span style="color: #0548e8; font-style: italic;">if</span> (voltype == "plotly") {
     <span style="color: #04cc04; font-style: italic;"># Create a ggplot object with layers and annotations</span>
     p <- ggplot(data = volcano_all, aes(x = logFC, y = AdjustedPvalue, color = DEGs, fill = DEGs, text = paste("ID: ", ID,
 													       <span style="color: #04cc04; font-style: italic;"># Tooltip text for gene symbol</span>
@@ -531,7 +522,7 @@ Makevolcano <- function(projname,
              font = list(family = "Arial", color = "black", size = 24),
              <span style="color: #04cc04; font-style: italic;"># Customize legend properties</span>
              legend = list(family = "Arial", color = "black", size = 20, itemclick = "toggle"))
-  } else {
+  } <span style="color: #0548e8; font-style: italic;">else</span> {
     <span style="color: #024202; font-style: italic;"># Create a ggplot object with layers and annotations:</span>
     p <- ggplot(data = volcano_all, aes(x = logFC, y = AdjustedPvalue, color = DEGs, fill = DEGs, label = Top)) + 
       <span style="color: #04cc04; font-style: italic;"># Set the labels for x and y axes</span>
@@ -581,7 +572,7 @@ Makevolcano <- function(projname,
   colnames(top)[7] <- "n.log10(adj.P.Val)"
   
   <span style="color: #04cc04; font-style: italic;"># Save the top table as a CSV file in the project folder</span>
-  write.csv(top, paste0(projname, "/", "top.csv"), quote = FALSE, row.names = FALSE)
+  write.csv(top, paste0(projname, "/", "top.csv"), quote = <span style="color: #0548e8; font-style: italic;">FALSE</span>, row.names = <span style="color: #0548e8; font-style: italic;">FALSE</span>)
   
   <span style="color: #04cc04; font-style: italic;"># Display the number of up-regulated and down-regulated genes</span>
   message(sprintf("Up-regulated genes: %s; Down-regulated genes: %s", nrow(volcano_up), nrow(volcano_down)))
@@ -592,16 +583,16 @@ Makevolcano <- function(projname,
 
 
 <span style="color: #04cc04; font-style: italic;"># Function to creates a Venn diagram to visualize common differentially expressed genes among specified GEO datasets.</span>
-MakeVenna <- function(common, ntop = 10) {
+MakeVenna <- <span style="color: #0548e8; font-style: italic;">function</span>(common, ntop = 10) {
   
   <span style="color: #04cc04; font-style: italic;"># Create a directory to store the output files</span>
-  dir.create("common", showWarnings = FALSE)
+  dir.create("common", showWarnings = <span style="color: #0548e8; font-style: italic;">FALSE</span>)
   
   <span style="color: #04cc04; font-style: italic;"># Reading all all_top_down files and processing them</span>
   com_table <- list()
   
   <span style="color: #04cc04; font-style: italic;"># Process each dataset</span>
-  for (i in seq_along(common)) {
+  <span style="color: #0548e8; font-style: italic;">for</span> (i <span style="color: #0548e8; font-style: italic;">in</span> seq_along(common)) {
     <span style="color: #04cc04; font-style: italic;"># Read the all_top_down file for the current dataset</span>
     DEG_table <- data.frame(read_tsv(paste0(common[i], "/", "all_top_down.tsv")))
     
@@ -621,7 +612,7 @@ MakeVenna <- function(common, ntop = 10) {
     uniq_genes_list <- list()
     
     <span style="color: #04cc04; font-style: italic;"># Process each duplicated gene</span>
-    for (j in seq_along(dup_uniq_genes)) {
+    <span style="color: #0548e8; font-style: italic;">for</span> (j <span style="color: #0548e8; font-style: italic;">in</span> seq_along(dup_uniq_genes)) {
       <span style="color: #04cc04; font-style: italic;"># Find the indices of the current duplicated gene</span>
       c <- which(all_dup$Gene.symbol %in% dup_uniq_genes[j])
       <span style="color: #04cc04; font-style: italic;"># Calculate the mean logFC</span>
@@ -662,7 +653,7 @@ MakeVenna <- function(common, ntop = 10) {
   <span style="color: #04cc04; font-style: italic;"># Create an empty list to store the up and down-regulated genes</span>
   DEGslist <- list()
   
-  for (i in seq_along(com_table)) {
+  <span style="color: #0548e8; font-style: italic;">for</span> (i <span style="color: #0548e8; font-style: italic;">in</span> seq_along(com_table)) {
     <span style="color: #04cc04; font-style: italic;"># Extract the 8th column (DEGs) and store it in the list</span>
     DEGslist[[common[i]]] <- com_table[[i]][8]
   }
@@ -676,7 +667,7 @@ MakeVenna <- function(common, ntop = 10) {
   <span style="color: #04cc04; font-style: italic;"># Create an empty list to store all common genes (including all samples)</span>
   all_com_all <- list()
   
-  for (i in seq_along(com_table)) {
+  <span style="color: #0548e8; font-style: italic;">for</span> (i <span style="color: #0548e8; font-style: italic;">in</span> seq_along(com_table)) {
     <span style="color: #04cc04; font-style: italic;"># Extract the common differentially expressed genes for the current dataset</span>
     comn <- which(com_table[[names(com_table)[i]]][["Gene.symbol"]] %in% com_prob$Gene.symbol)
     <span style="color: #04cc04; font-style: italic;"># Subset the current dataset with the common DEGs</span>
@@ -690,12 +681,12 @@ MakeVenna <- function(common, ntop = 10) {
     <span style="color: #04cc04; font-style: italic;"># Extract the top up-regulated genes for the current dataset</span>
     com_final_up <- com_final_DEG[which(com_final_DEG$DEG == "Upregulated"), ]
     <span style="color: #04cc04; font-style: italic;"># Sort the subsetted data frame based on the "logFC" column in decreasing order</span>
-    com_final_up <- com_final_up[order(com_final_up$logFC, decreasing = TRUE), ]
+    com_final_up <- com_final_up[order(com_final_up$logFC, decreasing = <span style="color: #0548e8; font-style: italic;">TRUE</span>), ]
     
     <span style="color: #04cc04; font-style: italic;"># Extract the top down-regulated genes for the current dataset</span>
     com_final_down <- com_final_DEG[which(com_final_DEG$DEG == "Downregulated"), ]
     <span style="color: #04cc04; font-style: italic;"># Sort the subsetted data frame based on the "logFC" column in increasing order</span>
-    com_final_down <- com_final_down[order(com_final_down$logFC, decreasing = FALSE), ]
+    com_final_down <- com_final_down[order(com_final_down$logFC, decreasing = <span style="color: #0548e8; font-style: italic;">FALSE</span>), ]
     
     <span style="color: #04cc04; font-style: italic;"># Save the top common differentially expressed genes as a TSV file</span>
     write_tsv(rbind(com_final_up[1:ntop, ], com_final_down[1:ntop, ]), paste0("common", "/", names(com_table)[i], "_top_common_DEGs.tsv"))
@@ -773,7 +764,7 @@ MakeVenna <- function(common, ntop = 10) {
   <span style="color: #04cc04; font-style: italic;"># Creating a list of DEGs for each dataset to generate a Venn diagram</span>
   venlist <- list()
   <span style="color: #04cc04; font-style: italic;"># Iterating over the DEGslist to populate the venlist</span>
-  for (i in seq_along(DEGslist)) {
+  <span style="color: #0548e8; font-style: italic;">for</span> (i <span style="color: #0548e8; font-style: italic;">in</span> seq_along(DEGslist)) {
     venlist[[common[i]]] <- DEGslist[[i]][[1]]
   }
   
@@ -795,12 +786,12 @@ MakeVenna <- function(common, ntop = 10) {
 
 
 <span style="color: #04cc04; font-style: italic;"># Function to prepares files for network analysis using the specified GEO datasets.</span>
-Makenetworkanalyst <- function(projname,
+Makenetworkanalyst <- <span style="color: #0548e8; font-style: italic;">function</span>(projname,
                                compare = "grade",
                                groups) {
   <span style="color: #04cc04; font-style: italic;"># Reading files</span>
   <span style="color: #04cc04; font-style: italic;"># Create 'networkanalyst' directory to store the output files</span>
-  dir.create("networkanalyst", showWarnings = FALSE)
+  dir.create("networkanalyst", showWarnings = <span style="color: #0548e8; font-style: italic;">FALSE</span>)
   
   <span style="color: #04cc04; font-style: italic;"># Read the 'matrix.csv' file</span>
   matrix <- read_csv(paste0(projname, "/", "matrix.csv"))
@@ -838,14 +829,14 @@ Makenetworkanalyst <- function(projname,
   <span style="color: #04cc04; font-style: italic;"># Add the gene symbols column back to the 'updown_matrix' dataframe</span>
   updown_matrix <- cbind(genes, updown_matrix)
   
-  if (compare == "subtype") {
+  <span style="color: #0548e8; font-style: italic;">if</span> (compare == "subtype") {
     <span style="color: #04cc04; font-style: italic;"># Prepare data based on subtype comparison</span>
     
     <span style="color: #04cc04; font-style: italic;"># Find the column index for 'pam50' in 'phenotype'</span>
     phecoln <- grep("pam50", phenotype)
     
     <span style="color: #04cc04; font-style: italic;"># Check if the length of 'phecoln' is greater than 0 (if there are subtype columns present in 'phenotype' dataframe.)</span>
-    if (length(phecoln) > 0) {
+    <span style="color: #0548e8; font-style: italic;">if</span> (length(phecoln) > 0) {
       <span style="color: #04cc04; font-style: italic;"># Extract the subtype column from 'phenotype'</span>
       pheno <- data.frame(phenotype[, phecoln])
       <span style="color: #04cc04; font-style: italic;"># Rename the column to "subtype"</span>
@@ -859,7 +850,7 @@ Makenetworkanalyst <- function(projname,
       <span style="color: #04cc04; font-style: italic;"># Creating groups of samples based on specified conditions:</span>
       <span style="color: #04cc04; font-style: italic;"># Create an empty list to store groups of samples</span>
       grouplis <- list()
-      for (i in seq_along(groups)) {
+      <span style="color: #0548e8; font-style: italic;">for</span> (i <span style="color: #0548e8; font-style: italic;">in</span> seq_along(groups)) {
         <span style="color: #04cc04; font-style: italic;"># Combine the group names using the '|' separator</span>
         name <- paste0(groups[[i]], collapse = "|")
         <span style="color: #04cc04; font-style: italic;"># Find the rows in 'pheno$subtype' that match the group name</span>
@@ -868,12 +859,12 @@ Makenetworkanalyst <- function(projname,
         grouplis[[names(groups)[i]]] <- rownames(pheno)[rownum]
       }
     }
-  } else {
+  } <span style="color: #0548e8; font-style: italic;">else</span> {
     <span style="color: #04cc04; font-style: italic;"># Preparing the breast cancer grades into a dataframe:</span>
     <span style="color: #04cc04; font-style: italic;"># Find the column index containing "grade:" in the phenotype data</span>
     gradecoln <- grep("grade:", phenotype)
     <span style="color: #04cc04; font-style: italic;"># Check if any column contains "grade:"</span>
-    if (length(gradecoln) > 0) {
+    <span style="color: #0548e8; font-style: italic;">if</span> (length(gradecoln) > 0) {
       <span style="color: #04cc04; font-style: italic;"># Extract the column with "grade:" and create a data frame</span>
       grade <- data.frame(phenotype[, gradecoln])
       <span style="color: #04cc04; font-style: italic;"># Rename the column to "grade"</span>
@@ -885,7 +876,7 @@ Makenetworkanalyst <- function(projname,
       <span style="color: #04cc04; font-style: italic;"># Find the rows with "III" in the grade column</span>
       greek <- grep("III", grade$grade)
       <span style="color: #04cc04; font-style: italic;"># Check if any rows contain "III"</span>
-      if (length(greek) > 0) {
+      <span style="color: #0548e8; font-style: italic;">if</span> (length(greek) > 0) {
         <span style="color: #04cc04; font-style: italic;"># Find the rows with "I", "II", "III" in the grade column</span>
         one <- which(factor(grade$grade) == "I")
         two <- which(factor(grade$grade) == "II")
@@ -901,7 +892,7 @@ Makenetworkanalyst <- function(projname,
       rownames(grade) <- rownames(phenotype)
       <span style="color: #04cc04; font-style: italic;"># Create an empty list to store the group information</span>
       grouplis <- list()
-      for (i in seq_along(groups)) {
+      <span style="color: #0548e8; font-style: italic;">for</span> (i <span style="color: #0548e8; font-style: italic;">in</span> seq_along(groups)) {
         <span style="color: #04cc04; font-style: italic;"># Concatenate the elements of 'groups' with a '|' separator</span>
         name <- paste0(groups[[i]], collapse = "|")
         <span style="color: #04cc04; font-style: italic;"># Find the rows in the 'grade' data frame where the 'grade' column matches the group name</span>
@@ -915,7 +906,7 @@ Makenetworkanalyst <- function(projname,
   <span style="color: #04cc04; font-style: italic;"># Renaming the matrix file according to the groups name specified by the user:</span>
   <span style="color: #04cc04; font-style: italic;"># Bind the column names of 'updown_matrix' as the first row of 'updown_matrix'</span>
   updown_matrix <- rbind(colnames(updown_matrix), updown_matrix)
-  for (i in seq_along(grouplis)) {
+  <span style="color: #0548e8; font-style: italic;">for</span> (i <span style="color: #0548e8; font-style: italic;">in</span> seq_along(grouplis)) {
     <span style="color: #04cc04; font-style: italic;"># Concatenate the elements of 'grouplis[[i]]' with a '|' separator</span>
     matname <- paste0(grouplis[[i]], collapse = "|")
     <span style="color: #04cc04; font-style: italic;"># Find the columns in 'updown_matrix' that match the group name specified by 'matname'</span>
@@ -935,7 +926,7 @@ Makenetworkanalyst <- function(projname,
   colnames(updown_matrix)[1] <- "#NAME"
   
   <span style="color: #04cc04; font-style: italic;"># Write 'updown_matrix' to a tab-separated file</span>
-  write.table(updown_matrix, paste0("networkanalyst", "/", projname, "_dataanlys.txt"), quote = FALSE, row.names = FALSE, sep = "\t")
+  write.table(updown_matrix, paste0("networkanalyst", "/", projname, "_dataanlys.txt"), quote = <span style="color: #0548e8; font-style: italic;">FALSE</span>, row.names = <span style="color: #0548e8; font-style: italic;">FALSE</span>, sep = "\t")
   
   <span style="color: #04cc04; font-style: italic;"># Display a message indicating that the file has been saved</span>
   message("+++++ Your file has been saved in the networkanalyst folder. +++++")
