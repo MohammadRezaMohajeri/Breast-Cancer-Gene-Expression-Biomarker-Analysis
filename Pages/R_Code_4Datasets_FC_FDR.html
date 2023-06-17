@@ -483,12 +483,12 @@ Makevolcano <- function(projname,
   if (voltype == "plotly") {
     <span style="color: #04cc04; font-style: italic;"># Create a ggplot object with layers and annotations</span>
     p <- ggplot(data = volcano_all, aes(x = logFC, y = AdjustedPvalue, color = DEGs, fill = DEGs, text = paste("ID: ", ID,
-														<span style="color: #04cc04; font-style: italic;"># Tooltip text for gene symbol</span>
-	                                                                                                        "&#x000A;Gene: ", Gene.symbol,
-	                                                                                                        <span style="color: #04cc04; font-style: italic;"># Tooltip text for chromosome location</span>
-	                                                                                                        "<br>Chromosome: ", Chromosome.location,
-	                                                                                                        <span style="color: #04cc04; font-style: italic;"># Tooltip text for GO function</span>
-	                                                                                                        "<br>GO function: ", GO.Function))) +
+													       <span style="color: #04cc04; font-style: italic;"># Tooltip text for gene symbol</span>
+	                                                                                                       "&lt;br&gt; Gene: ", Gene.symbol,
+	                                                                                                       <span style="color: #04cc04; font-style: italic;"># Tooltip text for chromosome location</span>
+	                                                                                                       "&lt;br&gt; Chromosome: ", Chromosome.location,
+	                                                                                                       <span style="color: #04cc04; font-style: italic;"># Tooltip text for GO function</span>
+	                                                                                                       "&lt;br&gt; GO function: ", GO.Function))) +
       <span style="color: #04cc04; font-style: italic;"># Set the x-axis label, y-axis label, and plot title</span>
       labs(x = 'log2 (Fold Change)', y = "-log10(Adjusted P-value)", title = paste0("Volcano plot-", projname)) +
       <span style="color: #04cc04; font-style: italic;"># Add points to the plot with specified size and shape</span>
