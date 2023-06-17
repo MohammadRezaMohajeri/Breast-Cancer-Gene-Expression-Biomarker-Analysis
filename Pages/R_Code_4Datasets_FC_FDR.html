@@ -602,21 +602,21 @@ MakeVenna <- function(common, ntop = 10) {
     <span style="color: #04cc04; font-style: italic;"># Calculation the mean for logFC/AveExpr/t value/P-value/adjusted P-value/B value of duplicated genes</span>
     uniq_genes_list <- list()
     
-    <span style="color: #04cc04; font-style: italic;"></span># Process each duplicated gene
+    <span style="color: #04cc04; font-style: italic;"># Process each duplicated gene</span>
     for (j in seq_along(dup_uniq_genes)) {
-      <span style="color: #04cc04; font-style: italic;"></span># Find the indices of the current duplicated gene
+      <span style="color: #04cc04; font-style: italic;"># Find the indices of the current duplicated gene</span>
       c <- which(all_dup$Gene.symbol %in% dup_uniq_genes[j])
-      <span style="color: #04cc04; font-style: italic;"></span># Calculate the mean logFC
+      <span style="color: #04cc04; font-style: italic;"># Calculate the mean logFC</span>
       b <- c(mean(all_dup$logFC[c]),
-             <span style="color: #04cc04; font-style: italic;"></span># Calculate the mean AveExpr
+             <span style="color: #04cc04; font-style: italic;"># Calculate the mean AveExpr</span>
              mean(all_dup$AveExpr[c]),
-             <span style="color: #04cc04; font-style: italic;"></span># Calculate the mean t value
+             <span style="color: #04cc04; font-style: italic;"># Calculate the mean t value</span>
              mean(all_dup$t[c]),
-             <span style="color: #04cc04; font-style: italic;"></span># Calculate the mean P-value
+             <span style="color: #04cc04; font-style: italic;"># Calculate the mean P-value</span>
              mean(all_dup$P.Value[c]),
-             <span style="color: #04cc04; font-style: italic;"></span># Calculate the mean adjusted P-value
+             <span style="color: #04cc04; font-style: italic;"># Calculate the mean adjusted P-value</span>
              mean(all_dup$adj.P.Val[c]),
-             <span style="color: #04cc04; font-style: italic;"></span># Calculate the mean B value
+             <span style="color: #04cc04; font-style: italic;"># Calculate the mean B value</span>
              mean(all_dup$B[c]))
       
       <span style="color: #04cc04; font-style: italic;"># Assign column names and create a new data frame with the mean values</span>
@@ -925,10 +925,10 @@ Makenetworkanalyst <- function(projname,
 
 
 	  
-<span style="color: #300206; font-style: italic;">#=================================== Q1 ===================================#</span>
+<span style="color: #300206; font-style: italic;">#===================================================== Q1 =====================================================#</span>
 # other adjust methods ---> "holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr", "none"
 
-<span style="color: #66050d; font-style: italic;">################################# GSE25055 #################################</span> 
+<span style="color: #66050d; font-style: italic;">################################################# GSE25055 #################################################</span> 
 <span style="color: #04cc04; font-style: italic;"># Download the GEO dataset GSE25055</span>
 DownloadGEO("GSE25055")
 
@@ -952,7 +952,7 @@ Makenetworkanalyst(projname = "GSE25055",
                    compare = "grade",
                    groups = list(normal = c("1"), tumor = c("3")))
 
-<span style="color: #66050d; font-style: italic;">################################# GSE7390 #################################</span>
+<span style="color: #66050d; font-style: italic;">################################################# GSE7390 #################################################</span>
 <span style="color: #04cc04; font-style: italic;"># Download the GEO dataset GSE7390</span>
 DownloadGEO("GSE7390")
 
@@ -976,7 +976,7 @@ Makenetworkanalyst(projname = "GSE7390",
                    compare = "grade",
                    groups = list(normal = c("1"), tumor = c("3")))
 
-<span style="color: #66050d; font-style: italic;">################################# GSE11121 #################################</span>
+<span style="color: #75020c; font-style: italic;"><strong>################################################# GSE11121 #################################################</strong></span>
 <span style="color: #04cc04; font-style: italic;"># Download the GEO dataset GSE11121</span>
 DownloadGEO("GSE11121")
 
@@ -1000,7 +1000,7 @@ Makenetworkanalyst(projname = "GSE11121",
                    compare = "grade",
                    groups = list(normal = c("1"), tumor = c("3")))
 
-<span style="color: #66050d; font-style: italic;">################################# GSE25065 #################################</span>
+<span style="color: #75020c; font-style: italic;">################################################# GSE25065 #################################################</span>
 <span style="color: #04cc04; font-style: italic;"></span># Download the GEO dataset GSE25065
 DownloadGEO("GSE25065")
 
