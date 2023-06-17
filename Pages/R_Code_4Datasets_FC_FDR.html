@@ -337,7 +337,8 @@ DEGanalysis <- function(projname,
     }
   }
   
-  <span style="color: #04cc04; font-style: italic;"># Rename the matrix file according to the groups name specified by the user</span>
+  <span style="color: #0d8f50; font-style: italic;"><strong># Rename the matrix file according to the groups name specified by the user:</strong></span>
+  <span style="color: #04cc04; font-style: italic;"># Iterate over each group in grouplis</span>		
   for (i in seq_along(grouplis)) {
     <span style="color: #04cc04; font-style: italic;"># Generate a group name by collapsing the elements of 'grouplis[[i]]' with "|"</span>
     matname <- paste0(grouplis[[i]], collapse = "|")
@@ -346,8 +347,9 @@ DEGanalysis <- function(projname,
     <span style="color: #04cc04; font-style: italic;"># Rename the columns of 'matrix' with the group name followed by a numeric index</span>
     colnames(matrix)[matcoln] <- paste0(names(grouplis)[i], 1:length(grouplis[[i]]))
   }
-  
-  <span style="color: #04cc04; font-style: italic;"># Keep only the renamed samples in the matrix and order them</span>
+   
+  <span style="color: #0d8f50; font-style: italic;"><strong># Keep only the renamed samples in the matrix and order them:</strong></span>
+  <span style="color: #04cc04; font-style: italic;"># Subset and reorder the 'matrix' data frame based on the group names</span>
   matnames <- grep(paste0(names(grouplis), collapse = "|"), colnames(matrix))
   <span style="color: #04cc04; font-style: italic;"># Subset the 'matrix' data frame to include only the columns corresponding to the renamed samples</span>
   matrix <- matrix[, matnames]
@@ -440,7 +442,7 @@ Makevolcano <- function(projname,
   <span style="color: #04cc04; font-style: italic;"># Define a vector of color codes</span>
   my_pal <- c("#1B9E77","#7570B3", "#E7298A", "#66A61E", "#E6AB02", "#A6761D", "#666666", "#9A7D0A")
   
-  <span style="color: #04cc04; font-style: italic;"># Add DEG column based on the value of adj.P.Val and logFC</span>
+  <span style="color: #0d8f50; font-style: italic;"><strong># Add DEG column based on the value of adj.P.Val and logFC:</strong></span>
   volcano <- table %>%
     <span style="color: #04cc04; font-style: italic;"># Calculate AdjustedPvalue as the negative logarithm (base 10) of adj.P.Val</span>
     mutate(AdjustedPvalue = -log10(adj.P.Val)) %>%
@@ -451,21 +453,26 @@ Makevolcano <- function(projname,
     <span style="color: #04cc04; font-style: italic;"># Update DEG based on conditions for downregulation</span>
     mutate(DEG = ifelse(AdjustedPvalue > -log10(padjlevel) & logFC < downlogFC, "Downregulated", DEG))
   
-  <span style="color: #0d8f50; font-style: italic;"><strong># Calculating the number of each Upregulated, Downregulated, and NonSignificant probes:</strong></span>
-  <span style="color: #04cc04; font-style: italic;"># Separate the DEGs into three categories: Upregulated</span>
+  <span style="color: #0d8f50; font-style: italic;"><strong># Separate the DEGs into three categories: Upregulated, Downregulated, Non-Significant:</strong></span>
+  <span style="color: #04cc04; font-style: italic;"># Subset the 'volcano' data frame to select only the rows where the 'DEG' column is equal to "Upregulated".</span>
   volcano_up <- volcano[which(volcano$DEG == "Upregulated"), ]
+  <span style="color: #04cc04; font-style: italic;"># Sort the 'volcano_up' data frame in descending order based on the 'logFC' column.</span>
   volcano_up <- volcano_up[order(volcano_up$logFC, decreasing = T), ]
-  <span style="color: #04cc04; font-style: italic;"># Separate the DEGs into three categories: Downregulated</span>
+  <span style="color: #04cc04; font-style: italic;"># Subset the 'volcano' data frame to select only the rows where the 'DEG' column is equal to "Downregulated".</span>
   volcano_down <- volcano[which(volcano$DEG == "Downregulated"), ]
+  <span style="color: #04cc04; font-style: italic;"># Sort the 'volcano_down' data frame in ascending order based on the 'logFC' column.</span>
   volcano_down <- volcano_down[order(volcano_down$logFC, decreasing = F), ]
-  <span style="color: #04cc04; font-style: italic;"># Separate the DEGs into three categories: Non-Significant</span>
+  <span style="color: #04cc04; font-style: italic;"># Subset the 'volcano' data frame to select only the rows where the 'DEG' column is equal to "Non-Significant".</span>
   volcano_NA <- volcano[which(volcano$DEG == "NotSignificant"), ]
   
-  <span style="color: #04cc04; font-style: italic;"># Combine the DEGs into a single data frame</span>
+  <span style="color: #0d8f50; font-style: italic;"><strong># Combine the DEGs into a single data frame:</strong></span>
+  <span style="color: #04cc04; font-style: italic;"># Combine the 'volcano_up', 'volcano_down', and 'volcano_NA' data frames vertically using the 'rbind' function.</span>
   volcano_all <- rbind(volcano_up, volcano_down, volcano_NA)
   
-  <span style="color: #04cc04; font-style: italic;"># Replace the top probes with the word "Top" in the DEGs column</span>
+  <span style="color: #0d8f50; font-style: italic;"><strong># Replace the top probes with the word "Top" in the DEGs column:</strong></span>
+  <span style="color: #04cc04; font-style: italic;"># Create a vector 'ntop_rep' with length 'ntop' where each element is "Top".</span>
   ntop_rep <- rep("Top", ntop)
+  <span style="color: #04cc04; font-style: italic;"># Create a new column 'DEGs' in the 'volcano_all' data frame.</span>
   volcano_all$DEGs <- c(ntop_rep, volcano_up$DEG[-c(1:ntop)], ntop_rep, volcano_down$DEG[-c(1:ntop)], volcano_NA$DEG)
   
   <span style="color: #0d8f50; font-style: italic;"><strong># Label only top genes:</strong></span>
@@ -476,12 +483,12 @@ Makevolcano <- function(projname,
   if (voltype == "plotly") {
     <span style="color: #04cc04; font-style: italic;"># Create a ggplot object with layers and annotations</span>
     p <- ggplot(data = volcano_all, aes(x = logFC, y = AdjustedPvalue, color = DEGs, fill = DEGs, text = paste("ID: ", ID,
-                                                                                                               <span style="color: #04cc04; font-style: italic;"># Tooltip text for gene symbol</span>
-                                                                                                               "<br>Gene: ", Gene.symbol,
-                                                                                                               <span style="color: #04cc04; font-style: italic;"># Tooltip text for chromosome location</span>
-                                                                                                               "<br>Chromosome: ", Chromosome.location,
-                                                                                                               <span style="color: #04cc04; font-style: italic;"># Tooltip text for GO function</span>
-                                                                                                               "<br>GO function: ", GO.Function))) +
+                                                                                                        <span style="color: #04cc04; font-style: italic;"># Tooltip text for gene symbol</span>
+                                                                                                        "<br>Gene: ", Gene.symbol,
+                                                                                                        <span style="color: #04cc04; font-style: italic;"># Tooltip text for chromosome location</span>
+                                                                                                        "<br>Chromosome: ", Chromosome.location,
+                                                                                                        <span style="color: #04cc04; font-style: italic;"># Tooltip text for GO function</span>
+                                                                                                        "<br>GO function: ", GO.Function))) +
       <span style="color: #04cc04; font-style: italic;"># Set the x-axis label, y-axis label, and plot title</span>
       labs(x = 'log2 (Fold Change)', y = "-log10(Adjusted P-value)", title = paste0("Volcano plot-", projname)) +
       <span style="color: #04cc04; font-style: italic;"># Add points to the plot with specified size and shape</span>
