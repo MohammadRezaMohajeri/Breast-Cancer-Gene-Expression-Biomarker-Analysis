@@ -186,9 +186,9 @@ require(ggvenn)
 DownloadGEO <- <span style="color: #53e053; font-style: italic;">function</span>(GSEname = <span style="color: #04cc04; font-style: italic;">"GSE11121"</span>) {
   <span style="color: #999999; font-style: italic;"># Create a folder for the dataset</span>
   dir.create(GSEname, showWarnings = <span style="color: #0548e8; font-style: italic;">FALSE</span>)
-   
+
   <span style="color: #999999; font-style: italic;"># Increase memory allocation for efficient data processing</span>
-  Sys.setenv(<span style="color: #04cc04; font-style: italic;">"VROOM_CONNECTION_SIZE"</span> = 131072 * 10)
+  Sys.setenv(<span style="color: #04cc04; font-style: italic;">"VROOM_CONNECTION_SIZE"</span> = <span style="color: #cf2139; font-style: italic;">131072</span> * <span style="color: #E7298A; font-style: italic;">10</span>)
   
   <span style="color: #999999; font-style: italic;"># Download the dataset from the GEO database</span>
   gset <- getGEO(GSEname, GSEMatrix = <span style="color: #0548e8; font-style: italic;">TRUE</span>, AnnotGPL = <span style="color: #0548e8; font-style: italic;">TRUE</span>,
