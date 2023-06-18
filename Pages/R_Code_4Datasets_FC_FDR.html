@@ -150,7 +150,7 @@
 			<span class="blue-text">BLUE TEXTTTTT</span> 
 			<strong>BOLD TEXTTTTTT</strong> 
 			-->
-<span style="color: #04cc04; font-style: italic;">1FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
+<span style="color: #04cc04; font-style: italic;"></span>
 <span style="color: #07e307; font-style: italic;">2FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
 <span style="color: #07f707; font-style: italic;">3FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
 <span style="color: #05a105; font-style: italic;">4FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
@@ -182,24 +182,23 @@ require(ggvenn)
 <span style="color: #999999; font-style: italic;"># devtools::install_github("yanlinlin82/ggvenn")</span>
 require(ggvenn)
 
-<span style="color: #999999; font-style: italic;"># Function to download the specified GEO dataset</span>
-DownloadGEO <- <span style="color: #53e053; font-style: italic;">function</span>(GSEname = <span style="color: #999999; font-style: italic;">"GSE11121"</span>) {
+<span style="color: #999999; font-style: italic;"># Function to download the specified GEO dataset</span> 
+DownloadGEO <- <span style="color: #53e053; font-style: italic;">function</span>(GSEname = <span style="color: #04cc04; font-style: italic;">"GSE11121"</span>) {
   <span style="color: #999999; font-style: italic;"># Create a folder for the dataset</span>
   dir.create(GSEname, showWarnings = <span style="color: #0548e8; font-style: italic;">FALSE</span>)
-  --- <span style="color: #53e053; font-style: italic;">12FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span> 
+   
   <span style="color: #999999; font-style: italic;"># Increase memory allocation for efficient data processing</span>
-  Sys.setenv("VROOM_CONNECTION_SIZE" = 131072 * 10)
+  Sys.setenv(<span style="color: #04cc04; font-style: italic;">"VROOM_CONNECTION_SIZE"</span> = 131072 * 10)
   
   <span style="color: #999999; font-style: italic;"># Download the dataset from the GEO database</span>
   gset <- getGEO(GSEname, GSEMatrix = <span style="color: #0548e8; font-style: italic;">TRUE</span>, AnnotGPL = <span style="color: #0548e8; font-style: italic;">TRUE</span>,
-                 destdir = paste0(getwd(), "/", GSEname))
+                 destdir = paste0(getwd(), <span style="color: #04cc04; font-style: italic;"><span style="color: #04cc04; font-style: italic;">"/"</span></span>, GSEname))
   
   <span style="color: #999999; font-style: italic;"># Check if the dataset was successfully downloaded</span>
   <span style="color: #0548e8; font-style: italic;">if</span> (!is.null(gset)) {
     <span style="color: #999999; font-style: italic;"># Extract matrix data from the downloaded dataset</span>
-    matrix <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@assayData[["exprs"]]
-    ---- <span style="color: #04cc04; font-style: italic;">1FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
-    ---- <span style="color: #07e307; font-style: italic;">2FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
+    matrix <- gset[[paste0(GSEname, <span style="color: #04cc04; font-style: italic;">"_series_matrix.txt.gz"</span>)]]@assayData[[<span style="color: #04cc04; font-style: italic;">"exprs"</span>]]
+    
     <span style="color: #999999; font-style: italic;"><strong># Perform log2 transformation if the matrix is not already transformed</strong></span>
     <span style="color: #999999; font-style: italic;"># Determine if log2 transformation is required based on the quantiles of the matrix values</span>
     qx <- as.numeric(quantile(matrix, c(0., 0.25, 0.5, 0.75, 0.99, 1.0), na.rm = <span style="color: #0548e8; font-style: italic;">TRUE</span>))
@@ -217,26 +216,26 @@ DownloadGEO <- <span style="color: #53e053; font-style: italic;">function</span>
     <span style="color: #999999; font-style: italic;"># Add row names as the first column of the matrix using cbind()</span>
     matrix <- cbind(rownames(matrix), matrix)
     <span style="color: #999999; font-style: italic;"># Set the column name of the first column as "ID" using colnames()</span>
-    colnames(matrix)[1] <- "ID"
+    colnames(matrix)[1] <- <span style="color: #04cc04; font-style: italic;">"ID"</span>
     
     <span style="color: #999999; font-style: italic;"><strong># Extract phenotype information from the dataset:</strong></span>
     <span style="color: #999999; font-style: italic;"># Extract the phenotype information from the dataset</span>
-    phenotype <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@phenoData@data  
+    phenotype <- gset[[paste0(GSEname, <span style="color: #04cc04; font-style: italic;">"_series_matrix.txt.gz"</span>)]]@phenoData@data  
     <span style="color: #999999; font-style: italic;"># Add row names as the first column of the phenotype data using cbind()</span>
     phenotype <- cbind(rownames(phenotype), phenotype)  
     <span style="color: #999999; font-style: italic;"># Set the column name of the first column as "ID" using colnames()</span>
-    colnames(phenotype)[1] <- "ID"  
+    colnames(phenotype)[1] <- <span style="color: #04cc04; font-style: italic;">"ID" </span> 
     
     <span style="color: #999999; font-style: italic;"># Extract annotation information from the dataset</span>
-    annot <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@featureData@data
+    annot <- gset[[paste0(GSEname, <span style="color: #04cc04; font-style: italic;">"_series_matrix.txt.gz"</span>)]]@featureData@data
     
     <span style="color: #999999; font-style: italic;"><strong># Write the extracted variables to files:</strong></span>
     <span style="color: #999999; font-style: italic;"># Write the 'matrix' variable to a CSV file</span>
-    write.csv(matrix, paste0(GSEname, "/", "matrix.csv"), quote = <span style="color: #0548e8; font-style: italic;">FALSE</span>, row.names = <span style="color: #0548e8; font-style: italic;">FALSE</span>)
+    write.csv(matrix, paste0(GSEname, <span style="color: #04cc04; font-style: italic;">"/"</span>, <span style="color: #04cc04; font-style: italic;">"matrix.csv"</span>), quote = <span style="color: #0548e8; font-style: italic;">FALSE</span>, row.names = <span style="color: #0548e8; font-style: italic;">FALSE</span>)
     <span style="color: #999999; font-style: italic;"># Write the 'phenotype' variable to a TSV file</span>
-    write_tsv(phenotype, paste0(GSEname, "/", "phenotype.tsv"))
+    write_tsv(phenotype, paste0(GSEname, <span style="color: #04cc04; font-style: italic;">"/"</span>, "phenotype.tsv"))
     <span style="color: #999999; font-style: italic;"># Write the 'annot' variable to a TSV file</span>
-    write_tsv(annot, paste0(GSEname, "/", "annot.tsv"))
+    write_tsv(annot, paste0(GSEname, <span style="color: #04cc04; font-style: italic;">"/"</span>, "annot.tsv"))
     
     <span style="color: #999999; font-style: italic;"># Remove unnecessary variables to free up memory</span>
     rm(gset, matrix, phenotype, annot)
@@ -254,7 +253,7 @@ DEGanalysis <- <span style="color: #0548e8; font-style: italic;">function</span>
                         adjust = "fdr") {
   <span style="color: #999999; font-style: italic;"><strong># Reading the files:</strong></span>
   <span style="color: #999999; font-style: italic;"># Read the matrix file and store it in a variable</span>
-  matrix <- read_csv(paste0(projname, "/", "matrix.csv"), )
+  matrix <- read_csv(paste0(projname, <span style="color: #04cc04; font-style: italic;">"/"</span>, "matrix.csv"), )
   <span style="color: #999999; font-style: italic;"># Convert the matrix into a data frame</span>
   matrix <- data.frame(matrix)
   <span style="color: #999999; font-style: italic;"># Set row names of the matrix</span>
@@ -263,7 +262,7 @@ DEGanalysis <- <span style="color: #0548e8; font-style: italic;">function</span>
   matrix <- matrix[, -1]
   
   <span style="color: #999999; font-style: italic;"># Read the phenotype file and store it in a variable</span>
-  phenotype <- read_tsv(paste0(projname, "/", "phenotype.tsv"))
+  phenotype <- read_tsv(paste0(projname, <span style="color: #04cc04; font-style: italic;">"/"</span>, "phenotype.tsv"))
   <span style="color: #999999; font-style: italic;"># Convert the phenotype into a data frame</span>
   phenotype <- data.frame(phenotype)
   <span style="color: #999999; font-style: italic;"># Set row names of the phenotype</span>
@@ -272,7 +271,7 @@ DEGanalysis <- <span style="color: #0548e8; font-style: italic;">function</span>
   phenotype <- phenotype[, -1]
   
   <span style="color: #999999; font-style: italic;"># Read the annotation file and store it in a variable</span>
-  annot <- read_tsv(paste0(projname, "/", "annot.tsv"))
+  annot <- read_tsv(paste0(projname, <span style="color: #04cc04; font-style: italic;">"/"</span>, "annot.tsv"))
   <span style="color: #999999; font-style: italic;"># Convert the annotation into a data frame</span>
   annot <- data.frame(annot)
   <span style="color: #999999; font-style: italic;"># Set row names of the annotation</span>
@@ -439,7 +438,7 @@ DEGanalysis <- <span style="color: #0548e8; font-style: italic;">function</span>
   DEGs <- DEGs[-genemissing, ]
   
   <span style="color: #999999; font-style: italic;"># Write the resulting top table to a file</span>
-  write_tsv(DEGs, paste0(projname, "/", "DEGs.tsv"))
+  write_tsv(DEGs, paste0(projname, <span style="color: #04cc04; font-style: italic;">"/"</span>, "DEGs.tsv"))
   
   <span style="color: #999999; font-style: italic;"># Display a completion message</span>
   message("+++++ Analysis has completed. +++++")
@@ -455,7 +454,7 @@ Makevolcano <- <span style="color: #0548e8; font-style: italic;">function</span>
                         ntop = 10,
                         voltype = "plotly") {
   <span style="color: #999999; font-style: italic;"># Read the tab-separated DEGs file into a data frame</span>
-  table <- read_tsv(paste0(projname, "/", "DEGs.tsv"))
+  table <- read_tsv(paste0(projname, <span style="color: #04cc04; font-style: italic;">"/"</span>, "DEGs.tsv"))
   table <- data.frame(table)
   
   <span style="color: #999999; font-style: italic;"># Define a vector of color codes</span>
@@ -579,7 +578,7 @@ Makevolcano <- <span style="color: #0548e8; font-style: italic;">function</span>
   
   <span style="color: #999999; font-style: italic;"><strong># Calculate the number of up-regulated and down-regulated genes:</strong></span>
   <span style="color: #999999; font-style: italic;"># Write the up-regulated and down-regulated genes to a TSV file</span>
-  write_tsv(rbind(volcano_up, volcano_down), paste0(projname, "/", "all_top_down.tsv"))
+  write_tsv(rbind(volcano_up, volcano_down), paste0(projname, <span style="color: #04cc04; font-style: italic;">"/"</span>, "all_top_down.tsv"))
   
   <span style="color: #999999; font-style: italic;"># Create the top table containing the top up-regulated and down-regulated genes</span>
   top <- rbind(volcano_up[1:ntop, ], volcano_down[1:ntop, ])
@@ -589,7 +588,7 @@ Makevolcano <- <span style="color: #0548e8; font-style: italic;">function</span>
   colnames(top)[7] <- "n.log10(adj.P.Val)"
   
   <span style="color: #999999; font-style: italic;"># Save the top table as a CSV file in the project folder</span>
-  write.csv(top, paste0(projname, "/", "top.csv"), quote = <span style="color: #0548e8; font-style: italic;">FALSE</span>, row.names = <span style="color: #0548e8; font-style: italic;">FALSE</span>)
+  write.csv(top, paste0(projname, <span style="color: #04cc04; font-style: italic;">"/"</span>, "top.csv"), quote = <span style="color: #0548e8; font-style: italic;">FALSE</span>, row.names = <span style="color: #0548e8; font-style: italic;">FALSE</span>)
   
   <span style="color: #999999; font-style: italic;"># Display the number of up-regulated and down-regulated genes</span>
   message(sprintf("Up-regulated genes: %s; Down-regulated genes: %s", nrow(volcano_up), nrow(volcano_down)))
@@ -611,7 +610,7 @@ MakeVenna <- <span style="color: #0548e8; font-style: italic;">function</span>(c
   <span style="color: #999999; font-style: italic;"># Process each dataset</span>
   <span style="color: #0548e8; font-style: italic;">for</span> (i <span style="color: #0548e8; font-style: italic;">in</span> seq_along(common)) {
     <span style="color: #999999; font-style: italic;"># Read the all_top_down file for the current dataset</span>
-    DEG_table <- data.frame(read_tsv(paste0(common[i], "/", "all_top_down.tsv")))
+    DEG_table <- data.frame(read_tsv(paste0(common[i], <span style="color: #04cc04; font-style: italic;">"/"</span>, "all_top_down.tsv")))
     
     <span style="color: #999999; font-style: italic;"># Finding duplicated genes</span>
     <span style="color: #999999; font-style: italic;"># Find the indices of duplicated genes</span>
@@ -693,7 +692,7 @@ MakeVenna <- <span style="color: #0548e8; font-style: italic;">function</span>(c
     com_final_DEG <- com_final_DEG[order(com_final_DEG$DEG), ]
     
     <span style="color: #999999; font-style: italic;"># Save the common differentially expressed genes as a TSV file</span>
-    write_tsv(com_final_DEG, paste0("common", "/", names(com_table)[i], "_common_DEGs.tsv"))
+    write_tsv(com_final_DEG, paste0("common", <span style="color: #04cc04; font-style: italic;">"/"</span>, names(com_table)[i], "_common_DEGs.tsv"))
     
     <span style="color: #999999; font-style: italic;"># Extract the top up-regulated genes for the current dataset</span>
     com_final_up <- com_final_DEG[which(com_final_DEG$DEG == "Upregulated"), ]
@@ -773,7 +772,7 @@ MakeVenna <- <span style="color: #0548e8; font-style: italic;">function</span>(c
   all_com_all_df <- all_com_all_df[, c(1, 6, 10, 9, 11, 7, 8, 2, 3, 4, 5)]
   
   <span style="color: #999999; font-style: italic;"># Writing the combined data frame of all calculated means to a TSV file</span>
-  write_tsv(all_com_all_df, paste0("common", "/", "all_mean_common_DEGs.tsv"))
+  write_tsv(all_com_all_df, paste0("common", <span style="color: #04cc04; font-style: italic;">"/"</span>, "all_mean_common_DEGs.tsv"))
   
   <span style="color: #999999; font-style: italic;"># Displaying a message to indicate that the common genes have been saved</span>
   message("+++++ Common genes between all datasets have been saved into the 'common' folder. +++++")
@@ -811,11 +810,11 @@ Makenetworkanalyst <- <span style="color: #0548e8; font-style: italic;">function
   dir.create("networkanalyst", showWarnings = <span style="color: #0548e8; font-style: italic;">FALSE</span>)
   
   <span style="color: #999999; font-style: italic;"># Read the 'matrix.csv' file</span>
-  matrix <- read_csv(paste0(projname, "/", "matrix.csv"))
+  matrix <- read_csv(paste0(projname, <span style="color: #04cc04; font-style: italic;">"/"</span>, "matrix.csv"))
   matrix <- data.frame(matrix)
   
   <span style="color: #999999; font-style: italic;"># Read the 'phenotype.tsv' file</span>
-  phenotype <- read_tsv(paste0(projname, "/", "phenotype.tsv"))
+  phenotype <- read_tsv(paste0(projname, <span style="color: #04cc04; font-style: italic;">"/"</span>, "phenotype.tsv"))
   phenotype <- data.frame(phenotype)
   
   <span style="color: #999999; font-style: italic;"># Set the row names of the 'phenotype' dataframe</span>
@@ -823,7 +822,7 @@ Makenetworkanalyst <- <span style="color: #0548e8; font-style: italic;">function
   
   <span style="color: #999999; font-style: italic;"># Calculating DEGs:</span>
   <span style="color: #999999; font-style: italic;"># Read the 'all_top_down.tsv' file containing up and down genes</span>
-  updown <- data.frame(read_tsv(paste0(projname, "/", "all_top_down.tsv")))
+  updown <- data.frame(read_tsv(paste0(projname, <span style="color: #04cc04; font-style: italic;">"/"</span>, "all_top_down.tsv")))
   
   <span style="color: #999999; font-style: italic;"># Creating a file that contains up and down genes based on groups specified:</span>
   
@@ -943,7 +942,7 @@ Makenetworkanalyst <- <span style="color: #0548e8; font-style: italic;">function
   colnames(updown_matrix)[1] <- "#NAME"
   
   <span style="color: #999999; font-style: italic;"># Write 'updown_matrix' to a tab-separated file</span>
-  write.table(updown_matrix, paste0("networkanalyst", "/", projname, "_dataanlys.txt"), quote = <span style="color: #0548e8; font-style: italic;">FALSE</span>, row.names = <span style="color: #0548e8; font-style: italic;">FALSE</span>, sep = "\t")
+  write.table(updown_matrix, paste0("networkanalyst", <span style="color: #04cc04; font-style: italic;">"/"</span>, projname, "_dataanlys.txt"), quote = <span style="color: #0548e8; font-style: italic;">FALSE</span>, row.names = <span style="color: #0548e8; font-style: italic;">FALSE</span>, sep = "\t")
   
   <span style="color: #999999; font-style: italic;"># Display a message indicating that the file has been saved</span>
   message("+++++ Your file has been saved in the networkanalyst folder. +++++")
