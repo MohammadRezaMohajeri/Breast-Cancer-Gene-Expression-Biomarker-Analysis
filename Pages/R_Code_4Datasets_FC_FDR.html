@@ -783,12 +783,12 @@ MakeVenna <- <span style="color: #0548e8; font-style: italic;">function</span>(c
   <span style="color: #0548e8; font-style: italic;">for</span> (i <span style="color: #0548e8; font-style: italic;">in</span> seq_along(DEGslist)) {
     venlist[[common[i]]] <- DEGslist[[i]][[1]]
   }
-  
+  <span style="color: #999999; font-style: italic;"></span>
   <span style="color: #999999; font-style: italic;"># Generate the Venn diagram using the logFC mean values for common genes</span>
   <span style="color: #999999; font-style: italic;"># Set the seed for random number generation</span>
   set.seed(1234)
   <span style="color: #999999; font-style: italic;"># Define color palette for the Venn diagram</span>
-  my_pal <- c(<span style="co<span style="color: #1B9E77; font-style: italic;">"#1B9E77"</span>, <span style="co<span style="color: #7570B3; font-style: italic;">"#7570B3"</span>, <span style="co<span style="color: #E7298A; font-style: italic;">"#E7298A"</span>, <span style="co<span style="color: #66A61E; font-style: italic;">"#66A61E"</span>, <span style="co<span style="color: #E6AB02; font-style: italic;">"#E6AB02"</span>, <span style="co<span style="color: #A6761D; font-style: italic;">"#A6761D"</span>, <span style="co<span style="color: #666666; font-style: italic;">"#666666"</span>, <span style="co<span style="color: #9A7D0A; font-style: italic;">"#9A7D0A"</span>)
+  my_pal <- c(<span style="color: #1B9E77; font-style: italic;">"#1B9E77"</span>, <span style="color: #7570B3; font-style: italic;">"#7570B3"</span>, <span style="color: #E7298A; font-style: italic;">"#E7298A"</span>, <span style="color: #; font-style: italic;">"#66A61E"</span>, <span style="color: #E6AB02; font-style: italic;">"#E6AB02"</span>, <span style="color: #A6761D; font-style: italic;">"#A6761D"</span>, <span style="color: #666666; font-style: italic;">"#666666"</span>, <span style="color: #9A7D0A; font-style: italic;">"#9A7D0A"</span>)
   <span style="color: #999999; font-style: italic;"># Create the Venn diagram using ggvenn package</span>
   venaa <- ggvenn(venlist, 
                   fill_color = my_pal,
