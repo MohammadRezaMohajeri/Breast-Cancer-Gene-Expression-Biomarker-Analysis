@@ -150,22 +150,22 @@
 			<span class="blue-text">BLUE TEXTTTTT</span> 
 			<strong>BOLD TEXTTTTTT</strong> 
 			-->
-<span style="color: #04cc04; font-style: italic;">FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
-<span style="color: #07e307; font-style: italic;">FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
-<span style="color: #07f707; font-style: italic;">FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
-<span style="color: #05a105; font-style: italic;">FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
-<span style="color: #038003; font-style: italic;">FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
-<span style="color: #036303; font-style: italic;">FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
-<span style="color: #024d02; font-style: italic;">FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
-<span style="color: #1e611e; font-style: italic;">FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
-<span style="color: #298029; font-style: italic;">FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
-<span style="color: #369936; font-style: italic;">FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
-<span style="color: #42bd42; font-style: italic;">FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
-<span style="color: #53e053; font-style: italic;">FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
-<span style="color: #62f562; font-style: italic;">FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
-<span style="color: #6df26d; font-style: italic;">FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
-<span style="color: #0d8f50; font-style: italic;">FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
-<span style="color: #097a43; font-style: italic;">FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>			
+<span style="color: #04cc04; font-style: italic;">1FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
+<span style="color: #07e307; font-style: italic;">2FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
+<span style="color: #07f707; font-style: italic;">3FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
+<span style="color: #05a105; font-style: italic;">4FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
+<span style="color: #038003; font-style: italic;">5FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
+<span style="color: #036303; font-style: italic;">6FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
+<span style="color: #024d02; font-style: italic;">7FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
+<span style="color: #1e611e; font-style: italic;">8FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
+<span style="color: #298029; font-style: italic;">9FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
+<span style="color: #369936; font-style: italic;">10FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
+<span style="color: #42bd42; font-style: italic;">11FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
+<span style="color: #53e053; font-style: italic;">12FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
+<span style="color: #62f562; font-style: italic;">13FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
+<span style="color: #6df26d; font-style: italic;">14FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
+<span style="color: #0d8f50; font-style: italic;">15FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
+<span style="color: #097a43; font-style: italic;">16FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>			
 
 <span style="color: #999999; font-style: italic;"># Load the GEOquery library for accessing GEO data</span>			
 require(GEOquery)
@@ -183,10 +183,10 @@ require(ggvenn)
 require(ggvenn)
 
 <span style="color: #999999; font-style: italic;"># Function to download the specified GEO dataset</span>
-DownloadGEO <- <span style="color: #0548e8; font-style: italic;">function</span>(GSEname = <span style="color: #999999; font-style: italic;">"GSE11121"</span>) {
+DownloadGEO <- <span style="color: #53e053; font-style: italic;">function</span>(GSEname = <span style="color: #999999; font-style: italic;">"GSE11121"</span>) {
   <span style="color: #999999; font-style: italic;"># Create a folder for the dataset</span>
   dir.create(GSEname, showWarnings = <span style="color: #0548e8; font-style: italic;">FALSE</span>)
-  
+  --- <span style="color: #53e053; font-style: italic;">12FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span> 
   <span style="color: #999999; font-style: italic;"># Increase memory allocation for efficient data processing</span>
   Sys.setenv("VROOM_CONNECTION_SIZE" = 131072 * 10)
   
@@ -198,7 +198,8 @@ DownloadGEO <- <span style="color: #0548e8; font-style: italic;">function</span>
   <span style="color: #0548e8; font-style: italic;">if</span> (!is.null(gset)) {
     <span style="color: #999999; font-style: italic;"># Extract matrix data from the downloaded dataset</span>
     matrix <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@assayData[["exprs"]]
-    
+    ---- <span style="color: #04cc04; font-style: italic;">1FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
+    ---- <span style="color: #07e307; font-style: italic;">2FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
     <span style="color: #999999; font-style: italic;"><strong># Perform log2 transformation if the matrix is not already transformed</strong></span>
     <span style="color: #999999; font-style: italic;"># Determine if log2 transformation is required based on the quantiles of the matrix values</span>
     qx <- as.numeric(quantile(matrix, c(0., 0.25, 0.5, 0.75, 0.99, 1.0), na.rm = <span style="color: #0548e8; font-style: italic;">TRUE</span>))
