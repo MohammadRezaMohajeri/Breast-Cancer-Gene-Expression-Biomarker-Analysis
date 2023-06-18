@@ -195,7 +195,7 @@ DownloadGEO <- <span style="color: #53e053; font-style: italic;">function</span>
                  destdir = paste0(getwd(), <span style="color: #04cc04; font-style: italic;">"/"</span>, GSEname))
   
   <span style="color: #999999; font-style: italic;"># Check if the dataset was successfully downloaded</span>
-  <span style="color: #0548e8; font-style: italic;">if</span> (!is.null(gset)) {
+  <span style="color: #0548e8; font-style: italic;">if</span> (!<span style="color: #f7b50c; font-style: italic;">is.null</span>(gset)) {
     <span style="color: #999999; font-style: italic;"># Extract matrix data from the downloaded dataset</span>
     matrix <- gset[[paste0(GSEname, <span style="color: #04cc04; font-style: italic;">"_series_matrix.txt.gz"</span>)]]@assayData[[<span style="color: #04cc04; font-style: italic;">"exprs"</span>]]
     
