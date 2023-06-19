@@ -416,7 +416,7 @@ DEGanalysis <- <span style="color: #0548e8; font-style: italic;">function</span>
   
   <span style="color: #999999; font-style: italic;"><strong># Preparing the annotation variable:</strong></span>
   <span style="color: #999999; font-style: italic;"># Extract relevant columns from the 'annot' data frame</span>
-  annotation <- annot[, c(<span style="color: #04cc04; font-style: italic;">"Gene.symbol"</span>, <span style="color: #04cc04; font-style: italic;">"Chromosome.location"</span>, <span style="color: #04cc04; font-style: italic;">"GO.Function"</span>)]
+  annotation <- annot[, <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #04cc04; font-style: italic;">"Gene.symbol"</span>, <span style="color: #04cc04; font-style: italic;">"Chromosome.location"</span>, <span style="color: #04cc04; font-style: italic;">"GO.Function"</span>)]
   <span style="color: #999999; font-style: italic;"># Add row names as a separate column in the 'annotation' data frame</span>
   annotation <- cbind(rownames(annotation), annotation)
   <span style="color: #999999; font-style: italic;"># Rename the first column as "ID"</span>
@@ -429,7 +429,7 @@ DEGanalysis <- <span style="color: #0548e8; font-style: italic;">function</span>
   DEGs <- DEGs[order(DEGs$ID), ]
   
   <span style="color: #999999; font-style: italic;"># Merge the top table with the annotation data </span>
-  DEGs <- cbind(DEGs, annotation[, c(<span style="color: #cf2139; font-style: italic;">2</span>, <span style="color: #cf2139; font-style: italic;">3</span>, <span style="color: #cf2139; font-style: italic;">4</span>)])
+  DEGs <- cbind(DEGs, annotation[, <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #cf2139; font-style: italic;">2</span>, <span style="color: #cf2139; font-style: italic;">3</span>, <span style="color: #cf2139; font-style: italic;">4</span>)])
   
   <span style="color: #999999; font-style: italic;"><strong># Removing missing gene symbols:</strong></span>
   <span style="color: #999999; font-style: italic;"># Find the indices of rows with missing gene symbols</span>
@@ -458,7 +458,7 @@ Makevolcano <- <span style="color: #0548e8; font-style: italic;">function</span>
   table <- data.frame(table)
   
   <span style="color: #999999; font-style: italic;"># Define a vector of color codes</span>
-  my_pal <- c(<span style="color: #1B9E77; font-style: italic;">"#1B9E77"</span>, <span style="color: #7570B3; font-style: italic;">"#7570B3"</span>, <span style="color: #E7298A; font-style: italic;">"#E7298A"</span>, <span style="color: #66A61E; font-style: italic;">"#66A61E"</span>, <span style="color: #E6AB02; font-style: italic;">"#E6AB02"</span>, <span style="color: #A6761D; font-style: italic;">"#A6761D"</span>, <span style="color: #666666; font-style: italic;">"#666666"</span>, <span style="color: #9A7D0A; font-style: italic;">"#9A7D0A"</span>)
+  my_pal <- <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #1B9E77; font-style: italic;">"#1B9E77"</span>, <span style="color: #7570B3; font-style: italic;">"#7570B3"</span>, <span style="color: #E7298A; font-style: italic;">"#E7298A"</span>, <span style="color: #66A61E; font-style: italic;">"#66A61E"</span>, <span style="color: #E6AB02; font-style: italic;">"#E6AB02"</span>, <span style="color: #A6761D; font-style: italic;">"#A6761D"</span>, <span style="color: #666666; font-style: italic;">"#666666"</span>, <span style="color: #9A7D0A; font-style: italic;">"#9A7D0A"</span>)
   
   <span style="color: #999999; font-style: italic;"><strong># Add DEG column based on the value of adj.P.Val and logFC:</strong></span>
   volcano <- table %>%
@@ -491,7 +491,7 @@ Makevolcano <- <span style="color: #0548e8; font-style: italic;">function</span>
   <span style="color: #999999; font-style: italic;"># Create a vector 'ntop_rep' with length 'ntop' where each element is "Top".</span>
   ntop_rep <- rep(<span style="color: #04cc04; font-style: italic;">"Top"</span>, ntop)
   <span style="color: #999999; font-style: italic;"># Create a new column 'DEGs' in the 'volcano_all' data frame.</span>
-  volcano_all$DEGs <- c(ntop_rep, volcano_up$DEG[-c(<span style="color: #cf2139; font-style: italic;">1</span>:ntop)], ntop_rep, volcano_down$DEG[-c(<span style="color: #cf2139; font-style: italic;">1</span>:ntop)], volcano_NA$DEG)
+  volcano_all$DEGs <- <span style="color: #f79502; font-style: italic;">c</span>(ntop_rep, volcano_up$DEG[-<span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #cf2139; font-style: italic;">1</span>:ntop)], ntop_rep, volcano_down$DEG[-<span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #cf2139; font-style: italic;">1</span>:ntop)], volcano_NA$DEG)
   
   <span style="color: #999999; font-style: italic;"><strong># Label only top genes:</strong></span>
   <span style="color: #999999; font-style: italic;"># Assign the gene symbol as a label for top genes</span>
@@ -512,9 +512,9 @@ Makevolcano <- <span style="color: #0548e8; font-style: italic;">function</span>
       <span style="color: #999999; font-style: italic;"># Add points to the plot with specified size and shape</span>
       geom_point(size = <span style="color: #cf2139; font-style: italic;">1</span>, shape = <span style="color: #cf2139; font-style: italic;">21</span>) +
       <span style="color: #999999; font-style: italic;"># Set the color scale of the plot manually</span>
-      scale_color_manual(values = c(my_pal)) +
+      scale_color_manual(values = <span style="color: #f79502; font-style: italic;">c</span>(my_pal)) +
       <span style="color: #999999; font-style: italic;"># Set the fill color scale of the plot manually</span>
-      scale_fill_manual(values = c(paste(my_pal, <span style="color: #04cc04; font-style: italic;">"66"</span>, sep = <span style="color: #04cc04; font-style: italic;">""</span>))) +
+      scale_fill_manual(values = <span style="color: #f79502; font-style: italic;">c</span>(paste(my_pal, <span style="color: #04cc04; font-style: italic;">"66"</span>, sep = <span style="color: #04cc04; font-style: italic;">""</span>))) +
       <span style="color: #999999; font-style: italic;"># Apply the "classic" theme to the plot</span>
       theme_classic() +
       <span style="color: #999999; font-style: italic;"># Set axis text font and size</span>
@@ -548,9 +548,9 @@ Makevolcano <- <span style="color: #0548e8; font-style: italic;">function</span>
       <span style="color: #999999; font-style: italic;"># Add text annotations to the plot</span>
       geom_text(check_overlap = F, vjust = <span style="color: #cf2139; font-style: italic;">0.1</span>, nudge_y = <span style="color: #cf2139; font-style: italic;">0.4</span>) +
       <span style="color: #999999; font-style: italic;"># Set manual color scale for DEGs</span>
-      scale_color_manual(values = c(my_pal)) +
+      scale_color_manual(values = <span style="color: #f79502; font-style: italic;">c</span>(my_pal)) +
       <span style="color: #999999; font-style: italic;"># Set manual fill scale for DEGs</span>
-      scale_fill_manual(values = c(paste(my_pal, <span style="color: #04cc04; font-style: italic;">"66"</span>, sep = <span style="color: #04cc04; font-style: italic;">""</span>))) +
+      scale_fill_manual(values = <span style="color: #f79502; font-style: italic;">c</span>(paste(my_pal, <span style="color: #04cc04; font-style: italic;">"66"</span>, sep = <span style="color: #04cc04; font-style: italic;">""</span>))) +
       <span style="color: #999999; font-style: italic;"># Use classic theme for the plot</span>
       theme_classic() +
      
@@ -583,7 +583,7 @@ Makevolcano <- <span style="color: #0548e8; font-style: italic;">function</span>
   <span style="color: #999999; font-style: italic;"># Create the top table containing the top up-regulated and down-regulated genes</span>
   top <- rbind(volcano_up[<span style="color: #cf2139; font-style: italic;">1</span>:ntop, ], volcano_down[<span style="color: #cf2139; font-style: italic;">1</span>:ntop, ])
   <span style="color: #999999; font-style: italic;"># Reorder columns in the top table</span>
-  top <- top[, c(<span style="color: #cf2139; font-style: italic;">1</span>:<span style="color: #cf2139; font-style: italic;">6</span>, <span style="color: #cf2139; font-style: italic;">11</span>, <span style="color: #cf2139; font-style: italic;">7</span>, <span style="color: #cf2139; font-style: italic;">8</span>, <span style="color: #cf2139; font-style: italic;">9</span>, <span style="color: #cf2139; font-style: italic;">10</span>, <span style="color: #cf2139; font-style: italic;">12</span>)]
+  top <- top[, <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #cf2139; font-style: italic;">1</span>:<span style="color: #cf2139; font-style: italic;">6</span>, <span style="color: #cf2139; font-style: italic;">11</span>, <span style="color: #cf2139; font-style: italic;">7</span>, <span style="color: #cf2139; font-style: italic;">8</span>, <span style="color: #cf2139; font-style: italic;">9</span>, <span style="color: #cf2139; font-style: italic;">10</span>, <span style="color: #cf2139; font-style: italic;">12</span>)]
   <span style="color: #999999; font-style: italic;"># Rename the 7th column as "n.log10(adj.P.Val)"</span>
   colnames(top)[<span style="color: #cf2139; font-style: italic;">7</span>] <- <span style="color: #04cc04; font-style: italic;">"n.log10(adj.P.Val)"</span>
   
@@ -632,7 +632,7 @@ MakeVenna <- <span style="color: #0548e8; font-style: italic;">function</span>(c
       <span style="color: #999999; font-style: italic;"># Find the indices of the current duplicated gene</span>
       c <- which(all_dup$Gene.symbol %in% dup_uniq_genes[j])
       <span style="color: #999999; font-style: italic;"># Calculate the mean logFC</span>
-      b <- c(mean(all_dup$logFC[c]),
+      b <- <span style="color: #f79502; font-style: italic;">c</span>(mean(all_dup$logFC[c]),
              <span style="color: #999999; font-style: italic;"># Calculate the mean AveExpr</span>
              mean(all_dup$AveExpr[c]),
              <span style="color: #999999; font-style: italic;"># Calculate the mean t value</span>
@@ -646,11 +646,11 @@ MakeVenna <- <span style="color: #0548e8; font-style: italic;">function</span>(c
       
       <span style="color: #999999; font-style: italic;"># Assign column names and create a new data frame with the mean values</span>
       <span style="color: #999999; font-style: italic;"># Assign column names to the mean values</span>
-      names(b) <- c(<span style="color: #04cc04; font-style: italic;">"logFC"</span>, <span style="color: #04cc04; font-style: italic;">"AveExpr"</span>, <span style="color: #04cc04; font-style: italic;">"t"</span>, <span style="color: #04cc04; font-style: italic;">"P.Value"</span>, <span style="color: #04cc04; font-style: italic;">"adj.P.Val"</span>, <span style="color: #04cc04; font-style: italic;">"B"</span>)
+      names(b) <- <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #04cc04; font-style: italic;">"logFC"</span>, <span style="color: #04cc04; font-style: italic;">"AveExpr"</span>, <span style="color: #04cc04; font-style: italic;">"t"</span>, <span style="color: #04cc04; font-style: italic;">"P.Value"</span>, <span style="color: #04cc04; font-style: italic;">"adj.P.Val"</span>, <span style="color: #04cc04; font-style: italic;">"B"</span>)
       <span style="color: #999999; font-style: italic;"># Create a new data frame with the mean values</span>
-      d <- data.frame(c(all_dup[c[<span style="color: #cf2139; font-style: italic;">1</span>], -c(<span style="color: #cf2139; font-style: italic;">2</span>, <span style="color: #cf2139; font-style: italic;">3</span>, <span style="color: #cf2139; font-style: italic;">4</span>, <span style="color: #cf2139; font-style: italic;">5</span>, <span style="color: #cf2139; font-style: italic;">6</span>, <span style="color: #cf2139; font-style: italic;">7</span>, <span style="color: #cf2139; font-style: italic;">11</span>)], b))
+      d <- data.frame(<span style="color: #f79502; font-style: italic;">c</span>(all_dup[c[<span style="color: #cf2139; font-style: italic;">1</span>], -<span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #cf2139; font-style: italic;">2</span>, <span style="color: #cf2139; font-style: italic;">3</span>, <span style="color: #cf2139; font-style: italic;">4</span>, <span style="color: #cf2139; font-style: italic;">5</span>, <span style="color: #cf2139; font-style: italic;">6</span>, <span style="color: #cf2139; font-style: italic;">7</span>, <span style="color: #cf2139; font-style: italic;">11</span>)], b))
       <span style="color: #999999; font-style: italic;"># Reorder the columns of the data frame</span>
-      d <- d[, c(<span style="color: #cf2139; font-style: italic;">1</span>, <span style="color: #cf2139; font-style: italic;">6</span>, <span style="color: #cf2139; font-style: italic;">7</span>, <span style="color: #cf2139; font-style: italic;">8</span>, <span style="color: #cf2139; font-style: italic;">9</span>, <span style="color: #cf2139; font-style: italic;">10</span>, <span style="color: #cf2139; font-style: italic;">11</span>, <span style="color: #cf2139; font-style: italic;">2</span>, <span style="color: #cf2139; font-style: italic;">3</span>, <span style="color: #cf2139; font-style: italic;">4</span>, <span style="color: #cf2139; font-style: italic;">5</span>)]
+      d <- d[, <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #cf2139; font-style: italic;">1</span>, <span style="color: #cf2139; font-style: italic;">6</span>, <span style="color: #cf2139; font-style: italic;">7</span>, <span style="color: #cf2139; font-style: italic;">8</span>, <span style="color: #cf2139; font-style: italic;">9</span>, <span style="color: #cf2139; font-style: italic;">10</span>, <span style="color: #cf2139; font-style: italic;">11</span>, <span style="color: #cf2139; font-style: italic;">2</span>, <span style="color: #cf2139; font-style: italic;">3</span>, <span style="color: #cf2139; font-style: italic;">4</span>, <span style="color: #cf2139; font-style: italic;">5</span>)]
       <span style="color: #999999; font-style: italic;"># Store the data frame in the list for unique genes</span>
       uniq_genes_list[[j]] <- d
     }
@@ -709,7 +709,7 @@ MakeVenna <- <span style="color: #0548e8; font-style: italic;">function</span>(c
     
     <span style="color: #999999; font-style: italic;"># Store the common differentially expressed genes and all genes for each dataset</span>
     <span style="color: #999999; font-style: italic;"># Store the subsetted com_final_DEG data frame in all_com list</span>
-    all_com[[names(com_table)[i]]] <- com_final_DEG[, c(<span style="color: #cf2139; font-style: italic;">2</span>:<span style="color: #cf2139; font-style: italic;">7</span>)]
+    all_com[[names(com_table)[i]]] <- com_final_DEG[, <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #cf2139; font-style: italic;">2</span>:<span style="color: #cf2139; font-style: italic;">7</span>)]
     <span style="color: #999999; font-style: italic;"># Store the complete com_final_DEG data frame in all_com_all list</span>
     all_com_all[[names(com_table)[i]]] <- com_final_DEG
   }
@@ -765,11 +765,11 @@ MakeVenna <- <span style="color: #0548e8; font-style: italic;">function</span>(c
   <span style="color: #999999; font-style: italic;"># Combining all calculated means into one data frame </span>
   all_com_all_df <- data.frame(do.call(cbind, all_com_all[[<span style="color: #cf2139; font-style: italic;">1</span>]]))
   <span style="color: #999999; font-style: italic;"># Removing unnecessary columns from all_com_all_df</span>
-  all_com_all_df <- all_com_all_df[, -c(<span style="color: #cf2139; font-style: italic;">2</span>:<span style="color: #cf2139; font-style: italic;">7</span>)]
+  all_com_all_df <- all_com_all_df[, -<span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #cf2139; font-style: italic;">2</span>:<span style="color: #cf2139; font-style: italic;">7</span>)]
   <span style="color: #999999; font-style: italic;"># Combining the calculated means with all_com_all_df</span>
   all_com_all_df <- cbind(all_com_all_df, logfc_df, adj.P.Val_df, B_df, t_df, AveExpr_df, P.Value_df)
   <span style="color: #999999; font-style: italic;"># Reordering the columns of all_com_all_df</span>
-  all_com_all_df <- all_com_all_df[, c(<span style="color: #cf2139; font-style: italic;">1</span>, <span style="color: #cf2139; font-style: italic;">6</span>, <span style="color: #cf2139; font-style: italic;">10</span>, <span style="color: #cf2139; font-style: italic;">9</span>, <span style="color: #cf2139; font-style: italic;">11</span>, <span style="color: #cf2139; font-style: italic;">7</span>, <span style="color: #cf2139; font-style: italic;">8</span>, <span style="color: #cf2139; font-style: italic;">2</span>, <span style="color: #cf2139; font-style: italic;">3</span>, <span style="color: #cf2139; font-style: italic;">4</span>, <span style="color: #cf2139; font-style: italic;">5</span>)]
+  all_com_all_df <- all_com_all_df[, <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #cf2139; font-style: italic;">1</span>, <span style="color: #cf2139; font-style: italic;">6</span>, <span style="color: #cf2139; font-style: italic;">10</span>, <span style="color: #cf2139; font-style: italic;">9</span>, <span style="color: #cf2139; font-style: italic;">11</span>, <span style="color: #cf2139; font-style: italic;">7</span>, <span style="color: #cf2139; font-style: italic;">8</span>, <span style="color: #cf2139; font-style: italic;">2</span>, <span style="color: #cf2139; font-style: italic;">3</span>, <span style="color: #cf2139; font-style: italic;">4</span>, <span style="color: #cf2139; font-style: italic;">5</span>)]
   
   <span style="color: #999999; font-style: italic;"># Writing the combined data frame of all calculated means to a TSV file</span>
   write_tsv(all_com_all_df, paste0(<span style="color: #04cc04; font-style: italic;">"common"</span>, <span style="color: #04cc04; font-style: italic;">"/"</span>, <span style="color: #04cc04; font-style: italic;">"all_mean_common_DEGs.tsv"</span>))
@@ -788,7 +788,7 @@ MakeVenna <- <span style="color: #0548e8; font-style: italic;">function</span>(c
   <span style="color: #999999; font-style: italic;"># Set the seed for random number generation</span>
   set.seed(<span style="color: #cf2139; font-style: italic;">1234</span>)
   <span style="color: #999999; font-style: italic;"># Define color palette for the Venn diagram</span>
-  my_pal <- c(<span style="color: #1B9E77; font-style: italic;">"#1B9E77"</span>, <span style="color: #7570B3; font-style: italic;">"#7570B3"</span>, <span style="color: #E7298A; font-style: italic;">"#E7298A"</span>, <span style="color: #; font-style: italic;">"#66A61E"</span>, <span style="color: #E6AB02; font-style: italic;">"#E6AB02"</span>, <span style="color: #A6761D; font-style: italic;">"#A6761D"</span>, <span style="color: #666666; font-style: italic;">"#666666"</span>, <span style="color: #9A7D0A; font-style: italic;">"#9A7D0A"</span>)
+  my_pal <- <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #1B9E77; font-style: italic;">"#1B9E77"</span>, <span style="color: #7570B3; font-style: italic;">"#7570B3"</span>, <span style="color: #E7298A; font-style: italic;">"#E7298A"</span>, <span style="color: #; font-style: italic;">"#66A61E"</span>, <span style="color: #E6AB02; font-style: italic;">"#E6AB02"</span>, <span style="color: #A6761D; font-style: italic;">"#A6761D"</span>, <span style="color: #666666; font-style: italic;">"#666666"</span>, <span style="color: #9A7D0A; font-style: italic;">"#9A7D0A"</span>)
   <span style="color: #999999; font-style: italic;"># Create the Venn diagram using ggvenn package</span>
   venaa <- ggvenn(venlist, 
                   fill_color = my_pal,
@@ -935,7 +935,7 @@ Makenetworkanalyst <- <span style="color: #0548e8; font-style: italic;">function
   <span style="color: #999999; font-style: italic;"># Find the columns in the first row of 'updown_matrix' that match the names of 'grouplis'</span>
   changedcol <- grep(paste0(names(grouplis), collapse = <span style="color: #04cc04; font-style: italic;">"|"</span>), updown_matrix[<span style="color: #cf2139; font-style: italic;">1</span>, ])
   <span style="color: #999999; font-style: italic;"># Keep the first column and the columns selected by 'changedcol' in 'updown_matrix'</span>
-  updown_matrix <- updown_matrix[, c(<span style="color: #cf2139; font-style: italic;">1</span>, changedcol)]
+  updown_matrix <- updown_matrix[, <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #cf2139; font-style: italic;">1</span>, changedcol)]
   <span style="color: #999999; font-style: italic;"># Replace the first cell of 'updown_matrix' with "#CLASS"</span>
   updown_matrix[<span style="color: #cf2139; font-style: italic;">1</span>, <span style="color: #cf2139; font-style: italic;">1</span>] <-  <span style="color: #04cc04; font-style: italic;">"#CLASS"</span>
   <span style="color: #999999; font-style: italic;"># Replace the column name of the first column in 'updown_matrix' with "#NAME"</span>
@@ -960,7 +960,7 @@ DownloadGEO( <span style="color: #04cc04; font-style: italic;">"GSE25055"</span>
 <span style="color: #999999; font-style: italic;"># Perform DEG analysis on GSE25055 dataset</span>
 DEGanalysis(projname = <span style="color: #04cc04; font-style: italic;">"GSE25055"</span>,
             compare = <span style="color: #04cc04; font-style: italic;">"grade"</span>,
-            groups = <span style="color: #f79502; font-style: italic;">list</span>(normal = c(<span style="color: #04cc04; font-style: italic;">"1"</span>), tumor = c(<span style="color: #04cc04; font-style: italic;">"3"</span>)),
+            groups = <span style="color: #f79502; font-style: italic;">list</span>(normal = <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #04cc04; font-style: italic;">"1"</span>), tumor = <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #04cc04; font-style: italic;">"3"</span>)),
             adjust = <span style="color: #04cc04; font-style: italic;">"fdr"</span>)
 
 # Create a volcano plot for GSE25055 dataset
@@ -975,7 +975,7 @@ volcano_GSE25055
 <span style="color: #999999; font-style: italic;"># Prepare files for network analysis on GSE25055 dataset</span>
 Makenetworkanalyst(projname = <span style="color: #04cc04; font-style: italic;">"GSE25055"</span>,
                    compare = <span style="color: #04cc04; font-style: italic;">"grade"</span>,
-                   groups = <span style="color: #f79502; font-style: italic;">list</span>(normal = c(<span style="color: #04cc04; font-style: italic;">"1"</span>), tumor = c(<span style="color: #04cc04; font-style: italic;">"3"</span>)))
+                   groups = <span style="color: #f79502; font-style: italic;">list</span>(normal = <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #04cc04; font-style: italic;">"1"</span>), tumor = <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #04cc04; font-style: italic;">"3"</span>)))
 
 <span style="color: #75020c; font-style: italic;"><strong>################################################# GSE7390 #################################################</strong></span>
 <span style="color: #999999; font-style: italic;"># Download the GEO dataset GSE7390</span>
@@ -984,7 +984,7 @@ DownloadGEO(<span style="color: #04cc04; font-style: italic;">"GSE7390"</span>)
 <span style="color: #999999; font-style: italic;"># Perform DEG analysis on GSE7390 dataset</span>
 DEGanalysis(projname = <span style="color: #04cc04; font-style: italic;">"GSE7390"</span>,
             compare = <span style="color: #04cc04; font-style: italic;">"grade"</span>,
-            groups = <span style="color: #f79502; font-style: italic;">list</span>(normal = c(<span style="color: #04cc04; font-style: italic;">"1"</span>), tumor = c(<span style="color: #04cc04; font-style: italic;">"3"</span>)),
+            groups = <span style="color: #f79502; font-style: italic;">list</span>(normal = <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #04cc04; font-style: italic;">"1"</span>), tumor = <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #04cc04; font-style: italic;">"3"</span>)),
             adjust = <span style="color: #04cc04; font-style: italic;">"fdr"</span>)
 
 <span style="color: #999999; font-style: italic;"># Create a volcano plot for GSE7390 dataset</span>
@@ -999,7 +999,7 @@ volcano_GSE7390
 <span style="color: #999999; font-style: italic;"># Prepare files for network analysis on GSE7390 dataset</span>
 Makenetworkanalyst(projname = <span style="color: #04cc04; font-style: italic;">"GSE7390"</span>,
                    compare = <span style="color: #04cc04; font-style: italic;">"grade"</span>,
-                   groups = <span style="color: #f79502; font-style: italic;">list</span>(normal = c(<span style="color: #04cc04; font-style: italic;">"1"</span>), tumor = c(<span style="color: #04cc04; font-style: italic;">"3"</span>)))
+                   groups = <span style="color: #f79502; font-style: italic;">list</span>(normal = <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #04cc04; font-style: italic;">"1"</span>), tumor = <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #04cc04; font-style: italic;">"3"</span>)))
 
 <span style="color: #75020c; font-style: italic;"><strong>################################################# GSE11121 #################################################</strong></span>
 <span style="color: #999999; font-style: italic;"># Download the GEO dataset GSE11121</span>
@@ -1008,7 +1008,7 @@ DownloadGEO(<span style="color: #04cc04; font-style: italic;">"GSE11121"</span>)
 <span style="color: #999999; font-style: italic;"># Perform DEG analysis on GSE11121 dataset</span>
 DEGanalysis(projname = <span style="color: #04cc04; font-style: italic;">"GSE11121"</span>,
             compare = <span style="color: #04cc04; font-style: italic;">"grade"</span>,
-            groups = <span style="color: #f79502; font-style: italic;">list</span>(normal = c(<span style="color: #04cc04; font-style: italic;">"1"</span>), tumor = c(<span style="color: #04cc04; font-style: italic;">"3"</span>)),
+            groups = <span style="color: #f79502; font-style: italic;">list</span>(normal = <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #04cc04; font-style: italic;">"1"</span>), tumor = <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #04cc04; font-style: italic;">"3"</span>)),
             adjust = <span style="color: #04cc04; font-style: italic;">"fdr"</span>)
 
 <span style="color: #999999; font-style: italic;"># Create a volcano plot for GSE11121 dataset</span>
@@ -1023,7 +1023,7 @@ volcano_GSE11121
 <span style="color: #999999; font-style: italic;"># Prepare files for network analysis on GSE11121 dataset</span>
 Makenetworkanalyst(projname = <span style="color: #04cc04; font-style: italic;">"GSE11121"</span>,
                    compare = <span style="color: #04cc04; font-style: italic;">"grade"</span>,
-                   groups = <span style="color: #f79502; font-style: italic;">list</span>(normal = c(<span style="color: #04cc04; font-style: italic;">"1"</span>), tumor = c(<span style="color: #04cc04; font-style: italic;">"3"</span>)))
+                   groups = <span style="color: #f79502; font-style: italic;">list</span>(normal = <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #04cc04; font-style: italic;">"1"</span>), tumor = <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #04cc04; font-style: italic;">"3"</span>)))
 
 <span style="color: #75020c; font-style: italic;"><strong>################################################# GSE25065 #################################################</strong></span>
 <span style="color: #999999; font-style: italic;"></span># Download the GEO dataset GSE25065
@@ -1032,7 +1032,7 @@ DownloadGEO(<span style="color: #04cc04; font-style: italic;">"GSE25065"</span>)
 <span style="color: #999999; font-style: italic;"># Perform DEG analysis on GSE25065 dataset</span>
 DEGanalysis(projname = <span style="color: #04cc04; font-style: italic;">"GSE25065"</span>,
             compare = <span style="color: #04cc04; font-style: italic;">"grade"</span>,
-            groups = <span style="color: #f79502; font-style: italic;">list</span>(normal = c(<span style="color: #04cc04; font-style: italic;">"1"</span>), tumor = c(<span style="color: #04cc04; font-style: italic;">"3"</span>)),
+            groups = <span style="color: #f79502; font-style: italic;">list</span>(normal = <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #04cc04; font-style: italic;">"1"</span>), tumor = <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #04cc04; font-style: italic;">"3"</span>)),
             adjust = <span style="color: #04cc04; font-style: italic;">"fdr"</span>)
 
 <span style="color: #999999; font-style: italic;"># Create a volcano plot for GSE25065 dataset</span>
@@ -1047,11 +1047,11 @@ volcano_GSE25065
 <span style="color: #999999; font-style: italic;"># Prepare files for network analysis on GSE25065 dataset</span>
 Makenetworkanalyst(projname = <span style="color: #04cc04; font-style: italic;">"GSE25065"</span>,
                    compare = <span style="color: #04cc04; font-style: italic;">"grade"</span>,
-                   groups = <span style="color: #f79502; font-style: italic;">list</span>(normal = c(<span style="color: #04cc04; font-style: italic;">"1"</span>), tumor = c(<span style="color: #04cc04; font-style: italic;">"3"</span>)))
+                   groups = <span style="color: #f79502; font-style: italic;">list</span>(normal = <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #04cc04; font-style: italic;">"1"</span>), tumor = <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #04cc04; font-style: italic;">"3"</span>)))
 
 
 <span style="color: #999999; font-style: italic;"># Create a Venn diagram for the common differentially expressed genes across the datasets</span>
-MakeVenna(common = c(<span style="color: #04cc04; font-style: italic;">"GSE25055"</span>, <span style="color: #04cc04; font-style: italic;">"GSE7390"</span>, <span style="color: #04cc04; font-style: italic;">"GSE11121"</span>, <span style="color: #04cc04; font-style: italic;""GSE25065"></span>), ntop = <span style="color: #cf2139; font-style: italic;">10</span>)
+MakeVenna(common = <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #04cc04; font-style: italic;">"GSE25055"</span>, <span style="color: #04cc04; font-style: italic;">"GSE7390"</span>, <span style="color: #04cc04; font-style: italic;">"GSE11121"</span>, <span style="color: #04cc04; font-style: italic;""GSE25065"></span>), ntop = <span style="color: #cf2139; font-style: italic;">10</span>)
 
 
 			
