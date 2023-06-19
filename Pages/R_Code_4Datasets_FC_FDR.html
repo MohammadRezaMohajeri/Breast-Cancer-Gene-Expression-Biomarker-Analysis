@@ -183,7 +183,7 @@ require(ggvenn)
 require(ggvenn)
 
 <span style="color: #999999; font-style: italic;"># Function to download the specified GEO dataset</span> 
-DownloadGEO <- <span style="color: #53e053; font-style: italic;">function</span>(GSEname = <span style="color: #04cc04; font-style: italic;">"GSE11121"</span>) {
+DownloadGEO <- <span style="color: #0548e8; font-style: italic;">function</span>(GSEname = <span style="color: #04cc04; font-style: italic;">"GSE11121"</span>) {
   <span style="color: #999999; font-style: italic;"># Create a folder for the dataset</span>
   dir.create(GSEname, showWarnings = <span style="color: #0548e8; font-style: italic;">FALSE</span>)
 
@@ -399,7 +399,7 @@ DEGanalysis <- <span style="color: #0548e8; font-style: italic;">function</span>
   <span style="color: #999999; font-style: italic;"># Get the number of group names</span>
   l <- <span style="color: #f79502; font-style: italic;">length</span>(<span style="color: #f79502; font-style: italic;">names</span>(grouplis))
   <span style="color: #999999; font-style: italic;"># Create a string representation of group names for contrasts</span>
-  cts <- paste0(names(grouplis)[l:<span style="color: #cf2139; font-style: italic;">1</span>], collapse = <span style="color: #04cc04; font-style: italic;">"-"</span>)
+  cts <- paste0(<span style="color: #f79502; font-style: italic;">names</span>(grouplis)[l:<span style="color: #cf2139; font-style: italic;">1</span>], collapse = <span style="color: #04cc04; font-style: italic;">"-"</span>)
   <span style="color: #999999; font-style: italic;"># Create contrasts for pairwise comparisons of groups</span>
   cont.matrix <- makeContrasts(contrasts = cts, levels = design)
   <span style="color: #999999; font-style: italic;"># Fit the contrasts to the model</span>
@@ -942,7 +942,7 @@ Makenetworkanalyst <- <span style="color: #0548e8; font-style: italic;">function
   colnames(updown_matrix)[<span style="color: #cf2139; font-style: italic;">1</span>] <-  <span style="color: #04cc04; font-style: italic;">"#NAME"</span>
   
   <span style="color: #999999; font-style: italic;"># Write 'updown_matrix' to a tab-separated file</span>
-  write.table(updown_matrix, paste0( <span style="color: #04cc04; font-style: italic;">"networkanalyst"</span>, <span style="color: #04cc04; font-style: italic;">"/"</span>, projname,  <span style="color: #04cc04; font-style: italic;">"_dataanlys.txt"</span>), <span style="color: #f79502; font-style: italic;">quote</span> = <span style="color: #0548e8; font-style: italic;">FALSE</span>, row.names = <span style="color: #0548e8; font-style: italic;">FALSE</span>, sep = "\t")
+  write.table(updown_matrix, paste0( <span style="color: #04cc04; font-style: italic;">"networkanalyst"</span>, <span style="color: #04cc04; font-style: italic;">"/"</span>, projname,  <span style="color: #04cc04; font-style: italic;">"_dataanlys.txt"</span>), <span style="color: #f79502; font-style: italic;">quote</span> = <span style="color: #0548e8; font-style: italic;">FALSE</span>, row.names = <span style="color: #0548e8; font-style: italic;">FALSE</span>, sep = <span style="color: #f79502; font-style: italic;">"\t"</span>)
   
   <span style="color: #999999; font-style: italic;"># Display a message indicating that the file has been saved</span>
   message(<span style="color: #04cc04; font-style: italic;">"+++++ Your file has been saved in the networkanalyst folder. +++++"</span>)
