@@ -153,7 +153,7 @@
 <span style="color: #f78102; font-style: italic;">1is.null</span> 
 <span style="color: #f78d02; font-style: italic;">2FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
 <span style="color: #f79502; font-style: italic;">3FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
-<span style="color: #f79502; font-style: italic;"></span>
+[<span style="color: #f79502; font-style: italic;">names</span>
 <span style="color: #f79d02; font-style: italic;">5FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
 <span style="color: #f79d02; font-style: italic;">6FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
 <span style="color: #f7aa02; font-style: italic;">7FUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTIONFUNCTION</span>
@@ -300,7 +300,7 @@ DEGanalysis <- <span style="color: #0548e8; font-style: italic;">function</span>
         <span style="color: #999999; font-style: italic;"># Find the row numbers in the "subtype" column of the phenotype data that match the pattern</span>
         rownum <- grep(name, pheno$subtype)
         <span style="color: #999999; font-style: italic;"># Store the row names corresponding to the matched rows in the grouplis list</span>
-        grouplis[[names(groups)[i]]] <- rownames(pheno)[rownum]
+        grouplis[[<span style="color: #f79502; font-style: italic;">names</span>(groups)[i]]] <- rownames(pheno)[rownum]
       }
     }
   } <span style="color: #0548e8; font-style: italic;">else</span> {
@@ -350,7 +350,7 @@ DEGanalysis <- <span style="color: #0548e8; font-style: italic;">function</span>
         <span style="color: #999999; font-style: italic;"># Find the row numbers in 'grade' where the group name is present in the 'grade' column</span>
         rownum <- grep(name, grade$grade)
         <span style="color: #999999; font-style: italic;"># Store the corresponding row names in the 'grouplis' list under the appropriate group name</span>
-        grouplis[[names(groups)[i]]] <- rownames(grade)[rownum]
+        grouplis[[<span style="color: #f79502; font-style: italic;">names</span>(groups)[i]]] <- rownames(grade)[rownum]
       }
     }
   }
@@ -685,9 +685,9 @@ MakeVenna <- <span style="color: #0548e8; font-style: italic;">function</span>(c
   
   <span style="color: #0548e8; font-style: italic;">for</span> (i <span style="color: #0548e8; font-style: italic;">in</span> <span style="color: #f79502; font-style: italic;">seq_along</span>(com_table)) {
     <span style="color: #999999; font-style: italic;"># Extract the common differentially expressed genes for the current dataset</span>
-    comn <- which(com_table[[names(com_table)[i]]][[<span style="color: #04cc04; font-style: italic;">"Gene.symbol"</span>]] %in% com_prob$Gene.symbol)
+    comn <- which(com_table[[<span style="color: #f79502; font-style: italic;">names</span>(com_table)[i]]][[<span style="color: #04cc04; font-style: italic;">"Gene.symbol"</span>]] %in% com_prob$Gene.symbol)
     <span style="color: #999999; font-style: italic;"># Subset the current dataset with the common DEGs</span>
-    com_final_DEG  <- com_table[[names(com_table)[i]]][comn, ]
+    com_final_DEG  <- com_table[[<span style="color: #f79502; font-style: italic;">names</span>(com_table)[i]]][comn, ]
     <span style="color: #999999; font-style: italic;"># Sort the subsetted data frame based on the "DEG" column</span>
     com_final_DEG <- com_final_DEG[order(com_final_DEG$DEG), ]
     
@@ -709,9 +709,9 @@ MakeVenna <- <span style="color: #0548e8; font-style: italic;">function</span>(c
     
     <span style="color: #999999; font-style: italic;"># Store the common differentially expressed genes and all genes for each dataset</span>
     <span style="color: #999999; font-style: italic;"># Store the subsetted com_final_DEG data frame in all_com list</span>
-    all_com[[names(com_table)[i]]] <- com_final_DEG[, <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #cf2139; font-style: italic;">2</span>:<span style="color: #cf2139; font-style: italic;">7</span>)]
+    all_com[[<span style="color: #f79502; font-style: italic;">names</span>(com_table)[i]]] <- com_final_DEG[, <span style="color: #f79502; font-style: italic;">c</span>(<span style="color: #cf2139; font-style: italic;">2</span>:<span style="color: #cf2139; font-style: italic;">7</span>)]
     <span style="color: #999999; font-style: italic;"># Store the complete com_final_DEG data frame in all_com_all list</span>
-    all_com_all[[names(com_table)[i]]] <- com_final_DEG
+    all_com_all[[<span style="color: #f79502; font-style: italic;">names</span>(com_table)[i]]] <- com_final_DEG
   }
   
   <span style="color: #999999; font-style: italic;"># Calculate the mean of logFC for all common genes in each dataset</span> 
@@ -872,7 +872,7 @@ Makenetworkanalyst <- <span style="color: #0548e8; font-style: italic;">function
         <span style="color: #999999; font-style: italic;"># Find the rows in 'pheno$subtype' that match the group name</span>
         rownum <- grep(name, pheno$subtype)
         <span style="color: #999999; font-style: italic;"># Store the matching row names in 'grouplis' with the group name as the key</span>
-        grouplis[[names(groups)[i]]] <- rownames(pheno)[rownum]
+        grouplis[[<span style="color: #f79502; font-style: italic;">names</span>(groups)[i]]] <- rownames(pheno)[rownum]
       }
     }
   } <span style="color: #0548e8; font-style: italic;">else</span> {
@@ -914,7 +914,7 @@ Makenetworkanalyst <- <span style="color: #0548e8; font-style: italic;">function
         <span style="color: #999999; font-style: italic;"># Find the rows in the 'grade' data frame where the 'grade' column matches the group name</span>
         rownum <- grep(name, grade$grade)
         <span style="color: #999999; font-style: italic;"># Store the row names corresponding to the group in the 'grouplis' list</span>
-        grouplis[[names(groups)[i]]] <- rownames(grade)[rownum]
+        grouplis[[<span style="color: #f79502; font-style: italic;">names</span>(groups)[i]]] <- rownames(grade)[rownum]
       }
     }
   }
