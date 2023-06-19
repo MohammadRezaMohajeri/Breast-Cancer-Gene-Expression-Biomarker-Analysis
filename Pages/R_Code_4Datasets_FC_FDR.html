@@ -385,7 +385,7 @@ DEGanalysis <- <span style="color: #0548e8; font-style: italic;">function</span>
     gname[[i]] <- factor(rep(i - <span style="color: #cf2139; font-style: italic;">1</span>, number))
   }
   <span style="color: #999999; font-style: italic;"># Convert the list of factors to a single vector</span>
-  grouping <- un<span style="color: #f79502; font-style: italic;">list</span>(gname)
+  grouping <- unlist(gname)
   
   <span style="color: #999999; font-style: italic;"><strong># Create a design matrix for the linear model:</strong></span>
   <span style="color: #999999; font-style: italic;"># Create a design matrix with the factor variables as predictors</span>
