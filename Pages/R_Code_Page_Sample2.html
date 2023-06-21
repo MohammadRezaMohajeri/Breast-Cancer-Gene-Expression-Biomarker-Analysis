@@ -101,38 +101,6 @@
 	<header>
 		<h1>R Code <br> (One Dataset)</h1>
 	</header>
-	
-	
-	<h2 style="font-size: 28px; text-align: center;">1- Differential Expression Analysis of Breast Cancer Dataset (GSE25055) using limma in R: Comparing Molecular Subtypes and Grading System</h2>
-
-	
-	<hr>
-	<h3 class="dropdown-trigger" onclick="toggleDropDown('explanation-content')">About this code</h3>
-	<div class="drop-down-content" id="explanation-content" style="text-align: justify;">
-		<p> In this code, we performed a differential expression analysis on the breast cancer dataset GSE25055 using the limma package in R. The dataset contains gene expression data for different grades of breast cancer (Grade 1 and Grade 3) as well as molecular subtypes (Luminal A, Normal-like, Luminal B, Basal-like, and HER2). </p> 
-
-		<p> The purpose of this analysis was to compare the ability of two classifications, molecular subtypes and the grading system, to differentiate between different levels of aggressiveness in breast cancer. Based on a literature review, we hypothesized that Luminal A and Normal-like molecular subtypes, as well as Grade 1, represent non-aggressiveness, while Luminal B, Basal-like, HER2 molecular subtypes, and Grade 3 represent aggressiveness. </p> 
-		<p> To perform the analysis, we used the GEOquery package to download the GSE25055 dataset from the GEO database. We also utilized the tidyverse package for data manipulation and preprocessing, and the plotly package for creating interactive volcano plots. </p> 
-		<p> The main goal of the analysis was to identify genes that showed significant differential expression between the non-aggressive and aggressive groups based on the two classifications. We used the limma package to apply appropriate statistical tests and adjust for multiple testing. The volcano plots were generated to visualize the statistical significance (p-value) and fold change of differentially expressed genes. </p> 
-		<p> By comparing the results of the molecular subtypes and grading system analyses, we aimed to determine which classification was better in terms of statistically significant and biologically meaningful differences between the non-aggressive and aggressive groups. </p> 
-		<p> Overall, this code provides insights into the differential expression analysis of breast cancer dataset GSE25055 and investigates the potential of molecular subtypes and the grading system as indicators of aggressiveness in breast cancer. </p>
-
-	</div>
-	<hr>
-
-	
-	<h3 class="dropdown-trigger" onclick="toggleDropDown('plots-tables-content')">Generated Plots & Tables:</h3>
-	<div class="drop-down-content" id="plots-tables-content">
-		<ul>
-			<li><a href="#">Volcano plots for comparing grade 1 vs grade 3 (GSE25055 dataset)</a></li>
-			<li><a href="#">Volcano plots for comparing Luminal A, Normal-like vs Luminal B, Basal-like, and HER2 (GSE25055 dataset)</a></li>
-			<li><a href="#">Tables</a></li>
-		</ul>
-	</div>
-	<hr>
-
-	<h3 class="dropdown-trigger" onclick="toggleDropDown('code-content')">Code</h3>
-	<div class="drop-down-content" id="code-content">
 		<pre><code>
 			<a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/R_Code_1Dataset2.html">Click to go to the code section</a>
 			<!--
