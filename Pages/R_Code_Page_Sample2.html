@@ -2,11 +2,10 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>About</title>
+	<title>R Code For One Dataset</title>
 	<style>
-
 		/* CSS Styles */
-		/* To highlight different  parts of the text in red, green, and blue, you can use the <span> element and apply CSS styles to  it */ 
+		/* To highlight different parts of the text in red, green, and blue, you can use the <span> element and apply CSS styles to it */ 
 		
 		.orange-text {
 			color: orange;
@@ -33,55 +32,27 @@
 			font-weight: bold;
 		}
 
-		/* Header Styles  */
-		.header {
-		        background-color: #010a0d; /* Black navy for header  */
-		        padding: 10px;
-		        display: flex;
-		        justify-content: center;
-		        align-items: center;
-		    }
-		
-		.header h1 {
-		        font-size: 40px; /* Adjust the font size as desired */
-		        color: #ededf5; /* To change the color of the text "About The Project" in the header to white */
-		        font-weight: bold; /* Add this line to make the text bold */
-		    }
+		/* Header Styles */
+		header {
+			background-color: #274f4f;
+			color: white;
+			text-align: center;
+			padding: 5px;
+		}
 
+		h1 {
+			color: white; /* Adjust the font color as desired */
+			font-size: 30px; /* Adjust the font size as desired */
+			font-weight: bold; /* Add font weight as desired */
+			text-align: center; /* Center the header title */
+			padding: 0px; /* Add padding around the header title */
+			margin-bottom: 20px; /* Add margin below the header title */
+		}
+		
 		hr {
 			width: 100%; /* Adjust the width as desired */
 		}
-
-		/* Page Content Styles */
-		.content {
-			width: 100%;
-			padding: 10px;
-			box-sizing: border-box;
-			border-left: 1px solid green;
-			text-align: justify; /* Add this line to justify the text */
-			
-
-
-		}
-
-		.content p {
-			font-size: 20px; /* Adjust the font size for paragraphs */
-			margin-left: 20px; /* Adjust the margin value for indentation */
-			margin-top: 0;
-		}
-
-		/* The <hr> element creates a horizontal rule, which is a self-closing tag and doesn't require a closing tag.
-          	You can also style the horizontal line using CSS if you want to customize its appearance. For example:*/ 
-		hr {
-			border: none;
-			border-top: 1px solid black;
-			margin: 20px 0;
-		}
-
-		/* Adjust font size for the code block */
-		#code-content pre code {
-			font-size: 17px; /*  Adjust the font size as desired */
-
+		
 		/* Footer Styles */
 		.footer {
 		        background-color: #333;
@@ -93,53 +64,31 @@
 		        bottom: 0;
 		        width: 100%;
 		}
-			
-		}
-
-		
 	</style>
+	
 </head>
 <body>
 	<header>
 		<h1>R Code <br> (One Dataset)</h1>
 	</header>
-		<pre><code>
-			<!--
-			<span class="green-text">GREEN TEXTTTTTT</span> 
-			<span class="purple-text">PURPLE TEXTTTTTT</span> 
-			<span class="orange-text">ORANGE TEXTTTT</span> 
-			<span class="dark-yellow-text">DARK YELLOW TEXTTT</span> 
-			<span class="brown-text">BROWN TEXTTTT</span> 
-			<span class="blue-text">BLUE TEXTTTTT</span> 
-			<strong>BOLD TEXTTTTTT</strong> 
-			-->
-<!-- put the R CODE comments in this format:    <span style="color: #0788e3; font-style: italic;">TESSSSSSSTTTTTT</span> -->
-<span style="color: #04cc04; font-style: italic;"># Load required packages</span>
-<span style="color: #c910c9; font-style: italic;">require</span>(GEOquery)    <span style="color: #04cc04; font-style: italic;"># For downloading and processing GEO datasets</span>
-<span style="color: #c910c9; font-style: italic;">require</span>(limma)       <span style="color: #04cc04; font-style: italic;"># For performing differential expression analysis</span>
-<span style="color: #c910c9; font-style: italic;">require</span>(tidyverse)   <span style="color: #04cc04; font-style: italic;"># For data manipulation and visualization</span>
-<span style="color: #c910c9; font-style: italic;">require</span>(plotly)      <span style="color: #04cc04; font-style: italic;"># For interactive plots</span>
 
-	
+	<section>
+		<h2>R Code Example</h2>
+		<pre><code>
+# Load required packages
+require(GEOquery)    # For downloading and processing GEO datasets
+require(limma)       # For performing differential expression analysis
+require(tidyverse)   # For data manipulation and visualization
+require(plotly)      # For interactive plots
+
+# Your R code goes here
+# ...
 
 		</code></pre>
-	</div>
+	</section>
 
-
-	<hr>
-	
 	<footer class="footer">
-	    		<p>&copy; 2023 Mohammad Reza Mohajeri. All rights reserved.</p>
+	    <p>&copy; 2023 Mohammad Reza Mohajeri. All rights reserved.</p>
 	</footer>
-
-	
-	<!-- JavaScript for Drop-down Functionality -->
-	<script>
-		function toggleDropDown(id) {
-			var content = document.getElementById(id);
-			content.classList.toggle("active");
-		}
-	</script>
-
 </body>
 </html>
