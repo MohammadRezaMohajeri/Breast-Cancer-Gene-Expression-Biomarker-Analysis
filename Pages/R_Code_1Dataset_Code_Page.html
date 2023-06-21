@@ -2,180 +2,10 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>About The Project</title>
+	<title>R Code ....</title>
 	<style>
-		/* Header Styles  */
-		
-		.header {
-			display: grid;
-			grid-template-columns: 10% 20% 70%;
-			background-color: #01031f; /* GREEN */
-			padding: 10px;
-		}
-
-		.left-section {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			
-
-		}
-
-		.left-section img {
-			width: 100px; /* Adjust the width as desired */
-			height: 200px; /* Adjust the height as desired */
-			object-fit: cover; /* Adjust the object-fit property as desired */
-		}
-		
-		.middle-section {
-			  display: flex;
-			  flex-direction: column;
-			  align-items: flex-end;
-			  justify-content: space-between;
-			  padding: 0 10px;
-			  background-color: black;
-			  color: white;
-		}
-
-		.text-above-buttons {
-		         margin-bottom: 5px;
-		}
-
-		.button-container {
-		  	display: flex;
-			justify-content: center; /* Align buttons horizontally at the center */
-			margin-top: 10px; /* Add margin to separate the buttons from the text */
-			align-items: center; /* Align items vertically at the center */
-		}
-		
-		
-		.button {
-			  padding: 5px 10px;
-			  background-color: #DAF7A6;
-			  color: darkblue;
-			  border: none;
-			  cursor: pointer;
-			  width: 100px; /* Adjust the width as desired */
-
-		}
-
-
-
-		.right-section {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-
-		.right-section h1 {
-			font-size: 30px;
-			color: #f0f0f7;
-			font-weight: bold;
-			text-align: center; /* Align the title in the center */
-		}
-
-		.right-section img {
-			width: 150px;
-			height: 150px;
-			margin-right: 10px;
-			float: left;
-		}
-		
-
-		/* Navbar Styles */
-		.navbar {
-			background-color: #f2f2f2;
-			padding: 10px;
-		}
-
-		.menu {
-			list-style-type: none;
-			margin: 0;
-			padding: 0;
-		        margin-right: 20px; /* Add a margin to the right side of the menu */
-
-		}
-
-		.menu li {
-			display: inline-block;
-			margin-right: 100px; /* I changed this from 10 to 100; therefore, the spacing between tabs on navbar will be increased */
-
-		}
-
-		.menu li a {
-			display: block;
-			padding: 10px;
-			background-color: #DAF7A6; /* green */
-			color: darkblue; /* Change the color to dark blue */
-			text-decoration: none;
-		}
-
-		.menu li a:hover {
-			background-color: #FFC300; /* Gold */
-			color: #fff;
-			text-decoration: none;
-		}
-
-		
-		/* Main Content Styles */
-		.main-content {
-		       display: flex;
-		}
-		
-		
-		/* Sidebar Styles */
-		.sidebar {
-			width: 30%;
-			background-color: #f1f1f1;
-			padding: 10px;
-		  }
-		
-		.sidebar .tab {
-		        display: block;
-		        padding: 10px;
-		        background-color: #EEE;
-		        transition: background-color 0.3s;
-		        cursor: pointer;
-		        margin-bottom: 5px;
-			font-size: 20px; /* Adjust the font size as desired */
-			text-align: center;
-			text-decoration: none; /* Remove the underline */
-			color: #000; /* Change the color to black or your preferred color */
-		}
-		
-		.sidebar .tab:hover {
-		        background-color: #CCC;
-		}
-
-
-		.tabs {
-		       width: 70%;
-		       display: flex;
-		       flex-direction: column;
-		       align-items: flex-start;
-		       padding: 10px;
-		}
-
-		.tabs .tab {
-		       padding: 10px;
-		       background-color: #EEE;
-		       transition: background-color 0.3s;
-		       cursor: pointer;
-		       margin-bottom: 5px;
-		       width: 99%; /* Adjust the width as desired */
-		       font-size: 20px; /* Adjust the font size as desired */
-		       text-align: center;
-		}
-
-		.tabs .tab:hover {
-		       background-color: #CCC;
-		}
-
-		
-		
-		
+		/* CSS Styles */
 		/* To highlight different parts of the text in red, green, and blue, you can use the <span> element and apply CSS styles to it */ 
-		
 		
 		.orange-text {
 			color: orange;
@@ -201,56 +31,65 @@
 			color: blue;
 			font-weight: bold;
 		}
+
+		/* Header Styles */
+		header {
+			background-color: #274f4f;
+			color: white;
+			text-align: center;
+			padding: 5px;
+		}
+
+		h1 {
+			color: white; /* Adjust the font color as desired */
+			font-size: 30px; /* Adjust the font size as desired */
+			font-weight: bold; /* Add font weight as desired */
+			text-align: center; /* Center the header title */
+			padding: 0px; /* Add padding around the header title */
+			margin-bottom: 20px; /* Add margin below the header title */
+		}
 		
+		hr {
+			width: 100%; /* Adjust the width as desired */
+		}
+		
+		/* Footer Styles */
+		.footer {
+		        background-color: #333;
+		        color: #fff;
+		        padding: 10px;
+		        text-align: center;
+		        position: fixed;
+		        left: 0;
+		        bottom: 0;
+		        width: 100%;
+		}
 	</style>
+	
 </head>
 <body>
+	<header>
+		<h1>R Code for ...  <br> (One Dataset)</h1>
+	</header>
+
+	<section>
+		<h2>R Code Example</h2>
+		<pre><code>
+<span style="color: #04cc04; font-style: italic;"># Load required packages</span>
+<span style="color: #c910c9; font-style: italic;">require</span>(GEOquery)    <span style="color: #04cc04; font-style: italic;"># For downloading and processing GEO datasets</span>
+<span style="color: #c910c9; font-style: italic;">require</span>(limma)       <span style="color: #04cc04; font-style: italic;"># For performing differential expression analysis</span>
+<span style="color: #c910c9; font-style: italic;">require</span>(tidyverse)   <span style="color: #04cc04; font-style: italic;"># For data manipulation and visualization</span>
+<span style="color: #c910c9; font-style: italic;">require</span>(plotly)      <span style="color: #04cc04; font-style: italic;"># For interactive plots</span>
 
 
-	<div class="header">
-		  <div class="left-section">
-			    <img src="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Images/Linkedin_Photo.jpg" alt="Your Photo">
-			  </div>
-			  <div class="middle-section">
-			    <p class="text-above-buttons">Results-oriented and motivated bioinformatician with rich experience in bioinformatics tools and programming.</p>
-			    <div class="button-container">
-			       <a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Documents/MohajeriM_CV.pdf" target="_blank"><button class="button">CV</button></a>
-     			       <a href="https://www.linkedin.com/in/mohammad-reza-mohajeri-24240a12b" target="_blank"><button class="button">LinkedIn</button></a>
-			    </div>
-			  </div> <!-- Close the middle-section div here -->
-			  <div class="right-section">
-			    <h1>Meta-Analysis of Breast Cancer Gene Expression Profiles: Identifying Pathways and Biomarkers for Diagnosis and Prognosis</h1>
-		  </div>
-	</div>
+# Your R code goes here
+# ...
 
+		</code></pre>
+	</section>
 
-	<div class="navbar">
-		<ul class="menu">
-			<li><a href="#">Tab 1</a></li>
-			<li><a href="#">Tab 2</a></li>
-			<li><a href="#">Tab 3</a></li>
-			<li><a href="#">Tab 4</a></li>
-			<li><a href="#">Tab 5</a></li>
-		</ul>
-	</div>
-
-	
-	<div class="main-content">
-        <div class="sidebar">
-            <a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/About_The_Project.html" class="tab">About The Project</a>
-            <a href="#" class="tab">R Code</a>
-            <a href="#" class="tab">C</a>
-            <a href="#" class="tab">D</a>
-        </div>
-
-       <div class="tabs">
-    <a href="project-goals.html" class="tab">Project Goals</a>
-    <a href="methodology.html" class="tab">Methodology</a>
-    <a href="results.html" class="tab">Results</a>
-    <a href="discussion-conclusion.html" class="tab">Discussion &amp; Conclusion</a>
-</div>
-
-
-
+	<footer class="footer">
+	    <p>&copy; 2023 Mohammad Reza Mohajeri. All rights reserved.</p>
+	</footer>
 </body>
 </html>
