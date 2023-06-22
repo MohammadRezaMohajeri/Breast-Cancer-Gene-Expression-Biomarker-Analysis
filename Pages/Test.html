@@ -2,142 +2,10 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>About The Project</title>
+	<title>R Code For 4 Datasets (Meta-analysis)</title>
 	<style>
-		/* Header Styles  */
-		.header {
-			background-color: #040459; /* Dark blue navy for header  */
-			padding: 10px;
-			text-align: center; /* Center-align the header content */
-		}
-
-		.header h1 {
-			font-size: 40px; /* Adjust the font size as desired */
-			color: #ededf5; /* To change the color of the text "About The Project" in the header to white */
-			font-weight: bold; /* Add this  line to make the text bold */
-		}
-
-		/* Navbar Styles */
-		.navbar {
-			background-color: #f2f2f2;
-			padding: 10px;
-		}
-
-		.menu {
-			list-style-type: none;
-			margin: 0;
-			padding: 0;
-		        margin-right: 20px; /* Add a margin to the right side of the menu */
-
-		}
-
-		.menu li {
-			display: inline-block;
-			margin-right: 100px; /* I changed this from 10 to 100; therefore, the spacing between tabs on navbar will be increased */
-
-		}
-
-		.menu li a {
-			display: block;
-			padding: 10px;
-			background-color: #DAF7A6; /* green */
-			color: darkblue; /* Change the color to dark blue */
-			text-decoration: none;
-		}
-
-		.menu li a:hover {
-			background-color: #FFC300; /* Gold */
-			color: #fff;
-			text-decoration: none;
-		}
-
-		/* Sidebar Styles */
-		.sidebar {
-			width: 20%;
-			background-color: #f2f2f2;
-			padding: 10px;
-			float: left;
-			height: 5000px; /* Increase the height as desired */
-			border-right: 1px solid black; /* This will visually separate the sidebar and content sections. */
-
-
-
-		}
-
-		.sidebar ul {
-			list-style-type: none;
-			padding: 0;
-			margin-bottom: 0; /* Add margin-bottom to remove extra spacing */
-
-		}
-
-		.sidebar li {
-			margin-bottom: 5px;
-		}
-
-		.sidebar .heading:hover {
-			background-color: green;
-			color: #fff;
-			text-decoration: none;
-		}
-
-
-		/* Page Content Styles */
-		.content {
-			width: 100%;
-			padding: 10px;
-			padding-left: 100px;
-			box-sizing: border-box;
-			border-left: 1px solid green;
-			text-align: justify; /* Add this line to justify the text */
-		}
-
-		.content h2 {
-			font-size: 24px; /* Adjust the font size for headings */
-			color:#000333;
-			cursor: pointer;
-		}
-		.content h3 {
-			font-size: 20px;
-			color: #000080;
-			font-weight: bold;
-			margin-bottom: 0;
-			
-			
-
-		}
-
-		.content p {
-			font-size: 20px; /* Adjust the font size for paragraphs */
-			margin-left: 20px; /* Adjust the margin value for indentation */
-			margin-top: 0;
-			
-
-		}
-		
-		.content .heading:hover {
-		       /* Add your desired hover effect styles here */
-		       /* For example, changing the background color and text color */
-		       background-color: green;
-		       color: #fff;
-		       text-decoration: none;
-		}
-
-		.heading.hover-effect:hover {
-		       /* Add your desired hover effect styles here */
-		       /* For example, changing the color */
-		       color: blue;
-		}
-
-		
-		/* The <hr> element creates a horizontal rule, which is a self-closing tag and doesn't require a closing tag.
-          	You can also style the horizontal line using CSS if you want to customize its appearance. For example:*/ 
-		hr {
-			border: none;
-			border-top: 1px solid black;
-			margin: 20px 0;
-		}
-
+		/* CSS Styles */
+		/* To highlight different  parts of  the text in red, green, and blue, you can use the <span> element and apply CSS styles to  it */ 
 		
 		.orange-text {
 			color: orange;
@@ -163,160 +31,136 @@
 			color: blue;
 			font-weight: bold;
 		}
-		
-	        }
-	</style>
 
+		/* Header Styles */
+		header {
+			background-color: #260e02;
+			color: white;
+			text-align: center;
+			padding: 5px;
+		}
+
+		h1 {
+			color: white; /* Adjust the font color as desired */
+			font-size: 30px; /* Adjust the font size as desired */
+			font-weight: bold; /* Add font weight as desired */
+			text-align: center; /* Center the header title */
+			padding: 0px; /* Add padding around the header title */
+		}
+		
+		hr {
+			width: 100%; /* Adjust the width as desired */
+		}
+		
+		/* Drop-down Styles */
+		.drop-down-content {
+			display: none;
+		}
+
+		.dropdown-trigger {
+			cursor: pointer;
+		}
+
+		.drop-down-content.active {
+			display: block;
+		}
+		
+		
+		h3.dropdown-trigger {
+		font-size: 24px; /* Adjust the font size as desired */
+		margin: 10px 0; /* Adjust the margin as desired */
+		}
+
+	        /* Adjust font size for paragraph under 1-1- Explanation:*/
+		.drop-down-content p {
+			font-size: 16px; /* Adjust the font size as desired */
+		}
+
+		/* Adjust font size for list items */
+		.drop-down-content ul li {
+			font-size: 16px; /* Adjust the font size as desired */
+		}
+
+			/* Adjust font size for the explanation paragraph */
+		#explanation-content p {
+			font-size: 20px; /* Adjust the font size as desired */
+		}
+		
+		/* Adjust font size for the headings */
+		#plots-tables-content ul li a {
+			font-size: 20px; /* Adjust the font size as desired */
+		}
+		
+		/* Adjust font size for the code block */
+		#code-content pre code {
+			font-size: 20px; /* Adjust the font size as desired */
+		}
+		
+		/* Footer Styles */
+		.footer {
+		        background-color: #333;
+		        color: #fff;
+		        padding: 10px;
+		        text-align: center;
+		        position: fixed;
+		        left: 0;
+		        bottom: 0;
+		        width: 100%;
+		}
+		
+	</style>
+	
 </head>
 <body>
-	<div class="header">
-		<h1>About The Project</h1>
-	</div>
-
-	<div class="navbar">
-		<ul class="menu">
-			<li><a href="#">Tab 1</a></li>
-			<li><a href="#">Tab 2</a></li>
-			<li><a href="#">Tab 3</a></li>
-			<li><a href="#">Tab 4</a></li>
-			<li><a href="#">Tab 5</a></li>
-			<li><a href="#">Tab 6</a></li>
-			<li><a href="#">Tab 7</a></li>
-		</ul>
-	</div>
-
-	<div class="sidebar">
-		<ul>
-			<li>
-				<h2 class="heading">1- Research Question</h2>
-				<!-- <ul class="subheadings">
-					<li>Subheading 1</li>
-					<li>Subheading 2</li>
-				</ul> --> 
-			</li>
-			<li>
-				<h2 class="heading">2- Research Hypothesis</h2>
-				<!-- <ul class="subheadings">
-					<li>Subheading 1</li>
-					<li>Subheading 2</li>
-				</ul> --> 
-			</li>
-			<li>
-				<h2 class="heading">3- Objectives</h2>
-				<!-- <ul class="subheadings">
-					<li>Subheading 1</li>
-					<li>Subheading 2</li>
-				</ul> -->
-			</li>
-			<li>
-				<h2 class="heading">4- A brief Methodology</h2>
-				<!-- <ul class="subheadings">
-					<li>Subheading 1</li>
-					<li>Subheading 2</li>
-				</ul> --> 
-			</li>
-			<li>
-				<h2 class="heading">5- The R Code: A Concise Overview</h2>
-				<!-- <ul class="subheadings">
-					<li>Subheading 1</li>
-					<li>Subheading 2</li>
-				</ul> --> 
-			</li>
-		
-		</ul>
-	</div>
+	<header>
+		<h1>R Code <br> For 4 Datasets (Meta-analysis)</h1>
+	</header>
 	
-
-
-	<!-- "Chromatic Transformation in the text: 
-
-		 <span class="green-text"> GREEN TEXTTTTTT </span> 
-
-		 <span class="purple-text"> PURPLE TEXTTTTTT</span> 
-
-		 <span class="orange-text"> ORANGE TEXTTTT </span> 
-
-		<span class="dark-yellow-text"> DARK YELLOW TEXTTT </span> 
-
-		<span class="brown-text">BROWN TEXTTTT </span> 
-
-		 <span class="blue-text">BLUE TEXTTTTT </span> 
-
-		<strong>BOLD TEXTTTTTT </strong> , 
-
--->
- 
-
-			<div class="content">
-		  <h2 class="heading hover-effect">1- Research Question</h2>
-		  <div class="dropdown">
-		    <!-- Research Question content -->
-		    <h3>1- Primary Research Question: "Which shared characteristics among homogeneous studies can be utilized to distinguish between non-aggressive and aggressive breast cancer samples through gene expression profiling?"</h3>
-		    <p>The research question development process began with a broad interest in gene expression profiling in relation to breast cancer differentiation...</p>
-
-		    <h3>2- Refining the Research Question: Investigating Grading Systems and Molecular Subtypes for Breast Cancer Differentiation between non-aggressive and aggressive samples through microarray gene expression profiling</h3>
-		    <p>After a review of the available literature and data, it became apparent that some homogenous datasets provided information on grading systems and molecular subtypes...</p>
-
-		    <h3>3- Distinguishing Non-aggressive and Aggressive Breast Cancer Samples through Grading Systems and Gene Expression Profiling</h3>
-		    <p>Further narrowing down the research question, the focus was specifically placed on examining whether the grading system and gene expression signatures...</p>
-
-		    <h3>4- Future Investigation: Comparative Analysis of Differentiating Breast Cancer Samples using Molecular Subtypes and Grading System</h3>
-		    <p>As a future research question, the research query was further refined to investigate whether molecular subtypes and gene expression signatures...</p>
-
-		    <p>Overall, the approach to developing the research question was iterative, starting with a broad question and progressively refining it based on the available literature and data.</p>
-		  </div>
-		</div>
-
-		<hr>
-
-		<div class="content">
-		  <h2 class="heading hover-effect">2- Research Hypothesis</h2>
-		  <div class="dropdown">
-		    <!-- Research Hypothesis content -->
-		    <p>Content of Research Hypothesis...</p>
-		  </div>
-		</div>
-
-		<hr>
-
-		<div class="content">
-		  <h2 class="heading hover-effect">3- Objectives</h2>
-		  <div class="dropdown">
-		    <!-- Objectives content -->
-		    <p>Content for Objectives...</p>
-		  </div>
-		</div>
-
-		<hr>
-
-		<div class="content">
-		  <h2 class="heading hover-effect">4- A brief Methodology</h2>
-		  <div class="dropdown">
-		    <!-- Methodology content -->
-		    <p>Content OF Methodology...</p>
-		  </div>
-		</div>
-
-		<hr>
-
-		<div class="content">
-		  <h2 class="heading hover-effect">5- The R Code: A Concise Overview</h2>
-		  <div class="dropdown">
-		    <!-- R Code Overview content -->
-		    <p>Content OF THE R Code Overview...</p>
-		  </div>
-		</div>
-
-
-
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-		$(document).ready(function() {
-		    $('.heading').click(function() {
-			$(this).next('.dropdown').slideToggle();
-		    });
-		});
-        </script>
 	
+	<h2 style="font-size: 28px; text-align: center;">1- Differential Expression Analysis of Breast Cancer Dataset (GSE25055) using limma in R: Comparing Molecular Subtypes and Grading System</h2>
+
+	
+	<hr>
+<h3 class="dropdown-trigger" onclick="toggleDropDown('project1-content')">About The Project 1</h3>
+<div class="drop-down-content" id="project1-content" style="text-align: justify;">
+	<p> (<a href="#">Click to go to "About The Project 1"</a>)</p> 
+</div>
+<hr>
+
+<h3 class="dropdown-trigger" onclick="toggleDropDown('explanation-content')">About this code</h3>
+<div class="drop-down-content" id="explanation-content" style="text-align: justify;">
+	<p> (<a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/About_This_Code_Project3.html">Click to go to "About this code"</a>)</p> 
+</div>
+<hr>
+
+<h3 class="dropdown-trigger" onclick="toggleDropDown('code-content')">Code (<a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/R_Code_4Datasets_Meta_Analysis_Code_Page.html">Click to go to the code section</a>)</h3>
+<div class="drop-down-content" id="code-content"></div>
+
+<hr>
+
+<h3 class="dropdown-trigger" onclick="toggleDropDown('plots-tables-content')">Generated Plots & Tables</h3>
+<div class="drop-down-content" id="plots-tables-content">
+	<ul>
+		<li><a href="#">Volcano plots for comparing grade 1 vs grade 3 (GSE25055 dataset)</a></li>
+		<li><a href="#">Volcano plots for comparing Luminal A, Normal-like vs Luminal B, Basal-like, and HER2 (GSE25055 dataset)</a></li>
+		<li><a href="#">Tables</a></li>
+	</ul>
+</div>
+<hr>
+
+	
+	
+	<footer class="footer">
+	    		<p>&copy; 2023 Mohammad Reza Mohajeri. All rights reserved.</p>
+	</footer>
+	
+	<!-- JavaScript for Drop-down Functionality -->
+	<script>
+		function toggleDropDown(id) {
+			var content = document.getElementById(id);
+			content.classList.toggle("active");
+		}
+	</script>
+
 </body>
 </html>
