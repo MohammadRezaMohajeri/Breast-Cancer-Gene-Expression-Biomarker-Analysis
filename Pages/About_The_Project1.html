@@ -96,43 +96,39 @@
 		<h1 style="text-align: left; font-size: 30px; font-weight: bold;">Approaches for Breast Cancer Classification</h1>
 		
 		<h2 style="font-size: 22px; font-weight: bold;">1. Introduction</h2>
-		<p>  <span style="font-size: 20px;">TEXT</span> </p>
+		<p>  <span style="font-size: 20px;">Breast cancer is a complex and heterogeneous disease with varying levels of aggressiveness. Accurate assessment of aggressiveness is crucial for determining appropriate treatment strategies and predicting patient outcomes. In recent years, researchers have focused on developing classification approaches to categorize breast cancer tumors based on their aggressiveness.</span> </p>
 
-		<p>
-		  <span style="font-size: 22px; font-weight: bold;">2. From Histology to Molecular Signatures: Decoding Breast Cancer Grades:</span>
-		  <span style="font-size: 20px;">TEXT</span>
-		</p>
+		<h2 style="font-size: 22px; font-weight: bold;">2. From Histology to Molecular Signatures: Decoding Breast Cancer Grades:</h2>
+		<p> <span style="font-size: 20px;">The grading system is a widely used classification approach that categorizes tumors into different grades based on histological features, including tumor size, mitotic rate, and nuclear pleomorphism. Grade 1 tumors are considered less aggressive, while grade 3 tumors are recognized as highly aggressive. This system provides valuable information about the tumor's architectural and cytological characteristics, aiding in prognosis and treatment decision-making.</span>	</p>
+		<p> <span style="font-size: 20px;">However, the translation of histological classification into specific molecular biomarkers presents exciting opportunities and potential advancements in the field of breast cancer. By identifying key biomarkers associated with different grades, we can develop molecular assays that accurately indicate the disease grade without relying solely on histological approaches. This approach holds promise for improving the efficiency and invasiveness of the diagnostic process, ultimately leading to enhanced breast cancer diagnosis and treatment strategies.</span>	</p>
 
-		<p>
-		  <span style="font-size: 22px; font-weight: bold;">3. Molecular Subtyping: Identifying Gene Expression Profiles</span>
-		  <span style="font-size: 20px;">TEXT</span>
-		</p>
+		<h2 style="font-size: 22px; font-weight: bold;">3. Molecular Subtyping: Identifying Gene Expression Profiles</h2>
+		<p> <span style="font-size: 20px;">In addition to the grading system, molecular subtyping has emerged as another approach to classify breast cancer based on gene expression profiles. Molecular subtypes include Luminal A, Luminal B, Basal-like, HER2-positive, and Normal-like subtypes. These subtypes reflect distinct molecular signatures and are associated with different clinical outcomes. Luminal A and Normal-like subtypes are generally associated with better prognosis and less aggressive behavior, while Luminal B, Basal-like, and HER2-positive subtypes are associated with poorer prognosis and more aggressive disease.</span> </p> 
+		
 
-		<p>
-		  <span style="font-size: 22px; font-weight: bold;">4. Rationale and Objectives</span>
-		  <span style="font-size: 20px;">TEXT</span>
-		</p>
+		<h2 style="font-size: 22px; font-weight: bold;">4. Rationale and Objectives</h2>
+		<p> <span style="font-size: 20px;">Given the importance of accurately assessing aggressiveness in breast cancer, it is essential to evaluate the effectiveness of different classification approaches. Therefore, in this preliminary study, known as Project 1, we aimed to assess the effectiveness of grade-based & molecular subtype-based classifications in differentiating aggressiveness levels in breast cancer. To accomplish these objectives, we performed a differential expression analysis of the breast cancer dataset GSE25055 using the limma package in the R. The project aimed to identify genes showing significant differential expression between non-aggressive and aggressive tumor groups in two classifications of grade-based (Grade 1 vs Grade 3) and subtype-based (Luminal A/Normal-like vs Luminal B/Basal-like/HER2 subtypes). By comparing the results of grade- & subtype-based analyses, we aimed to determine which classification approach demonstrated greater potential for further investigation in subsequent projects.</span> </p>
+		
 
-		<p>
-		  <span style="font-size: 22px; font-weight: bold;">5. Study Design and Methodology</span>
-		  <span style="font-size: 20px;">TEXT</span>
-		</p>
+		<h2 style="font-size: 22px; font-weight: bold;">5. Study Design and Methodology</h2>
+		<p> <span style="font-size: 20px;">The categorization of tumors into these classifications was determined based on a thorough review of existing literature, considering the known associations between histological features, gene expression patterns, and clinical outcomes. We hypothesized that Grade 1 and Luminal A/Normal-like subtypes represent non-aggressiveness, while Grade 3 and Luminal B/Basal-like/HER2 subtypes represent aggressiveness. Therefore, two classifications, based on grading system (G1 (non-aggressiveness) vs G3 (aggressiveness)) and subtypes (Luminal A/Normal-like subtypes (non-aggressiveness) vs Luminal B/Basal-like/HER2 subtypes (aggressiveness)) were defined to represent non- aggressiveness and aggressiveness of breast cancer samples.</span> </p>
+		<p> <span style="font-size: 20px;">To achieve our objectives, we performed a differential expression analysis of the breast cancer dataset GSE25055 using the limma package in the R programming language. The dataset comprised gene expression data for both the grading system (grade 1 and grade 3) and molecular subtypes (Luminal A, Normal-like, Luminal B, Basal-like, and HER2-positive subtypes).</span>	</p>
+		<p> <span style="font-size: 20px;">The GSE25055 dataset was downloaded from the GEO database using the GEOquery package. Data manipulation and preprocessing were performed using the tidyverse package. Volcano plots were created using the plotly package to visualize the statistical significance and fold change of differentially expressed genes. The limma package was utilized for statistical tests and multiple testing adjustments. </span>	</p>
+		
 
-		<p>
-		  <span style="font-size: 22px; font-weight: bold;">6- Results: </span>
-		  <span style="font-size: 20px;">TEXT</span>
-		</p>
+		<h2 style="font-size: 22px; font-weight: bold;">6- Results:</h2>
+		<p> <span style="font-size: 20px;">The results of Project 1 revealed significant differences in differential expression analysis for both grade-based and subtype-based classifications. Therefore, it was determined that both classifications could be used for further analysis. However, the number of samples with grading information was larger than those with subtypes information, leading us to prioritize the grading system for further analysis in Project 2 and 3. </span>  </p>
+		
 
-		<p>
-		  <span style="font-size: 22px; font-weight: bold;">7- Conclusion: </span>
-		  <span style="font-size: 20px;">TEXT</span>
-		</p>
+		<h2 style="font-size: 22px; font-weight: bold;">7- Conclusion: </h2>
+		<p> <span style="font-size: 20px;">Project 1 demonstrated that both grade-based and subtype-based classifications exhibited significant differences in the differential expression analysis of breast cancer dataset GSE25055. Although both classifications showed promise, the decision was made to proceed with the grading system (Grade 1 vs. Grade 3) in Project 2 and 3. This choice was influenced by the larger number of samples containing grading information compared to those with subtypes information. By prioritizing the grading system classification, the subsequent projects aimed to further explore and expand upon the differentiation of aggressiveness levels in breast cancer.</span>  </p>
+		
 
-		<p>
-		  <span style="font-size: 22px; font-weight: bold;">8- Next Step: </span>
-		  <span style="font-size: 20px;">In the next phase of this research, following the completion of Project 1 and the subsequent Project 2 and 3 utilizing the grading system, the focus will shift towards conducting a differential expression (DE) analysis with the subtype-based classification. Specifically, the DE analysis will involve comparing the gene expression profiles between the Luminal A and Normal-like subtypes versus the Luminal B, Basal-like, and HER2 subtypes. </span>
-		  <span style="font-size: 20px;">By performing this DE analysis with the subtype groups, the aim is to obtain a comprehensive understanding of the differential expression associated with different aggressiveness levels in breast cancer. The obtained results from the subtypes analysis will be compared with the existing findings derived from the grading system analysis, which has already been conducted.</span>
-		</p>
+		<h2 style="font-size: 22px; font-weight: bold;">8- Next Step (Comparison of Grading System and Subtypes Analysis):</h2>
+		<p>  <span style="font-size: 20px;">In the next phase of this research, following the completion of Project 1 and the subsequent Project 2 and 3 utilizing the grading system, the focus will shift towards conducting a differential expression (DE) analysis with the subtype-based classification. Specifically, the DE analysis will involve comparing the gene expression profiles between the Luminal A and Normal-like subtypes versus the Luminal B, Basal-like, and HER2 subtypes. </span> </p>
+		<p>  <span style="font-size: 20px;">By performing this DE analysis with the subtype groups, the aim is to obtain a comprehensive understanding of the differential expression associated with different aggressiveness levels in breast cancer. The obtained results from the subtypes analysis will be compared with the existing findings derived from the grading system analysis, which has already been conducted.</span> </p>
+		<p> <span style="font-size: 20px;">Through this comparative analysis, the research seeks to evaluate the concordance or divergence between the two classification approaches and identify potential differences in the underlying molecular mechanisms related to breast cancer aggressiveness. This comparative assessment will offer valuable insights into the integration of results obtained from both the grading system and subtypes classifications, ultimately providing a more holistic perspective on the disease progression and enabling the discovery of novel findings.</span>	</p>
+		<p> <span style="font-size: 20px;">By conducting the DE analysis with the subtypes classification and comparing its results to those obtained from the grading system, this research aims to contribute to the growing knowledge in the field of breast cancer classification and identification of robust indicators of aggressiveness. The combined findings will enhance our understanding of the underlying biological processes and potential targets for future therapeutic interventions, ultimately advancing the field towards personalized and targeted breast cancer treatments.</span>	</p>
 
 		
 		
