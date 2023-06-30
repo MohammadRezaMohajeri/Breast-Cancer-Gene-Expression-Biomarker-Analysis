@@ -67,21 +67,21 @@
 
 		<h2 style="font-size: 22px; font-weight: bold;">Objectives: </h2>
 		<p>  <span style="font-size: 20px; margin-bottom: 0; ">The primary objectives of Project 2 were as follows:</span> </p>
-		<h2 style="font-size: 20px; text-indent: 25px;">1. Assess the differential gene expression between non-aggressive (Grade 1) and aggressive (Grade 3) breast cancer samples.</h2>
-		<h2 style="font-size: 20px; text-indent: 25px;">2. Identify DEGs that exhibit significant expression differences associated with disease aggressiveness. </h2>
-		<h2 style="font-size: 20px; text-indent: 25px;">3. Utilize bioinformatics tools and R packages to facilitate data analysis and visualization.  </h2>
-		<h2 style="font-size: 20px; text-indent: 25px;">4. Provide insights into potential biomarkers for industry application in breast cancer diagnosis and treatment. </h2>
+		<h2 style="font-size: 20px; text-indent: 25px; font-weight: normal;">1. Assess the differential gene expression between non-aggressive (Grade 1) and aggressive (Grade 3) breast cancer samples.</h2>
+		<h2 style="font-size: 20px; text-indent: 25px; font-weight: normal;">2. Identify DEGs that exhibit significant expression differences associated with disease aggressiveness. </h2>
+		<h2 style="font-size: 20px; text-indent: 25px; font-weight: normal;">3. Utilize bioinformatics tools and R packages to facilitate data analysis and visualization.  </h2>
+		<h2 style="font-size: 20px; text-indent: 25px; font-weight: normal;">4. Provide insights into potential biomarkers for industry application in breast cancer diagnosis and treatment. </h2>
 
 
 		<h2 style="font-size: 22px; font-weight: bold;">Methodology: </h2>
-		<h2 style="font-size: 20px; text-indent: 25px;">1.	Data Acquisition and Preprocessing: </h2>
+		<h2 style="font-size: 20px; text-indent: 25px; font-weight: normal;">1.	Data Acquisition and Preprocessing: </h2>
 		<p style="font-size: 20px; margin-bottom: 0; text-indent: 35px;"><strong style="font-size: 25px;">&#10003;</strong> The gene expression datasets, GSE25055, GSE7390, and GSE11121, were retrieved from the Gene Expression Omnibus (GEO) database using the GEOquery R package.</p>
 		<p style="font-size: 20px; margin-bottom: 0; text-indent: 35px;"><strong style="font-size: 25px;">&#10003;</strong> Quality control measures were implemented to ensure data integrity, including assessment of sample quality and data normalization.</p>
-		<h2 style="font-size: 20px; text-indent: 25px;">2.	Differential Expression Analysis:</h2>
+		<h2 style="font-size: 20px; text-indent: 25px; font-weight: normal;">2.	Differential Expression Analysis:</h2>
 		<p style="font-size: 20px; margin-bottom: 0; text-indent: 35px;"><strong style="font-size: 25px;">&#10003;</strong> The limma R package was employed for differential expression analysis. This package is widely used for its robust statistical methods and flexibility in handling microarray data.</p>
 		<p style="font-size: 20px; margin-bottom: 0; text-indent: 35px;"><strong style="font-size: 25px;">&#10003;</strong> Individual dataset analyses were performed using the limma package to identify DEGs specific to each dataset.</p>
 		<p style="font-size: 20px; margin-bottom: 0; text-indent: 35px;"><strong style="font-size: 25px;">&#10003;</strong> Fold change (FC) and false discovery rate (FDR) values were calculated to assess the magnitude and statistical significance of gene expression changes.</p>
-		<h2 style="font-size: 20px; text-indent: 25px;">3.	Integration and Visualization: </h2>
+		<h2 style="font-size: 20px; text-indent: 25px; font-weight: normal;">3.	Integration and Visualization: </h2>
 		<p style="font-size: 20px; margin-bottom: 0; text-indent: 35px;"><strong style="font-size: 25px;">&#10003;</strong> The identified DEGs from each dataset were further analyzed to obtain a common set of DEGs across the three datasets.</p>
 		<p style="font-size: 20px; margin-bottom: 0; text-indent: 35px;"><strong style="font-size: 25px;">&#10003;</strong> The ggvenn package was used to visualize the overlapping DEGs among the datasets, providing a visual representation of shared and unique genes.</p>
 		<p style="font-size: 20px; margin-bottom: 0; text-indent: 35px;"><strong style="font-size: 25px;">&#10003;</strong> The tidyverse package, along with plotly, was utilized for data manipulation, exploration, and interactive visualizations, facilitating the interpretation of the results.</p>
