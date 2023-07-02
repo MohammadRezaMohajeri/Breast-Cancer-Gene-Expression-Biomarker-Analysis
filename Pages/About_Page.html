@@ -54,19 +54,19 @@
 		<strong> These three code snippets represent different approaches and analyses applied to the datasets, including single dataset analysis, differential expression analysis with multiple datasets, and meta-analysis to combine the results from multiple datasets. </strong>
 		</p>
 		
-		<h2>1. R CODE (1 Dataset)</h2>
+		<h2>1. R CODE (Phase 1; 1 Dataset)</h2>
 		<p>
 		In this code, a differential expression analysis was performed on the breast cancer dataset GSE25055 using the limma package in R. The analysis aimed to compare the effectiveness of molecular subtypes and the grading system in distinguishing aggressive and non-aggressive forms of breast cancer. By identifying genes with significant differential expression and visualizing the results through volcano plots, the code explored the potential of these classifications as indicators of aggressiveness.
 		</p>
 		<hr>
 
-		<h2>2. R CODE (4 Dataset analysis - FC & FDR)</h2>
+		<h2>2. R CODE (Phase 2; 4 Datasets)</h2>
 		<p>
 		In this code, a differential expression analysis is conducted using four datasets with the same platform. The analysis utilizes the limma package for differential expression and the tidyverse package for data manipulation. The objective of this analysis is to compare the gene expression profiles between two grades of cancer (Grade 1 and Grade 3). Statistical measures such as fold change (FC) and false discovery rate (FDR) are used to identify genes that are differentially expressed between the two grades. Additionally, the code incorporates the ggvenn package to generate Venn diagrams, aiming to identify the common differentially expressed genes (DEGs) across the four datasets. The volcano plots are created to visualize the results, and the final outcome is the identification of DEGs as well as the common DEGs shared among the datasets.
 		</p>
 		<hr>
 
-		<h2>3. R CODE (4 Dataset Meta-analysis - Z score & FDR)</h2>
+		<h2>3. R CODE (Phase 3/ 4 Datasets/ Meta-analysis)</h2>
 		<p>
 		This code snippet involves performing a meta-analysis using the Genemeta package. The analysis integrates the same four datasets from the previous code snippet. The effect size, represented by the z score, and the false discovery rate (FDR) are utilized for the meta-analysis. The objective is to identify and obtain the meta-combined differentially expressed genes (DEGs) across the four datasets.
 		</p>
