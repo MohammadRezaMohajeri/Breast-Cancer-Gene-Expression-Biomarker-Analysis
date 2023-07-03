@@ -1,71 +1,72 @@
-<<span style="color: #68affc; font-style: italic;">!</span>DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-	<meta charset<span style="color: #68affc; font-style: italic;">=</span>"UTF-8">
-	<title>R Code <br> For 3 Datasets <span style<span style="color: #68affc; font-style: italic;">=</span>"color: #68affc; font-style: italic;">(</span>Meta-analysis<span style<span style="color: #68affc; font-style: italic;">=</span>"color: #68affc; font-style: italic;">)</span></title>
+	<meta charset="UTF-8">
+	<title>R Code <br> For 4 Datasets (Meta-analysis)</title>
 	<style>
 
-		body <span style="color: #68affc; font-style: italic;">{</span>
-			background-color: #12243d; /<span style="color: #68affc; font-style: italic;">*</span> page background color code <span style="color: #68affc; font-style: italic;">*</span>/
+		body {
+			background-color: #12243d; /* Cobalt color code */
 
 		}
 		
-		/<span style="color: #68affc; font-style: italic;">*</span> CSS Styles <span style="color: #68affc; font-style: italic;">*</span>/
-		/<span style="color: #68affc; font-style: italic;">*</span> To highlight different parts of the text in red, green, and blue, you can use the <span> element and apply CSS styles to it <span style="color: #68affc; font-style: italic;">*</span>/ 
+				
+		/* CSS Styles */
+		/* To highlight different parts of the text in red, green, and blue, you can use the <span> element and apply CSS styles to it */ 
 		
-		.orange-text <span style="color: #68affc; font-style: italic;">{</span>
+		.orange-text {
 			color: orange;
 			font-weight: bold;
 		}
-		.dark-yellow-text <span style="color: #68affc; font-style: italic;">{</span>
-			color: hsl<span style<span style="color: #68affc; font-style: italic;">=</span>"color: #68affc; font-style: italic;">(</span>50, 100%, 30%<span style<span style="color: #68affc; font-style: italic;">=</span>"color: #68affc; font-style: italic;">)</span>; /<span style="color: #68affc; font-style: italic;">*</span> Adjust the hue and saturation values as needed <span style="color: #68affc; font-style: italic;">*</span>/
+		.dark-yellow-text {
+			color: hsl(50, 100%, 30%); /* Adjust the hue and saturation values as needed */
 			font-weight: bold;
 		}
-		.brown-text <span style="color: #68affc; font-style: italic;">{</span>
-			color: hsl<span style<span style="color: #68affc; font-style: italic;">=</span>"color: #68affc; font-style: italic;">(</span>30, 100%, 30%<span style<span style="color: #68affc; font-style: italic;">=</span>"color: #68affc; font-style: italic;">)</span>; /<span style="color: #68affc; font-style: italic;">*</span> Adjust the hue and saturation values as needed <span style="color: #68affc; font-style: italic;">*</span>/
+		.brown-text {
+			color: hsl(30, 100%, 30%); /* Adjust the hue and saturation values as needed */
 			font-weight: bold;
 		}
-		.green-text <span style="color: #68affc; font-style: italic;">{</span>
+		.green-text {
 			color: green;
 			font-weight: bold;
 		}
-		.purple-text <span style="color: #68affc; font-style: italic;">{</span>
+		.purple-text {
 			color: purple;
 			font-weight: bold;
 		}
-		.blue-text <span style="color: #68affc; font-style: italic;">{</span>
+		.blue-text {
 			color: blue;
 			font-weight: bold;
 		}
 
-		/<span style="color: #68affc; font-style: italic;">*</span> Header Styles <span style="color: #68affc; font-style: italic;">*</span>/
-		header <span style="color: #68affc; font-style: italic;">{</span>
+		/* Header Styles */
+		header {
 			background-color: #274f4f;
 			color: white;
 			text-align: center;
 			padding: 5px;
 		}
 
-		h1 <span style="color: #68affc; font-style: italic;">{</span>
-			color: white; /<span style="color: #68affc; font-style: italic;">*</span> Adjust the font color as desired <span style="color: #68affc; font-style: italic;">*</span>/
-			font-size: 30px; /<span style="color: #68affc; font-style: italic;">*</span> Adjust the font size as desired <span style="color: #68affc; font-style: italic;">*</span>/
-			font-weight: bold; /<span style="color: #68affc; font-style: italic;">*</span> Add font weight as desired <span style="color: #68affc; font-style: italic;">*</span>/
-			text-align: center; /<span style="color: #68affc; font-style: italic;">*</span> Center the header title <span style="color: #68affc; font-style: italic;">*</span>/
-			padding: 0px; /<span style="color: #68affc; font-style: italic;">*</span> Add padding around the header title <span style="color: #68affc; font-style: italic;">*</span>/
-			margin-bottom: 20px; /<span style="color: #68affc; font-style: italic;">*</span> Add margin below the header title <span style="color: #68affc; font-style: italic;">*</span>/
+		h1 {
+			color: white; /* Adjust the font color as desired */
+			font-size: 30px; /* Adjust the font size as desired */
+			font-weight: bold; /* Add font weight as desired */
+			text-align: center; /* Center the header title */
+			padding: 0px; /* Add padding around the header title */
+			margin-bottom: 20px; /* Add margin below the header title */
 		}
 		
-		hr <span style="color: #68affc; font-style: italic;">{</span>
-			width: 100%; /<span style="color: #68affc; font-style: italic;">*</span> Adjust the width as desired <span style="color: #68affc; font-style: italic;">*</span>/
+		hr {
+			width: 100%; /* Adjust the width as desired */
 		}
 		
-		/<span style="color: #68affc; font-style: italic;">*</span> Adjust font size for the code block <span style="color: #68affc; font-style: italic;">*</span>/
-		pre code <span style="color: #68affc; font-style: italic;">{</span>
-		        font-size: 17px; /<span style="color: #68affc; font-style: italic;">*</span> Adjust the font size as desired <span style="color: #68affc; font-style: italic;">*</span>/
+		/* Adjust font size for the code block */
+		pre code {
+		        font-size: 17px; /* Adjust the font size as desired */
 	        }
 		
-		/<span style="color: #68affc; font-style: italic;">*</span> Footer Styles <span style="color: #68affc; font-style: italic;">*</span>/
-		.footer <span style="color: #68affc; font-style: italic;">{</span>
+		/* Footer Styles */
+		.footer {
 		        background-color: #333;
 		        color: #fff;
 		        padding: 10px;
@@ -80,11 +81,11 @@
 </head>
 <body>
 	<header>
-		<h1>R Code <br> For 3 Datasets <span style<span style="color: #68affc; font-style: italic;">=</span>"color: #68affc; font-style: italic;">(</span>Meta-analysis<span style<span style="color: #68affc; font-style: italic;">=</span>"color: #68affc; font-style: italic;">)</span></h1>
+		<h1>R Code <br> For 4 Datasets (Meta-analysis)</h1>
 	</header>
 
 	<section>
-		<h2>R Code For 4 Datasets <span style<span style="color: #68affc; font-style: italic;">=</span>"color: #68affc; font-style: italic;">(</span>Meta-analysis<span style<span style="color: #68affc; font-style: italic;">=</span>"color: #68affc; font-style: italic;">)</span></h2>
+		<h2>R Code For 4 Datasets (Meta-analysis)</h2>
 <pre><code>
 		
 ################################################################# "Package Installation" #################################################################
