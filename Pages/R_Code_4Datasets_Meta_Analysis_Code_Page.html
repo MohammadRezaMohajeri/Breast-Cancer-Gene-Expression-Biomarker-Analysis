@@ -85,70 +85,70 @@
 	</header>
 
 	<section>
-		<h2>R Code For 4 Datasets (Meta-analysis)</h2>
+		
 <pre><code>
 		
-################################################################# "Package Installation" #################################################################
-#################################### Uncomment the following lines if any of the packages are not already installed or need to be reinstalled.############
-# BiocManager packages
-# Install required Bioconductor packages
-# BiocManager::install("sva", force = TRUE)
-# BiocManager::install("GeneMeta", force = TRUE)
-# BiocManager::install("ComplexHeatmap", force = TRUE)
-# BiocManager::install("fgsea", force = TRUE)
-# BiocManager::install("clusterProfiler", force = TRUE)
+<span style="color: #05c6e3; font-style: italic;">################################################################# "Package Installation" #################################################################</span>
+<span style="color: #05c6e3; font-style: italic;">#################################### Uncomment the following lines if any of the packages are not already installed or need to be reinstalled.############</span>
+<span style="color: #05c6e3; font-style: italic;"># BiocManager packages</span>
+<span style="color: #05c6e3; font-style: italic;"># Install required Bioconductor packages</span>
+<span style="color: #05c6e3; font-style: italic;"># BiocManager::install("sva", force = TRUE)</span>
+<span style="color: #05c6e3; font-style: italic;"># BiocManager::install("GeneMeta", force = TRUE)</span>
+<span style="color: #05c6e3; font-style: italic;"># BiocManager::install("ComplexHeatmap", force = TRUE)</span>
+<span style="color: #05c6e3; font-style: italic;"># BiocManager::install("fgsea", force = TRUE)</span>
+<span style="color: #05c6e3; font-style: italic;"># BiocManager::install("clusterProfiler", force = TRUE)</span>
 			
-# Other packages
-# Install required CRAN packages:
-# install.packages("RColorBrewer")
-# install.packages("msigdbr")
-# install.packages("ggpubr")
-# install.packages("reshape2")
-# install.packages("caret")
-# install.packages("rgl")
+<span style="color: #05c6e3; font-style: italic;"># Other packages</span>
+<span style="color: #05c6e3; font-style: italic;"># Install required CRAN packages:</span>
+<span style="color: #05c6e3; font-style: italic;"># install.packages("RColorBrewer")</span>
+<span style="color: #05c6e3; font-style: italic;"># install.packages("msigdbr")</span>
+<span style="color: #05c6e3; font-style: italic;"># install.packages("ggpubr")</span>
+<span style="color: #05c6e3; font-style: italic;"># install.packages("reshape2")</span>
+<span style="color: #05c6e3; font-style: italic;"># install.packages("caret")</span>
+<span style="color: #05c6e3; font-style: italic;"># install.packages("rgl")</span>
 
-# sva package installation
-# Install "sva" package using BiocManager
-# if (!require("BiocManager", quietly = TRUE))
-#   install.packages("BiocManager")
-# BiocManager::install("sva")
+<span style="color: #05c6e3; font-style: italic;"># sva package installation</span>
+<span style="color: #05c6e3; font-style: italic;"># Install "sva" package using BiocManager</span>
+<span style="color: #05c6e3; font-style: italic;"># if (!require("BiocManager", quietly = TRUE))</span>
+<span style="color: #05c6e3; font-style: italic;">#   install.packages("BiocManager")</span>
+<span style="color: #05c6e3; font-style: italic;"># BiocManager::install("sva")</span>
 
-# VSN package installation
-# Install "vsn" package using BiocManager
-# if (!require("BiocManager", quietly = TRUE))
-#   install.packages("BiocManager")
-# BiocManager::install("vsn")
+<span style="color: #05c6e3; font-style: italic;"># VSN package installation</span>
+<span style="color: #05c6e3; font-style: italic;"># Install "vsn" package using BiocManager</span>
+<span style="color: #05c6e3; font-style: italic;"># if (!require("BiocManager", quietly = TRUE))</span>
+<span style="color: #05c6e3; font-style: italic;">#   install.packages("BiocManager")</span>
+<span style="color: #05c6e3; font-style: italic;"># BiocManager::install("vsn")</span>
 
-# tidyverse package installation
-# install.packages("tidyverse")
+<span style="color: #05c6e3; font-style: italic;"># tidyverse package installation</span>
+<span style="color: #05c6e3; font-style: italic;"># install.packages("tidyverse")</span>
 
-# GEOquery package installation
-# Install "GEOquery" package using BiocManager
-# if (!require("BiocManager", quietly = TRUE))
-#   install.packages("BiocManager")
-# BiocManager::install("GEOquery")
+<span style="color: #05c6e3; font-style: italic;"># GEOquery package installation</span>
+<span style="color: #05c6e3; font-style: italic;"># Install "GEOquery" package using BiocManager</span>
+<span style="color: #05c6e3; font-style: italic;"># if (!require("BiocManager", quietly = TRUE))</span>
+<span style="color: #05c6e3; font-style: italic;">#   install.packages("BiocManager")</span>
+<span style="color: #05c6e3; font-style: italic;"># BiocManager::install("GEOquery")</span>
 
-# limma package installation
-# install.packages("limma")
+<span style="color: #05c6e3; font-style: italic;"># limma package installation</span>
+<span style="color: #05c6e3; font-style: italic;"># install.packages("limma")</span>
 
-# plotly package installation
-# install.packages("plotly")
+<span style="color: #05c6e3; font-style: italic;"># plotly package installation</span>
+<span style="color: #05c6e3; font-style: italic;"># install.packages("plotly")</span>
 
-# ggvenn package installation
-# install.packages("ggvenn")
+<span style="color: #05c6e3; font-style: italic;"># ggvenn package installation</span>
+<span style="color: #05c6e3; font-style: italic;"># install.packages("ggvenn")</span>
 
-# ggpubr package installation
-# install.packages("ggpubr")
+<span style="color: #05c6e3; font-style: italic;"># ggpubr package installation</span>
+<span style="color: #05c6e3; font-style: italic;"># install.packages("ggpubr")</span>
 
-# rgl package installation
-# For rgl installation, require remotes package first
-# install.packages("remotes")
-# require(remotes)
-# remotes::install_github("dmurdoch/rgl")
+<span style="color: #05c6e3; font-style: italic;"># rgl package installation</span>
+<span style="color: #05c6e3; font-style: italic;"># For rgl installation, require remotes package first</span>
+<span style="color: #05c6e3; font-style: italic;"># install.packages("remotes")</span>
+<span style="color: #05c6e3; font-style: italic;"># require(remotes)</span>
+<span style="color: #05c6e3; font-style: italic;"># remotes::install_github("dmurdoch/rgl")</span>
 
 
-# Package Loading
-# Load the required packages for data analysis and visualization.
+<span style="color: #05c6e3; font-style: italic;"># Package Loading</span>
+<span style="color: #05c6e3; font-style: italic;"># Load the required packages for data analysis and visualization.</span>
 	 		
 <span style="color: #f79502; font-style: italic;">require</span>(<span style="color: #ebedf0; font-style: italic;">tidyverse</span>)       <span style="color: #0000FF; font-style: italic;"># Package for comprehensive data manipulation and visualization, including dplyr, ggplot2, and other useful packages</span>
 require(GEOquery)        <span style="color: #05c6e3; font-style: italic;"># Package for accessing and retrieving gene expression data from the Gene Expression Omnibus (GEO) database</span>
