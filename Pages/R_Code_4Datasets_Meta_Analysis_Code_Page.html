@@ -171,7 +171,8 @@
 
 
 	
-#################################### 1- DownloadGEO Function ####################################
+######################################################################################################################################
+####################################################### 1- DownloadGEO Function#######################################################
 # DownloadGEO: Downloads a Gene Expression Omnibus (GEO) dataset and prepares it for analysis
 
 # Input (Arguments):
@@ -242,7 +243,8 @@
 <span style="color: #68affc; font-style: italic;">}</span>
 
 
-############################### 2- ReadGEO Function ############################### 
+######################################################################################################################################
+######################################################### 2- ReadGEO Function#########################################################  
 # ReadGEO: Reads the gene expression matrix file for a given project
 
 # Input (Arguments):
@@ -269,7 +271,8 @@
 
 	
 	
-##################################################################### 3- MakePhenotype Function #####################################################################
+######################################################################################################################################
+###################################################### 3- MakePhenotype Function #####################################################
 # MakePhenotype: Creates a phenotype file based on project-specific phenotype data
 
 # Input (Arguments):
@@ -391,7 +394,8 @@
 
 
 	
-	########################################### 4- MakeBoxPlot Function ###########################################
+######################################################################################################################################
+####################################################### 4- MakeBoxPlot Function ######################################################
 # MakeBoxPlot: Creates a box plot to visualize gene expression values from a gene expression matrix
 
 # Input (Arguments):
@@ -432,6 +436,10 @@
     <span style="color: #ebedf0; font-style: italic;">labs</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">subtitle</span> <span style="color: #68affc; font-style: italic;">=</span> <span style="color: #ebedf0; font-style: italic;">paste0</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #2ad43b; font-style: italic;">"Box plot - "</span><span style="color: #ebedf0; font-style: italic;">,</span> <span style="color: #ebedf0; font-style: italic;">projname</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #68affc; font-style: italic;">)</span>
 <span style="color: #68affc; font-style: italic;">}</span>
 
+
+	
+######################################################################################################################################
+####################################################### 5- the MakePCA Function ###################################################### 
 <span style="color: #ebedf0; font-style: italic;">MakePCA</span><span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">GEOmatrix</span><span style="color: #ebedf0; font-style: italic;">,</span>
                     <span style="color: #ebedf0; font-style: italic;">studies </span><span style="color: #68affc; font-style: italic;">=</span>  <span style="color: #cf4275; font-style: italic;">NULL</span> <span style="color: #ebedf0; font-style: italic;">,</span>
                     <span style="color: #ebedf0; font-style: italic;">projname</span> <span style="color: #ebedf0; font-style: italic;">,</span>
@@ -518,6 +526,10 @@
   <span style="color: #68affc; font-style: italic;">}</span>
 <span style="color: #68affc; font-style: italic;">}</span>
 
+
+
+######################################################################################################################################
+##################################################### 6- VSNQuantilNorm Function###################################################### 
 <span style="color: #ebedf0; font-style: italic;">VSNQuantilNorm</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">GEOmatrix</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #68affc; font-style: italic;">{</span>
   <span style="color: #ebedf0; font-style: italic;">set.seed</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #cf4275; font-style: italic;">1234</span><span style="color: #68affc; font-style: italic;">)</span>
   # Reading matrix
@@ -541,6 +553,10 @@
   <span style="color: #ebedf0; font-style: italic;">return</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">norm_finall</span><span style="color: #68affc; font-style: italic;">)</span>
 <span style="color: #68affc; font-style: italic;">}</span>
 
+
+	
+######################################################################################################################################
+###################################################### 7- MergeStudies function ######################################################
 <span style="color: #ebedf0; font-style: italic;">Mergestudies</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">studies</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #68affc; font-style: italic;">{</span>
   # Merging two or more matrix
   <span style="color: #ebedf0; font-style: italic;">study_list</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #ebedf0; font-style: italic;">Reduce</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">x</span><span style="color: #ebedf0; font-style: italic;">,</span> <span style="color: #ebedf0; font-style: italic;">y</span><span style="color: #68affc; font-style: italic;">)</span> <span style="color: #ebedf0; font-style: italic;">merge</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">x</span><span style="color: #ebedf0; font-style: italic;">,</span> <span style="color: #ebedf0; font-style: italic;">y</span><span style="color: #ebedf0; font-style: italic;">,</span> <span style="color: #ebedf0; font-style: italic;">all</span><span style="color: #68affc; font-style: italic;">=</span> <span style="color: #cf4275; font-style: italic;">TRUE</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #ebedf0; font-style: italic;">,</span> <span style="color: #ebedf0; font-style: italic;">studies</span><span style="color: #68affc; font-style: italic;">)</span>
