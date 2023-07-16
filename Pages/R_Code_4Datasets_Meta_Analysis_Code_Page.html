@@ -292,7 +292,6 @@
 # phenotype data from all projects into a single data frame. Finally, it writes the phenotype data to a CSV file and 
 # displays a message indicating that the phenotype file is created.
 
-	
 <span style="color: #ebedf0; font-style: italic;">Makephenotype</span>  <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">projname</span> <span style="color: #ebedf0; font-style: italic;">,</span> <span style="color: #ebedf0; font-style: italic;">compare</span><span style="color: #68affc; font-style: italic;">=</span> <span style="color: #2ad43b; font-style: italic;">"grade"</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #68affc; font-style: italic;">{</span>
   # Create a folder to store the phenotype file
   <span style="color: #ebedf0; font-style: italic;">dir.create</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #2ad43b; font-style: italic;">"phenotype"</span><span style="color: #ebedf0; font-style: italic;">,</span> <span style="color: #ebedf0; font-style: italic;">showWarnings</span> <span style="color: #68affc; font-style: italic;">=</span> <span style="color: #cf4275; font-style: italic;">FALSE</span><span style="color: #68affc; font-style: italic;">)</span>
@@ -440,6 +439,27 @@
 	
 ######################################################################################################################################
 ####################################################### 5- the MakePCA Function ###################################################### 
+# MakePCA: Performs principal component analysis (PCA) and generates a plot
+
+# Input (Arguments):
+#   - GEOmatrix: A gene expression matrix in data frame format
+#   - studies: A list of gene expression matrices from different studies (optional)
+#   - projname: A character vector specifying the project name(s)
+#   - compare: A character specifying the comparison type (e.g., "grade")
+
+# Output:
+#   - A PCA plot or a 3D plot (based on the number of studies)
+
+# Function Description:
+# This function performs principal component analysis (PCA) on the gene expression matrix provided. 
+# It takes the gene expression matrix, `GEOmatrix`, as the primary input. Additionally, it can take a 
+# list of gene expression matrices from different studies, `studies`, the project name(s), `projname`, 
+# and the comparison type, `compare` (e.g., "grade"). The function first prepares the data by scaling 
+# the gene expression matrix and performing PCA using the `preProcess` function from the `caret` package. 
+# It then plots the PCA results either as a 2D plot for multiple studies or a 3D plot for a single study. 
+# The plot is customized with colors, legends, axis labels, and theme settings. The resulting PCA plot 
+# or 3D plot is displayed or saved as an HTML widget based on the number of studies provided.
+	
 <span style="color: #ebedf0; font-style: italic;">MakePCA</span><span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">GEOmatrix</span><span style="color: #ebedf0; font-style: italic;">,</span>
                     <span style="color: #ebedf0; font-style: italic;">studies </span><span style="color: #68affc; font-style: italic;">=</span>  <span style="color: #cf4275; font-style: italic;">NULL</span> <span style="color: #ebedf0; font-style: italic;">,</span>
                     <span style="color: #ebedf0; font-style: italic;">projname</span> <span style="color: #ebedf0; font-style: italic;">,</span>
@@ -530,6 +550,25 @@
 
 ######################################################################################################################################
 ##################################################### 6- VSNQuantilNorm Function###################################################### 
+# VSNQuantilNorm: Performs VSN (Variance Stabilizing Normalization) followed by quantile normalization on the input gene expression matrix
+
+# Input (Arguments):
+#   - GEOmatrix: The gene expression matrix to be normalized
+
+# Output:
+#   - A data frame containing the normalized gene expression matrix
+
+# Function Description:
+# This function performs Variance Stabilizing Normalization (VSN) followed by quantile normalization on the 
+# input gene expression matrix, `GEOmatrix`. VSN is used to stabilize the variance of gene expression values 
+# across samples, and quantile normalization is applied to ensure that the distribution of gene expression values 
+# is the same across samples. The function first sets the row names of the gene expression matrix and removes the 
+# ID column. Then, it performs VSN normalization using the `normalizeVSN` function. After VSN normalization, the 
+# function applies quantile normalization by ranking and sorting each column of the normalized matrix. It calculates 
+# the mean across rows and applies an indexing function to retrieve the mean values using column indices. Finally, 
+# the function returns a data frame containing the normalized gene expression matrix, where the first column is 
+# named "ID" and row names are combined with the normalized matrix.
+
 <span style="color: #ebedf0; font-style: italic;">VSNQuantilNorm</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">GEOmatrix</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #68affc; font-style: italic;">{</span>
   <span style="color: #ebedf0; font-style: italic;">set.seed</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #cf4275; font-style: italic;">1234</span><span style="color: #68affc; font-style: italic;">)</span>
   # Reading matrix
@@ -556,13 +595,48 @@
 
 	
 ######################################################################################################################################
-###################################################### 7- MergeStudies function ######################################################
+###################################################### 7- MergeStudies function ######################################################  
+# MergeStudies: Merge multiple matrices
+
+# Input (Arguments):
+#   - studies: A list of matrices to be merged
+
+# Output:
+#   - The merged matrix
+
+# Function Description:
+# This function merges multiple matrices provided as a list, 'studies'. It uses the 'merge' function to combine 
+# the matrices, ensuring that all rows and columns from each matrix are included in the merged result by setting 
+# the 'all=TRUE' argument. The function returns the merged matrix, which contains the combined data from all 
+# input matrices.
+	
 <span style="color: #ebedf0; font-style: italic;">Mergestudies</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">studies</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #68affc; font-style: italic;">{</span>
   # Merging two or more matrix
   <span style="color: #ebedf0; font-style: italic;">study_list</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #ebedf0; font-style: italic;">Reduce</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">x</span><span style="color: #ebedf0; font-style: italic;">,</span> <span style="color: #ebedf0; font-style: italic;">y</span><span style="color: #68affc; font-style: italic;">)</span> <span style="color: #ebedf0; font-style: italic;">merge</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">x</span><span style="color: #ebedf0; font-style: italic;">,</span> <span style="color: #ebedf0; font-style: italic;">y</span><span style="color: #ebedf0; font-style: italic;">,</span> <span style="color: #ebedf0; font-style: italic;">all</span><span style="color: #68affc; font-style: italic;">=</span> <span style="color: #cf4275; font-style: italic;">TRUE</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #ebedf0; font-style: italic;">,</span> <span style="color: #ebedf0; font-style: italic;">studies</span><span style="color: #68affc; font-style: italic;">)</span>
   <span style="color: #ebedf0; font-style: italic;">return</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">study_list</span><span style="color: #68affc; font-style: italic;">)</span>
 <span style="color: #68affc; font-style: italic;">}</span>
 
+
+	
+######################################################################################################################################
+#################################################### 8- StudyBatchEffect Function #################################################### 
+# StudyBatchEffect: Perform batch effect correction on merged matrices
+
+# Input (Arguments):
+#   - studies: A list of matrices with batch effects
+
+# Output:
+#   - The batch-corrected matrix
+
+# Function Description:
+# This function performs batch effect correction on a list of matrices provided in 'studies'. 
+# It calculates the number of samples for each matrix and creates a vector of batch sizes based on the 
+# number of samples in each matrix. The function then merges the matrices using the 'merge' function with 
+# 'all=TRUE' to include all rows and columns. Next, it sets the row names of the merged matrix and performs 
+# batch effect correction using the ComBat function. The corrected matrix is converted to a data frame, 
+# ensuring columns are of numeric type. Finally, the row names are combined with the corrected matrix, 
+# the first column is renamed as "ID", and the batch-corrected matrix is returned as the output of the function.
+	
 <span style="color: #ebedf0; font-style: italic;">StudyBatchEffect</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">studies</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #68affc; font-style: italic;">{</span>
   # Calculating the number of samples for each matrix
   <span style="color: #ebedf0; font-style: italic;">study_list</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #ebedf0; font-style: italic;">studies</span>
@@ -589,6 +663,27 @@
   <span style="color: #ebedf0; font-style: italic;">colnames</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">corrected_batch</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #68affc; font-style: italic;">[</span><span style="color: #cf4275; font-style: italic;">1</span><span style="color: #68affc; font-style: italic;">]</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #2ad43b; font-style: italic;">"ID"</span>
   <span style="color: #ebedf0; font-style: italic;">return</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">corrected_batch</span><span style="color: #68affc; font-style: italic;">)</span>
 <span style="color: #68affc; font-style: italic;">}</span>
+
+
+	
+######################################################################################################################################
+#################################################### 9- MakeDensityPlot Function #################################################### 
+# MakeDensityPlot: Create a density plot of gene expression values
+
+# Input:
+#   - matrix: The gene expression matrix
+#   - studies: A list of matrices representing different studies
+
+# Output:
+#   - None (the plot is displayed)
+
+# Function Description:
+# This function creates a density plot to visualize the distribution of gene expression values across different studies. 
+# It converts the gene expression matrix to a long format data frame, calculates the number of samples for each study, 
+# and adds a study factor variable to the data frame. The function then plots the density plot using ggplot2, 
+# with gene expression values on the x-axis and color-coded by studies. It customizes the appearance of the plot 
+# and adds axis labels and a subtitle. The density plot provides insights into the distribution patterns and 
+# potential differences in gene expression between studies.
 
 <span style="color: #ebedf0; font-style: italic;">MakeDensityPlot</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">matrix</span><span style="color: #ebedf0; font-style: italic;">,</span> <span style="color: #ebedf0; font-style: italic;">studies</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #68affc; font-style: italic;">{</span>
   <span style="color: #ebedf0; font-style: italic;">set.seed</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #cf4275; font-style: italic;">1234</span><span style="color: #68affc; font-style: italic;">)</span>
@@ -620,6 +715,26 @@
     <span style="color: #ebedf0; font-style: italic;">labs</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">subtitle</span> <span style="color: #68affc; font-style: italic;">=</span> <span style="color: #2ad43b; font-style: italic;">"Density plot"</span><span style="color: #68affc; font-style: italic;">)</span>
 <span style="color: #68affc; font-style: italic;">}</span> 
 
+
+	
+######################################################################################################################################
+###################################################### 10- MakeMDSPlot Function ###################################################### 
+# MakeMDSPlot: Create a multidimensional scaling (MDS) plot
+
+# Input (Arguments):
+#   - matrix: The input matrix containing gene expression data
+#   - studies: A list of matrices representing different studies
+#   - projname: A vector of project names corresponding to each study
+#   - compare: A comparison variable
+#   - nstudies: The number of studies
+
+# Output:
+#   - None (the plot is displayed)
+
+# Function Description:
+# This function creates an MDS plot to visualize the relationship between samples based on their gene expression data. 
+# The plot helps to identify clusters and patterns in the data, providing insights into similarities and differences among samples.
+	
 <span style="color: #ebedf0; font-style: italic;">MakeMDSPlot</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">matrix</span><span style="color: #ebedf0; font-style: italic;">,</span>
                         <span style="color: #ebedf0; font-style: italic;">studies</span><span style="color: #ebedf0; font-style: italic;">,</span>
                         <span style="color: #ebedf0; font-style: italic;">projname</span><span style="color: #ebedf0; font-style: italic;">,</span>
