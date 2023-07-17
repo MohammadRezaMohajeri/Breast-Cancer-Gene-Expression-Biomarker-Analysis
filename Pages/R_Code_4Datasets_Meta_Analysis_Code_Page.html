@@ -174,19 +174,19 @@
 	
 <span style="color: #05c6e3; font-style: italic;">######################################################################################################################################</span>
 <span style="color: #05c6e3; font-style: italic;">####################################################### 1- DownloadGEO Function#######################################################</span>
-# DownloadGEO: Downloads a Gene Expression Omnibus (GEO) dataset and prepares it for analysis
+<span style="color: #05c6e3; font-style: italic;"># DownloadGEO: Downloads a Gene Expression Omnibus (GEO) dataset and prepares it for analysis</span> 
 
-# Input (Arguments):
-#   - GSEname: A character vector specifying the GEO dataset name (default: "GSE25065")
+<span style="color: #05c6e3; font-style: italic;"># Input (Arguments):</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - GSEname: A character vector specifying the GEO dataset name (default: "GSE25065")</span>
 
-# Output:
-#   - Extracted variables saved as separate files (matrix.csv, phenotype.tsv, annot.tsv)
+<span style="color: #05c6e3; font-style: italic;"># Output:</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - Extracted variables saved as separate files (matrix.csv, phenotype.tsv, annot.tsv)</span> 
 
-# Function Description:
-# This function downloads a specified GEO dataset from Gene Expression Omnibus (GEO) and prepares it for analysis. 
-# It creates a folder to store the downloaded dataset, increases memory allocation for efficient processing, 
-# and downloads the specified GEO dataset. It then extracts the gene expression matrix, phenotype information, 
-# and annotation data from the downloaded dataset. The extracted variables are saved as separate files.
+<span style="color: #05c6e3; font-style: italic;"># Function Description:</span> 
+<span style="color: #05c6e3; font-style: italic;"># This function downloads a specified GEO dataset from Gene Expression Omnibus (GEO) and prepares it for analysis. </span>
+<span style="color: #05c6e3; font-style: italic;"># It creates a folder to store the downloaded dataset, increases memory allocation for efficient processing,</span>  
+<span style="color: #05c6e3; font-style: italic;"># and downloads the specified GEO dataset. It then extracts the gene expression matrix, phenotype information,</span> 
+<span style="color: #05c6e3; font-style: italic;"># and annotation data from the downloaded dataset. The extracted variables are saved as separate files.</span> 
 	
 <span style="color: #ebedf0; font-style: italic;">DownloadGEO</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">GSEname</span> <span style="color: #68affc; font-style: italic;">=</span> <span style="color: #2ad43b; font-style: italic;">"GSE25065"</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #68affc; font-style: italic;">{</span>
   # Create a folder to store the downloaded dataset
@@ -274,24 +274,24 @@
 	
 <span style="color: #05c6e3; font-style: italic;">######################################################################################################################################</span> 
 <span style="color: #05c6e3; font-style: italic;">###################################################### 3- MakePhenotype Function #####################################################</span> 
-# MakePhenotype: Creates a phenotype file based on project-specific phenotype data
+<span style="color: #05c6e3; font-style: italic;"># MakePhenotype: Creates a phenotype file based on project-specific phenotype data</span> 
 
-# Input (Arguments):
-#   - projname: A character vector of project names
-#   - compare: A string indicating whether to compare "subtype" or "grade"
+<span style="color: #05c6e3; font-style: italic;"># Input (Arguments):</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - projname: A character vector of project names</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - compare: A string indicating whether to compare "subtype" or "grade"</span> 
 
-# Output:
-#   - A phenotype file containing the selected comparison (subtype or grade)
+<span style="color: #05c6e3; font-style: italic;"># Output:</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - A phenotype file containing the selected comparison (subtype or grade)</span> 
 
-# Function Description:
-# This function creates a phenotype file based on project-specific phenotype data. It takes the argument `projname`, 
-# which is a character vector of project names. The function reads the phenotype file for each project, converts 
-# the phenotype data to a data frame, and sets row names. Depending on the value of the `compare` argument, the function 
-# either compares subtype or grade information. For subtype comparison, it extracts subtype data, formats it, and stores 
-# it in a new list. For grade comparison, it extracts grade data, handles special cases (such as Greek symbols), and 
-# formats it. The formatted phenotype data is stored in a new list for each project. The function then combines the 
-# phenotype data from all projects into a single data frame. Finally, it writes the phenotype data to a CSV file and 
-# displays a message indicating that the phenotype file is created.
+<span style="color: #05c6e3; font-style: italic;"># Function Description:</span> 
+<span style="color: #05c6e3; font-style: italic;"># This function creates a phenotype file based on project-specific phenotype data. It takes the argument `projname`,</span>  
+<span style="color: #05c6e3; font-style: italic;"># which is a character vector of project names. The function reads the phenotype file for each project, converts</span>  
+<span style="color: #05c6e3; font-style: italic;"># the phenotype data to a data frame, and sets row names. Depending on the value of the `compare` argument, the function </span> 
+<span style="color: #05c6e3; font-style: italic;"># either compares subtype or grade information. For subtype comparison, it extracts subtype data, formats it, and stores </span>
+<span style="color: #05c6e3; font-style: italic;"># it in a new list. For grade comparison, it extracts grade data, handles special cases (such as Greek symbols), and</span>  
+<span style="color: #05c6e3; font-style: italic;"># formats it. The formatted phenotype data is stored in a new list for each project. The function then combines the</span>  
+<span style="color: #05c6e3; font-style: italic;"># phenotype data from all projects into a single data frame. Finally, it writes the phenotype data to a CSV file and</span>  
+<span style="color: #05c6e3; font-style: italic;"># displays a message indicating that the phenotype file is created.</span> 
 
 <span style="color: #ebedf0; font-style: italic;">Makephenotype</span>  <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">projname</span> <span style="color: #ebedf0; font-style: italic;">,</span> <span style="color: #ebedf0; font-style: italic;">compare</span><span style="color: #68affc; font-style: italic;">=</span> <span style="color: #2ad43b; font-style: italic;">"grade"</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #68affc; font-style: italic;">{</span>
   # Create a folder to store the phenotype file
@@ -396,23 +396,23 @@
 	
 <span style="color: #05c6e3; font-style: italic;">######################################################################################################################################</span> 
 <span style="color: #05c6e3; font-style: italic;">####################################################### 4- MakeBoxPlot Function ######################################################</span> 
-# MakeBoxPlot: Creates a box plot to visualize gene expression values from a gene expression matrix
+<span style="color: #05c6e3; font-style: italic;"># MakeBoxPlot: Creates a box plot to visualize gene expression values from a gene expression matrix</span> 
 
-# Input (Arguments):
-#   - GEOmatrix: A gene expression matrix in data frame format
-#   - projname: A character vector specifying the project name
+<span style="color: #05c6e3; font-style: italic;"># Input (Arguments):</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - GEOmatrix: A gene expression matrix in data frame format</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - projname: A character vector specifying the project name</span> 
 
-# Output:
-#   - A box plot visualizing the gene expression values
+<span style="color: #05c6e3; font-style: italic;"># Output:</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - A box plot visualizing the gene expression values</span> 
 
-# Function Description:
-# This function creates a box plot to visualize the gene expression values from a gene expression matrix. 
-# It takes two arguments: `GEOmatrix`, which is the gene expression matrix in data frame format, and `projname`, 
-# which is a character vector specifying the project name. The function converts the gene expression matrix into 
-# a long format data frame using the `melt` function. It then uses `ggplot2` to create the box plot, with the 
-# x-axis representing the samples and the y-axis representing the gene expression values. The plot is customized 
-# with color and fill options, axis labels, y-axis scale labels, and theme settings. The resulting box plot 
-# is displayed, with the subtitle indicating the project name.
+<span style="color: #05c6e3; font-style: italic;"># Function Description:</span> 
+<span style="color: #05c6e3; font-style: italic;"># This function creates a box plot to visualize the gene expression values from a gene expression matrix.</span>  
+<span style="color: #05c6e3; font-style: italic;"># It takes two arguments: `GEOmatrix`, which is the gene expression matrix in data frame format, and `projname`, </span> 
+<span style="color: #05c6e3; font-style: italic;"># which is a character vector specifying the project name. The function converts the gene expression matrix into </span> 
+<span style="color: #05c6e3; font-style: italic;"># a long format data frame using the `melt` function. It then uses `ggplot2` to create the box plot, with the</span>  
+<span style="color: #05c6e3; font-style: italic;"># x-axis representing the samples and the y-axis representing the gene expression values. The plot is customized</span>  
+<span style="color: #05c6e3; font-style: italic;"># with color and fill options, axis labels, y-axis scale labels, and theme settings. The resulting box plot</span>  
+<span style="color: #05c6e3; font-style: italic;"># is displayed, with the subtitle indicating the project name.</span> 
 	
 <span style="color: #ebedf0; font-style: italic;">MakeBoxPlot</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">GEOmatrix</span><span style="color: #ebedf0; font-style: italic;">,</span><span style="color: #ebedf0; font-style: italic;">projname</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #68affc; font-style: italic;">{</span>
   # Make a long format data frame
@@ -442,24 +442,24 @@
 <span style="color: #05c6e3; font-style: italic;">####################################################### 5- the MakePCA Function ######################################################</span> 
 # MakePCA: Performs principal component analysis (PCA) and generates a plot
 
-# Input (Arguments):
-#   - GEOmatrix: A gene expression matrix in data frame format
-#   - studies: A list of gene expression matrices from different studies (optional)
-#   - projname: A character vector specifying the project name(s)
-#   - compare: A character specifying the comparison type (e.g., "grade")
+<span style="color: #05c6e3; font-style: italic;"># Input (Arguments):</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - GEOmatrix: A gene expression matrix in data frame format</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - studies: A list of gene expression matrices from different studies (optional)</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - projname: A character vector specifying the project name(s)</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - compare: A character specifying the comparison type (e.g., "grade")</span> 
 
-# Output:
-#   - A PCA plot or a 3D plot (based on the number of studies)
+<span style="color: #05c6e3; font-style: italic;"># Output:</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - A PCA plot or a 3D plot (based on the number of studies)</span> 
 
-# Function Description:
-# This function performs principal component analysis (PCA) on the gene expression matrix provided. 
-# It takes the gene expression matrix, `GEOmatrix`, as the primary input. Additionally, it can take a 
-# list of gene expression matrices from different studies, `studies`, the project name(s), `projname`, 
-# and the comparison type, `compare` (e.g., "grade"). The function first prepares the data by scaling 
-# the gene expression matrix and performing PCA using the `preProcess` function from the `caret` package. 
-# It then plots the PCA results either as a 2D plot for multiple studies or a 3D plot for a single study. 
-# The plot is customized with colors, legends, axis labels, and theme settings. The resulting PCA plot 
-# or 3D plot is displayed or saved as an HTML widget based on the number of studies provided.
+<span style="color: #05c6e3; font-style: italic;"># Function Description:</span> 
+<span style="color: #05c6e3; font-style: italic;"># This function performs principal component analysis (PCA) on the gene expression matrix provided. </span> 
+<span style="color: #05c6e3; font-style: italic;"># It takes the gene expression matrix, `GEOmatrix`, as the primary input. Additionally, it can take a</span>  
+<span style="color: #05c6e3; font-style: italic;"># list of gene expression matrices from different studies, `studies`, the project name(s), `projname`, </span> 
+<span style="color: #05c6e3; font-style: italic;"># and the comparison type, `compare` (e.g., "grade"). The function first prepares the data by scaling</span>  
+<span style="color: #05c6e3; font-style: italic;"># the gene expression matrix and performing PCA using the `preProcess` function from the `caret` package. </span> 
+<span style="color: #05c6e3; font-style: italic;"># It then plots the PCA results either as a 2D plot for multiple studies or a 3D plot for a single study. </span> 
+<span style="color: #05c6e3; font-style: italic;"># The plot is customized with colors, legends, axis labels, and theme settings. The resulting PCA plot </span> 
+<span style="color: #05c6e3; font-style: italic;"># or 3D plot is displayed or saved as an HTML widget based on the number of studies provided.</span> 
 	
 <span style="color: #ebedf0; font-style: italic;">MakePCA</span><span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">GEOmatrix</span><span style="color: #ebedf0; font-style: italic;">,</span>
                     <span style="color: #ebedf0; font-style: italic;">studies </span><span style="color: #68affc; font-style: italic;">=</span>  <span style="color: #cf4275; font-style: italic;">NULL</span> <span style="color: #ebedf0; font-style: italic;">,</span>
