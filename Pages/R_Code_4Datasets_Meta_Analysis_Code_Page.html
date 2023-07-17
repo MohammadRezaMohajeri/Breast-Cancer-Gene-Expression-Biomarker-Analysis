@@ -791,8 +791,8 @@
 
 
 
-######################################################################################################################################
-##################################################### 11- CochranQTest Function ###################################################### 
+<span style="color: #05c6e3; font-style: italic;">######################################################################################################################################</span> 
+<span style="color: #05c6e3; font-style: italic;">##################################################### 11- CochranQTest Function ######################################################</span> ##################################################### 11- CochranQTest Function ###################################################### 
 <span style="color: #05c6e3; font-style: italic;"># CochranQTest: Perform Cochran's Q Test on multiple studies</span> 
 
 <span style="color: #05c6e3; font-style: italic;"># Input:</span> 
@@ -864,8 +864,8 @@
 
 
 
-######################################################################################################################################
-###################################################### 12- MakeQQPlot Function ####################################################### 
+<span style="color: #05c6e3; font-style: italic;">######################################################################################################################################</span> 
+<span style="color: #05c6e3; font-style: italic;">###################################################### 12- MakeQQPlot Function #######################################################</span>  
 <span style="color: #05c6e3; font-style: italic;"># MakeQQPlot: Generate a QQ plot for Cochran's Q Test</span> 
 
 <span style="color: #05c6e3; font-style: italic;"># Input:</span> 
@@ -915,9 +915,9 @@
 
 
 
-######################################################################################################################################
-##################################################### 13- FEMREMAnalysis Function#####################################################
-<span style="color: #05c6e3; font-style: italic;"></span> # FEMREMAnalysis: Perform FEM-REM meta-analysis
+<span style="color: #05c6e3; font-style: italic;">######################################################################################################################################</span> 
+<span style="color: #05c6e3; font-style: italic;">##################################################### 13- FEMREMAnalysis Function#####################################################</span> 
+<span style="color: #05c6e3; font-style: italic;"># FEMREMAnalysis: Perform FEM-REM meta-analysis</span> 
 
 <span style="color: #05c6e3; font-style: italic;"># Input:</span> 
 <span style="color: #05c6e3; font-style: italic;">#   - studies: A list of expression matrices from different studies</span> 
@@ -941,15 +941,15 @@
 <span style="color: #05c6e3; font-style: italic;"># mode and the annotation files for each project. It then performs data preprocessing, including handling missing values</span> 
 <span style="color: #05c6e3; font-style: italic;"># and filtering based on comparison groups. The expression matrices, class labels, and annotation data are prepared for analysis.</span>   
 
-<span style="color: #05c6e3; font-style: italic;"></span> # Next, the function determines the type of analysis based on the model selection and performs z-score calculation using 
-<span style="color: #05c6e3; font-style: italic;"></span> # the zScoreFDR function. The two-sided scores are extracted and combined with annotation information. Missing gene 
-<span style="color: #05c6e3; font-style: italic;"></span> # symbols are removed, and the data frame is subsetted, counted, and checked for duplicated gene symbols. For duplicated 
-<span style="color: #05c6e3; font-style: italic;"></span> # gene symbols, average expression values and associated information are calculated and stored. The averaged genes are 
-<span style="color: #05c6e3; font-style: italic;"></span> # combined with unique genes into a single data frame, sorted by z-score in descending order, and written to files.
+<span style="color: #05c6e3; font-style: italic;"># Next, the function determines the type of analysis based on the model selection and performs z-score calculation using </span>
+<span style="color: #05c6e3; font-style: italic;"># the zScoreFDR function. The two-sided scores are extracted and combined with annotation information.</span>  
+<span style="color: #05c6e3; font-style: italic;"># Missing gene symbols are removed, and the data frame is subsetted, counted, and checked for duplicated gene symbols. </span>  
+<span style="color: #05c6e3; font-style: italic;"># For duplicated gene symbols, average expression values and associated information are calculated and stored. </span> 
+<span style="color: #05c6e3; font-style: italic;"># The averaged genes are combined with unique genes into a single data frame, sorted by z-score in descending order, and written to files.</span> 
 
-<span style="color: #05c6e3; font-style: italic;"></span> # The function also performs FDR filtering on the data frame, writes the filtered results to files, and displays summary 
-<span style="color: #05c6e3; font-style: italic;"></span> # information for each project. The completion message is displayed when the analysis is finished.
-<span style="color: #05c6e3; font-style: italic;"></span>	
+<span style="color: #05c6e3; font-style: italic;"># The function also performs FDR filtering on the data frame, writes the filtered results to files,</span> 
+<span style="color: #05c6e3; font-style: italic;"># and displays summary information for each project. The completion message is displayed when the analysis is finished.</span> 
+	
 <span style="color: #ebedf0; font-style: italic;">FEMREMAnalysis</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">studies</span><span style="color: #ebedf0; font-style: italic;">,</span>
                            <span style="color: #ebedf0; font-style: italic;">projname</span> <span style="color: #ebedf0; font-style: italic;">,</span>
                            <span style="color: #ebedf0; font-style: italic;">compare</span> <span style="color: #ebedf0; font-style: italic;">,</span>
@@ -1101,8 +1101,8 @@
 
 
 
-######################################################################################################################################
-###################################################### 14- Makevolcano Function#######################################################
+<span style="color: #05c6e3; font-style: italic;">######################################################################################################################################</span> 
+<span style="color: #05c6e3; font-style: italic;">###################################################### 14- Makevolcano Function#######################################################</span> 
 <span style="color: #05c6e3; font-style: italic;"># Function to generate a volcano plot</span>
 
 <span style="color: #05c6e3; font-style: italic;"># Input:</span> 
@@ -1223,8 +1223,8 @@
 
 
 	
-######################################################################################################################################
-####################################################### 15- MakeVenna Function########################################################
+<span style="color: #05c6e3; font-style: italic;">######################################################################################################################################</span> 
+<span style="color: #05c6e3; font-style: italic;">####################################################### 15- MakeVenna Function########################################################</span> 
 <span style="color: #05c6e3; font-style: italic;"># Function to generate a volcano plot</span> 
 
 <span style="color: #05c6e3; font-style: italic;"># Arguments:</span> 
@@ -1322,8 +1322,8 @@
 
 
 
-######################################################################################################################################
-################################################### 16- Makenetworkanalyst Function################################################### 
+<span style="color: #05c6e3; font-style: italic;">######################################################################################################################################</span> 
+<span style="color: #05c6e3; font-style: italic;">################################################### 16- Makenetworkanalyst Function###################################################</span>  
 <span style="color: #05c6e3; font-style: italic;"># Function to prepare data for NetworkAnalyst platform</span> 
 
 <span style="color: #05c6e3; font-style: italic;"># Arguments:</span> 
@@ -1416,51 +1416,51 @@
 
 
 
-######################################################################################################################################
-###################################################### 17- MakeHeatmap Function ###################################################### 
-<span style="color: #05c6e3; font-style: italic;"></span> # Function to create a heatmap based on gene expression data
+<span style="color: #05c6e3; font-style: italic;">######################################################################################################################################</span> 
+<span style="color: #05c6e3; font-style: italic;">###################################################### 17- MakeHeatmap Function ######################################################</span> 
+<span style="color: #05c6e3; font-style: italic;"># Function to create a heatmap based on gene expression data</span> 
 
-# Arguments:
-#   - matrix: The gene expression data matrix
-#   - projname: The project name or identifier
-#   - compare: The comparison for phenotype
-#   - groups: A list of groups for sample selection
-#   - ntop: The number of top genes to consider
-#   - sorted: A logical value indicating whether the heatmap should be sorted
+<span style="color: #05c6e3; font-style: italic;"># Arguments:</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - matrix: The gene expression data matrix</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - projname: The project name or identifier</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - compare: The comparison for phenotype</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - groups: A list of groups for sample selection</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - ntop: The number of top genes to consider</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - sorted: A logical value indicating whether the heatmap should be sorted</span> 
 
-# Input:
-#   - Gene expression data matrix
-#   - Phenotype data
-#   - Annotation data
-#   - Differential expression gene (DEG) file
+<span style="color: #05c6e3; font-style: italic;"># Input:</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - Gene expression data matrix</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - Phenotype data</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - Annotation data</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - Differential expression gene (DEG) file</span> 
 
-# Output:
-#   - Heatmap plot visualizing the gene expression data
+<span style="color: #05c6e3; font-style: italic;"># Output:</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - Heatmap plot visualizing the gene expression data</span> 
 
-# Function Description:
-# This function generates a heatmap based on gene expression data. 
-# It takes a gene expression data matrix, project name, comparison for phenotype, groups for sample selection, number of top genes to consider, 
-# and a logical value indicating whether the heatmap should be sorted as input.
+<span style="color: #05c6e3; font-style: italic;"># Function Description:</span> 
+<span style="color: #05c6e3; font-style: italic;"># This function generates a heatmap based on gene expression data. </span> 
+<span style="color: #05c6e3; font-style: italic;"># It takes a gene expression data matrix, project name, comparison for phenotype, groups for sample selection,</span>  
+<span style="color: #05c6e3; font-style: italic;"># number of top genes to consider, and a logical value indicating whether the heatmap should be sorted as input.</span> 
 
-# The function starts by checking if the matrix's first column is named "ID" and adjusts the matrix if necessary. 
-# It reads the phenotype CSV file and converts it to a data frame. 
-# The annotation file is also read and processed based on the project name. 
-# The matrix is adjusted to match the IDs in the annotation data frame.
+<span style="color: #05c6e3; font-style: italic;"># The function starts by checking if the matrix's first column is named "ID" and adjusts the matrix if necessary.</span>  
+<span style="color: #05c6e3; font-style: italic;"># It reads the phenotype CSV file and converts it to a data frame. </span> 
+<span style="color: #05c6e3; font-style: italic;"># The annotation file is also read and processed based on the project name.</span> 
+<span style="color: #05c6e3; font-style: italic;"># The matrix is adjusted to match the IDs in the annotation data frame.</span> 
 
-# Next, the function performs averaging for duplicated genes by calculating the column-wise mean for rows with the same gene symbol. 
-# The averaged genes are combined with unique non-duplicated genes into a single data frame. 
-# The DEG file is read, and the top upregulated and downregulated genes are extracted.
+<span style="color: #05c6e3; font-style: italic;"># Next, the function performs averaging for duplicated genes by calculating the column-wise mean for rows with the same gene symbol.</span>  
+<span style="color: #05c6e3; font-style: italic;"># The averaged genes are combined with unique non-duplicated genes into a single data frame.</span> 
+<span style="color: #05c6e3; font-style: italic;"># The DEG file is read, and the top upregulated and downregulated genes are extracted.</span> 
 
-# The function selects the genes from the combined data frame that match the selected DEGs. 
-# The network data frame is created, and the sample IDs are matched with the network data frame columns based on the groups provided. 
-# The grades are extracted from the network data frame columns.
+<span style="color: #05c6e3; font-style: italic;"># The function selects the genes from the combined data frame that match the selected DEGs. </span> 
+<span style="color: #05c6e3; font-style: italic;"># The network data frame is created, and the sample IDs are matched with the network data frame columns based on the groups provided.</span>  
+<span style="color: #05c6e3; font-style: italic;"># The grades are extracted from the network data frame columns.</span> 
 
-# The function generates the heatmap plot using the network data frame. 
-# If the heatmap should be sorted, the columns are ordered based on column names. 
-# The plot includes row (gene) annotations, a bottom annotation indicating the grades, and a legend for expression levels. 
-# The row title is positioned on the left side, and the column names are hidden.
+<span style="color: #05c6e3; font-style: italic;"># The function generates the heatmap plot using the network data frame.</span>  
+<span style="color: #05c6e3; font-style: italic;"># If the heatmap should be sorted, the columns are ordered based on column names. </span> 
+<span style="color: #05c6e3; font-style: italic;"># The plot includes row (gene) annotations, a bottom annotation indicating the grades, and a legend for expression levels.</span>  
+<span style="color: #05c6e3; font-style: italic;"># The row title is positioned on the left side, and the column names are hidden.</span> 
 
-# The completion message is displayed when the heatmap plot is generated.
+<span style="color: #05c6e3; font-style: italic;"># The completion message is displayed when the heatmap plot is generated.</span> 
 	
 <span style="color: #ebedf0; font-style: italic;">MakeHeatmap</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">matrix</span><span style="color: #ebedf0; font-style: italic;">,</span>
                         <span style="color: #ebedf0; font-style: italic;">projname</span> <span style="color: #ebedf0; font-style: italic;">,</span>
@@ -1574,30 +1574,30 @@
 
 
 
-######################################################################################################################################
-########################################################## 18- GSEAAnalysis ########################################################## 
-# Function to perform Gene Set Enrichment Analysis (GSEA)
+<span style="color: #05c6e3; font-style: italic;">######################################################################################################################################</span> 
+<span style="color: #05c6e3; font-style: italic;">########################################################## 18- GSEAAnalysis ##########################################################</span> 
+<span style="color: #05c6e3; font-style: italic;"># Function to perform Gene Set Enrichment Analysis (GSEA)</span> 
 
-# Arguments:
-#   - projname: The project name or identifier
-#   - FDR: The false discovery rate (FDR) threshold for significance
+<span style="color: #05c6e3; font-style: italic;"># Arguments:</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - projname: The project name or identifier</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - FDR: The false discovery rate (FDR) threshold for significance</span> 
 
-# Input:
-#   - DEG_table: Data frame containing differential expression gene (DEG) information
-#   - H: Data frame containing hallmark pathway gene sets
-#   - FC: Data frame containing gene names and logFC values
+<span style="color: #05c6e3; font-style: italic;"># Input:</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - DEG_table: Data frame containing differential expression gene (DEG) information</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - H: Data frame containing hallmark pathway gene sets</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - FC: Data frame containing gene names and logFC values</span> 
 
-# Output:
-#   - GSEA plot visualizing the enriched gene sets
+<span style="color: #05c6e3; font-style: italic;"># Output:</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - GSEA plot visualizing the enriched gene sets</span> 
 
-# Function Description:
-# This function performs Gene Set Enrichment Analysis (GSEA) using the fgseaSimple function.
-# It takes the project name and FDR threshold as input and generates a GSEA plot of enriched gene sets.
+<span style="color: #05c6e3; font-style: italic;"># Function Description:</span> 
+<span style="color: #05c6e3; font-style: italic;"># This function performs Gene Set Enrichment Analysis (GSEA) using the fgseaSimple function.</span> 
+<span style="color: #05c6e3; font-style: italic;"># It takes the project name and FDR threshold as input and generates a GSEA plot of enriched gene sets.</span> 
 
-# The function reads the DEG table specific to the project name and prepares gene scores and gene set lookup table.
-# GSEA is performed using fgseaSimple, and the results are visualized in a GSEA plot.
-# The significance of gene sets is determined based on FDR and NES values.
-# The plot includes pathway names, NES values, and colored bars representing significance.
+<span style="color: #05c6e3; font-style: italic;"># The function reads the DEG table specific to the project name and prepares gene scores and gene set lookup table.</span> 
+<span style="color: #05c6e3; font-style: italic;"># GSEA is performed using fgseaSimple, and the results are visualized in a GSEA plot.</span> 
+<span style="color: #05c6e3; font-style: italic;"># The significance of gene sets is determined based on FDR and NES values.</span> 
+<span style="color: #05c6e3; font-style: italic;"># The plot includes pathway names, NES values, and colored bars representing significance.</span> 
 	
 <span style="color: #ebedf0; font-style: italic;">GSEAAnalysis</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">projname</span> <span style="color: #ebedf0; font-style: italic;">,</span> <span style="color: #ebedf0; font-style: italic;">FDR</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #68affc; font-style: italic;">{</span>
   # Reading file 
