@@ -788,6 +788,30 @@
     <span style="color: #ebedf0; font-style: italic;">labs</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">subtitle</span> <span style="color: #68affc; font-style: italic;">=</span> <span style="color: #2ad43b; font-style: italic;">"MDS plot"</span><span style="color: #68affc; font-style: italic;">)</span>
 <span style="color: #68affc; font-style: italic;">}</span>
 
+
+
+######################################################################################################################################
+##################################################### 11- CochranQTest Function ###################################################### 
+# CochranQTest: Perform Cochran's Q Test on multiple studies
+
+# Input:
+#   - studies: A list of matrices representing different studies
+#   - groups: A vector specifying the comparison groups (e.g., grade1 vs grade3)
+#   - compare: A string indicating the type of comparison (e.g., "grade")
+
+# Output:
+#   - A list containing the mean and variance for each comparison mode
+
+# Function Description:
+# Cochran's Q Test: Perform statistical analysis to compare proportions across multiple groups
+
+# This function performs Cochran's Q Test on multiple studies to compare proportions across different groups.
+# It takes a list of matrices representing different studies, a vector specifying the comparison groups, 
+# and a string indicating the type of comparison. The function calculates the mean and variance for each comparison mode 
+# and returns them as a list. Cochran's Q Test is a statistical test used to determine if there are significant differences 
+# in proportions between multiple groups. It helps to assess the homogeneity of proportions across the groups and 
+# identify any significant departures from the null hypothesis of equal proportions.
+	
 <span style="color: #ebedf0; font-style: italic;">CochranQTest</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">studies</span><span style="color: #ebedf0; font-style: italic;">,</span> <span style="color: #ebedf0; font-style: italic;">groups</span><span style="color: #ebedf0; font-style: italic;">,</span> <span style="color: #ebedf0; font-style: italic;">compare</span> <span style="color: #68affc; font-style: italic;">)</span><span style="color: #68affc; font-style: italic;">{</span>
   <span style="color: #ebedf0; font-style: italic;">set.seed</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #cf4275; font-style: italic;">1234</span><span style="color: #68affc; font-style: italic;">)</span>
   # Reading matrix and phenotype
@@ -837,6 +861,28 @@
   <span style="color: #ebedf0; font-style: italic;">message</span> <span style="color: #68affc; font-style: italic;">(</span><span style="color: #2ad43b; font-style: italic;">"Analysis has completed."</span><span style="color: #68affc; font-style: italic;">)</span>
 <span style="color: #68affc; font-style: italic;">}</span>
 
+
+
+######################################################################################################################################
+###################################################### 12- MakeQQPlot Function ####################################################### 
+# MakeQQPlot: Generate a QQ plot for Cochran's Q Test
+
+# Input:
+#   - cohranq: Output from CochranQTest function (list of means and variances)
+#   - nstudies: Number of studies
+
+# Output:
+#   - QQ plot
+
+# Function Description:
+# This function generates a QQ plot for Cochran's Q Test. It takes the output from the CochranQTest function, 
+# which is a list of means and variances, and the number of studies as input. The function calculates the quantiles 
+# of the chi-square distribution and the quantiles of the sample, and then plots them on a QQ plot. 
+# A QQ plot (quantile-quantile plot) is used to assess whether a dataset follows a specific theoretical distribution 
+# by comparing the observed quantiles against the expected quantiles. In this case, the QQ plot helps to visualize 
+# the goodness-of-fit between the observed Cochran's Q statistics and the expected chi-square distribution. 
+# Deviations from the diagonal reference line indicate departures from the expected distribution.
+	
 <span style="color: #ebedf0; font-style: italic;">MakeQQPlot</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">cohranq</span><span style="color: #ebedf0; font-style: italic;">,</span> <span style="color: #ebedf0; font-style: italic;">nstudies</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #68affc; font-style: italic;">{</span>
   # Unpack the previous list into data frames
   <span style="color: #ebedf0; font-style: italic;">output1</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #ebedf0; font-style: italic;">cohranq</span><span style="color: #68affc; font-style: italic;">[</span><span style="color: #68affc; font-style: italic;">[</span><span style="color: #cf4275; font-style: italic;">1</span><span style="color: #68affc; font-style: italic;">]</span><span style="color: #68affc; font-style: italic;">]</span> 
@@ -866,6 +912,44 @@
     <span style="color: #ebedf0; font-style: italic;">labs</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">subtitle</span> <span style="color: #68affc; font-style: italic;">=</span> <span style="color: #2ad43b; font-style: italic;">"QQ Plot"</span><span style="color: #68affc; font-style: italic;">)</span>
 <span style="color: #68affc; font-style: italic;">}</span> 
 
+
+
+######################################################################################################################################
+##################################################### 13- FEMREMAnalysis Function#####################################################
+# FEMREMAnalysis: Perform FEM-REM meta-analysis
+
+# Input:
+#   - studies: A list of expression matrices from different studies
+#   - projname: Names of the projects or studies
+#   - compare: Comparison mode (e.g., "grade1_vs_grade3")
+#   - groups: List of comparison groups
+#   - model: Model selection ("FEM" for fixed effects model, "REM" for random effects model)
+#   - FDR: False discovery rate threshold for filtering genes
+#   - nperm: Number of permutations for z-score calculation
+
+# Output:
+#   - Meta-analysis results
+
+# Function Description:
+# This function performs FEM-REM meta-analysis on expression matrices from different studies. 
+# It takes as input a list of expression matrices, names of the projects or studies, a comparison mode, 
+# a list of comparison groups, a model selection (FEM for fixed effects model or REM for random effects model), 
+# a false discovery rate (FDR) threshold for gene filtering, and the number of permutations for z-score calculation.
+
+# The function first creates folders to store the meta-analysis results. It reads the phenotype file for the comparison 
+# mode and the annotation files for each project. It then performs data preprocessing, including handling missing values 
+# and filtering based on comparison groups. The expression matrices, class labels, and annotation data are prepared for 
+# analysis.
+
+# Next, the function determines the type of analysis based on the model selection and performs z-score calculation using 
+# the zScoreFDR function. The two-sided scores are extracted and combined with annotation information. Missing gene 
+# symbols are removed, and the data frame is subsetted, counted, and checked for duplicated gene symbols. For duplicated 
+# gene symbols, average expression values and associated information are calculated and stored. The averaged genes are 
+# combined with unique genes into a single data frame, sorted by z-score in descending order, and written to files.
+
+# The function also performs FDR filtering on the data frame, writes the filtered results to files, and displays summary 
+# information for each project. The completion message is displayed when the analysis is finished.
+	
 <span style="color: #ebedf0; font-style: italic;">FEMREMAnalysis</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">studies</span><span style="color: #ebedf0; font-style: italic;">,</span>
                            <span style="color: #ebedf0; font-style: italic;">projname</span> <span style="color: #ebedf0; font-style: italic;">,</span>
                            <span style="color: #ebedf0; font-style: italic;">compare</span> <span style="color: #ebedf0; font-style: italic;">,</span>
@@ -1015,6 +1099,36 @@
   <span style="color: #ebedf0; font-style: italic;">message</span> <span style="color: #68affc; font-style: italic;">(</span><span style="color: #2ad43b; font-style: italic;">"+++++++++++++++++++++++ Analysis has completed. +++++++++++++++++++++++"</span><span style="color: #68affc; font-style: italic;">)</span>
 <span style="color: #68affc; font-style: italic;">}</span>
 
+
+
+######################################################################################################################################
+###################################################### 14- Makevolcano Function#######################################################
+# Function to generate a volcano plot
+
+# Input:
+#   - projname: Name of the project (default: "GSE11121")
+#   - padjlevel: Adjusted p-value threshold (default: 0.05)
+#   - pSE_thresh: Positive effect size threshold (default: 1)
+#   - nSE_thresh: Negative effect size threshold (default: -1)
+#   - ntop: Number of top genes to label (default: 10)
+#   - voltype: Type of volcano plot ("ggplot" or "plotly") (default: "ggplot")
+
+# Output:
+#   - A volcano plot visualization
+#   - DEG files (upregulated, downregulated, and top genes)
+
+# Function Description:
+# This function generates a volcano plot for differential gene expression analysis. 
+# It takes several arguments to customize the plot, including the project name, 
+# adjusted p-value threshold, effect size thresholds, number of top genes to label, 
+# and the type of volcano plot (ggplot or plotly).
+
+# The function reads the volcano plot data, calculates adjusted p-values and assigns DEG labels based on the thresholds. 
+# It then generates the volcano plot using either ggplot or plotly, visualizing the relationship between effect size and statistical significance. 
+# The plot includes color-coded points representing upregulated, downregulated, and non-significant genes. 
+# Additionally, the function saves DEG files containing upregulated, downregulated, and top genes, 
+# and displays the number of upregulated and downregulated genes.
+	
 <span style="color: #ebedf0; font-style: italic;">Makevolcano</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">projname</span>  <span style="color: #68affc; font-style: italic;">=</span> <span style="color: #2ad43b; font-style: italic;">"GSE11121"</span><span style="color: #ebedf0; font-style: italic;">,</span>
                         <span style="color: #ebedf0; font-style: italic;">padjlevel</span> <span style="color: #68affc; font-style: italic;">=</span> <span style="color: #cf4275; font-style: italic;">0.05</span><span style="color: #ebedf0; font-style: italic;">,</span>
                         <span style="color: #ebedf0; font-style: italic;">pSE_thresh</span> <span style="color: #68affc; font-style: italic;">=</span> <span style="color: #cf4275; font-style: italic;">1</span><span style="color: #ebedf0; font-style: italic;">,</span>
@@ -1107,6 +1221,36 @@
   <span style="color: #ebedf0; font-style: italic;">return</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">p</span><span style="color: #68affc; font-style: italic;">)</span>
 <span style="color: #68affc; font-style: italic;">}</span>
 
+
+	
+######################################################################################################################################
+####################################################### 15- MakeVenna Function########################################################
+# Function to generate a volcano plot
+
+# Arguments:
+#    - projname: Name of the project (default: "GSE11121")
+#    - padjlevel: Adjusted p-value threshold (default: 0.05)
+#    - pSE_thresh: Positive effect size threshold (default: 1)
+#    - nSE_thresh: Negative effect size threshold (default: -1)
+#    - ntop: Number of top genes to label (default: 10)
+#    - voltype: Type of volcano plot ("ggplot" or "plotly") (default: "ggplot")
+
+# Input: Dataframe containing the differential expression analysis results
+
+# Output: Volcano plot object (ggplot or plotly)
+
+# Function Description:
+# This function generates a volcano plot based on differential expression analysis results. 
+# It takes several arguments to customize the plot, including the project name, adjusted p-value threshold, 
+# effect size thresholds, number of top genes to label, and the type of volcano plot (ggplot or plotly).
+
+# The function reads the differential expression analysis results from a dataframe. 
+# It then identifies the common genes across all projects and creates separate files for common genes and top common genes. 
+# The function calculates the mean values of z-score and FDR for the common genes and creates a new dataframe. 
+# The common genes, as well as the Venn diagram showing the overlapping genes between projects, are saved in the "common" folder.
+
+# Finally, the function generates a volcano plot using either ggplot or plotly, visualizing the relationship between effect size and statistical significance of genes. The plot includes color-coded points representing upregulated, downregulated, and non-significant genes. The function returns the volcano plot object.
+
 <span style="color: #ebedf0; font-style: italic;">MakeVenna</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">common</span><span style="color: #ebedf0; font-style: italic;">,</span>
                       <span style="color: #ebedf0; font-style: italic;">ntop </span><span style="color: #68affc; font-style: italic;">=</span> <span style="color: #cf4275; font-style: italic;">10</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #68affc; font-style: italic;">{</span>
   
@@ -1175,6 +1319,42 @@
   <span style="color: #ebedf0; font-style: italic;">return</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">venaa</span><span style="color: #68affc; font-style: italic;">)</span>
 <span style="color: #68affc; font-style: italic;">}</span>
 
+
+
+######################################################################################################################################
+################################################### 16- Makenetworkanalyst Function################################################### 
+# Function to prepare data for NetworkAnalyst platform
+
+# Arguments:
+#   - matrix: Input matrix containing gene expression data
+#   - projname: Name of the project
+#   - compare: Comparison type (default: "grade")
+#   - groups: List of groups for comparison
+
+# Input: Gene expression matrix, phenotype data, annotation data
+
+# Output: Modified matrix file for NetworkAnalyst
+
+# Function Description:
+# This function prepares the gene expression data for the NetworkAnalyst platform. 
+# It takes a gene expression matrix, project name, comparison type, and groups for comparison as input. 
+# The function performs several steps to process the data and generate a modified matrix file compatible with NetworkAnalyst.
+
+# The function first creates a directory to store the network analysis files for NetworkAnalyst. 
+# It then checks if the first column of the matrix is labeled as "ID" and adjusts the matrix accordingly. 
+# The phenotype file is read and processed based on the specified comparison type. 
+# The annotation file is also read and processed to ensure compatibility.
+
+# Next, the function finds matching samples based on the provided groups and subsets the matrix accordingly. 
+# The values in the matrix are rounded to two decimal places. Rows with missing gene symbols are removed from the matrix. 
+# Group information is extracted from the phenotype data and stored in the grouplis list.
+
+# The function renames the matrix file according to the group names specified by the user. 
+# It modifies the column names and the second row to adhere to the file format required by NetworkAnalyst. 
+# Finally, the modified matrix file is saved in the "MetaAnalysis/networkanalyst" directory with the name "projname_network_full.txt".
+
+# The completion message is displayed when the file has been successfully saved.
+	
 <span style="color: #ebedf0; font-style: italic;">Makenetworkanalyst</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">matrix</span><span style="color: #ebedf0; font-style: italic;">,</span>
                                <span style="color: #ebedf0; font-style: italic;">projname</span> <span style="color: #ebedf0; font-style: italic;">,</span>
                                <span style="color: #ebedf0; font-style: italic;">compare</span>  <span style="color: #68affc; font-style: italic;">=</span> <span style="color: #2ad43b; font-style: italic;">"grade"</span><span style="color: #ebedf0; font-style: italic;">,</span>
@@ -1233,6 +1413,54 @@
   <span style="color: #ebedf0; font-style: italic;">message</span> <span style="color: #68affc; font-style: italic;">(</span><span style="color: #2ad43b; font-style: italic;">"+++++ Your file has saved into networkanalyst folder. +++++"</span><span style="color: #68affc; font-style: italic;">)</span>
 <span style="color: #68affc; font-style: italic;">}</span> 
 
+
+
+######################################################################################################################################
+###################################################### 17- MakeHeatmap Function ###################################################### 
+# Function to create a heatmap based on gene expression data
+
+# Arguments:
+#   - matrix: The gene expression data matrix
+#   - projname: The project name or identifier
+#   - compare: The comparison for phenotype
+#   - groups: A list of groups for sample selection
+#   - ntop: The number of top genes to consider
+#   - sorted: A logical value indicating whether the heatmap should be sorted
+
+# Input:
+#   - Gene expression data matrix
+#   - Phenotype data
+#   - Annotation data
+#   - Differential expression gene (DEG) file
+
+# Output:
+#   - Heatmap plot visualizing the gene expression data
+
+# Function Description:
+# This function generates a heatmap based on gene expression data. 
+# It takes a gene expression data matrix, project name, comparison for phenotype, groups for sample selection, number of top genes to consider, 
+# and a logical value indicating whether the heatmap should be sorted as input.
+
+# The function starts by checking if the matrix's first column is named "ID" and adjusts the matrix if necessary. 
+# It reads the phenotype CSV file and converts it to a data frame. 
+# The annotation file is also read and processed based on the project name. 
+# The matrix is adjusted to match the IDs in the annotation data frame.
+
+# Next, the function performs averaging for duplicated genes by calculating the column-wise mean for rows with the same gene symbol. 
+# The averaged genes are combined with unique non-duplicated genes into a single data frame. 
+# The DEG file is read, and the top upregulated and downregulated genes are extracted.
+
+# The function selects the genes from the combined data frame that match the selected DEGs. 
+# The network data frame is created, and the sample IDs are matched with the network data frame columns based on the groups provided. 
+# The grades are extracted from the network data frame columns.
+
+# The function generates the heatmap plot using the network data frame. 
+# If the heatmap should be sorted, the columns are ordered based on column names. 
+# The plot includes row (gene) annotations, a bottom annotation indicating the grades, and a legend for expression levels. 
+# The row title is positioned on the left side, and the column names are hidden.
+
+# The completion message is displayed when the heatmap plot is generated.
+	
 <span style="color: #ebedf0; font-style: italic;">MakeHeatmap</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">matrix</span><span style="color: #ebedf0; font-style: italic;">,</span>
                         <span style="color: #ebedf0; font-style: italic;">projname</span> <span style="color: #ebedf0; font-style: italic;">,</span>
                         <span style="color: #ebedf0; font-style: italic;">compare</span> <span style="color: #ebedf0; font-style: italic;">,</span>
@@ -1343,6 +1571,33 @@
   <span style="color: #68affc; font-style: italic;">}</span>
 <span style="color: #68affc; font-style: italic;">}</span>
 
+
+
+######################################################################################################################################
+########################################################## 18- GSEAAnalysis ########################################################## 
+# Function to perform Gene Set Enrichment Analysis (GSEA)
+
+# Arguments:
+#   - projname: The project name or identifier
+#   - FDR: The false discovery rate (FDR) threshold for significance
+
+# Input:
+#   - DEG_table: Data frame containing differential expression gene (DEG) information
+#   - H: Data frame containing hallmark pathway gene sets
+#   - FC: Data frame containing gene names and logFC values
+
+# Output:
+#   - GSEA plot visualizing the enriched gene sets
+
+# Function Description:
+# This function performs Gene Set Enrichment Analysis (GSEA) using the fgseaSimple function.
+# It takes the project name and FDR threshold as input and generates a GSEA plot of enriched gene sets.
+
+# The function reads the DEG table specific to the project name and prepares gene scores and gene set lookup table.
+# GSEA is performed using fgseaSimple, and the results are visualized in a GSEA plot.
+# The significance of gene sets is determined based on FDR and NES values.
+# The plot includes pathway names, NES values, and colored bars representing significance.
+	
 <span style="color: #ebedf0; font-style: italic;">GSEAAnalysis</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">projname</span> <span style="color: #ebedf0; font-style: italic;">,</span> <span style="color: #ebedf0; font-style: italic;">FDR</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #68affc; font-style: italic;">{</span>
   # Reading file 
   <span style="color: #ebedf0; font-style: italic;">DEG_table</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #ebedf0; font-style: italic;">data.frame</span> <span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">read_tsv</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">paste0</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #2ad43b; font-style: italic;">"MetaAnalysis/DEG/"</span><span style="color: #ebedf0; font-style: italic;">,</span> <span style="color: #ebedf0; font-style: italic;">projname</span> <span style="color: #ebedf0; font-style: italic;">,</span> <span style="color: #2ad43b; font-style: italic;">"_up_down.tsv"</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #68affc; font-style: italic;">)</span>
@@ -1398,7 +1653,9 @@
     <span style="color: #ebedf0; font-style: italic;">labs</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">subtitle</span> <span style="color: #68affc; font-style: italic;">=</span> <span style="color: #ebedf0; font-style: italic;">paste0</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #2ad43b; font-style: italic;">"GSEA - "</span><span style="color: #ebedf0; font-style: italic;">,</span> <span style="color: #ebedf0; font-style: italic;">projname</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #68affc; font-style: italic;">)</span>
 <span style="color: #68affc; font-style: italic;">}</span>
 
-<span style="color: #05c6e3; font-style: italic;">###################################################### Running all functions ###################################################### </span>
+
+<span style="color: #05c6e3; font-style: italic;">###################################################################################################################################### </span>
+<span style="color: #05c6e3; font-style: italic;">################################################### Running all functions ############################################################ </span>
 
 # Downloading GEO 
 <span style="color: #ebedf0; font-style: italic;">DownloadGEO</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #2ad43b; font-style: italic;">"GSE25065"</span><span style="color: #68affc; font-style: italic;">)</span>
