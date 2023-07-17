@@ -92,7 +92,7 @@
 	
 <span style="color: #05c6e3; font-style: italic;">################################################################# "Package Installation" #################################################################</span>
 <span style="color: #05c6e3; font-style: italic;">#################################### Uncomment the following lines if any of the packages are not already installed or need to be reinstalled.############</span>
-<span style="color: #05c6e3; font-style: italic;"># BiocManager packages</span>
+<span style="color: #05c6e3; font-style: italic;"># BiocManager packages</span> 
 <span style="color: #05c6e3; font-style: italic;"># Install required Bioconductor packages</span>
 <span style="color: #05c6e3; font-style: italic;"># BiocManager::install("sva", force = TRUE)</span>
 <span style="color: #05c6e3; font-style: italic;"># BiocManager::install("GeneMeta", force = TRUE)</span>
@@ -246,21 +246,21 @@
 
 <span style="color: #05c6e3; font-style: italic;">######################################################################################################################################</span>
 <span style="color: #05c6e3; font-style: italic;">######################################################### 2- ReadGEO Function#########################################################</span>   
-# ReadGEO: Reads the gene expression matrix file for a given project
+<span style="color: #05c6e3; font-style: italic;"># ReadGEO: Reads the gene expression matrix file for a given project</span> 
 
-# Input (Arguments):
-#   - projname: A character vector specifying the project name
+<span style="color: #05c6e3; font-style: italic;"># Input (Arguments):</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - projname: A character vector specifying the project name</span> 
 
-# Output:
-#   - A data frame containing the gene expression matrix
+<span style="color: #05c6e3; font-style: italic;"># Output:</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - A data frame containing the gene expression matrix</span> 
 
-# Function Description:
-# This function reads the gene expression matrix file for a specified project. 
-# It takes the argument `projname`, which is a character vector specifying the project name. 
-# The function reads the matrix file in CSV format using the `read_csv` function and stores it in the variable `matrix`. 
-# The gene expression matrix is assumed to be stored in a file named "matrix.csv" in the project folder.
-# Finally, the matrix is converted to a data frame using the `data.frame` function before being returned as the output. 
-# The function does not modify the original matrix file; it only reads the file and returns the matrix as a data frame.
+<span style="color: #05c6e3; font-style: italic;"># Function Description:</span> 
+<span style="color: #05c6e3; font-style: italic;"># This function reads the gene expression matrix file for a specified project.</span>  
+<span style="color: #05c6e3; font-style: italic;"># It takes the argument `projname`, which is a character vector specifying the project name. </span>
+<span style="color: #05c6e3; font-style: italic;"># The function reads the matrix file in CSV format using the `read_csv` function and stores it in the variable `matrix`.</span>  
+<span style="color: #05c6e3; font-style: italic;"># The gene expression matrix is assumed to be stored in a file named "matrix.csv" in the project folder.</span> 
+<span style="color: #05c6e3; font-style: italic;"># Finally, the matrix is converted to a data frame using the `data.frame` function before being returned as the output.</span> 
+<span style="color: #05c6e3; font-style: italic;"># The function does not modify the original matrix file; it only reads the file and returns the matrix as a data frame.</span> 
 
 <span style="color: #ebedf0; font-style: italic;">ReadGEO</span>  <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">projname</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #68affc; font-style: italic;">{</span>
  # Reading the gene expression matrix file
@@ -551,24 +551,24 @@
 
 <span style="color: #05c6e3; font-style: italic;">######################################################################################################################################</span> 
 <span style="color: #05c6e3; font-style: italic;">##################################################### 6- VSNQuantilNorm Function######################################################</span>
-# VSNQuantilNorm: Performs VSN (Variance Stabilizing Normalization) followed by quantile normalization on the input gene expression matrix
+<span style="color: #05c6e3; font-style: italic;"></span> # VSNQuantilNorm: Performs VSN (Variance Stabilizing Normalization) followed by quantile normalization on the input gene expression matrix
 
-# Input (Arguments):
-#   - GEOmatrix: The gene expression matrix to be normalized
+<span style="color: #05c6e3; font-style: italic;"></span> # Input (Arguments):
+<span style="color: #05c6e3; font-style: italic;"></span> #   - GEOmatrix: The gene expression matrix to be normalized
 
-# Output:
-#   - A data frame containing the normalized gene expression matrix
+<span style="color: #05c6e3; font-style: italic;"></span> # Output:
+<span style="color: #05c6e3; font-style: italic;"></span> #   - A data frame containing the normalized gene expression matrix
 
-# Function Description:
-# This function performs Variance Stabilizing Normalization (VSN) followed by quantile normalization on the 
-# input gene expression matrix, `GEOmatrix`. VSN is used to stabilize the variance of gene expression values 
-# across samples, and quantile normalization is applied to ensure that the distribution of gene expression values 
-# is the same across samples. The function first sets the row names of the gene expression matrix and removes the 
-# ID column. Then, it performs VSN normalization using the `normalizeVSN` function. After VSN normalization, the 
-# function applies quantile normalization by ranking and sorting each column of the normalized matrix. It calculates 
-# the mean across rows and applies an indexing function to retrieve the mean values using column indices. Finally, 
-# the function returns a data frame containing the normalized gene expression matrix, where the first column is 
-# named "ID" and row names are combined with the normalized matrix.
+<span style="color: #05c6e3; font-style: italic;"># Function Description:</span> 
+<span style="color: #05c6e3; font-style: italic;"># This function performs Variance Stabilizing Normalization (VSN) followed by quantile normalization on the</span>  
+<span style="color: #05c6e3; font-style: italic;"># input gene expression matrix, `GEOmatrix`. VSN is used to stabilize the variance of gene expression values</span> 
+<span style="color: #05c6e3; font-style: italic;"># across samples, and quantile normalization is applied to ensure that the distribution of gene expression values</span>  
+<span style="color: #05c6e3; font-style: italic;"># is the same across samples. The function first sets the row names of the gene expression matrix and removes the</span>  
+<span style="color: #05c6e3; font-style: italic;"># ID column. Then, it performs VSN normalization using the `normalizeVSN` function. After VSN normalization, the</span>  
+<span style="color: #05c6e3; font-style: italic;"># function applies quantile normalization by ranking and sorting each column of the normalized matrix. It calculates</span>  
+<span style="color: #05c6e3; font-style: italic;"># the mean across rows and applies an indexing function to retrieve the mean values using column indices. Finally,</span>  
+<span style="color: #05c6e3; font-style: italic;"># the function returns a data frame containing the normalized gene expression matrix, where the first column is</span>  
+<span style="color: #05c6e3; font-style: italic;"># named "ID" and row names are combined with the normalized matrix.</span> 
 
 <span style="color: #ebedf0; font-style: italic;">VSNQuantilNorm</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">GEOmatrix</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #68affc; font-style: italic;">{</span>
   <span style="color: #ebedf0; font-style: italic;">set.seed</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #cf4275; font-style: italic;">1234</span><span style="color: #68affc; font-style: italic;">)</span>
@@ -597,19 +597,19 @@
 	
 <span style="color: #05c6e3; font-style: italic;">######################################################################################################################################</span> 
 <span style="color: #05c6e3; font-style: italic;">###################################################### 7- MergeStudies function ######################################################</span>   
-# MergeStudies: Merge multiple matrices
+<span style="color: #05c6e3; font-style: italic;"># MergeStudies: Merge multiple matrices</span> 
 
-# Input (Arguments):
-#   - studies: A list of matrices to be merged
+<span style="color: #05c6e3; font-style: italic;"># Input (Arguments):</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - studies: A list of matrices to be merged</span> 
 
-# Output:
-#   - The merged matrix
+<span style="color: #05c6e3; font-style: italic;"># Output:</span> 
+<span style="color: #05c6e3; font-style: italic;">#   - The merged matrix</span>
 
-# Function Description:
-# This function merges multiple matrices provided as a list, 'studies'. It uses the 'merge' function to combine 
-# the matrices, ensuring that all rows and columns from each matrix are included in the merged result by setting 
-# the 'all=TRUE' argument. The function returns the merged matrix, which contains the combined data from all 
-# input matrices.
+<span style="color: #05c6e3; font-style: italic;"># Function Description:</span> 
+<span style="color: #05c6e3; font-style: italic;"># This function merges multiple matrices provided as a list, 'studies'. It uses the 'merge' function to combine</span>  
+<span style="color: #05c6e3; font-style: italic;"># the matrices, ensuring that all rows and columns from each matrix are included in the merged result by setting</span>  
+<span style="color: #05c6e3; font-style: italic;"># the 'all=TRUE' argument. The function returns the merged matrix, which contains the combined data from all</span>  
+<span style="color: #05c6e3; font-style: italic;"># input matrices.</span> 
 	
 <span style="color: #ebedf0; font-style: italic;">Mergestudies</span> <span style="color: #68affc; font-style: italic;"><-</span> <span style="color: #f79502; font-style: italic;">function</span><span style="color: #68affc; font-style: italic;">(</span><span style="color: #ebedf0; font-style: italic;">studies</span><span style="color: #68affc; font-style: italic;">)</span><span style="color: #68affc; font-style: italic;">{</span>
   # Merging two or more matrix
