@@ -13,7 +13,7 @@
 
 ## Introduction
 
-This project aims to identify potential biomarkers in breast cancer using differential gene expression analysis and meta-analysis techniques. For a more detailed background and objectives, please refer to [Project Overview](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/Project_Overview.html).
+This project aims to identify potential biomarkers in breast cancer using differential gene expression analysis and meta-analysis techniques. For a more detailed background and objectives, please refer to [Project Overview](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/Project_Summary.html).
 
 ## Phase 1: Data Preparation and Preliminary Analysis
 
