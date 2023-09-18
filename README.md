@@ -115,4 +115,23 @@ install.packages(c("tidyverse", "GEOquery", "reshape2", "caret", "GeneMeta", "li
 ------------------------------------------------------------------------------------------------------
 ## How to Run the Code
 
-Instructions for running the analysis, including any parameters that should be set.
+### Prerequisites
+
+1. Ensure R and RStudio are installed.
+2. Clone or download this repository.
+
+### Instructions
+
+#### Phase 1
+1. Open `Phase1.Rmd` in RStudio.
+2. Execute the setup chunk to install required packages.
+3. Run all code chunks sequentially.
+
+#### Phase 2
+1. Open `Phase2.Rmd` in RStudio.
+2. Follow steps 1 and 2 as in Phase 1.
+
+#### Phase 3
+1. Open `Phase3.Rmd` in RStudio.
+2. Follow steps 1 and 2 as in Phase 1.
+
