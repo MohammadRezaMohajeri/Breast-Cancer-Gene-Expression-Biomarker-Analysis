@@ -8,6 +8,7 @@
 - [Phase 3: Integration of Gene Expression Data through Meta-Analysis for Robust Biomarker Discovery in Breast Cancer](#phase-3-integration-of-gene-expression-data-through-meta-analysis-for-robust-biomarker-discovery-in-breast-cancer)
 - [Research Question](#research-question)
 - [Research Hypothesis](#research-hypothesis)
+- [Code Pages](#code-pages)
 - [Dependencies](#dependencies)
 - [How to Run the Code](#how-to-run-the-code)
 
@@ -40,6 +41,14 @@ For details about the research question, please visit [Research Question](https:
 ### Title: Research Hypothesis Derived from the Research Question in This Study
 
 For details about the research hypothesis, please visit [Research Hypothesis](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/Research_Hypothesis.html).
+
+## Code Pages
+
+For the source code and notebooks related to each phase of this project, please refer to the following pages:
+
+1. [Code for Phase 1](#) - *Data Preparation and Preliminary Analysis*
+2. [Code for Phase 2](#) - *Differential Expression Analysis for Biomarker Discovery in Breast Cancer*
+3. [Code for Phase 3](#) - *Integration of Gene Expression Data through Meta-Analysis for Robust Biomarker Discovery in Breast Cancer*
 
 ## Dependencies
 
