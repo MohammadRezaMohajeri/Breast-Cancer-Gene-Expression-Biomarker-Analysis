@@ -3,7 +3,8 @@
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [Phase 1:  1-Dataset Analysis - limma](#differential-expression-analysis-of-breast-cancer-dataset-gse25055-using-limma-in-r-comparing-molecular-subtypes-and-grading-system)
+- [Phase 1: Differential Expression Analysis of Breast Cancer Dataset (GSE25055) using limma in R: Comparing Molecular Subtypes and Grading System
+](#differential-expression-analysis-of-breast-cancer-dataset-gse25055-using-limma-in-r-comparing-molecular-subtypes-and-grading-system)
 - [Phase 2: Differential Expression Analysis for Biomarker Discovery in Breast Cancer](#phase-2-differential-expression-analysis-for-biomarker-discovery-in-breast-cancer)
 - [Phase 3: Integration of Gene Expression Data through Meta-Analysis for Robust Biomarker Discovery in Breast Cancer](#phase-3-integration-of-gene-expression-data-through-meta-analysis-for-robust-biomarker-discovery-in-breast-cancer)
 - [Research Question](#research-question)
@@ -16,7 +17,7 @@
 
 This project aims to identify potential biomarkers in breast cancer using differential gene expression analysis and meta-analysis techniques. For a more detailed background and objectives, please refer to [Project Overview](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/Project_Summary.html).
 
-## Phase 1: Data Preparation and Preliminary Analysis
+## Phase 1: Differential Expression Analysis of Breast Cancer Dataset (GSE25055) using limma in R: Comparing Molecular Subtypes and Grading System
 
 In Phase 1, we prepared the gene expression datasets for analysis, employing quality control measures and normalization techniques.
 
