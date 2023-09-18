@@ -1,0 +1,891 @@
+# Phase 2
+# R Code (4-Dataset Analysis - limma)
+# Differential Expression Analysis of Four Datasets for Biomarker Discovery in Breast Cancer (Grade 1 vs Grade 3) using limma in R
+# ==============================================================================================================================
+
+
+# Load the GEOquery library for accessing GEO data			
+require(GEOquery)
+# Load the limma library for differential expression analysis			
+require(limma)
+# Load the tidyverse library, which includes several useful packages for data manipulation and visualization		
+require(tidyverse)
+# Load the plotly library for interactive plots			
+require(plotly)
+# Load the ggvenn library for creating Venn diagrams using ggplot2			
+require(ggvenn)
+# Uncomment the line below if devtools package is not installed
+# if (!require(devtools)) install.packages("devtools")
+# devtools::install_github("yanlinlin82/ggvenn")
+require(ggvenn)
+
+# Function to download the specified GEO dataset 
+DownloadGEO <- function(GSEname = "GSE11121") {
+  # Create a folder for the dataset
+  dir.create(GSEname, showWarnings = FALSE)
+
+  # Increase memory allocation for efficient data processing
+  Sys.setenv("VROOM_CONNECTION_SIZE" = 131072 * 10)
+  
+  # Download the dataset from the GEO database
+  gset <- getGEO(GSEname, GSEMatrix = TRUE, AnnotGPL = TRUE,
+                 destdir = paste0(getwd(), "/", GSEname))
+  
+  # Check if the dataset was successfully downloaded
+  if (!is.null(gset)) {  
+    # Extract matrix data from the downloaded dataset
+    matrix <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@assayData[["exprs"]]
+    
+    # Perform log2 transformation if the matrix is not already transformed
+    # Determine if log2 transformation is required based on the quantiles of the matrix values
+    qx <- as.numeric(quantile(matrix, c(0., 0.25, 0.5, 0.75, 0.99, 1.0), na.rm = TRUE))
+    LogC <- (qx[5] > 100) || (qx[6] - qx[1] > 50 && qx[2] > 0)
+    
+    # Check if log2 transformation is required
+    if (LogC) {
+      # Replace non-positive values with NA
+      matrix[matrix <= 0] <- NA
+      # Perform log2 transformation on the matrix
+      matrix <- log2(matrix)
+    }
+    
+    # Add row names to the matrix:
+    # Add row names as the first column of the matrix using cbind()
+    matrix <- cbind(rownames(matrix), matrix)
+    # Set the column name of the first column as "ID" using colnames()
+    colnames(matrix)[1] <- "ID"
+    
+    # Extract phenotype information from the dataset:
+    # Extract the phenotype information from the dataset
+    phenotype <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@phenoData@data  
+    # Add row names as the first column of the phenotype data using cbind()
+    phenotype <- cbind(rownames(phenotype), phenotype)  
+    # Set the column name of the first column as "ID" using colnames()
+    colnames(phenotype)[1] <- "ID"  
+    
+    # Extract annotation information from the dataset
+    annot <- gset[[paste0(GSEname, "_series_matrix.txt.gz")]]@featureData@data
+    
+    # Write the extracted variables to files:
+    # Write the 'matrix' variable to a CSV file
+    write.csv(matrix, paste0(GSEname, "/", "matrix.csv"), quote = FALSE, row.names = FALSE)
+    # Write the 'phenotype' variable to a TSV file
+    write_tsv(phenotype, paste0(GSEname, "/", "phenotype.tsv"))
+    # Write the 'annot' variable to a TSV file
+    write_tsv(annot, paste0(GSEname, "/", "annot.tsv"))
+    
+    # Remove unnecessary variables to free up memory
+    rm(gset, matrix, phenotype, annot)
+
+    # Display a completion message
+    message("+++++ Dataset is ready to be analyzed. +++++")
+  }
+}
+
+
+# Function to perform differential expression analysis on the specified GEO dataset.
+DEGanalysis <- function(projname,
+                        compare = "subtype",
+                        groups,
+                        adjust = "fdr") {
+  # Reading the files:
+  # Read the matrix file and store it in a variable
+  matrix <- read_csv(paste0(projname, "/", "matrix.csv"), )
+  # Convert the matrix into a data frame
+  matrix <- data.frame(matrix)
+  # Set row names of the matrix
+  rownames(matrix) <- matrix[, 1]
+  # Remove the first column of the matrix
+  matrix <- matrix[, -1]
+  
+  # Read the phenotype file and store it in a variable
+  phenotype <- read_tsv(paste0(projname, "/", "phenotype.tsv"))
+  # Convert the phenotype into a data frame
+  phenotype <- data.frame(phenotype)
+  # Set row names of the phenotype
+  rownames(phenotype) <- phenotype[, ]
+  # Remove the first column of the phenotype
+  phenotype <- phenotype[, -1]
+  
+  # Read the annotation file and store it in a variable
+  annot <- read_tsv(paste0(projname, "/", "annot.tsv"))
+  # Convert the annotation into a data frame
+  annot <- data.frame(annot)
+  # Set row names of the annotation
+  rownames(annot) <- annot[, 1]
+  # Remove the first column of the annotation
+  annot <- annot[, -1]
+  
+  # Extract sample IDs based on user-specified groups for differential analysis
+  if (compare == "subtype") {
+    
+    # Preparing the breast cancer subtype
+    phecoln <- grep("pam50", phenotype)
+    if (length(phecoln) > 0) {
+      # Prepare breast cancer subtypes into a dataframe
+      pheno <- data.frame(phenotype[, phecoln])
+      # Extract relevant columns from the phenotype file for breast cancer subtypes and rename them
+      colnames(pheno) <- "subtype"
+      pheno$subtype <- gsub("pam50.+:", "", pheno$subtype)
+      rownames(pheno) <- rownames(phenotype)
+      # Store the extracted subtypes in a list, grouped by user-specified group names
+      grouplis <- list()
+      # Iterate over each group specified by the user
+      for (i in seq_along(groups)) {
+        # Create a regular expression pattern by concatenating group elements with a "|"
+        name <- paste0(groups[[i]], collapse = "|")
+        # Find the row numbers in the "subtype" column of the phenotype data that match the pattern
+        rownum <- grep(name, pheno$subtype)
+        # Store the row names corresponding to the matched rows in the grouplis list
+        grouplis[[names(groups)[i]]] <- rownames(pheno)[rownum]
+      }
+    }
+  } else {
+    
+    # Preparing the breast cancer grades:
+    # Find columns containing "grade:" in the 'phenotype' data frame
+    gradecoln <- grep("grade:", phenotype)
+    
+    # Check if there are any columns with "grade:" found
+    if (length(gradecoln) > 0) {
+      # Prepare breast cancer grades into a dataframe
+      grade <- data.frame(phenotype[, gradecoln])
+      
+      # Extract relevant columns from phenotype file for breast cancer grades and rename them:
+      # Rename the column in 'grade' data frame to "grade"
+      colnames(grade) <- "grade"
+      # Remove unwanted text patterns from the 'grade' column using regular expressions
+      grade$grade <- gsub("grade:|grade: |B-R grade: ", "", grade$grade)
+      grade$grade <- gsub("=.+", "", grade$grade)
+      
+      # Identify rows containing the pattern "III" in the 'grade' column
+      greek <- grep("III", grade$grade)
+      if (length(greek) > 0) {
+        
+        # Convert grade names to numeric values:
+        # Identify rows with grade "I"
+        one <- which(factor(grade$grade) == "I")
+        # Identify rows with grade "II"
+        two <- which(factor(grade$grade) == "II")
+        # Identify rows with grade "III"
+        three <- which(factor(grade$grade) == "III")
+        
+        # Convert grade values to numeric: "I" -> 1, "II" -> 2, "III" -> 3
+        grade[one, ] <- "1"
+        grade[two, ] <- "2"
+        grade[three, ] <- "3"
+      }
+      
+      # Set row names of 'grade' data frame to row names of 'phenotype'
+      rownames(grade) <- rownames(phenotype)
+      
+      # Store the extracted grades in a list, grouped by user-specified group names
+      grouplis <- list()
+      for (i in seq_along(groups)) {
+        # Generate a group name by collapsing the elements of 'groups' with "|"
+        name <- paste0(groups[[i]], collapse = "|")
+        # Find the row numbers in 'grade' where the group name is present in the 'grade' column
+        rownum <- grep(name, grade$grade)
+        # Store the corresponding row names in the 'grouplis' list under the appropriate group name
+        grouplis[[names(groups)[i]]] <- rownames(grade)[rownum]
+      }
+    }
+  }
+  
+  # Rename the matrix file according to the groups name specified by the user:
+  # Iterate over each group in grouplis		
+  for (i in seq_along(grouplis)) {
+    # Generate a group name by collapsing the elements of 'grouplis[[i]]' with "|"
+    matname <- paste0(grouplis[[i]], collapse = "|")
+    # Find the column numbers in 'matrix' where the group name is present in the column names
+    matcoln <- grep(matname, colnames(matrix))
+    # Rename the columns of 'matrix' with the group name followed by a numeric index
+    colnames(matrix)[matcoln] <- paste0(names(grouplis)[i], 1:length(grouplis[[i]]))
+  }
+   
+  # Keep only the renamed samples in the matrix and order them:
+  # Subset and reorder the 'matrix' data frame based on the group names
+  matnames <- grep(paste0(names(grouplis), collapse = "|"), colnames(matrix))
+  # Subset the 'matrix' data frame to include only the columns corresponding to the renamed samples
+  matrix <- matrix[, matnames]
+  # Reorder the columns of the 'matrix' data frame based on the column names
+  matrix <- matrix[, order(colnames(matrix))]
+  
+  # Creating a factor of 0 and 1 according to the length of groups specified by the user:
+  # Create an empty list to store the factors
+  gname <- list()
+  # Iterate over each group in grouplis
+  for (i in seq_along(grouplis)) {
+    # Count the number of columns in matrix corresponding to the group
+    number <- length(grep(names(grouplis)[i], colnames(matrix)))
+    # Create a factor variable with values i - 1 repeated number times
+    gname[[i]] <- factor(rep(i - 1, number))
+  }
+  # Convert the list of factors to a single vector
+  grouping <- unlist(gname)
+  
+  # Create a design matrix for the linear model:
+  # Create a design matrix with the factor variables as predictors
+  design <- model.matrix(~ i - 0 + grouping)
+  # Assign column names to the design matrix based on the group names
+  colnames(design) <-names(grouplis)
+  
+  # Fit the linear model to the data:
+  # Fit the linear model using the matrix and design matrix
+  fit1 <- lmFit(matrix, design)
+  # Get the number of group names
+  l <- length(names(grouplis))
+  # Create a string representation of group names for contrasts
+  cts <- paste0(names(grouplis)[l:1], collapse = "-")
+  # Create contrasts for pairwise comparisons of groups
+  cont.matrix <- makeContrasts(contrasts = cts, levels = design)
+  # Fit the contrasts to the model
+  fit2 <- contrasts.fit(fit1, cont.matrix)
+  # Perform empirical Bayes moderation on the fitted model
+  fit2 <- eBayes(fit2)
+  
+  # Generate a top table of differentially expressed genes
+  DEGs <- topTable(fit2, adjust = adjust, number = Inf)
+  # Add row names as a separate column in the DEGs table
+  DEGs <- cbind(rownames(DEGs), DEGs)
+  # Rename the first column as "ID"
+  colnames(DEGs)[1] <- <- "ID"
+  
+  # Preparing the annotation variable:
+  # Extract relevant columns from the 'annot' data frame
+  annotation <- annot[, c("Gene.symbol", "Chromosome.location", "GO.Function")]
+  # Add row names as a separate column in the 'annotation' data frame
+  annotation <- cbind(rownames(annotation), annotation)
+  # Rename the first column as "ID"
+  colnames(annotation)[1] <- <- "ID"
+  
+  # Making sure that both DEGs and annotation row names are the same:
+  # Sort the 'annotation' data frame by the "ID" column
+  annotation <- annotation[order(annotation$ID), ]
+  # Sort the 'DEGs' data frame by the "ID" column
+  DEGs <- DEGs[order(DEGs$ID), ]
+  
+  # Merge the top table with the annotation data 
+  DEGs <- cbind(DEGs, annotation[, c(2, 3, 4)])
+  
+  # Removing missing gene symbols:
+  # Find the indices of rows with missing gene symbols
+  genemissing <- which(is.na(DEGs$Gene.symbol) == TRUE)
+  # Remove the rows with missing gene symbols from the 'DEGs' data frame
+  DEGs <- DEGs[-genemissing, ]
+  
+  # Write the resulting top table to a file
+  write_tsv(DEGs, paste0(projname, "/", "DEGs.tsv"))
+  
+  # Display a completion message
+  message("+++++ Analysis has completed. +++++")
+}
+
+
+
+# Function to generates volcano plots for the specified GEO datasets.
+Makevolcano <- function(projname,
+                        padjlevel = 0.05,
+                        uplogFC = 1,
+                        downlogFC = -1,
+                        ntop = 10,
+                        voltype = "plotly") {
+  # Read the tab-separated DEGs file into a data frame
+  table <- read_tsv(paste0(projname, "/", "DEGs.tsv"))
+  table <- data.frame(table)
+  
+  # Define a vector of color codes
+  my_pal <- c("#1B9E77", "#7570B3", "#E7298A", "#66A61E", "#E6AB02", "#A6761D", "#666666", "#9A7D0A")
+  
+  # Add DEG column based on the value of adj.P.Val and logFC:
+  volcano <- table %>%
+    # Calculate AdjustedPvalue as the negative logarithm (base 10) of adj.P.Val
+    mutate(AdjustedPvalue = -log10(adj.P.Val)) %>%
+    # Initialize DEG column with "Non-Significant" for all rows
+    mutate(DEG = "NotSignificant") %>%
+    # Update DEG based on conditions for upregulation
+    mutate(DEG = ifelse(AdjustedPvalue > -log10(padjlevel) & logFC > uplogFC, "Upregulated", DEG)) %>%
+    # Update DEG based on conditions for downregulation
+    mutate(DEG = ifelse(AdjustedPvalue > -log10(padjlevel) & logFC < downlogFC, "Downregulated", DEG))
+  
+  # Separate the DEGs into three categories: Upregulated, Downregulated, Non-Significant:
+  # Subset the 'volcano' data frame to select only the rows where the 'DEG' column is equal to "Upregulated".
+  volcano_up <- volcano[which(volcano$DEG == "Upregulated"), ]
+  # Sort the 'volcano_up' data frame in descending order based on the 'logFC' column.
+  volcano_up <- volcano_up[order(volcano_up$logFC, decreasing = T), ]
+  # Subset the 'volcano' data frame to select only the rows where the 'DEG' column is equal to "Downregulated".
+  volcano_down <- volcano[which(volcano$DEG == "Downregulated"), ]
+  # Sort the 'volcano_down' data frame in ascending order based on the 'logFC' column.
+  volcano_down <- volcano_down[order(volcano_down$logFC, decreasing = F), ]
+  # Subset the 'volcano' data frame to select only the rows where the 'DEG' column is equal to "Non-Significant".
+  volcano_NA <- volcano[which(volcano$DEG == "NotSignificant"), ]
+  
+  # Combine the DEGs into a single data frame:
+  # Combine the 'volcano_up', 'volcano_down', and 'volcano_NA' data frames vertically using the 'rbind' function.
+  volcano_all <- rbind(volcano_up, volcano_down, volcano_NA)
+  
+  # Replace the top probes with the word "Top" in the DEGs column:
+  # Create a vector 'ntop_rep' with length 'ntop' where each element is "Top".
+  ntop_rep <- rep("Top", ntop)
+  # Create a new column 'DEGs' in the 'volcano_all' data frame.
+  volcano_all$DEGs <- c(ntop_rep, volcano_up$DEG[-c(1:ntop)], ntop_rep, volcano_down$DEG[-c(1:ntop)], volcano_NA$DEG)
+  
+  # Label only top genes:
+  # Assign the gene symbol as a label for top genes
+  volcano_all$Top <- ifelse(volcano_all$DEGs == "Top", volcano_all$Gene.symbol, "")
+  
+  # Plotting either with plotly or ggplot
+  if (voltype == "plotly") {
+    # Create a ggplot object with layers and annotations
+    p <- ggplot(data = volcano_all, aes(x = logFC, y = AdjustedPvalue, color = DEGs, fill = DEGs, text = paste("ID: ", ID,
+													       # Tooltip text for gene symbol
+	                                                                                                       "<br> Gene: ", Gene.symbol,
+	                                                                                                       # Tooltip text for chromosome location
+	                                                                                                       "<br> Chromosome: ", Chromosome.location,
+	                                                                                                       # Tooltip text for GO function
+	                                                                                                       "<br> GO function: ", GO.Function))) +
+      # Set the x-axis label, y-axis label, and plot title
+      labs(x = 'log2 (Fold Change)', y = "-log10(Adjusted P-value)", title = paste0("Volcano plot-", projname)) +
+      # Add points to the plot with specified size and shape
+      geom_point(size = 1, shape = 21) +
+      # Set the color scale of the plot manually
+      scale_color_manual(values = c(my_pal)) +
+      # Set the fill color scale of the plot manually
+      scale_fill_manual(values = c(paste(my_pal, "66", sep = ""))) +
+      # Apply the "classic" theme to the plot
+      theme_classic() +
+      # Set axis text font and size
+      theme(axis.text = element_text(family = "Arial", size = 24, colour = "black"),
+            # Set x-axis text color and size
+            axis.text.x = element_text(family = "Arial", colour = "black", size = 24),
+            # Set y-axis text color and size
+            axis.text.y = element_text(family = "Arial", colour = "black", size = 24),
+            # Set subtitle font, size, and color
+            plot.subtitle = element_text(family = "Arial", size = 24, colour = "black", hjust = 0.5),
+            # Set y-axis title font, size, and angle
+            axis.title.y = element_text(family = "Arial", size = 24, angle = 90),
+            # Set x-axis title font, size, and angle
+            axis.title.x = element_text(family = "Arial", size = 24, angle = 00))
+    
+    # Convert ggplot object to plotly object and customize layout
+    p <- ggplotly(p, tooltip = "text") %>%
+      # Set the title of the plot
+      layout(title = paste0("Volcano plot-", projname),
+             # Customize font properties
+             font = list(family = "Arial", color = "black", size = 24),
+             # Customize legend properties
+             legend = list(family = "Arial", color = "black", size = 20, itemclick = "toggle"))
+  } else {
+    # Create a ggplot object with layers and annotations:
+    p <- ggplot(data = volcano_all, aes(x = logFC, y = AdjustedPvalue, color = DEGs, fill = DEGs, label = Top)) + 
+      # Set the labels for x and y axes
+      labs(x = 'log2 (Fold Change)', y = "-log10(Adjusted P-value)") +
+      # Add points to the plot
+      geom_point(size = 1, shape = 21) +
+      # Add text annotations to the plot
+      geom_text(check_overlap = F, vjust = 0.1, nudge_y = 0.4) +
+      # Set manual color scale for DEGs
+      scale_color_manual(values = c(my_pal)) +
+      # Set manual fill scale for DEGs
+      scale_fill_manual(values = c(paste(my_pal, "66", sep = ""))) +
+      # Use classic theme for the plot
+      theme_classic() +
+     
+      theme(
+        # Customize axis text properties
+        axis.text = element_text(family = "Arial", size = 24, colour = "black"),
+        # Customize x-axis text properties    
+        axis.text.x = element_text(family = "Arial", colour = "black", size = 24),
+        # Customize y-axis text properties    
+        axis.text.y = element_text(family = "Arial", colour = "black", size = 24),
+        # Customize subtitle text properties    
+        plot.subtitle = element_text(family = "Arial", size = 24, colour = "black", hjust = 0.5),
+        # Customize y-axis title properties    
+        axis.title.y = element_text(family = "Arial", size = 24, angle = 90),
+        # Customize x-axis title properties    
+        axis.title.x = element_text(family = "Arial", size = 24, angle = 00),
+        # Customize legend text properties    
+        legend.text = element_text(size = 10, family = "Arial"), 
+        # Customize legend title properties    
+        legend.title = element_text(size = 20, family = "Arial")
+      ) + 
+      # Set the subtitle of the plot
+      labs(subtitle = paste0("Volcano plot-", projname))
+  }
+  
+  # Calculate the number of up-regulated and down-regulated genes:
+  # Write the up-regulated and down-regulated genes to a TSV file
+  write_tsv(rbind(volcano_up, volcano_down), paste0(projname, "/", "all_top_down.tsv"))
+  
+  # Create the top table containing the top up-regulated and down-regulated genes
+  top <- rbind(volcano_up[1:ntop, ], volcano_down[1:ntop, ])
+  # Reorder columns in the top table
+  top <- top[, c(1:6, 11, 7, 8, 9, 10, 12)]
+  # Rename the 7th column as "n.log10(adj.P.Val)"
+  colnames(top)[7] <- "n.log10(adj.P.Val)"
+  
+  # Save the top table as a CSV file in the project folder
+  write.csv(top, paste0(projname, "/", "top.csv"), quote = FALSE, row.names = FALSE)
+  
+  # Display the number of up-regulated and down-regulated genes
+  message(sprintf("Up-regulated genes: %s; Down-regulated genes: %s", nrow(volcano_up), nrow(volcano_down)))
+  
+  # Return the generated plot
+  return(p)
+}
+
+
+# Function to creates a Venn diagram to visualize common differentially expressed genes among specified GEO datasets.
+MakeVenna <- function(common, ntop = 10) {
+  
+  # Create a directory to store the output files
+  dir.create("common", showWarnings = FALSE)
+  
+  # Reading all all_top_down files and processing them
+  com_table <- list()
+  
+  # Process each dataset
+  for (i in seq_along(common)) {
+    # Read the all_top_down file for the current dataset
+    DEG_table <- data.frame(read_tsv(paste0(common[i], "/", "all_top_down.tsv")))
+    
+    # Finding duplicated genes
+    # Find the indices of duplicated genes
+    dup_genes_n <- which(duplicated(DEG_table$Gene.symbol))
+    # Get unique duplicated genes
+    dup_uniq_genes <- unique(DEG_table[dup_genes_n, "Gene.symbol"])
+    # Find the indices of all duplicated genes
+    find_dup <- which(DEG_table$Gene.symbol %in% dup_uniq_genes)
+    # Extract all duplicated genes
+    all_dup <- DEG_table[find_dup, ]
+    # Remove duplicated genes from the DEG table
+    DEG_table <- DEG_table[-find_dup, -11]
+    
+    # Calculation the mean for logFC/AveExpr/t value/P-value/adjusted P-value/B value of duplicated genes
+    uniq_genes_list <- list()
+    
+    # Process each duplicated gene
+    for (j in seq_along(dup_uniq_genes)) {
+      # Find the indices of the current duplicated gene
+      c <- which(all_dup$Gene.symbol %in% dup_uniq_genes[j])
+      # Calculate the mean logFC
+      b <- c(mean(all_dup$logFC[c]),
+             # Calculate the mean AveExpr
+             mean(all_dup$AveExpr[c]),
+             # Calculate the mean t value
+             mean(all_dup$t[c]),
+             # Calculate the mean P-value
+             mean(all_dup$P.Value[c]),
+             # Calculate the mean adjusted P-value
+             mean(all_dup$adj.P.Val[c]),
+             # Calculate the mean B value
+             mean(all_dup$B[c]))
+      
+      # Assign column names and create a new data frame with the mean values
+      # Assign column names to the mean values
+     names(b) <- c("logFC", "AveExpr", "t", "P.Value", "adj.P.Val", "B")
+      # Create a new data frame with the mean values
+      d <- data.frame(c(all_dup[c[1], -c(2, 3, 4, 5, 6, 7, 11)], b))
+      # Reorder the columns of the data frame
+      d <- d[, c(1, 6, 7, 8, 9, 10, 11, 2, 3, 4, 5)]
+      # Store the data frame in the list for unique genes
+      uniq_genes_list[[j]] <- d
+    }
+    
+    # Joining the mean calculated and unique genes with the rest of genes
+    # Combine the data frames in the list into one data frame
+    uniq_genes_df <- do.call(rbind, uniq_genes_list)
+    # Append the unique genes data frame to the DEG_table
+    DEG_table <- rbind(DEG_table, uniq_genes_df)
+    
+    # Store the processed DEG table for the current dataset
+    com_table[[common[i]]] <- DEG_table
+  }
+  
+  # Calculating up and down-regulated genes for each dataset
+  # Create an empty list to store the up and down-regulated genes
+  DEGslist <- list()
+  
+  for (i in seq_along(com_table)) {
+    # Extract the 8th column (DEGs) and store it in the list
+    DEGslist[[common[i]]] <- com_table[[i]][8]
+  }
+  
+  # Find common genes among all datasets
+  com_prob <- Reduce(intersect, DEGslist)
+  
+  # Writing all common genes into separated files as well as the top files
+  # Create an empty list to store all common genes
+  all_com <- list()
+  # Create an empty list to store all common genes (including all samples)
+  all_com_all <- list()
+  
+  for (i in seq_along(com_table)) {
+    # Extract the common differentially expressed genes for the current dataset
+    comn <- which(com_table[[names(com_table)[i]]][["Gene.symbol"]] %in% com_prob$Gene.symbol)
+    # Subset the current dataset with the common DEGs
+    com_final_DEG  <- com_table[[names(com_table)[i]]][comn, ]
+    # Sort the subsetted data frame based on the "DEG" column
+    com_final_DEG <- com_final_DEG[order(com_final_DEG$DEG), ]
+    
+    # Save the common differentially expressed genes as a TSV file
+    write_tsv(com_final_DEG, paste0("common", "/",names(com_table)[i], "_common_DEGs.tsv"))
+    
+    # Extract the top up-regulated genes for the current dataset
+    com_final_up <- com_final_DEG[which(com_final_DEG$DEG == "Upregulated"), ]
+    # Sort the subsetted data frame based on the "logFC" column in decreasing order
+    com_final_up <- com_final_up[order(com_final_up$logFC, decreasing = TRUE), ]
+    
+    # Extract the top down-regulated genes for the current dataset
+    com_final_down <- com_final_DEG[which(com_final_DEG$DEG == "Downregulated"), ]
+    # Sort the subsetted data frame based on the "logFC" column in increasing order
+    com_final_down <- com_final_down[order(com_final_down$logFC, decreasing = FALSE), ]
+    
+    # Save the top common differentially expressed genes as a TSV file
+    write_tsv(rbind(com_final_up[1:ntop, ], com_final_down[1:ntop, ]), paste0("common", "/",names(com_table)[i], "_top_common_DEGs.tsv"))
+    
+    # Store the common differentially expressed genes and all genes for each dataset
+    # Store the subsetted com_final_DEG data frame in all_com list
+    all_com[[names(com_table)[i]]] <- com_final_DEG[, c(2:7)]
+    # Store the complete com_final_DEG data frame in all_com_all list
+    all_com_all[[names(com_table)[i]]] <- com_final_DEG
+  }
+  
+  # Calculate the mean of logFC for all common genes in each dataset 
+  # Combine the data frames in all_com list into a single data frame, all_com_df
+  all_com_df <- do.call(cbind, all_com)
+  # Find the column indices of columns containing "logFC" in their names
+  logfc_n <- grep("logFC", colnames(all_com_df))
+  
+  # Extract the columns containing logFC values from all_com_all_df
+  logfc_df <- all_com_df[, logfc_n]
+  
+  # Calculate the row means of logFC values to obtain the mean logFC for each common gene
+  logfc_df <- data.frame(logFC = rowMeans(logfc_df))
+  
+  # Extract columns containing adj.P.Val values from all_com_df:
+  # Find the column indices of columns containing "adj.P.Val" in their names
+  adj.P.Val_n <- grep("adj.P.Val", colnames(all_com_df))
+  # Extract the columns containing adj.P.Val values
+  adj.P.Val_df <- all_com_df[, adj.P.Val_n]
+  # Calculate the row means of adj.P.Val values to obtain the mean adj.P.Val for each common gene:
+  # Create a data frame with a single column "adj.P.Val" containing the mean adj.P.Val values
+  adj.P.Val_df <- data.frame(adj.P.Val = rowMeans(adj.P.Val_df))
+  
+  # Extract columns containing B values from all_com_df
+  B_n <- grep("B", colnames(all_com_df))
+  B_df <- all_com_df[, B_n]
+  # Calculate the row means of B values to obtain the mean B for each common gene
+  B_df <- data.frame(B = rowMeans(B_df))
+  
+  # Extract columns containing t values from all_com_df
+  t_n <- grep(".t", colnames(all_com_df))
+  t_df <- all_com_df[, t_n]
+  # Calculate the row means of t values to obtain the mean t for each common gene
+  t_df <- data.frame(t = rowMeans(t_df))
+  
+  # Extract columns containing P.Value values from all_com_df
+  P.Value_n <- grep("P.Value", colnames(all_com_df))
+  P.Value_df <- all_com_df[, P.Value_n]
+  # Calculate the row means of P.Value values to obtain the mean P.Value for each common gene
+  P.Value_df <- data.frame(P.Value = rowMeans(P.Value_df))
+  
+  # Extract columns containing AveExpr values from all_com_df:
+  # Find the column indices of columns containing "AveExpr" in their names
+  AveExpr_n <- grep("AveExpr", colnames(all_com_df))
+  # Extract the columns containing AveExpr values
+  AveExpr_df <- all_com_df[, AveExpr_n]
+  # Calculate the row means of AveExpr values to obtain the mean AveExpr for each common gene:
+  # Create a data frame with a single column "AveExpr" containing the mean AveExpr values
+  AveExpr_df <- data.frame(AveExpr = rowMeans(AveExpr_df))
+  
+  # Combining all calculated means into one data frame 
+  all_com_all_df <- data.frame(do.call(cbind, all_com_all[[1]]))
+  # Removing unnecessary columns from all_com_all_df
+  all_com_all_df <- all_com_all_df[, -c(2:7)]
+  # Combining the calculated means with all_com_all_df
+  all_com_all_df <- cbind(all_com_all_df, logfc_df, adj.P.Val_df, B_df, t_df, AveExpr_df, P.Value_df)
+  # Reordering the columns of all_com_all_df
+  all_com_all_df <- all_com_all_df[, c(1, 6, 10, 9, 11, 7, 8, 2, 3, 4, 5)]
+  
+  # Writing the combined data frame of all calculated means to a TSV file
+  write_tsv(all_com_all_df, paste0("common", "/", "all_mean_common_DEGs.tsv"))
+  
+  # Displaying a message to indicate that the common genes have been saved
+  message("+++++ Common genes between all datasets have been saved into the 'common' folder. +++++")
+  
+  # Creating a list of DEGs for each dataset to generate a Venn diagram
+  venlist <- list()
+  # Iterating over the DEGslist to populate the venlist
+  for (i in seq_along(DEGslist)) {
+    venlist[[common[i]]] <- DEGslist[[i]][[1]]
+  }
+  
+  # Generate the Venn diagram using the logFC mean values for common genes
+  # Set the seed for random number generation
+  set.seed(1234)
+  # Define color palette for the Venn diagram
+  my_pal <- c("#1B9E77", "#7570B3", "#E7298A", "#66A61E", "#E6AB02", "#A6761D", "#666666", "#9A7D0A")
+  # Create the Venn diagram using ggvenn package
+  venaa <- ggvenn(venlist, 
+                  fill_color = my_pal,
+                  stroke_size = 0.5,
+                  set_name_size = 4)
+  
+  # Return the generated Venn diagram
+  return(venaa)
+}
+
+
+
+# Function to prepares files for network analysis using the specified GEO datasets.
+Makenetworkanalyst <- function(projname,
+                               compare = "grade",
+                               groups) {
+  # Reading files
+  # Create 'networkanalyst' directory to store the output files
+  dir.create("networkanalyst", showWarnings = FALSE)
+  
+  # Read the 'matrix.csv' file
+  matrix <- read_csv(paste0(projname, "/", "matrix.csv"))
+  matrix <- data.frame(matrix)
+  
+  # Read the 'phenotype.tsv' file
+  phenotype <- read_tsv(paste0(projname, "/", "phenotype.tsv"))
+  phenotype <- data.frame(phenotype)
+  
+  # Set the row names of the 'phenotype' dataframe
+  rownames(phenotype) <- phenotype[, 1]
+  
+  # Calculating DEGs:
+  # Read the 'all_top_down.tsv' file containing up and down genes
+  updown <- data.frame(read_tsv(paste0(projname, "/", "all_top_down.tsv")))
+  
+  # Creating a file that contains up and down genes based on groups specified:
+  
+  # Identify the rows in 'matrix' corresponding to up and down genes
+  updown_genes <- which(matrix$ID %in% updown$ID)
+  # Create a new matrix 'updown_matrix' containing the identified rows
+  updown_matrix <- matrix[updown_genes, ]
+ 
+  # Add gene symbols to the 'updown_matrix' dataframe
+  updown_matrix <- cbind(updown$Gene.symbol, updown_matrix)
+  # Rename the first column as "Symbol"
+  colnames(updown_matrix)[1] <-  "Symbol" 
+  # Remove the second column from the dataframe
+  updown_matrix <- updown_matrix[, -2]
+  
+  # Extract the gene symbols from the 'updown_matrix' dataframe
+  genes <- updown_matrix$Symbol
+  # Remove the first column (gene symbols) from 'updown_matrix', round the remaining expression values to 2 decimal places
+  updown_matrix <- round(updown_matrix[-1], 2)
+  # Add the gene symbols column back to the 'updown_matrix' dataframe
+  updown_matrix <- cbind(genes, updown_matrix)
+  
+  if (compare ==  "subtype") {
+    # Prepare data based on subtype comparison
+    
+    # Find the column index for 'pam50' in 'phenotype'
+    phecoln <- grep( "pam50", phenotype)
+    
+    # Check if the length of 'phecoln' is greater than 0 (if there are subtype columns present in 'phenotype' dataframe.)
+    if (length(phecoln) > 0) {
+      # Extract the subtype column from 'phenotype'
+      pheno <- data.frame(phenotype[, phecoln])
+      # Rename the column to "subtype"
+      colnames(pheno) <-  "subtype"
+      
+      # Clean up the subtype values by removing the "pam50" prefix
+      pheno$subtype <- gsub( "pam50.+:",  "", pheno$subtype)
+      # Assign the row names of 'phenotype' as the row names of 'pheno'
+      rownames(pheno) <- rownames(phenotype)
+      
+      # Creating groups of samples based on specified conditions:
+      # Create an empty list to store groups of samples
+      grouplis <- list()
+      for (i in seq_along(groups)) {
+        # Combine the group names using the '|' separator
+        name <- paste0(groups[[i]], collapse = "|")
+        # Find the rows in 'pheno$subtype' that match the group name
+        rownum <- grep(name, pheno$subtype)
+        # Store the matching row names in 'grouplis' with the group name as the key
+        grouplis[[names(groups)[i]]] <- rownames(pheno)[rownum]
+      }
+    }
+  } else {
+    # Preparing the breast cancer grades into a dataframe:
+    # Find the column index containing "grade:" in the phenotype data
+    gradecoln <- grep( "grade:", phenotype)
+    # Check if any column contains "grade:"
+    if (length(gradecoln) > 0) {
+      # Extract the column with "grade:" and create a data frame
+      grade <- data.frame(phenotype[, gradecoln])
+      # Rename the column to "grade"
+      colnames(grade) <-  "grade"
+      # Remove "grade:", "grade: ", and "B-R grade: " from the values in the column
+      grade$grade <- gsub( "grade:|grade: |B-R grade: ",  "", grade$grade)
+      # Remove any characters after "=" in the values
+      grade$grade <- gsub( "=.+",  "", grade$grade)
+      # Find the rows with "III" in the grade column
+      greek <- grep( "III", grade$grade)
+      # Check if any rows contain "III"
+      if (length(greek) > 0) {
+        # Find the rows with "I", "II", "III" in the grade column
+        one <- which(factor(grade$grade) ==  "I")
+        two <- which(factor(grade$grade) ==  "II")
+        three <- which(factor(grade$grade) ==  "III")
+        # Replace the rows with "I" with "1"
+        grade[one, ] <-  "1"
+        # Replace the rows with "II" with "2"
+        grade[two, ] <-  "2"
+        # Replace the rows with "III" with "3"
+        grade[three, ] <-  "3"
+      }
+      # Set the row names of the 'grade' data frame to match the row names of the 'phenotype' data frame
+      rownames(grade) <- rownames(phenotype)
+      # Create an empty list to store the group information
+      grouplis <- list()
+      for (i in seq_along(groups)) {
+        # Concatenate the elements of 'groups' with a '|' separator
+        name <- paste0(groups[[i]], collapse = "|")
+        # Find the rows in the 'grade' data frame where the 'grade' column matches the group name
+        rownum <- grep(name, grade$grade)
+        # Store the row names corresponding to the group in the 'grouplis' list
+        grouplis[[names(groups)[i]]] <- rownames(grade)[rownum]
+      }
+    }
+  }
+  
+  # Renaming the matrix file according to the groups name specified by the user:
+  # Bind the column names of 'updown_matrix' as the first row of 'updown_matrix'
+  updown_matrix <- rbind(colnames(updown_matrix), updown_matrix)
+  for (i in seq_along(grouplis)) {
+    # Concatenate the elements of 'grouplis[[i]]' with a '|' separator
+    matname <- paste0(grouplis[[i]], collapse = "|")
+    # Find the columns in 'updown_matrix' that match the group name specified by 'matname'
+    matcoln <- grep(matname, colnames(updown_matrix))
+    # Replace the corresponding columns in the first row of 'updown_matrix' with the group name
+    updown_matrix[1, matcoln] <-names(grouplis)[i]
+  }
+  
+  # Adding column names and the second row according to the file for networkanalyst:
+  # Find the columns in the first row of 'updown_matrix' that match the names of 'grouplis'
+  changedcol <- grep(paste0(names(grouplis), collapse = "|"), updown_matrix[1, ])
+  # Keep the first column and the columns selected by 'changedcol' in 'updown_matrix'
+  updown_matrix <- updown_matrix[, c(1, changedcol)]
+  # Replace the first cell of 'updown_matrix' with "#CLASS"
+  updown_matrix[1, 1] <-  "#CLASS"
+  # Replace the column name of the first column in 'updown_matrix' with "#NAME"
+  colnames(updown_matrix)[1] <-  "#NAME"
+  
+  # Write 'updown_matrix' to a tab-separated file
+  write.table(updown_matrix, paste0( "networkanalyst", "/", projname,  "_dataanlys.txt"), quote = FALSE, row.names = FALSE, sep = "\t")
+  
+  # Display a message indicating that the file has been saved
+  message("+++++ Your file has been saved in the networkanalyst folder. +++++")
+}
+
+
+	  
+#===================================================== Q1 =====================================================#
+# other adjust methods ---> "holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr", "none"
+
+################################################# GSE25055 ################################################# 
+# Download the GEO dataset GSE25055
+DownloadGEO( "GSE25055")
+
+# Perform DEG analysis on GSE25055 dataset
+DEGanalysis(projname = "GSE25055",
+            compare = "grade",
+            groups = list(normal = c("1"), tumor = c("3")),
+            adjust = "fdr")
+
+# Create a volcano plot for GSE25055 dataset
+volcano_GSE25055 <- Makevolcano(projname = "GSE25055",
+                                padjlevel = 0.05,
+                                uplogFC = 1,
+                                downlogFC = -1,
+                                ntop = 10,
+                                voltype = "ggplot")
+volcano_GSE25055
+
+# Prepare files for network analysis on GSE25055 dataset
+Makenetworkanalyst(projname = "GSE25055",
+                   compare = "grade",
+                   groups = list(normal = c("1"), tumor = c("3")))
+
+################################################# GSE7390 #################################################
+# Download the GEO dataset GSE7390
+DownloadGEO("GSE7390")
+
+# Perform DEG analysis on GSE7390 dataset
+DEGanalysis(projname = "GSE7390",
+            compare = "grade",
+            groups = list(normal = c("1"), tumor = c("3")),
+            adjust = "fdr")
+
+# Create a volcano plot for GSE7390 dataset
+volcano_GSE7390 <- Makevolcano(projname = "GSE7390",
+                               padjlevel = 0.05,
+                               uplogFC = 1,
+                               downlogFC = -1,
+                               ntop = 10,
+                               voltype = "ggplot")
+volcano_GSE7390
+
+# Prepare files for network analysis on GSE7390 dataset
+Makenetworkanalyst(projname = "GSE7390",
+                   compare = "grade",
+                   groups = list(normal = c("1"), tumor = c("3")))
+
+################################################# GSE11121 #################################################
+# Download the GEO dataset GSE11121
+DownloadGEO("GSE11121")
+
+# Perform DEG analysis on GSE11121 dataset
+DEGanalysis(projname = "GSE11121",
+            compare = "grade",
+            groups = list(normal = c("1"), tumor = c("3")),
+            adjust = "fdr")
+
+# Create a volcano plot for GSE11121 dataset
+volcano_GSE11121 <- Makevolcano(projname = "GSE11121",
+                                padjlevel = 0.05,
+                                uplogFC = 1,
+                                downlogFC = -1,
+                                ntop = 10,
+                                voltype = "ggplot")
+volcano_GSE11121
+
+# Prepare files for network analysis on GSE11121 dataset
+Makenetworkanalyst(projname = "GSE11121",
+                   compare = "grade",
+                   groups = list(normal = c("1"), tumor = c("3")))
+
+################################################# GSE25065 #################################################
+# Download the GEO dataset GSE25065
+DownloadGEO("GSE25065")
+
+# Perform DEG analysis on GSE25065 dataset
+DEGanalysis(projname = "GSE25065",
+            compare = "grade",
+            groups = list(normal = c("1"), tumor = c("3")),
+            adjust = "fdr")
+
+# Create a volcano plot for GSE25065 dataset
+volcano_GSE25065 <- Makevolcano(projname = "GSE25065",
+                                padjlevel = 0.05,
+                                uplogFC = 1,
+                                downlogFC = -1,
+                                ntop = 10,
+                                voltype = "ggplot")
+volcano_GSE25065
+
+# Prepare files for network analysis on GSE25065 dataset
+Makenetworkanalyst(projname = "GSE25065",
+                   compare = "grade",
+                   groups = list(normal = c("1"), tumor = c("3")))
+
+
+# Create a Venn diagram for the common differentially expressed genes across the datasets
+MakeVenna(common = c("GSE25055", "GSE7390", "GSE11121", ), ntop = 10)
