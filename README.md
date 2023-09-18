@@ -25,3 +25,34 @@ This meta-analysis project aimed to identify potential biomarkers for breast can
 
 For inline code, wrap the code in backticks (`). 
 
+
+```
+ require(readr)
+  require(tidyr)
+  require(gridExtra)
+  require(reshape2)
+  require(viridis)
+  require(ggplot2)
+  require(DESeq2)
+  require(biomaRt)
+  require(genefilter)
+  require(org.Hs.eg.db)
+  require(ComplexHeatmap)
+  require(clusterProfiler)
+  require(readr)
+  require(knitr)
+# ===========================================
+# Importing_Counts_Matrix
+# ===========================================
+# Set the random seed for reproducible results
+set.seed(1234)
+# Reading and preparing files:
+counts <- data.frame(read_tsv("countMatrix.tsv"))
+# Set the row names of the 'counts' data frame to be the first column (usually gene IDs or similar identifiers)
+rownames(counts) <- counts[,1]
+``` 
+
+
+
+
+
