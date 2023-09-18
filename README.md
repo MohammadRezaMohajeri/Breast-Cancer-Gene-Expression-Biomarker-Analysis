@@ -13,6 +13,7 @@
 - [Dependencies](#dependencies)
 - [How to Run the Code](#how-to-run-the-code)
 
+------------------------------------------------------------------------------------------------------
 ## Introduction
 
 This project aims to identify potential biomarkers in breast cancer using differential gene expression analysis and meta-analysis techniques. For a more detailed background and objectives, please refer to [Project Summary](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/Project_Summary.html).
@@ -30,18 +31,21 @@ For details, please refer to the [Phase 2 description](https://mohammadrezamohaj
 
 For details, please refer to the [Phase 3 description](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/About_The_Project3.html).
 
+------------------------------------------------------------------------------------------------------
 ## Research Question
 
 ### Title: Evolution of the Research Question
 
 For details about the research question, please visit [Research Question](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/Research_Question.html).
 
+------------------------------------------------------------------------------------------------------
 ## Research Hypothesis
 
 ### Title: Research Hypothesis Derived from the Research Question in This Study
 
 For details about the research hypothesis, please visit [Research Hypothesis](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/Research_Hypothesis.html).
 
+------------------------------------------------------------------------------------------------------
 ## Code Pages
 
 For the source code and notebooks related to each phase of this project, please refer to the following pages:
@@ -50,6 +54,7 @@ For the source code and notebooks related to each phase of this project, please 
 2. [Code for Phase 2](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/R_Code_4Datasets_FC_FDR_Code_Page.html) - *Differential Expression Analysis for Biomarker Discovery in Breast Cancer (G1/G3)*
 3. [Code for Phase 3](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/R_Code_4Datasets_Meta_Analysis_Code_Page.html) - *Integration of Gene Expression Data through Meta-Analysis for Robust Biomarker Discovery in Breast Cancer (G1/G3) (4 datasets)*
 
+------------------------------------------------------------------------------------------------------
 ## Dependencies
 
 ### General Requirements
