@@ -1,61 +1,50 @@
-# Breast-Cancer-Gene-Expression-Biomarker-Analysis
-This meta-analysis project aimed to identify potential biomarkers for breast cancer diagnosis and prognosis through a comprehensive gene expression profiling analysis. The study utilized 468 grade 1 and 3 breast cancer samples from four microarray breast cancer GEO datasets, all of which were on the same platform, technology, and biological specimens. Integration was achieved using REM meta-analysis with the GeneMeta Bioconductor R package. Common differentially expressed genes (DEGs) were identified among all four datasets, and meta-combined DEGs were obtained and subjected to functional analysis.
+# Breast Cancer Gene Expression Biomarker Analysis
 
-[My website (Gene Expression Profiling)](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/index.html)
-[Breast](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/index.html)
+## Table of Contents
 
-# Header 1
-## Header 2
-### Header 3
-#### Header 4
-##### Header 5
-###### Header 6
+- [Introduction](#introduction)
+- [Phase 1: Data Preparation and Preliminary Analysis](#phase-1-data-preparation-and-preliminary-analysis)
+- [Phase 2: Differential Expression Analysis for Biomarker Discovery in Breast Cancer](#phase-2-differential-expression-analysis-for-biomarker-discovery-in-breast-cancer)
+- [Phase 3: Integration of Gene Expression Data through Meta-Analysis for Robust Biomarker Discovery in Breast Cancer](#phase-3-integration-of-gene-expression-data-through-meta-analysis-for-robust-biomarker-discovery-in-breast-cancer)
+- [Research Question](#research-question)
+- [Research Hypothesis](#research-hypothesis)
+- [Dependencies](#dependencies)
+- [How to Run the Code](#how-to-run-the-code)
 
-* Item 1
-* Item 2
-* Item 3
+## Introduction
 
-- Another item 1
-- Another item 2
-- Another item 3
+This project aims to identify potential biomarkers in breast cancer using differential gene expression analysis and meta-analysis techniques. For a more detailed background and objectives, please refer to [Project Overview](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/Project_Overview.html).
 
-`counts <- data.frame(read_tsv("countMatrix.tsv"))`
+## Phase 1: Data Preparation and Preliminary Analysis
 
-1. First item
-2. Second item
-3. Third item
+In Phase 1, we prepared the gene expression datasets for analysis, employing quality control measures and normalization techniques.
 
-For inline code, wrap the code in backticks (`). 
+* **Read More About Phase 1**: [Data Preparation and Preliminary Analysis](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/Data_Preparation_and_Preliminary_Analysis.html)
 
+## Phase 2: Differential Expression Analysis for Biomarker Discovery in Breast Cancer
 
-```
- require(readr)
-  require(tidyr)
-  require(gridExtra)
-  require(reshape2)
-  require(viridis)
-  require(ggplot2)
-  require(DESeq2)
-  require(biomaRt)
-  require(genefilter)
-  require(org.Hs.eg.db)
-  require(ComplexHeatmap)
-  require(clusterProfiler)
-  require(readr)
-  require(knitr)
-# ===========================================
-# Importing_Counts_Matrix
-# ===========================================
-# Set the random seed for reproducible results
-set.seed(1234)
-# Reading and preparing files:
-counts <- data.frame(read_tsv("countMatrix.tsv"))
-# Set the row names of the 'counts' data frame to be the first column (usually gene IDs or similar identifiers)
-rownames(counts) <- counts[,1]
-``` 
+For details, please refer to the [Phase 2 description](#).
 
+## Phase 3: Integration of Gene Expression Data through Meta-Analysis for Robust Biomarker Discovery in Breast Cancer
 
+For details, please refer to the [Phase 3 description](#).
 
+## Research Question
 
+### Title: Evolution of the Research Question
 
+For details about the research question, please visit [Research Question](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/Research_Question.html).
 
+## Research Hypothesis
+
+### Title: Research Hypothesis Derived from the Research Question in This Study
+
+For details about the research hypothesis, please visit [Research Hypothesis](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/Research_Hypothesis.html).
+
+## Dependencies
+
+1. List the software and libraries that need to be installed to run the code.
+
+## How to Run the Code
+
+Instructions for running the analysis, including any parameters that should be set.
