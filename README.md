@@ -17,11 +17,11 @@ This meta-analysis project aimed to identify potential biomarkers for breast can
 - Another item 2
 - Another item 3
 
+`counts <- data.frame(read_tsv("countMatrix.tsv"))`
 
 1. First item
 2. Second item
 3. Third item
 
 For inline code, wrap the code in backticks (`). 
-`counts <- data.frame(read_tsv("countMatrix.tsv"))`
 
