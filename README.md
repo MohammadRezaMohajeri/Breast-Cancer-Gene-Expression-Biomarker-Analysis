@@ -52,8 +52,62 @@ For the source code and notebooks related to each phase of this project, please 
 
 ## Dependencies
 
-1. List the software and libraries that need to be installed to run the code.
+### General Requirements
+* R programming language
+* RStudio (optional, but recommended for easier R script development)
 
+### Phase 1: Differential Expression Analysis of Breast Cancer Dataset (GSE25055) using limma in R: Comparing Molecular Subtypes and Grading System
+To run the Phase 1 analysis, the following R packages are required:
+
+1. `require(GEOquery)` - For downloading and processing GEO datasets
+2. `require(limma)` - For performing differential expression analysis
+3. `require(tidyverse)` - For data manipulation and visualization
+4. `require(plotly)` - For interactive plots
+
+```
+# R code to install Phase 1 packages
+install.packages(c("GEOquery", "limma", "tidyverse", "plotly"))
+```
+
+### Phase 2: Differential Expression Analysis for Biomarker Discovery in Breast Cancer (Grade 1 vs 3)
+To run the Phase 2 analysis, the following R packages are required:
+
+1. `require(GEOquery)` - For accessing GEO data
+2. `require(limma)` - For differential expression analysis
+3. `require(tidyverse)` - For data manipulation and visualization
+4. `require(plotly)` - For interactive plots
+5. `require(ggvenn)` - For creating Venn diagrams using ggplot2
+
+```
+# R code to install Phase 2 packages
+install.packages(c("GEOquery", "limma", "tidyverse", "plotly", "ggvenn"))
+``` 
+### Phase 3: Integration of Gene Expression Data through Meta-Analysis for Robust Biomarker Discovery in Breast Cancer (Grade 1 vs 3)
+To run the Phase 3 analysis, the following R packages are required:
+
+1. `require(tidyverse)` - For comprehensive data manipulation and visualization, including dplyr, ggplot2, and ...
+2. `require(GEOquery)` - For accessing and retrieving gene expression data from the Gene Expression Omnibus (GEO) database
+3. `require(reshape2)` - For reshaping data from wide to long format and vice versa, useful for data preprocessing
+4. `require(caret)` - For ML and predictive modeling, provides a unified interface for algorithms and performance evaluation
+5. `require(GeneMeta)` - For meta-analysis of gene expression data, allowing combining results from multiple studies
+6. `require(limma)` - For analyzing microarray data using linear models, including differential expression analysis
+7. `require(rgl)` - For creating interactive 3D visualizations, useful for exploring complex data structures
+8. `require(sva)` -For surrogate variable analysis, to identify & adjust for unwanted variation in high-dimensional datasets
+9. `require(plotly)` - For creating interactive and dynamic plots, including scatter plots, bar plots, and more
+10. `require(ggvenn)` - For creating Venn diagrams using ggplot2, useful for visualizing set relationships
+11. `require(ggpubr)` - For creating publication-ready plots using ggplot2, providing additional customization options
+12. `require(ComplexHeatmap)` - For creating complex heatmaps, allowing vis. of multiple layers of data and annotations
+13. `require(RColorBrewer)` - For providing color palettes suitable for data visualization
+14. `require(msigdbr)` - For accessing and using the Molecular Signatures Database (MSigDB) for gene set enrichment analysis
+15. `require(fgsea)` - For performing gene set enrichment analysis (GSEA) using fast gene set testing algorithms
+16. `require(locfit)` - For local regression modeling, useful for fitting flexible curves to data
+17. `require(vsn)` - For variance stabilization and normalization, specifically for microarray data analysis
+
+```
+# R code to install Phase 3 packages
+install.packages(c("tidyverse", "GEOquery", "reshape2", "caret", "GeneMeta", "limma", "rgl", "sva", "plotly", "ggvenn", "ggpubr", "ComplexHeatmap", "RColorBrewer", "msigdbr", "fgsea", "locfit", "vsn"))
+``` 
+------------------------------------------------------------------------------------------------------
 ## How to Run the Code
 
 Instructions for running the analysis, including any parameters that should be set.
