@@ -25,11 +25,11 @@ This project seeks to identify potential biomarkers for breast cancer by conduct
 
 ## Phase 2: Differential Expression Analysis for Biomarker Discovery in Breast Cancer (Grade 1 vs 3)
 
-For details, please refer to the [Phase 2 description](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/About_The_Project2.html).
+* For details, please refer to the [Phase 2 description](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/About_The_Project2.html).
 
 ## Phase 3: Integration of Gene Expression Data through Meta-Analysis for Robust Biomarker Discovery in Breast Cancer (Grade 1 vs 3)
 
-For details, please refer to the [Phase 3 description](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/About_The_Project3.html).
+* For details, please refer to the [Phase 3 description](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/About_The_Project3.html).
 
 ------------------------------------------------------------------------------------------------------
 ## Research Question
