@@ -3,7 +3,7 @@
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [Phase 1:  1-Dataset Analysis - limma](#phase-1-data-preparation-and-preliminary-analysis)
+- [Phase 1:  1-Dataset Analysis - limma](#Differential Expression Analysis of Breast Cancer Dataset (GSE25055) using limma in R: Comparing Molecular Subtypes and Grading System)
 - [Phase 2: Differential Expression Analysis for Biomarker Discovery in Breast Cancer](#phase-2-differential-expression-analysis-for-biomarker-discovery-in-breast-cancer)
 - [Phase 3: Integration of Gene Expression Data through Meta-Analysis for Robust Biomarker Discovery in Breast Cancer](#phase-3-integration-of-gene-expression-data-through-meta-analysis-for-robust-biomarker-discovery-in-breast-cancer)
 - [Research Question](#research-question)
