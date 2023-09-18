@@ -16,7 +16,7 @@
 ------------------------------------------------------------------------------------------------------
 ## Introduction
 
-This project aims to identify potential biomarkers in breast cancer using differential gene expression analysis and meta-analysis techniques. For a more detailed background and objectives, please refer to [Project Summary](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/Project_Summary.html).
+This project seeks to identify potential biomarkers for breast cancer by conducting differential gene expression analysis across multiple datasets and employing the Meta-Analysis of Random-Effects Models. The goal is to uncover robust gene signatures that could be pivotal for early diagnosis, treatment, and management of the disease. For a more detailed background and objectives, please refer to [Project Summary](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/Project_Summary.html).
 
 ## Phase 1: Differential Expression Analysis of Breast Cancer Dataset (GSE25055) using limma in R: Comparing Molecular Subtypes and Grading System
 
