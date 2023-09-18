@@ -19,15 +19,15 @@ This project aims to identify potential biomarkers in breast cancer using differ
 
 In Phase 1, we prepared the gene expression datasets for analysis, employing quality control measures and normalization techniques.
 
-* **Read More About Phase 1**: [Data Preparation and Preliminary Analysis](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/Data_Preparation_and_Preliminary_Analysis.html)
+* **Read More About Phase 1**: [Data Preparation and Preliminary Analysis](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/About_The_Project1.html)
 
 ## Phase 2: Differential Expression Analysis for Biomarker Discovery in Breast Cancer
 
-For details, please refer to the [Phase 2 description](#).
+For details, please refer to the [Phase 2 description](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/About_The_Project2.html).
 
 ## Phase 3: Integration of Gene Expression Data through Meta-Analysis for Robust Biomarker Discovery in Breast Cancer
 
-For details, please refer to the [Phase 3 description](#).
+For details, please refer to the [Phase 3 description](https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/About_The_Project3.html).
 
 ## Research Question
 
