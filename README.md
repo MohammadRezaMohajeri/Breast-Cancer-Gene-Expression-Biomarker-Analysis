@@ -3,10 +3,10 @@
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [Phase 1: Differential Expression Analysis of Breast Cancer Dataset (GSE25055) using limma in R: Comparing Molecular Subtypes and Grading System
-](#differential-expression-analysis-of-breast-cancer-dataset-gse25055-using-limma-in-r-comparing-molecular-subtypes-and-grading-system)
-- [Phase 2: Differential Expression Analysis for Biomarker Discovery in Breast Cancer (Grade 1 vs 3)](#phase-2-differential-expression-analysis-for-biomarker-discovery-in-breast-cancer)
-- [Phase 3: Integration of Gene Expression Data through Meta-Analysis for Robust Biomarker Discovery in Breast Cancer (Grade 1 vs 3)](#phase-3-integration-of-gene-expression-data-through-meta-analysis-for-robust-biomarker-discovery-in-breast-cancer)
+- [Phase 1: Differential Expression Analysis of Breast Cancer Dataset GSE25055 using limma in R: Comparing Molecular Subtypes and Grading System](#phase-1-differential-expression-analysis-of-breast-cancer-dataset-gse25055-using-limma-in-r-comparing-molecular-subtypes-and-grading-system)
+- [Phase 2: Differential Expression Analysis for Biomarker Discovery in Breast Cancer Grade 1 vs 3](#phase-2-differential-expression-analysis-for-biomarker-discovery-in-breast-cancer-grade-1-vs-3)
+- [Phase 3: Integration of Gene Expression Data through Meta-Analysis for Robust Biomarker Discovery in Breast Cancer Grade 1 vs 3](#phase-3-integration-of-gene-expression-data-through-meta-analysis-for-robust-biomarker-discovery-in-breast-cancer-grade-1-vs-3)
+
 - [Research Question](#research-question)
 - [Research Hypothesis](#research-hypothesis)
 - [Code Pages](#code-pages)
