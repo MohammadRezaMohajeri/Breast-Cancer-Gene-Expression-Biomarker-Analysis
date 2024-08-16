@@ -7,8 +7,10 @@
 		/* Header Styles  */
 		.header {
 			background-color: #010a0d; /* Black navy for header  */
+			height: 500px; /* Set an explicit height */
 			padding: 10px;
 			text-align: center; /* Center-align the header content */
+			position: relative; /* Add relative positioning here */
 		}
 
 		.header h1 {
@@ -17,6 +19,15 @@
 			font-weight: bold; /* Add this  line to make the text bold */
 		}
 
+		 /* Home Link Style */
+	        .home-link {
+		       position: absolute;
+		       bottom: 10px;
+		       left: 10px;
+		       text-decoration: none; /* Remove underline */
+		       z-index: 1; /* Ensures it appears above other content */
+	        }
+		
 		/* Page Content Styles */
 		.content {
 			width: 100%;
@@ -79,6 +90,12 @@
 </head>
 <body>
 	<div class="header">
+
+		<!-- the positioning of the "Home" icon -->
+	        <a href="https://mohammadrezamohajeri.github.io/Main_Portfolio/index.html" class="home-link">
+	            <img src="https://mohammadrezamohajeri.github.io/Main_Portfolio/Pictures/Home_Link_JPG/1.jpg" alt="Home" style="width:50px; height:auto;">
+	        </a>
+		
 		<h1>Research Hypothesis</h1>
 	</div>
 
