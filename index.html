@@ -19,8 +19,22 @@
 			grid-template-columns: 12% 18% 70%;
 			background-color: #01031f;
 			padding: 10px;
+			position: relative; /* Ensure the header is the reference point for absolutely positioned elements */
+			height: 500px; /* Set an explicit height */
 		}
 
+		 /* Home Link Style */
+	        .home-link {
+		       position: absolute;
+		       bottom: 10px;
+		       left: 10px;
+		       text-decoration: none; /* Remove underline */
+		       z-index: 1; /* Ensures it appears above other content */
+	        }
+
+
+
+		
 		.left-section {
 			display: flex;
 			align-items: center;
@@ -151,6 +165,12 @@
 <body>
 
 	<div class="header">
+
+		<!-- the positioning of the "Home" icon -->
+	        <a href="https://mohammadrezamohajeri.github.io/Main_Portfolio/index.html" class="home-link">
+	            <img src="https://mohammadrezamohajeri.github.io/Main_Portfolio/Pictures/Home_Link_JPG/1.jpg" alt="Home" style="width:50px; height:auto;">
+	        </a>
+		
 		<div class="left-section">
 			<img src="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Images/Linkedin_Photo.jpg" alt="Your Photo">
 		</div>
