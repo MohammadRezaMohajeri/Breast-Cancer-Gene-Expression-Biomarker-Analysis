@@ -82,6 +82,34 @@
 		            z-index: 1; /* Ensures it appears above other content */
 		}
 
+/* ===================== boxes under header ============================= */ 
+		/* New section for the boxes */
+		.box-container {
+			display: flex;
+			justify-content: space-around;
+			margin: 20px 0;
+		}
+
+		.box {
+			border: 2px solid black;
+			padding: 20px;
+			width: 30%;
+			text-align: center;
+			font-size: 1.5em;
+			background-color: #f4f4f4;
+			transition: background-color 0.3s ease;
+		}
+
+		.box:hover {
+			background-color: #e0e0e0;
+		}
+
+		.box a {
+			text-decoration: none;
+			color: black;
+			font-weight: bold;
+		}
+/* ================================================== */ 
 		
 		/* Adjust font size for the code block */
 		pre code {
@@ -111,6 +139,22 @@
 		
 	    <h1>Phase 1 <br> R Code (1-Dataset Analysis - limma)</h1>
 	</header>
+
+<!-- ===================== boxes under header ============================= --> 
+	<!-- New Section: Box container for the two boxes -->
+	<section class="box-container">
+		<div class="box">
+			<a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/About_The_Project1.html">
+				About The Phase 1
+			</a>
+		</div>
+		<div class="box">
+			<a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/About_This_Code_Project1.html">
+				About This Code
+			</a>
+		</div>
+	</section>
+<!-- ====================================================================== -->
 
 	<section>
 		<h2>R Code(One Dataset)</h2>
