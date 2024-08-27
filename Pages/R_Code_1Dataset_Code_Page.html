@@ -54,7 +54,9 @@
 		header {
 			background-color: #274f4f;
 			color: white;
+			height: 500px;                 /* Set an explicit height */
 			text-align: center;
+			position: relative;           /* Add relative positioning here */
 			padding: 5px;
 		}
 
@@ -71,6 +73,16 @@
 			width: 100%; /* Adjust the width as desired */
 		}
 
+		 /* Home Link Style */
+		.home-link {
+		            position: absolute;
+		            bottom: 10px;
+		            left: 10px;
+		            text-decoration: none; /* Remove underline */
+		            z-index: 1; /* Ensures it appears above other content */
+		}
+
+		
 		/* Adjust font size for the code block */
 		pre code {
 		        font-size: 17px; /* Adjust the font size as desired */
@@ -92,7 +104,12 @@
 </head>
 <body>
 	<header>
-		<h1>Phase 1 <br> R Code (1-Dataset Analysis - limma)</h1>
+	    <!-- the positioning of the "Home" icon -->
+	    <a href="https://mohammadrezamohajeri.github.io/Main_Portfolio/index.html" class="home-link">
+	        <img src="https://mohammadrezamohajeri.github.io/Main_Portfolio/Pictures/Home_Link_JPG/1.jpg" alt="Home" style="width:50px; height:auto;">
+	    </a>
+		
+	    <h1>Phase 1 <br> R Code (1-Dataset Analysis - limma)</h1>
 	</header>
 
 	<section>
