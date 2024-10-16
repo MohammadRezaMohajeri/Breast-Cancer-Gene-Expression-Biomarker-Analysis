@@ -93,77 +93,119 @@
 		<h1>About the R code for 4 datasets <br> (Meta-analysis using GeneMeta R package) </h1> 
 	</div>
 
-	<h2>Overview of the Gene Expression Analysis Script</h2>
-<p>
-This script performs a comprehensive analysis of multiple GEO datasets, including data downloading, normalization, batch effect correction, and visualization of differential gene expression. It consists of <strong>18 custom functions</strong> that handle various stages of the analysis.
-</p>
 
-<h3>Key Functions</h3>
 
-<h4>1. DownloadGEO:</h4>
-<p>Downloads the data for a specified GEO accession number and stores it locally, making it ready for further analysis.</p>
+<!-- ============================= START OF THE CONTENT =============================== -->
+		<div class="content">
+	    <h2>Overview of the Gene Expression Analysis Script</h2>
+	    <p>
+	        This script performs a comprehensive analysis of multiple GEO datasets, including data downloading, normalization, batch effect correction, and visualization of differential gene expression. It consists of <strong>18 custom functions</strong> that handle various stages of the analysis.
+	    </p>
+	
+	    <h3>Key Functions</h3>
+	
+	    <div class="function">
+	        <h4>1. DownloadGEO:</h4>
+	        <p>Downloads the data for a specified GEO accession number and stores it locally, making it ready for further analysis.</p>
+	    </div>
+	
+	    <div class="function">
+	        <h4>2. ReadGEO:</h4>
+	        <p>Reads and processes the downloaded GEO dataset, converting it into a matrix format for downstream analysis.</p>
+	    </div>
+	
+	    <div class="function">
+	        <h4>3. Makephenotype:</h4>
+	        <p>Generates phenotype data files from GEO datasets based on the project name and comparison factors (e.g., 'grade').</p>
+	    </div>
+	
+	    <div class="function">
+	        <h4>4. MakeBoxPlot:</h4>
+	        <p>Creates boxplots to visualize gene expression data distribution both before and after normalization, highlighting the variance within the dataset.</p>
+	    </div>
+	
+	    <div class="function">
+	        <h4>5. MakePCA:</h4>
+	        <p>Performs Principal Component Analysis (PCA) and generates visualizations to explore sample grouping based on experimental factors such as 'grade.'</p>
+	    </div>
+	
+	    <div class="function">
+	        <h4>6. VSNQuantilNorm:</h4>
+	        <p>Applies Variance Stabilizing Normalization (VSN) and quantile normalization to the gene expression data, providing normalized datasets for further analysis.</p>
+	    </div>
+	
+	    <div class="function">
+	        <h4>7. Mergestudies:</h4>
+	        <p>Merges gene expression matrices from multiple studies without batch effect correction, allowing a comparison across multiple datasets.</p>
+	    </div>
+	
+	    <div class="function">
+	        <h4>8. StudyBatchEffect:</h4>
+	        <p>Corrects for batch effects in merged datasets using statistical methods, ensuring that technical variation is minimized and biological variation is emphasized.</p>
+	    </div>
+	
+	    <div class="function">
+	        <h4>9. MakeDensityPlot:</h4>
+	        <p>Generates density plots to assess the distribution of gene expression levels in datasets before and after batch effect correction.</p>
+	    </div>
+	
+	    <div class="function">
+	        <h4>10. MakeMDSPlot:</h4>
+	        <p>Creates Multidimensional Scaling (MDS) plots to visualize similarities and differences between samples based on gene expression profiles.</p>
+	    </div>
+	
+	    <div class="function">
+	        <h4>11. CochranQTest:</h4>
+	        <p>Performs Cochran's Q test to evaluate the heterogeneity among studies, a critical step in meta-analysis when comparing multiple datasets.</p>
+	    </div>
+	
+	    <div class="function">
+	        <h4>12. FEMREMAnalysis:</h4>
+	        <p>Conducts meta-analysis using either the Fixed Effects Model (FEM) or Random Effects Model (REM) to identify significantly differentially expressed genes across multiple studies.</p>
+	    </div>
+	
+	    <div class="function">
+	        <h4>13. Makevolcano:</h4>
+	        <p>Generates a volcano plot for differential gene expression analysis. The plot visually represents the effect size versus statistical significance and highlights upregulated and downregulated genes.</p>
+	    </div>
+	
+	    <div class="function">
+	        <h4>14. MakeVenna:</h4>
+	        <p>Creates a Venn diagram to visualize the overlap of upregulated and downregulated genes across multiple datasets. It also identifies common genes and generates files of shared DEGs.</p>
+	    </div>
+	
+	    <div class="function">
+	        <h4>15. Makenetworkanalyst:</h4>
+	        <p>Prepares the gene expression data matrix for use in the NetworkAnalyst platform, a tool used for network-based analysis.</p>
+	    </div>
+	
+	    <div class="function">
+	        <h4>16. MakeHeatmap:</h4>
+	        <p>Generates heatmaps for visualizing the expression patterns of top differentially expressed genes, grouping samples based on experimental conditions such as 'grade.'</p>
+	    </div>
+	
+	    <div class="function">
+	        <h4>17. GSEAAnalysis:</h4>
+	        <p>Performs Gene Set Enrichment Analysis (GSEA) to identify significantly enriched pathways, using gene set data from MSigDB and presenting the results in an NES-based visualization.</p>
+	    </div>
+	
+	    <div class="function">
+	        <h4>18. MakeQQPlot:</h4>
+	        <p>Creates a QQ plot using the results from Cochran’s Q test to assess the distribution of p-values and identify potential discrepancies in the meta-analysis.</p>
+	    </div>
+	
+	    <h3>Usage Flow</h3>
+	    <ul>
+	        <li><strong>Download and process</strong> GEO datasets with <code>DownloadGEO</code> and <code>ReadGEO</code>.</li>
+	        <li><strong>Preprocess</strong> and <strong>normalize</strong> data using <code>VSNQuantilNorm</code>.</li>
+	        <li>Perform <strong>exploratory analyses</strong> such as PCA and boxplots using <code>MakePCA</code> and <code>MakeBoxPlot</code>.</li>
+	        <li><strong>Correct for batch effects</strong> and visualize data distribution before and after correction using <code>StudyBatchEffect</code>, <code>MakeDensityPlot</code>, and <code>MakeMDSPlot</code>.</li>
+	        <li>Conduct <strong>meta-analysis</strong> using <code>FEMREMAnalysis</code>, generate <strong>volcano plots</strong> (<code>Makevolcano</code>), and visualize common DEGs with <strong>Venn diagrams</strong> (<code>MakeVenna</code>).</li>
+	        <li>Perform <strong>network analysis</strong> with <code>Makenetworkanalyst</code> and <strong>Gene Set Enrichment Analysis</strong> with <code>GSEAAnalysis</code>.</li>
+	        <li>Generate <strong>heatmaps</strong> to visualize top DEGs (<code>MakeHeatmap</code>) and evaluate heterogeneity with <code>CochranQTest</code> and <code>QQ plots</code> (<code>MakeQQPlot</code>).</li>
+	    </ul>
+	</div>
 
-<h4>2. ReadGEO:</h4>
-<p>Reads and processes the downloaded GEO dataset, converting it into a matrix format for downstream analysis.</p>
-
-<h4>3. Makephenotype:</h4>
-<p>Generates phenotype data files from GEO datasets based on the project name and comparison factors (e.g., 'grade').</p>
-
-<h4>4. MakeBoxPlot:</h4>
-<p>Creates boxplots to visualize gene expression data distribution both before and after normalization, highlighting the variance within the dataset.</p>
-
-<h4>5. MakePCA:</h4>
-<p>Performs Principal Component Analysis (PCA) and generates visualizations to explore sample grouping based on experimental factors such as 'grade.'</p>
-
-<h4>6. VSNQuantilNorm:</h4>
-<p>Applies Variance Stabilizing Normalization (VSN) and quantile normalization to the gene expression data, providing normalized datasets for further analysis.</p>
-
-<h4>7. Mergestudies:</h4>
-<p>Merges gene expression matrices from multiple studies without batch effect correction, allowing a comparison across multiple datasets.</p>
-
-<h4>8. StudyBatchEffect:</h4>
-<p>Corrects for batch effects in merged datasets using statistical methods, ensuring that technical variation is minimized and biological variation is emphasized.</p>
-
-<h4>9. MakeDensityPlot:</h4>
-<p>Generates density plots to assess the distribution of gene expression levels in datasets before and after batch effect correction.</p>
-
-<h4>10. MakeMDSPlot:</h4>
-<p>Creates Multidimensional Scaling (MDS) plots to visualize similarities and differences between samples based on gene expression profiles.</p>
-
-<h4>11. CochranQTest:</h4>
-<p>Performs Cochran's Q test to evaluate the heterogeneity among studies, a critical step in meta-analysis when comparing multiple datasets.</p>
-
-<h4>12. FEMREMAnalysis:</h4>
-<p>Conducts meta-analysis using either the Fixed Effects Model (FEM) or Random Effects Model (REM) to identify significantly differentially expressed genes across multiple studies.</p>
-
-<h4>13. Makevolcano:</h4>
-<p>Generates a volcano plot for differential gene expression analysis. The plot visually represents the effect size versus statistical significance and highlights upregulated and downregulated genes.</p>
-
-<h4>14. MakeVenna:</h4>
-<p>Creates a Venn diagram to visualize the overlap of upregulated and downregulated genes across multiple datasets. It also identifies common genes and generates files of shared DEGs.</p>
-
-<h4>15. Makenetworkanalyst:</h4>
-<p>Prepares the gene expression data matrix for use in the NetworkAnalyst platform, a tool used for network-based analysis.</p>
-
-<h4>16. MakeHeatmap:</h4>
-<p>Generates heatmaps for visualizing the expression patterns of top differentially expressed genes, grouping samples based on experimental conditions such as 'grade.'</p>
-
-<h4>17. GSEAAnalysis:</h4>
-<p>Performs Gene Set Enrichment Analysis (GSEA) to identify significantly enriched pathways, using gene set data from MSigDB and presenting the results in an NES-based visualization.</p>
-
-<h4>18. MakeQQPlot:</h4>
-<p>Creates a QQ plot using the results from Cochran’s Q test to assess the distribution of p-values and identify potential discrepancies in the meta-analysis.</p>
-
-<h3>Usage Flow</h3>
-<ul>
-    <li><strong>Download and process</strong> GEO datasets with <code>DownloadGEO</code> and <code>ReadGEO</code>.</li>
-    <li><strong>Preprocess</strong> and <strong>normalize</strong> data using <code>VSNQuantilNorm</code>.</li>
-    <li>Perform <strong>exploratory analyses</strong> such as PCA and boxplots using <code>MakePCA</code> and <code>MakeBoxPlot</code>.</li>
-    <li><strong>Correct for batch effects</strong> and visualize data distribution before and after correction using <code>StudyBatchEffect</code>, <code>MakeDensityPlot</code>, and <code>MakeMDSPlot</code>.</li>
-    <li>Conduct <strong>meta-analysis</strong> using <code>FEMREMAnalysis</code>, generate <strong>volcano plots</strong> (<code>Makevolcano</code>), and visualize common DEGs with <strong>Venn diagrams</strong> (<code>MakeVenna</code>).</li>
-    <li>Perform <strong>network analysis</strong> with <code>Makenetworkanalyst</code> and <strong>Gene Set Enrichment Analysis</strong> with <code>GSEAAnalysis</code>.</li>
-    <li>Generate <strong>heatmaps</strong> to visualize top DEGs (<code>MakeHeatmap</code>) and evaluate heterogeneity with <code>CochranQTest</code> and <code>QQ plots</code> (<code>MakeQQPlot</code>).</li>
-</ul>
 
 
 </body>
