@@ -78,25 +78,73 @@
 	</div>
 
 	<div class="content">
-		<p>
-		<strong>EXPLANATION_BEFRE_HEADINGS  EXPLANATION_BEFRE_HEADINGSEXPLANATION_BEFRE_HEADINGSEXPLANATION_BEFRE_HEADINGSEXPLANATION_BEFRE_HEADINGSEXPLANATION_BEFRE_HEADINGSEXPLANATION_BEFRE_HEADINGSEXPLANATION_BEFRE_HEADINGSEXPLANATION_BEFRE_HEADINGSEXPLANATION_BEFRE_HEADINGSEXPLANATION_BEFRE_HEADINGSEXPLANATION_BEFRE_HEADINGSEXPLANATION_BEFRE_HEADINGSEXPLANATION_BEFRE_HEADINGSEXPLANATION_BEFRE_HEADINGSEXPLANATION_BEFRE_HEADINGSEXPLANATION_BEFRE_HEADINGSEXPLANATION_BEFRE_HEADINGSEXPLANATION_BEFRE_HEADINGS</strong></p>
-		
-		<h2>1. FIRST HEADING</h2>
-		<p>CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1  		</p>
-		<hr>
+    <p><strong>R Code For 4 Datasets (FC/FDR)</strong></p>
+    <p><strong>Number of Functions:</strong> 5 functions have been written.</p>
 
-		<h2>2. SECOND HEADING </h2>
-		<p> CONTENT 2 		</p>
-		<hr>
-
-		<h2>3. THIRD HEADING </h2>
-		<p> CONTENT 3
-
+    <h2>1. DownloadGEO()</h2>
+    <p>
+        <strong>Purpose</strong>: Downloads a GEO dataset, extracts the expression matrix, phenotype data, and annotation, and saves them to files.
+        <br><strong>Key Steps</strong>:
+        <ul>
+            <li>Downloads the dataset.</li>
+            <li>Performs log2 transformation if necessary.</li>
+            <li>Saves matrix, phenotype, and annotation data to CSV/TSV files.</li>
+        </ul>
     </p>
-		<hr>
 
-	
-	</div>
+    <h2>2. DEGanalysis()</h2>
+    <p>
+        <strong>Purpose</strong>: Performs differential expression analysis using <strong>limma</strong>.
+        <br><strong>Key Steps</strong>:
+        <ul>
+            <li>Loads matrix and phenotype files.</li>
+            <li>Groups samples by subtype or grade.</li>
+            <li>Fits a linear model and creates a top table of DEGs.</li>
+            <li>Saves the DEGs and associated annotation data.</li>
+        </ul>
+    </p>
+
+    <h2>3. Makevolcano()</h2>
+    <p>
+        <strong>Purpose</strong>: Generates volcano plots to visualize DEGs.
+        <br><strong>Key Steps</strong>:
+        <ul>
+            <li>Reads DEGs from TSV.</li>
+            <li>Categorizes genes into upregulated, downregulated, or non-significant.</li>
+            <li>Creates interactive volcano plots using <strong>plotly</strong> or <strong>ggplot2</strong>.</li>
+        </ul>
+    </p>
+
+    <h2>4. Makenetworkanalyst()</h2>
+    <p>
+        <strong>Purpose</strong>: Prepares files for <strong>network analysis</strong> based on the results of differential expression analysis.
+        <br><strong>Key Steps</strong>:
+        <ul>
+            <li>Extracts up/down-regulated genes and formats the data for <strong>network analysis</strong>.</li>
+            <li>Saves the results for further analysis.</li>
+        </ul>
+    </p>
+
+    <h2>5. MakeVenna()</h2>
+    <p>
+        <strong>Purpose</strong>: Creates a Venn diagram to visualize common differentially expressed genes across multiple datasets.
+        <br><strong>Key Steps</strong>:
+        <ul>
+            <li>Identifies common genes among datasets.</li>
+            <li>Generates a Venn diagram using <strong>ggvenn</strong>.</li>
+        </ul>
+    </p>
+
+    <h2>Packages Used:</h2>
+    <ul>
+        <li><strong>GEOquery</strong>: For downloading and processing GEO datasets.</li>
+        <li><strong>limma</strong>: For performing differential expression analysis.</li>
+        <li><strong>tidyverse</strong>: For data manipulation and visualization.</li>
+        <li><strong>plotly</strong> & <strong>ggplot2</strong>: For interactive and static plots.</li>
+        <li><strong>ggvenn</strong>: For creating Venn diagrams.</li>
+    </ul>
+</div>
+
 
 </body>
 </html>
