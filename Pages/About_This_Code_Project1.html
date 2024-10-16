@@ -70,25 +70,62 @@
 	</div>
 
 	<div class="content">
-		<p>
-		<strong>1-	Title: Differential Expression Analysis of Breast Cancer Dataset (GSE25055) Using limma in R: Comparing two classifications of "Molecular Subtypes" and "Grading System" to Differentiate Aggressiveness Levels in Breast Cancer</strong></p>
-		
-		<h2>1. FIRST HEADING</h2>
-		<p>CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1 CONTENT 1  		</p>
-		<hr>
+	<p>
+	<strong>1-	Title: Differential Expression Analysis of Breast Cancer Dataset (GSE25055) Using limma in R: Comparing two classifications of "Molecular Subtypes" and "Grading System" to Differentiate Aggressiveness Levels in Breast Cancer</strong>
+	</p>
+	<p>Number of Functions: 3 functions have been written.</p>
 
-		<h2>2. SECOND HEADING </h2>
-		<p> CONTENT 2 		</p>
-		<hr>
+	<h2>1. DownloadGEO()</h2>
+	<p>
+	<strong>Purpose</strong>: Downloads a GEO dataset based on the specified accession number (<strong>GSEname</strong>), extracts the <strong>expression matrix</strong>, <strong>phenotype data</strong>, and <strong>annotation</strong>, and saves them as files (<strong>matrix.csv</strong>, <strong>phenotype.tsv</strong>, <strong>annot.tsv</strong>).
+	<br> 
+	<strong>Key Steps</strong>: 
+	<ul>
+		<li>Downloads the dataset using <strong>GEOquery</strong>.</li>
+		<li>Extracts and processes the <strong>matrix</strong>, <strong>phenotype</strong>, and <strong>annotation</strong>.</li>
+		<li>Writes these components to separate files.</li>
+	</ul>
+	</p>
+	<hr>
 
-		<h2>3. THIRD HEADING </h2>
-		<p> CONTENT 3
+	<h2>2. DEGanalysis()</h2>
+	<p>
+	<strong>Purpose</strong>: Performs differential expression analysis using the <strong>limma</strong> package, comparing either subtypes or grades based on user input.
+	<br> 
+	<strong>Key Steps</strong>: 
+	<ul>
+		<li>Loads the pre-saved <strong>matrix</strong>, <strong>phenotype</strong>, and <strong>annotation</strong> files.</li>
+		<li>Performs <strong>log2 transformation</strong> on the matrix if needed.</li>
+		<li>Groups samples by subtypes or grades and fits a linear model using the <strong>limma</strong> package.</li>
+		<li>Outputs a table of differentially expressed genes (DEGs) with annotation and saves it as <strong>DEGs.tsv</strong>.</li>
+	</ul>
+	</p>
+	<hr>
 
-    </p>
-		<hr>
+	<h2>3. Makevolcano()</h2>
+	<p>
+	<strong>Purpose</strong>: Generates an <strong>interactive volcano plot</strong> using <strong>ggplot2</strong> and <strong>plotly</strong> to visualize the results of the differential expression analysis.
+	<br> 
+	<strong>Key Steps</strong>: 
+	<ul>
+		<li>Reads the DEGs from <strong>DEGs.tsv</strong>.</li>
+		<li>Assigns colors to upregulated and downregulated genes.</li>
+		<li>Creates an interactive volcano plot with tooltips for gene information.</li>
+		<li>Saves the top up- and down-regulated genes as <strong>top.csv</strong> and displays the plot.</li>
+	</ul>
+	</p>
+	<hr>
 
-	
-	</div>
+	<h2>Packages Used:</h2>
+	<ul>
+		<li><strong>GEOquery</strong>: For downloading and processing GEO datasets.</li>
+		<li><strong>limma</strong>: For differential expression analysis.</li>
+		<li><strong>tidyverse</strong>: For data manipulation and visualization.</li>
+		<li><strong>plotly</strong>: For creating interactive plots.</li>
+	</ul>
+	<hr>
+</div>
+
 
 </body>
 </html>
