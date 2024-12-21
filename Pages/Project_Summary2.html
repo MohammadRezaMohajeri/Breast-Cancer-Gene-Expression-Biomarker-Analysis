@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>The Project Summary</title>
+    <link rel="icon" type="image/x-icon" href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Images/1.ico">
+    <style>
+        /* Existing CSS Styles Here */
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="https://mohammadrezamohajeri.github.io/Main_Portfolio/index.html" class="home-link">
+            <img src="https://mohammadrezamohajeri.github.io/Main_Portfolio/Pictures/Home_Link_JPG/1.jpg" alt="Home" style="width:50px; height:auto;">
+        </a>
+        <h1>The Project Summary</h1>
+    </div>
+
+    <div class="navbar">
+        <ul class="menu">
+            <li><a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/Research_Question.html">Research Question</a></li>
+            <li><a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/Research_Hypothesis.html">Research Hypothesis</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <h2 style="font-size: 22px; font-weight: bold; margin-bottom: 0;">Biomarker and Pathway Discovery for Breast Cancer Aggressiveness</h2>
+        <p><span style="font-size: 20px; text-indent: 35px;">
+            This project aimed to classify aggressiveness in breast cancer patients using gene expression data, focusing on discovering biomarkers and pathways associated with tumor aggressiveness. This project investigated two classification approaches—grading system and molecular subtypes—using gene expression data to discover biomarkers and pathways associated with aggressiveness. The study was conducted in three phases: Phase 1 compared the two approaches and prioritized the grading system due to its larger dataset and practical applicability. Phase 2 applied the grading system across four microarray datasets to identify common differentially expressed genes (DEGs). Phase 3 integrated these datasets through meta-analysis, uncovering a robust set of DEGs and associated pathways, laying the groundwork for personalized diagnostic and therapeutic strategies.
+        </span></p>
+
+        <h2 style="font-size: 22px; font-weight: bold;">Phase 1: Evaluating Classification Approaches</h2>
+        <p><span style="font-size: 20px; text-indent: 35px;">
+            <strong>Objective:</strong> To compare two classification approaches—grading system (Grade 1 vs. Grade 3) and molecular subtypes (Luminal A/Normal-like vs. Luminal B/Basal-like/HER2)—to identify differentially expressed genes (DEGs) associated with aggressiveness.
+        </span></p>
+        <p><span style="font-size: 20px; text-indent: 35px;">
+            <strong>Data:</strong> The GSE25055 dataset, comprising pre-treatment tumor biopsies, was used, providing information on both grading systems and molecular subtypes.
+        </span></p>
+        <p><span style="font-size: 20px; text-indent: 35px;">
+            <strong>Methods:</strong> Differential expression analysis was performed using the limma package in R, with volcano plots visualizing significant gene expression changes.
+        </span></p>
+        <p><span style="font-size: 20px; text-indent: 35px;">
+            <strong>Results:</strong> Both classification systems revealed significant DEGs. However, due to the larger number of samples with grading information, the grading system was prioritized for subsequent phases.
+        </span></p>
+        <p><span style="font-size: 20px; text-indent: 35px;">
+            <strong>Conclusion:</strong> This phase highlighted the effectiveness of both classification methods and set the stage for prioritizing grade-based classification in later analyses.
+        </span></p>
+
+        <h2 style="font-size: 22px; font-weight: bold;">Phase 2: Multi-Dataset DEG Analysis</h2>
+        <p><span style="font-size: 20px; text-indent: 35px;">
+            <strong>Objective:</strong> To identify DEGs using the grading system (Grade 1 vs. Grade 3) across four large-scale microarray datasets (GSE25055, GSE7390, GSE11121, GSE25065).
+        </span></p>
+        <p><span style="font-size: 20px; text-indent: 35px;">
+            <strong>Data:</strong> A total of 468 untreated patient samples were analyzed, focusing on datasets that included grading information.
+        </span></p>
+        <p><span style="font-size: 20px; text-indent: 35px;">
+            <strong>Methods:</strong> Differential expression analysis was performed individually on each dataset using the limma package. DEGs were analyzed for fold change (FC) and false discovery rate (FDR).
+        </span></p>
+        <p><span style="font-size: 20px; text-indent: 35px;">
+            <strong>Results:</strong> A common set of 77 DEGs was identified across datasets, representing molecular signatures indicative of disease severity.
+        </span></p>
+        <p><span style="font-size: 20px; text-indent: 35px;">
+            <strong>Conclusion:</strong> This phase provided robust evidence of the molecular differences associated with breast cancer aggressiveness, validating the findings across multiple datasets.
+        </span></p>
+
+        <h2 style="font-size: 22px; font-weight: bold;">Phase 3: Meta-Analysis for Robust Biomarker Discovery</h2>
+        <p><span style="font-size: 20px; text-indent: 35px;">
+            <strong>Objective:</strong> To integrate findings from Phase 2 using a meta-analysis approach to enhance the reliability of identified biomarkers.
+        </span></p>
+        <p><span style="font-size: 20px; text-indent: 35px;">
+            <strong>Data Integration:</strong> Four microarray datasets (GSE25055, GSE7390, GSE11121, GSE25065) were preprocessed for normalization, quality control, and batch effect correction.
+        </span></p>
+        <p><span style="font-size: 20px; text-indent: 35px;">
+            <strong>Methods:</strong> A random-effects model (REM) meta-analysis was performed using the GeneMeta package, combining DEG results from individual datasets. Functional enrichment analysis was conducted using tools such as msigdbr and PANTHER to explore biological pathways.
+        </span></p>
+        <p><span style="font-size: 20px; text-indent: 35px;">
+            <strong>Results:</strong> Meta-analysis identified a larger set of DEGs with significant Z scores and FDR values, reducing dataset-specific biases. Functional analysis highlighted key pathways and biological processes linked to aggressiveness, including gene ontology (GO), KEGG pathways, and protein-protein interaction (PPI) networks.
+        </span></p>
+        <p><span style="font-size: 20px; text-indent: 35px;">
+            <strong>Conclusion:</strong> This phase provided a more comprehensive understanding of gene expression changes, identifying robust biomarkers with potential applications in personalized diagnostics and targeted therapies.
+        </span></p>
+
+        <h2 style="font-size: 22px; font-weight: bold;">Overall Contribution</h2>
+        <p><span style="font-size: 20px; text-indent: 35px;">
+            This three-phase project demonstrated the utility of integrating grading systems and multi-dataset analyses for discovering biomarkers and pathways associated with breast cancer aggressiveness. The inclusion of 468 samples and the prioritization of grade-based classification ensured a robust foundation for biomarker discovery. Future research will focus on subtype-based classifications to provide complementary insights. The findings lay the groundwork for advanced diagnostic tools and therapeutic strategies, with potential applications in personalized medicine.
+        </span></p>
+    </div>
+</body>
+</html>
