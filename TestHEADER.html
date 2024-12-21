@@ -1,0 +1,169 @@
+<!-- 
+    New index code for the main page, 
+	replacing the old version. 
+    I changed the name of old one from index.html to Old_Main_Page.html
+-->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Meta-Analysis of Breast Cancer Gene Expression Profiles: Identifying Pathways and Biomarkers for Diagnosis and Prognosis</title>
+	<link rel="icon" type="image/x-icon" href="Images/1.ico">
+
+<style>
+    /* Header Styles  */
+    .header {
+        display: grid;
+        grid-template-columns: 100%; /* Single column for the title */
+        background-color: #01031f; /* Navy color */
+        padding: 10px;
+        position: relative; /* Ensure the header is the reference point for absolutely positioned elements */
+        height: 350px; /* Set an explicit height */
+    }
+
+    /* Home Link Style */
+    .home-link {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        text-decoration: none; /* Remove underline */
+        z-index: 1; /* Ensures it appears above other content */
+    }
+
+    .right-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .right-section h1 {
+        font-size: 30px;
+        color: #f0f0f7;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    /* Main Content Styles */
+    .main-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+		.project-summary {
+			width: 100%;
+			background-color: #DAF7A6;
+			color: darkblue;
+			padding: 20px;
+			text-align: center;
+			font-size: 24px;
+			font-weight: bold;
+			margin-bottom: 30px;
+			cursor: pointer;
+			transition: background-color 0.3s;
+		}
+
+		.project-summary:hover {
+			background-color: yellow;
+		}
+
+		
+		/* Phase Container Styles */
+		.phase-container {
+			display: flex;
+			justify-content: space-between; /* Space between the phase squares */
+			width: 100%; /* Ensure the container is full width */
+			padding: 10px; /* Add padding on the sides of the container */
+			box-sizing: border-box; /* Include padding in the width */
+		}
+
+		/* Phase Styles */
+		.phase {
+			background-color: #90d1a7;
+			color: darkblue;
+			padding: 20px;
+			text-align: center;
+			font-size: 20px;
+			font-weight: bold;
+			width: calc(33.3% - 20px); /* Each square takes up 1/3 of the container, minus the margin */
+			height: 0;
+			padding-bottom: calc(33.3% - 20px); /* Maintain a square aspect ratio */
+			cursor: pointer;
+			transition: background-color 0.3s;
+			margin: 10px; /* Add margin between squares */
+			box-sizing: border-box; /* Ensure padding and margin are included in the dimensions */
+
+		}
+
+		.phase:hover {
+			background-color: #787ec4;
+			color: white;
+		}
+		
+		/* Footer Styles */
+		.footer {
+			background-color: #333;
+			color: #fff;
+			padding: 10px;
+			text-align: center;
+			position: relative;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			margin-top: 50px; /* Adding space at the bottom of the page */
+		}
+	</style>
+</head>
+<body>
+
+	<div class="header">
+
+		<!-- the positioning of the "Home" icon -->
+	        <a href="https://mohammadrezamohajeri.github.io/Main_Portfolio/index.html" class="home-link">
+	            <img src="https://mohammadrezamohajeri.github.io/Main_Portfolio/Pictures/Home_Link_JPG/1.jpg" alt="Home" style="width:50px; height:auto;">
+	        </a>
+<!--  1- Removed:
+		<div class="left-section">
+			<img src="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Images/Linkedin_Photo.jpg" alt="Your Photo">
+		</div>
+-->
+		
+		
+		<div class="middle-section">
+			
+<!-- 2- removed:		<p class="text-above-buttons">Results-oriented and motivated bioinformatician with rich experience in bioinformatics tools and programming.</p>  -->
+
+
+<!-- 3-	removed:		
+			<div class="button-container">
+				<a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Document/Mohajeri_O_CV.pdf" target="_blank"><button class="button">CV</button></a>
+				<a href="https://www.linkedin.com/in/mohammad-reza-mohajeri-24240a12b" target="_blank"><button class="button">LinkedIn</button></a>
+			</div>
+-->
+			
+		</div>
+		<div class="right-section">
+			<h1>Meta-Analysis of Breast Cancer Gene Expression Profiles: Identifying Pathways and Biomarkers for Diagnosis and Prognosis</h1>
+		</div>
+	</div>
+
+	<div class="main-content">
+		<a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/Project_Summary.html" class="project-summary">
+			The Project Summary
+		</a>
+		<div class="phase-container">
+			<a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/R_Code_1Dataset_Code_Page.html" class="phase">Phase 1</a>
+			<a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/R_Code_4Datasets_FC_FDR_Code_Page.html" class="phase">Phase 2</a>
+			<a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/R_Code_4Datasets_Meta_Analysis_Code_Page.html" class="phase">Phase 3</a>
+		</div>
+	</div>
+
+	<footer class="footer">
+		<p>&copy; 2023 Mohammad Reza Mohajeri. All rights reserved.</p>
+	</footer>
+
+</body>
+</html>
