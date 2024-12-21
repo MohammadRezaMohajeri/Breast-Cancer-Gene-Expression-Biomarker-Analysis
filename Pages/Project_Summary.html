@@ -1,181 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html> 
 <head>
-	<meta charset="UTF-8">
-	<title>The Project Summary</title>
+    <meta charset="UTF-8">
+    <title>The Project Summary</title>
+    <link rel="icon" type="image/x-icon" href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Images/1.ico">
+    <style>
 
-	<!-- 
-        This line adds a favicon to the tab of the web browser. 
-        The favicon is the small icon displayed next to the page title in the browser tab.
-        The 'href' attribute specifies the path to the icon file hosted on GitHub. 
-        Ensure the path is correct for the favicon to appear.
-	-->
-	<link rel="icon" type="image/x-icon" href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Images/1.ico">
-
-	
-	<style>
-		/* Header Styles  */
-		.header {
-			background-color: #040459; /* Dark blue navy for header  */
-		        height: 300px; /* Set an explicit height */
-			padding: 10px;
-			text-align: center; /* Center-align the header content */
-			position: relative; /* Ensure the header is the reference point for absolutely positioned elements */
-
+        ::selection {
+			background-color: yellow; /* Change this to any color you prefer */
+			color: black; /* Change the text color if needed */
 		}
 
-		.header h1 {
-			font-size: 40px; /* Adjust the font size as desired */
-			color: #ededf5; /* To change the color of the text "About The Project" in the header to white */
-			font-weight: bold; /* Add this  line to make the text bold */
-		}
+        
+        /* Existing CSS Styles Here */
+        .header {
+            background-color: #040459;
+            height: 300px;
+            padding: 10px;
+            text-align: center;
+            position: relative;
+        }
 
+        .header h1 {
+            font-size: 40px;
+            color: #ededf5;
+            font-weight: bold;
+        }
 
-		 /* Home Link Style */
-		.home-link {
-		       position: absolute;
-		       bottom: 10px;
-		       left: 10px;
-		       text-decoration: none; /* Remove underline */
-		       z-index: 1; /* Ensures it appears above other content */
-		}
-		/* Navbar Styles */
-		.navbar {
-			background-color: #f2f2f2;
-			padding: 10px;
-		}
+        .home-link {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            text-decoration: none;
+        }
 
-		.menu {
-			list-style-type: none;
-			margin: 0;
-			padding: 0;
-		        margin-right: 20px; /* Add a margin to the right side of the menu */
+        .navbar {
+            background-color: #f2f2f2;
+            padding: 10px;
+        }
 
-		}
+        .menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
 
-		.menu li {
-			display: inline-block;
-			margin-right: 100px; /* I changed this from 10 to 100; therefore, the spacing between tabs on navbar will be increased */
+        .menu li {
+            display: inline-block;
+            margin-right: 100px;
+        }
 
-		}
+        .menu li a {
+            display: block;
+            padding: 10px;
+            background-color: #DAF7A6;
+            color: darkblue;
+            text-decoration: none;
+        }
 
-		.menu li a {
-			display: block;
-			padding: 10px;
-			background-color: #DAF7A6; /* green */
-			color: darkblue; /* Change the color to dark blue */
-			text-decoration: none;
-		}
+        .menu li a:hover {
+            background-color: #FFC300;
+            color: #fff;
+        }
 
-		.menu li a:hover {
-			background-color: #FFC300; /* Gold */
-			color: #fff;
-			text-decoration: none;
-		}
+        .content {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border-left: 1px solid green;
+            text-align: justify;
+        }
 
-		/* Sidebar Styles */
-		 /* .sidebar {
-			width: 20%;
-			background-color: #f2f2f2;
-			padding: 10px;
-			float: left;
-			height: 5000px; /* Increase the height as desired 
-			border-right: 1px solid black; /* This will visually separate the sidebar and content sections. 
+        .content h2 {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 0;
+        }
 
+        .content p {
+            font-size: 20px;
+            margin-left: 20px;
+            margin-top: 0;
+            text-indent: 35px;
+        }
 
-
-		}
-
-		.sidebar ul {
-			list-style-type: none;
-			padding: 0;
-			margin-bottom: 0; /* Add margin-bottom to remove extra spacing 
-
-		}
-
-		.sidebar li {
-			margin-bottom: 5px;
-		}
-
-		.sidebar .heading:hover {
-			background-color: green;
-			color: #fff;
-			text-decoration: none;
-		}
-
-
-		/* Page Content Styles 
-		.content {
-			width: 100%;
-			padding: 10px;
-			padding-left: 100px;
-			box-sizing: border-box;
-			border-left: 1px solid green;
-			text-align: justify; 
-		}
-
-		.content h2 {
-			font-size: 24px; 
-			color:#000333;
-			cursor: pointer;
-			margin-bottom: 0;
-
-		}
-		.content h3 {
-			font-size: 20px;
-			color: #000080;
-			font-weight: bold;
-			margin-bottom: 0;
-			
-			
-
-		}
-
-		.content p {
-			font-size: 20px; 
-			margin-left: 20px; /* Adjust the margin value for indentation 
-			margin-top: 0;
-			
-
-		}
-		
-		.content .heading:hover {
-		       /* Add your desired hover effect styles here 
-		       /* For example, changing the background color and text color *
-		       background-color: green;
-		       color: #fff;
-		       text-decoration: none;
-		}
-
-		.heading.hover-effect:hover {
-		       /* Add your desired hover effect styles here */
-		       /* For example, changing the color 
-		       color: blue;
-		} */ 
-
-		
-		/* The <hr> element creates a horizontal rule, which is a self-closing tag and doesn't require a closing tag.
-          	You can also style the horizontal line using CSS if you want to customize its appearance. For example:*/ 
-
-		/* Page Content Styles */
-		.content {
-			width: 100%;
-			padding: 10px;
-			box-sizing: border-box;
-			border-left: 1px solid green;
-			text-align: justify; /* Add this line to justify the text */
-			
-
-
-		}
-
-		.content p {
-			font-size: 20px; /* Adjust the font size for paragraphs */
-			margin-left: 20px; /* Adjust the margin value for indentation */
-			margin-top: 0;
-		}
-
-		/* The <hr> element creates a horizontal rule, which is a self-closing tag and doesn't require a closing tag.
+        /* The <hr> element creates a horizontal rule, which is a self-closing tag and doesn't require a closing tag.
           	You can also style the horizontal line using CSS if you want to customize its appearance. For example:*/ 
 		hr {
 			border: none;
@@ -183,198 +92,59 @@
 			margin: 20px 0;
 		}
 
-		h2 {
-		       
-		       font-weight: bold;
-		       margin-bottom: 0;
-		}
-
-		
-		.orange-text {
-			color: orange;
-			font-weight: bold;
-		}
-		.dark-yellow-text {
-			color: hsl(50, 100%, 30%); /* Adjust the hue and saturation values as needed */
-			font-weight: bold;
-		}
-		.brown-text {
-			color: hsl(30, 100%, 30%); /* Adjust the hue and saturation values as needed */
-			font-weight: bold;
-		}
-		.green-text {
-			color: green;
-			font-weight: bold;
-		}
-		.purple-text {
-			color: purple;
-			font-weight: bold;
-		}
-		.blue-text {
-			color: blue;
-			font-weight: bold;
-		}
-
-		
-		
-	        
-	</style>
-
+        
+    </style>
 </head>
 <body>
-	<div class="header">
-		<!-- the positioning of the "Home" icon -->
-	        <a href="https://mohammadrezamohajeri.github.io/Main_Portfolio/index.html" class="home-link">
-	            <img src="https://mohammadrezamohajeri.github.io/Main_Portfolio/Pictures/Home_Link_JPG/1.jpg" alt="Home" style="width:50px; height:auto;">
-	        </a>
-		
-		
-		<h1>The Project Summary</h1>
-	</div>
+    <div class="header">
+        <a href="https://mohammadrezamohajeri.github.io/Main_Portfolio/index.html" class="home-link">
+            <img src="https://mohammadrezamohajeri.github.io/Main_Portfolio/Pictures/Home_Link_JPG/1.jpg" alt="Home" style="width:50px; height:auto;">
+        </a>
+        <h1>The Project Summary</h1>
+    </div>
 
-	<div class="navbar">
-		<ul class="menu">
-			<li><a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/Research_Question.html">Research Question</a></li>
-			<li><a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/Research_Hypothesis.html">Research Hypothesis</a></li>
-		 <!-- 	<li><a href="#">The Project Workflow</a></li>   -->
-		 <!--   <li><a href="#">Tab 4</a></li>
-			<li><a href="#">Tab 5</a></li>
-			<li><a href="#">Tab 6</a></li>
-			<li><a href="#">Tab 7</a></li>                    --> 
-		</ul>
-	</div>
-<!-- the sidebar: 
-	<div class="sidebar">
-		<ul>
-			<li>
-				<h2 class="heading">1- Research Question</h2>
-				<!-- <ul class="subheadings">
-					<li>Subheading 1</li>
-					<li>Subheading 2</li>
-				</ul>  
-			</li>
-			<li>
-				<h2 class="heading">2- Research Hypothesis</h2>
-				<!-- <ul class="subheadings">
-					<li>Subheading 1</li>
-					<li>Subheading 2</li>
-				</ul> 
-			</li>
-			<li>
-				<h2 class="heading">3- Objectives</h2>
-				<!-- <ul class="subheadings">
-					<li>Subheading 1</li>
-					<li>Subheading 2</li>
-				</ul> 
-			</li>
-			<li>
-				<h2 class="heading">4- A brief Methodology</h2>
-				<!-- <ul class="subheadings">
-					<li>Subheading 1</li>
-					<li>Subheading 2</li>
-				</ul> 
-			</li>
-			<li>
-				<h2 class="heading">5- The R Code: A Concise Overview</h2>
-				<!-- <ul class="subheadings">
-					<li>Subheading 1</li>
-					<li>Subheading 2</li>
-				</ul> 
-			</li>
-		
-		</ul>
-	</div> 
+    <div class="navbar">
+        <ul class="menu">
+            <li><a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/Research_Question.html">Research Question</a></li>
+            <li><a href="https://mohammadrezamohajeri.github.io/Breast-Cancer-Gene-Expression-Biomarker-Analysis/Pages/Research_Hypothesis.html">Research Hypothesis</a></li>
+        </ul>
+    </div>
 
-	END OF SIDEBAR SECTION 
---> 
+    <div class="content">
+        <h2>Biomarker and Pathway Discovery for Breast Cancer Aggressiveness</h2>
+        <p>This project <strong>aimed to classify aggressiveness in breast cancer patients</strong> using gene expression data, focusing on discovering biomarkers and pathways associated with tumor aggressiveness. This project investigated <strong>two classification approaches</strong>—<strong>grading system (Grade 1 vs. Grade 3 tumors)</strong> and <strong>molecular subtypes</strong> (<strong>Luminal A/Normal-like</strong> (non-aggressive subtypes) vs. <strong>Luminal B/Basal-like/HER2</strong> (aggressive subtypes ))—using gene expression data to discover biomarkers and pathways associated with aggressiveness. The study was conducted in <strong>three phases</strong>: <strong>Phase 1</strong>  <strong>compared the two approaches and prioritized the grading system</strong> due to its <strong>larger dataset</strong>. <strong>Phase 2</strong> applied <strong>the grading system</strong> across <strong>four datasets</strong> to identify <strong>77 common</strong> <strong>DEGs</strong> as molecular signatures of breast cancer aggressiveness. <strong>Phase 3</strong> <strong>integrated these datasets through meta-analysis</strong>, uncovering a robust <strong>set of DEGs and associated pathways</strong>, laying the groundwork for personalized diagnostic and therapeutic strategies.</p>
+        <p>To conduct this analysis, data was collected from PubMed and GEO databases, narrowing down to four large-scale microarray datasets: GSE7390, GSE11121, GSE25055, and GSE25065. These datasets, encompassing a total of 468 untreated patient samples, were selected based on the availability of gene expression data and information on tumor grading and molecular subtypes. </p>
+        <hr>
+        
+        <h2>Phase 1: Evaluating Classification Approaches</h2>
+        <p><strong>Objective:</strong> To compare two classification approaches—grading system (Grade 1 vs. Grade 3) and molecular subtypes (Luminal A/Normal-like vs. Luminal B/Basal-like/HER2)—to identify differentially expressed genes (DEGs) associated with aggressiveness.</p>
+        <p><strong>Data:</strong> The GSE25055 dataset, comprising pre-treatment tumor biopsies, was used, providing information on both grading systems and molecular subtypes.</p>
+        <p><strong>Methods:</strong> Differential expression analysis was performed using the limma package in R, with volcano plots visualizing significant gene expression changes.</p>
+        <p><strong>Results:</strong> Both classification systems revealed significant DEGs. However, due to the larger number of samples with grading information, the grading system was prioritized for subsequent phases.</p>
+        <p><strong>Conclusion:</strong> This phase highlighted the effectiveness of both classification methods and set the stage for prioritizing grade-based classification in later analyses.</p>
 
-	<!-- "Chromatic Transformation in the text: 
+        <hr>
 
-		 <span class="green-text"> GREEN TEXTTTTTT </span> 
+        <h2>Phase 2: Multi-Dataset DEG Analysis</h2>
+        <p><strong>Objective:</strong> To identify DEGs using the grading system (Grade 1 vs. Grade 3) across four large-scale microarray datasets (GSE25055, GSE7390, GSE11121, GSE25065).</p>
+        <p><strong>Data:</strong> A total of 468 untreated patient samples were analyzed, focusing on datasets that included grading information.</p>
+        <p><strong>Methods:</strong> Differential expression analysis was performed individually on each dataset using the limma package. DEGs were analyzed for fold change (FC) and false discovery rate (FDR).</p>
+        <p><strong>Results:</strong> A common set of 77 DEGs was identified across datasets, representing molecular signatures indicative of disease severity.</p>
+        <p><strong>Conclusion:</strong> This phase provided robust evidence of the molecular differences associated with breast cancer aggressiveness, validating the findings across multiple datasets.</p>
 
-		 <span class="purple-text"> PURPLE TEXTTTTTT</span> 
+        <hr>
+        
+        <h2>Phase 3: Meta-Analysis for Robust Biomarker Discovery</h2>
+        <p><strong>Objective:</strong> To integrate findings from Phase 2 using a meta-analysis approach to enhance the reliability of identified biomarkers.</p>
+        <p><strong>Data Integration:</strong> Four microarray datasets (GSE25055, GSE7390, GSE11121, GSE25065) were preprocessed for normalization, quality control, and batch effect correction.</p>
+        <p><strong>Methods:</strong> A random-effects model (REM) meta-analysis was performed using the GeneMeta package, combining DEG results from individual datasets. Functional enrichment analysis was conducted using tools such as msigdbr and PANTHER to explore biological pathways.</p>
+        <p><strong>Results:</strong> Meta-analysis identified a larger set of DEGs with significant Z scores and FDR values, reducing dataset-specific biases. Functional analysis highlighted key pathways and biological processes linked to aggressiveness, including gene ontology (GO), KEGG pathways, and protein-protein interaction (PPI) networks.</p>
+        <p><strong>Conclusion:</strong> This phase provided a more comprehensive understanding of gene expression changes, identifying robust biomarkers with potential applications in personalized diagnostics and targeted therapies.</p>
 
-		 <span class="orange-text"> ORANGE TEXTTTT </span> 
+        <hr>
 
-		<span class="dark-yellow-text"> DARK YELLOW TEXTTT </span> 
-
-		<span class="brown-text">BROWN TEXTTTT </span> 
-
-		 <span class="blue-text">BLUE TEXTTTTT </span> 
-
-		<strong>BOLD TEXTTTTTT </strong> , 
-
--->
-
-               
-		
-	<div class="content">
-	
-		<h2 style="font-size: 22px; font-weight: bold; margin-bottom: 0;">Heterogeneity and Classification in Breast Cancer:</h2>
-		 
-		<p>  
-		    <span style="font-size: 20px; text-indent: 35px;">
-		        Breast cancer is inherently heterogeneous, leading to varying levels of aggressiveness. This project focused on the precise classification of breast cancer to guide treatment decisions and predict patient outcomes. 
-		        <em>Two classification approaches were used: a grade-based classification comparing non-aggressive grade 1 to aggressive grade 3 tumors, and a molecular subtype-based classification contrasting non-aggressive subtypes (Luminal A, Normal-like) with aggressive subtypes (Luminal B, Basal-like, HER2-positive). The study was conducted in three interconnected phases.</em>
-		    </span> 
-		</p>
-
-		<h2 style="font-size: 22px; font-weight: bold; margin-bottom: 0;">Data Collection and Selection:</h2>
-		<p>  <span style="font-size: 20px; text-indent: 35px;">To conduct this analysis, data was collected from PubMed and GEO databases, narrowing down to four large-scale microarray datasets: GSE7390, GSE11121, GSE25055, and GSE25065. These datasets, encompassing a total of 468 untreated patient samples, were selected based on the availability of gene expression data and information on tumor grading and molecular subtypes. The suitability of these variables for differential expression analysis was assessed to determine their relevance for further investigation.</span> </p>
-		 
-
-		
-		<h2 style="font-size: 22px; font-weight: bold;">1-	Phase 1: Objectives and Approach: Assessing Grade-based and Subtype-based Classification:</h2>
-		<p>  <span style="font-size: 20px; text-indent: 35px;">Phase 1 focused on assessing the effectiveness of the grade-based and subtype-based classification approaches in differentiating aggressiveness levels in breast cancer. The dataset GSE25055, obtained from pre-treatment tumor biopsies, included gene expression data for both grading system and molecular subtypes. It was subjected to a comprehensive differential expression analysis using the limma package in R. Significant gene expression differences were identified between non-aggressive and aggressive tumor groups based on both classification approaches, highlighting their potential for accurate differentiation of aggressiveness levels.</span> </p>
-		
-
-		<h2 style="font-size: 22px; font-weight: bold;"></h2>
-		<p>  <span style="font-size: 20px; text-indent: 35px;">The Shift in Focus: Future Directions for Subtype-based Analysis: Nevertheless, due to the larger number of samples with grading information compared to those with subtype information, the project prioritized grade-based classification for Phase 2 and 3. However, in the future, the research will shift its focus to conducting a differential expression (DE) analysis using subtype-based classification. This analysis will allow for a comparison of the results obtained from the subtype-based analysis with the existing findings derived from the grade-based classification, providing a more comprehensive understanding of disease progression and facilitating the discovery of novel insights.</span> </p>
-			
-		 
-		<h2 style="font-size: 22px; font-weight: bold;">2- Phase 2: Analyzing Individual Datasets and Comparing Gene Expression Profiles:</h2>
-		<p>  <span style="font-size: 20px; text-indent: 35px;">Building upon the findings of Phase 1, Phase 2 focuses on analyzing individual datasets and comparing the gene expression profiles between non-aggressive (Grade 1) and aggressive (Grade 3) breast cancer samples using microarray datasets. Three microarray datasets (GSE25055, GSE7390, GSE11121) were selected, and differential expression analysis was performed using the limma package. The analysis revealed differentially expressed genes (DEGs) associated with the aggressiveness of breast cancer, providing molecular signatures indicative of disease severity.</span> </p>
-		
-				
-		<h2 style="font-size: 22px; font-weight: bold;">3-	Phase 3: Meta-analysis for Robust Biomarker Discovery:</h2>
-		<p>  <span style="font-size: 20px; text-indent: 35px;">In Phase 3, the focus was on utilizing a meta-analysis approach to integrate multiple breast cancer microarray datasets (GSE25055, GSE7390, GSE11121) with the goal of robust biomarker discovery. The main objective of Phase 3 was to generate a more extensive set of differentially expressed genes (DEGs) and enhance the overall comprehensiveness of the findings. Comprehensive data preprocessing, including quality control, normalization, and batch effect correction, was performed. Meta-analysis was conducted using the random-effects model, combining DEG results from individual dataset analyses. Functional enrichment analysis was performed on the identified DEGs, providing insights into the underlying biological processes associated with breast cancer aggressiveness.</span> </p>
-		
-		
-    		<h2 style="font-size: 22px; font-weight: bold;"></h2>
-		<p>  <span style="font-size: 20px; text-indent: 35px;">Comparison of Objectives: Phase 2 vs. Phase 3: Phase 2 involved the analysis of three breast cancer microarray datasets (GSE25055, GSE7390, GSE11121) using the limma package. The primary objective was to identify differentially expressed genes (DEGs) specific to each dataset and compare gene expression profiles between non-aggressive (Grade 1) and aggressive (Grade 3) breast cancer samples. The aim was to gain insights into the molecular differences associated with varying levels of aggressiveness using individual dataset analyses.</span> </p>
-		<p>  <span style="font-size: 20px; text-indent: 35px;">In contrast, Phase 3 focused on conducting a meta-analysis to integrate the results from the three aforementioned datasets. The objective was to obtain a more comprehensive understanding of gene expression changes and biomarker significance. By applying the GeneMeta package and employing the random-effects model (REM), Phase 3 aimed to identify common DEGs across the datasets, calculate Z scores and false discovery rate (FDR) values, and generate a larger set of meta-combined DEGs. The meta-analysis approach enhanced the robustness and reliability of the findings by incorporating data from multiple sources.</span> </p>
-		<p>  <span style="font-size: 20px; text-indent: 35px;">In summary, while Phase 2 aimed to explore DEGs within each dataset separately, Phase 3 utilized a meta-analysis strategy to combine the results from multiple datasets. The meta-analysis in Phase 3 provided a broader perspective and more comprehensive insights into gene expression changes and potential biomarkers associated with breast cancer aggressiveness.</span> </p>
-		<p>  <span style="font-size: 20px; text-indent: 35px;">Overall, this project aimed to advance the understanding of breast cancer classification and identification of robust indicators of aggressiveness. The integration of different classification approaches and the discovery of DEGs through comprehensive analysis contributed to the growing knowledge in the field. The results obtained from these projects lay the foundation for further investigations, enabling personalized and targeted treatments for breast cancer patients.</span> </p>
-	
-		
-	
-
-		
-		
-
-	</div>
-	
-
-		
-		
-		
-
-
-
- 
-
-		
-
-
-
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-		$(document).ready(function() {
-		    $('.heading').click(function() {
-			$(this).next('.dropdown').slideToggle();
-		    });
-		});
-        </script>
-	
+        <h2>Overall Contribution</h2>
+        <p>This three-phase project demonstrated the utility of integrating grading systems and multi-dataset analyses for discovering biomarkers and pathways associated with breast cancer aggressiveness. The inclusion of 468 samples and the prioritization of grade-based classification ensured a robust foundation for biomarker discovery. Future research will focus on subtype-based classifications to provide complementary insights. The findings lay the groundwork for advanced diagnostic tools and therapeutic strategies, with potential applications in personalized medicine.</p>
+    </div>
 </body>
 </html>
