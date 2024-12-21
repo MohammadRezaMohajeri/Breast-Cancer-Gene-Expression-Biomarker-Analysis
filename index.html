@@ -32,17 +32,34 @@
         z-index: 1; /* Ensures it appears above other content */
     }
 
-    .right-section {
+   /* .right-section {
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-
+    } */
+	
+    .right-section {
+        display: flex;
+        align-items: flex-start; /* Align the content to the top */
+        justify-content: center; /* Keep the title centered horizontally */
+        padding-top: 20px; /* Add padding to control the vertical position */
+        height: 100%; /* Ensure it spans the full height of the header */
+     }
+/*
     .right-section h1 {
         font-size: 30px;
         color: #f0f0f7;
         font-weight: bold;
         text-align: center;
+    }
+*/
+
+
+    .right-section h1 {
+       font-size: 30px;
+       color: #f0f0f7;
+       font-weight: bold;
+       text-align: center;
     }
 
     /* Main Content Styles */
